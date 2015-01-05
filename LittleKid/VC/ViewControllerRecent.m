@@ -31,7 +31,7 @@
     [[RuntimeStatus instance] loadLocalInfo];
     //get info from server
     [HTTTClient sendData:nil withProtocol:GET_RECENT_MSG];
-    //[HTTTClient sendData:nil withProtocol:GET_SELF_MSG];
+    [HTTTClient sendData:nil withProtocol:GET_SELF_MSG];
     
     //[self waitStatus];
     
@@ -53,12 +53,6 @@
 }
 
 - (void)freshRecentContacts:(NSNotification *)notification{
-    NSLog(@"fresh recent");
-    NSString *nameString = [notification name];
-    NSString *objectString = [notification object];
-    NSDictionary *dictionary = [notification userInfo];
-    NSLog(@"name = %@,object = %@,userInfo = %@",nameString,objectString,[dictionary objectForKey:@"key"]);
-    self.str = @"hello";
     [self.recentTableView reloadData];
     
 }
@@ -79,33 +73,35 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 5;
+    return [[RuntimeStatus instance].recentUsrList count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static int i = 1;
     RecentTableViewCell *cell;
     cell = (RecentTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"cellRecentMsg" forIndexPath:indexPath];
     //[[tableView tableHeaderView] setNeedsUpdateConstraints];
     if (cell == nil) {
         cell = [[RecentTableViewCell alloc] init];
     }
-    cell.nickName.text = @"now can";
-    if (self.str != nil) {
-        cell.share.text = self.str;
+    UserOther *recent1Usr = [[RuntimeStatus instance].recentUsrList objectAtIndex:[indexPath row]];
+    if (recent1Usr == nil) {
+        return cell;
     }
-    if (i==1) {
-        cell.headPicture.image = self.headImage;
-        cell.msgIcon.image = self.iconImage;
+    cell.nickName.text = recent1Usr.nickName;
+    cell.headPicture.image = self.headImage;
+    cell.msgIcon.image = self.iconImage;
+    cell.share.text = @"empty";
+    ChatMessage *lastMsg = [recent1Usr.msgs lastObject];
+    if (lastMsg == nil) {
+        return cell;
     }
-    else{
-        cell.headPicture.image = self.iconImage;
-        cell.msgIcon.image = self.headImage;
-    }
+    /* 根据不同类型消息显示不同 */
+    cell.lastMsg.text = lastMsg.msg;
     
 
-    i = (i+1)%2;
+    
+    
     return cell;
 }
 
@@ -118,8 +114,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSData *data = [[NSData alloc] initWithBytes:"hello world" length:11];
-    [HTTTClient sendData:data withProtocol:GET_RECENT_MSG];
+    //hit the index of the row to get the recentMsg in runtimestatus
+    
+    
+    
 }
 
 // Override to support conditional editing of the table view.

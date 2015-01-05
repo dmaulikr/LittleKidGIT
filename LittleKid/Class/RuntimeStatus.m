@@ -83,9 +83,24 @@
 
 - (void)loadLocalRecent{
     self.recentUsrList = [[NSMutableArray alloc] init];
-    NSArray *recentUsrsArr = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self recentDir] error:nil];
-    for (UserOther *recentUsr in recentUsrsArr) {
-        [self.recentUsrList addObject:recentUsr];
+    NSError *err;
+    NSString *recentUsrsRootPath = [self recentDir];
+    NSArray *recentUsrsPathArr = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:recentUsrsRootPath error:&err];
+    if (err) {
+        return;
+    }
+    if ( [recentUsrsPathArr count] == 0 ) {// decide if it's an empty array
+        return;
+    }
+    UserOther *recent1Usr;
+    for (NSString *recentUsrPath in recentUsrsPathArr) {
+        if ([recentUsrPath containsString:@".xcui"]) {
+            recent1Usr = [[UserOther alloc] initWithPath:[recentUsrsRootPath stringByAppendingPathComponent:recentUsrPath]];
+            if (recent1Usr) {
+                [self.recentUsrList addObject:recent1Usr];
+            }
+            recent1Usr = nil;
+        }
     }
 }
 

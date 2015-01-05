@@ -62,15 +62,16 @@
     NSData *usrData = [NSData dataWithContentsOfFile:[self usrDataPathWithUID:UID] options:NSDataReadingUncached error:&err];//keep options in mind
     if (err) {
         NSLog(@"no selfUser data, read data error: %@",err);
+        self = [[UserSelf alloc] init];
+        self.UID = UID;
         return self;
     }
     self = [NSKeyedUnarchiver unarchiveObjectWithData:usrData];
     if (self) {
-        
     }
     else{
         NSLog(@"self no data");
-        self = [UserSelf alloc];
+        self = [[UserSelf alloc] init];
         self.UID = UID;
     }
     return  self;

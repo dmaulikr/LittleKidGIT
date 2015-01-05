@@ -104,7 +104,10 @@
                 break;
             }
         }
-        ///add-1
+        ///add-4
+        if (contact.phoneNumber==nil) {
+            contact.phoneNumber = @" ";
+        }
         [dicInfoLocal setObject:contact.phoneNumber forKey:@"phoneNumber"];
         
          ///add
@@ -145,8 +148,8 @@
     
     self.initials = [[self.contactDic allKeys] sortedArrayUsingSelector:@selector(compare:)];
     
-    NSLog(@"%@", self.contactDic);
-    NSLog(@"***************%@++++++++++++++++++",self.initials);
+//    NSLog(@"%@", self.contactDic);
+//    NSLog(@"***************%@++++++++++++++++++",self.initials);
 }
 
 #pragma  mark 字母转换大小写--6.0

@@ -26,7 +26,7 @@
     [self procLaunchOptios:launchOptions];
 //    NSString *post=@"postData";
 //    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-        [self createUdpP2P];
+    [self createUdpP2P];
     
     return YES;
 }
@@ -53,19 +53,6 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
-}
-
-#pragma mark - Server
-//
-
-- (void)createUdpP2P{
-    NSError *err;
-    [RuntimeStatus instance].udpP2P = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
-    if (![[RuntimeStatus instance].udpP2P bindToPort:20107 error:&err] ) {
-        NSLog(@"bind error, %@",[err description]);
-    }
-    [[RuntimeStatus instance].udpP2P sendData:[NSData dataWithBytes:"hello world" length:11] toHost:@"192.168.1.20" port:20108 withTimeout:3 tag:0];
-    
 }
 
 #pragma mark - notifications
@@ -239,14 +226,24 @@ forLocalNotification:(UILocalNotification *)notification
     }
 }
 
-#pragma mark - UDP delegate
+#pragma mark - UDPP2P
 
+- (void)createUdpP2P{
+    NSError *err;
+    [RuntimeStatus instance].udpP2P = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
+    if (![[RuntimeStatus instance].udpP2P bindToPort:20107 error:&err] ) {
+        NSLog(@"bind error, %@",[err description]);
+    }
+    err = nil;
+    [[RuntimeStatus instance].udpP2P beginReceiving:&err];
+//    [[RuntimeStatus instance].udpP2P sendData:[NSData dataWithBytes:"hello world" length:11] toHost:@"192.168.1.20" port:20108 withTimeout:3 tag:0];
+}
 
 /**
  * Called when the datagram with the given tag has been sent.
  **/
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didSendDataWithTag:(long)tag{
-    NSLog(@"send data success");
+    
 }
 
 /**
@@ -254,7 +251,7 @@ forLocalNotification:(UILocalNotification *)notification
  * This could be due to a timeout, or something more serious such as the data being too large to fit in a sigle packet.
  **/
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error{
-    NSLog(@"send error");
+    
 }
 
 /**
@@ -263,7 +260,6 @@ forLocalNotification:(UILocalNotification *)notification
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext{
-    NSLog(@"receive data");
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFI_GET_RECENT_MSG object:nil userInfo:[NSDictionary dictionaryWithObject:data forKey:@"key"]];
 }
 
@@ -271,7 +267,7 @@ withFilterContext:(id)filterContext{
  * Called when the socket is closed.
  **/
 - (void)udpSocketDidClose:(GCDAsyncUdpSocket *)sock withError:(NSError *)error{
-    
+    NSLog(@"socket did close");
 }
 
 

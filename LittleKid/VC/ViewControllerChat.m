@@ -8,6 +8,12 @@
 
 #import "ViewControllerChat.h"
 #import <AVFoundation/AVFoundation.h>
+#import "SelfMsgTableViewCell.h"
+#import "OtherMsgTableViewCell.h"
+#import "RuntimeStatus.h"
+#import "ChatMessage.h"
+
+#define OTHER_UID @"12345"
 
 @interface ViewControllerChat ()
 
@@ -15,6 +21,9 @@
 @property(strong, atomic) AVAudioPlayer *player;
 @property(strong, atomic) NSDictionary *recorderSettingsDict;
 @property(strong, nonatomic) NSString *recordPath;
+@property (weak, nonatomic) IBOutlet UITableView *msgTableView;
+@property (strong, nonatomic) NSDate *dateToRecord;
+
 
 @end
 
@@ -42,7 +51,7 @@
 
 - (IBAction)touchDownRecord:(id)sender {
     NSError *error = nil;
-    self.recorder = [[AVAudioRecorder alloc] initWithURL:[NSURL URLWithString:self.recordPath] settings:self.recorderSettingsDict error:&error];
+    self.recorder = [[AVAudioRecorder alloc] initWithURL:[NSURL URLWithString:[self recordPath]] settings:self.recorderSettingsDict error:&error];
     if (self.recorder) {
         self.recorder.meteringEnabled = YES;
         [self.recorder prepareToRecord];
@@ -50,23 +59,32 @@
         //启动定时器
 //        timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(levelTimer:) userInfo:nil repeats:YES];
     } else{
-        NSLog(@"%@", [error localizedDescription]);
+        NSLog(@"%@", error);
     }
-
 }
 
 - (IBAction)touchUpInsideSend:(id)sender {
     [self.recorder stop];
     //send the record
+    [self createMsg];
     [self sendRecord];
     self.recorder = nil;
     //结束定时器
     //[timer invalidate];
     //timer = nil;
-    
 }
 
 -(BOOL)sendRecord{
+    return YES;
+}
+
+-(BOOL)createMsg{
+    ChatMessage *newMsg = [[ChatMessage alloc] init];
+    newMsg.owner = @"1";
+    newMsg.type = @"1";
+    newMsg.timeStamp = [NSString stringWithFormat:@"%@",self.dateToRecord];
+    newMsg.msg = [NSString stringWithFormat:@"%@%@.aac", OTHER_UID, self.dateToRecord];
+    
     return YES;
 }
 
@@ -112,8 +130,17 @@
                            [NSNumber numberWithBool:NO],AVLinearPCMIsBigEndianKey,
                            [NSNumber numberWithBool:NO],AVLinearPCMIsFloatKey,
                            nil];
-    self.recordPath = [NSString stringWithFormat:@"%@/local.aac", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]];
     return bCanRecord;
+}
+
+-(NSString *)recordPath{
+    NSString *savePath;
+    self.dateToRecord = [[NSDate alloc] init];
+    savePath = [NSString stringWithFormat:@"%@/%@/recent/%@%@.aac", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], [RuntimeStatus instance].usrSelf.UID, self.dateToRecord, OTHER_UID];
+    NSError *err;
+    NSFileManager *fm = [NSFileManager defaultManager];
+    [fm createDirectoryAtPath:[savePath stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:&err];
+    return savePath;
 }
 
 
@@ -134,19 +161,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
     
-    if (indexPath.row%2==0) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"cellSelf" forIndexPath:indexPath];
-    }
-    if (indexPath.row%2==1) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"cellHim" forIndexPath:indexPath];
-    }
-    
+
+    cell = [tableView dequeueReusableCellWithIdentifier:@"otherMsgCell" forIndexPath:indexPath];
+    cell = [tableView dequeueReusableCellWithIdentifier:@"selfMsgCell" forIndexPath:indexPath];
     return cell;
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"select the row %d",indexPath.row);
     NSError *playerError;
     self.player = nil;
     self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:self.recordPath] error:&playerError];
