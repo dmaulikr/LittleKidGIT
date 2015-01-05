@@ -13,9 +13,14 @@
 
 
 @interface ViewControllerContact ()
-
-@property(nonatomic, strong) NSMutableArray *contactList;
-
+//字典序保存联系人信息
+@property(nonatomic,retain)NSMutableDictionary*contactDic;
+//未排序的联系人首字母数组
+//@property(nonatomic,retain)NSMutableArray*dataArray;
+//数组里面保存每个获取Vcard（名片）
+@property(nonatomic,retain)NSMutableArray*dataArrayDic;
+//联系人首字母数组
+@property(nonatomic,retain) NSArray*initials;
 
 @end
 
@@ -26,7 +31,7 @@
     // Do any additional setup after loading the view.
     ABAddressBookRef ABRef = [self getABWithGranted];
     if (ABRef) {
-        [self getABContactList:ABRef];
+        [self getABContactDic:ABRef];
         [self sortAB];
         
         NSLog(@"test");
@@ -60,14 +65,12 @@
     return localAddressBook;
 }
 
-- (void)getABContactList:(ABAddressBookRef)addressBook{
-    
+- (void)getABContactDic:(ABAddressBookRef)addressBook{
+
     ///-2
-    self.dataArray = [NSMutableArray arrayWithCapacity:0];
     self.dataArrayDic = [NSMutableArray arrayWithCapacity:0];
-    self.index=[NSMutableDictionary dictionaryWithCapacity:0];
+    self.contactDic=[NSMutableDictionary dictionaryWithCapacity:0];
     
-    self.contactList =[[NSMutableArray alloc] init];
     CFArrayRef allContacts = ABAddressBookCopyArrayOfAllPeople(addressBook);
     CFIndex counts = CFArrayGetCount(allContacts);
     for (CFIndex index=0; index<counts; ++index) {
@@ -101,12 +104,14 @@
                 break;
             }
         }
+        ///add-1
+        [dicInfoLocal setObject:contact.phoneNumber forKey:@"phoneNumber"];
+        
          ///add
         if ([contact.firstName isEqualToString:@" "] == NO || [contact.lastName isEqualToString:@" "]) {
             [self.dataArrayDic addObject:dicInfoLocal];
         }///
         
-        [self.contactList addObject:contact];
     
     }
     
@@ -126,21 +131,22 @@
             strFirLetter= [self upperStr:[str substringToIndex:1]];
         }
         
-        if ([[self.index allKeys]containsObject:strFirLetter]) {
+        if ([[self.contactDic allKeys]containsObject:strFirLetter]) {
             //判断index字典中，是否有这个key如果有，取出值进行追加操作
-            [[self.index objectForKey:strFirLetter] addObject:dic];
+            [[self.contactDic objectForKey:strFirLetter] addObject:dic];
         }else{
             NSMutableArray*tempArray=[NSMutableArray arrayWithCapacity:0];
             [tempArray addObject:dic];
-            [self.index setObject:tempArray forKey:strFirLetter];
+            [self.contactDic setObject:tempArray forKey:strFirLetter];
         }
 
     }
     
-    [self.dataArray addObjectsFromArray:[self.index allKeys]];
     
-    //NSLog(@"%@", self.index);
+    self.initials = [[self.contactDic allKeys] sortedArrayUsingSelector:@selector(compare:)];
     
+    NSLog(@"%@", self.contactDic);
+    NSLog(@"***************%@++++++++++++++++++",self.initials);
 }
 
 #pragma  mark 字母转换大小写--6.0
@@ -158,15 +164,8 @@
 //    NSMutableDictionary*index=[NSMutableDictionary dictionaryWithCapacity:0];
     
 }
-//构建数组排序方法SEL
-//NSInteger cmp(id, id, void *);
-//NSInteger cmp(NSString * a, NSString* b, void * p)
-//{
-//    if([a compare:b] == 1){
-//        return NSOrderedDescending;//(1)
-//    }else
-//        return  NSOrderedAscending;//(-1)
-//}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -177,21 +176,41 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    // Return the number of sections.
-    return 1;
+    ///Return the number of sections.
+    return [self.initials count];
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     // Return the number of rows in the section.
-    if (self.contactList == nil){
-        return 0;
-    }
-    else{
-        return [self.contactList count];
-    }
 
+    
+    //check the current based on the section index
+    NSString *ichar = [self.initials objectAtIndex:section];
+    
+    // return the contacts in that ichar as an array
+    
+    NSArray *contactSection = [self.contactDic objectForKey:ichar];
+    
+    return [contactSection count];
+    
 }
+
+
+#pragma mark - 数组中相关信息的分离
+
+-(Contact *)getContactfromStringArray:(NSDictionary *)str{
+    
+    Contact *result=[Contact alloc];
+    
+    result.firstName = [str objectForKey: @"firstName"];
+    result.lastName = [str objectForKey:@"lastName"];
+    result.phoneNumber = [str objectForKey:@"phoneNumber"];
+    
+    return result;
+}
+
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -200,15 +219,38 @@
     if (cell == nil) {
         cell = [[ContactTableViewCell alloc] init];
     }
-    cell.name.text = [NSString stringWithFormat:@"%@ %@",((Contact *)[self.contactList objectAtIndex:indexPath.row]).firstName, ((Contact *)[self.contactList objectAtIndex:indexPath.row]).lastName];
-    cell.phoneNumber.text = ((Contact *)[self.contactList objectAtIndex:indexPath.row]).phoneNumber;
+    
+    ///get the initial char
+    NSString *ichar = [self.initials objectAtIndex:[indexPath section]];
+    
+    ///get the list of contacts for that initial charactar
+    NSArray *contactSection = [self.contactDic objectForKey:ichar];
+    
+    Contact * contact = [self getContactfromStringArray:(NSDictionary *) (contactSection[indexPath.row]) ];
+    
+    
+    ///get the particular contacts based on that row
+    
+    cell.name.text = [NSString stringWithFormat:@"%@ %@",contact.firstName, contact.lastName];
+    cell.phoneNumber.text =contact.phoneNumber;
     
     
     return cell;
 }
 
+
+///
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    ///get the initial character as the section header
+    NSString *ichar = [self.initials objectAtIndex:section];
+    return ichar;
+    
+}
+
+
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return [NSArray arrayWithObjects:@"A",@"B",@"C",@"D",@"E",@"F",@"L",@"H", nil];
+//    return [NSArray arrayWithObjects:@"A",@"B",@"C",@"D",@"E",@"F",@"L",@"H", nil];
+    return self.initials;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPat{

@@ -11,11 +11,6 @@
 
 @interface ViewControllerContact : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property(nonatomic,retain)NSMutableArray*dataArray;
-//数组里面保存每个获取Vcard（名片）
-@property(nonatomic,retain)NSMutableArray*dataArrayDic;
-//字典序保存联系人信息
-@property(nonatomic,retain)NSMutableDictionary*index;
 
 
 @end
