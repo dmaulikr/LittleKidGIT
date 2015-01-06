@@ -30,5 +30,6 @@
 
 + (instancetype)instance;
 - (void)loadLocalInfo;
+- (void)procNewChatMsg:(NSData *)newChatMsgData;
 
 @end

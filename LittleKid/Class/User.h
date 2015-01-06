@@ -49,7 +49,7 @@
 - (id)initWithPath:(NSString *)path;
 - (BOOL)save;
 - (NSString *)usrDataPath;
-- (void)procNewMsg;
 - (void)loadServerData;
+- (NSData *)packetLastChatMsg;
 
 @end

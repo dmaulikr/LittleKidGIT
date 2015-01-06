@@ -104,5 +104,10 @@
     }
 }
 
+- (void)procNewChatMsg:(NSData *)newChatMsgData{
+    
+
+}
+
 
 @end

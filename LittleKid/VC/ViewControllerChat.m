@@ -76,7 +76,7 @@
 }
 
 -(BOOL)sendMsg{
-    
+    [[RuntimeStatus instance].udpP2P sendData:[self.toChatUsr packetLastChatMsg] toHost:self.toChatUsr.usrIP port:self.toChatUsr.usrPort.intValue withTimeout:3 tag:TAG_CHATMSG];
     return YES;
 }
 

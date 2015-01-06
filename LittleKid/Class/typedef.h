@@ -37,7 +37,13 @@ typedef enum NET_PROTOCOL{
 #define NOTIFI_GET_SELF_MSG         @"NOTIFI_GET_SELF_MSG"
 #define NOTIFI_GET_NEW_MSG          @"NOTIFI_GET_NEW_MSG"
 
+/* dict keys defination */
+#define CHATMSG_KEY_SOUND_DATA  @"CHATMSG_KEY_SOUND_DATA"
+#define CHATMSG_KEY_CHATMSG     @"CHATMSG_KEY_CHATMSG"
+#define CHATMSG_KEY_UID         @"CHATMSG_KEY_UID"
 
+/* UDPP2P tag defination */
+#define TAG_CHATMSG 5
 
 
 #endif

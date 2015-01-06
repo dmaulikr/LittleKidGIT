@@ -192,8 +192,28 @@
     return self;
 }
 
-- (void)procNewMsg{
-    
+
+/*
+ 目前协议规则:
+ 字典
+ 
+ */
+- (NSData *)packetLastChatMsg{
+    ChatMessage *lastMsg = [self.msgs lastObject];
+    if ([lastMsg.type compare:MSG_TYPE_SOUND]) {
+        NSData *soundData = [NSData dataWithContentsOfFile:[self soundPathWithMsg:lastMsg]];
+        NSDictionary *dictToSent = [NSDictionary dictionaryWithObjectsAndKeys:self.UID, CHATMSG_KEY_UID, lastMsg, CHATMSG_KEY_CHATMSG, soundData, CHATMSG_KEY_SOUND_DATA, nil];
+        return [NSKeyedArchiver archivedDataWithRootObject:dictToSent];
+    }
+    else{
+        return nil;
+    }
+
+
+}
+
+- (NSString *)soundPathWithMsg:(ChatMessage *)msg{
+    return [NSString stringWithFormat:@"%@/%@/recent/%@",[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], [RuntimeStatus instance].usrSelf.UID, msg.msg];
 }
 
 - (void)loadServerData{
