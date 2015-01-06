@@ -10,4 +10,6 @@
 
 @interface ViewControllerChat : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
+@property NSInteger toChatUsrIndex;
+
 @end

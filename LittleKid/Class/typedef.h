@@ -35,6 +35,7 @@ typedef enum NET_PROTOCOL{
 #define NOTIFI_SEND_MSG             @"NOTIFI_SEND_MSG"
 #define NOTIFI_SERVER_REQUEST       @"NOTIFI_SERVER_REQUEST"
 #define NOTIFI_GET_SELF_MSG         @"NOTIFI_GET_SELF_MSG"
+#define NOTIFI_GET_NEW_MSG          @"NOTIFI_GET_NEW_MSG"
 
 
 

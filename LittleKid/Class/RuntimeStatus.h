@@ -30,4 +30,5 @@
 
 + (instancetype)instance;
 - (void)loadLocalInfo;
+
 @end

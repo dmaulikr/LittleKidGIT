@@ -8,7 +8,7 @@
 
 #import "ViewControllerRecent.h"
 #import "RecentTableViewCell.h"
-#import "HTTTClient.h"
+#import "ViewControllerChat.h"
 
 @interface ViewControllerRecent ()
 
@@ -16,6 +16,7 @@
 @property (strong, nonatomic) UIImage *headImage;
 @property( strong, nonatomic) UIImage *iconImage;
 @property(strong, nonatomic) NSString *str;
+@property NSInteger toChatUsrIndex;
 
 @end
 
@@ -55,13 +56,6 @@
 - (void)freshRecentContacts:(NSNotification *)notification{
     [self.recentTableView reloadData];
     
-}
-
-#pragma mark - Navigation
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    [segue.destinationViewController setHidesBottomBarWhenPushed:YES];
 }
 
 #pragma mark - Table view data source
@@ -115,9 +109,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //hit the index of the row to get the recentMsg in runtimestatus
-    
-    
-    
+    self.toChatUsrIndex = [indexPath row];
 }
 
 // Override to support conditional editing of the table view.
@@ -150,15 +142,18 @@
  }
  */
 
-/*
+
  #pragma mark - Navigation
  
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
+     ViewControllerChat *desVC = segue.destinationViewController;
+     [desVC setHidesBottomBarWhenPushed:YES];
+     desVC.toChatUsrIndex = self.toChatUsrIndex;
  }
- */
+
 
 
 @end

@@ -11,18 +11,17 @@
 #import "SelfMsgTableViewCell.h"
 #import "OtherMsgTableViewCell.h"
 #import "RuntimeStatus.h"
-#import "ChatMessage.h"
 
 #define OTHER_UID @"12345"
 
 @interface ViewControllerChat ()
 
+@property (weak, nonatomic) IBOutlet UITableView *msgTableView;
 @property(strong, atomic) AVAudioRecorder *recorder;
 @property(strong, atomic) AVAudioPlayer *player;
 @property(strong, atomic) NSDictionary *recorderSettingsDict;
-@property(strong, nonatomic) NSString *recordPath;
-@property (weak, nonatomic) IBOutlet UITableView *msgTableView;
 @property (strong, nonatomic) NSDate *dateToRecord;
+@property(weak, nonatomic) UserOther *toChatUsr;
 
 
 @end
@@ -32,8 +31,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.toChatUsr = [[RuntimeStatus instance].recentUsrList objectAtIndex:self.toChatUsrIndex];
     [self prepareRecord];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshChat:) name:@"newRemoteMsg" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshChat:) name:NOTIFI_GET_NEW_MSG object:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,7 +52,7 @@
 
 - (IBAction)touchDownRecord:(id)sender {
     NSError *error = nil;
-    self.recorder = [[AVAudioRecorder alloc] initWithURL:[NSURL URLWithString:[self recordPath]] settings:self.recorderSettingsDict error:&error];
+    self.recorder = [[AVAudioRecorder alloc] initWithURL:[NSURL URLWithString:[self msgDataSavePath]] settings:self.recorderSettingsDict error:&error];
     if (self.recorder) {
         self.recorder.meteringEnabled = YES;
         [self.recorder prepareToRecord];
@@ -66,28 +67,28 @@
 - (IBAction)touchUpInsideSend:(id)sender {
     [self.recorder stop];
     //send the record
-    [self createMsg];
-    [self sendRecord];
+    [self updateMsg];
+    [self sendMsg];
     self.recorder = nil;
     //结束定时器
     //[timer invalidate];
     //timer = nil;
 }
 
--(BOOL)sendRecord{
-    return YES;
-}
-
--(BOOL)createMsg{
-    ChatMessage *newMsg = [[ChatMessage alloc] init];
-    newMsg.owner = @"1";
-    newMsg.type = @"1";
-    newMsg.timeStamp = [NSString stringWithFormat:@"%@",self.dateToRecord];
-    newMsg.msg = [NSString stringWithFormat:@"%@%@.aac", OTHER_UID, self.dateToRecord];
+-(BOOL)sendMsg{
     
     return YES;
 }
 
+-(BOOL)updateMsg{
+    ChatMessage *newMsg = [[ChatMessage alloc] init];
+    newMsg.owner = MSG_OWNER_SELF;
+    newMsg.type = MSG_TYPE_SOUND;
+    newMsg.timeStamp = [NSString stringWithFormat:@"%@",self.dateToRecord];
+    newMsg.msg = [NSString stringWithFormat:@"%@%@.aac", self.toChatUsr.UID, newMsg.timeStamp];
+    [self.toChatUsr.msgs addObject:newMsg];
+    return YES;
+}
 
 - (IBAction)touchUpOutsideCancel:(id)sender {
     [self.recorder stop];
@@ -133,10 +134,11 @@
     return bCanRecord;
 }
 
--(NSString *)recordPath{
+/* 存储时使用这个path，读取信息时字节用msg.msg做path */
+-(NSString *)msgDataSavePath{
     NSString *savePath;
     self.dateToRecord = [[NSDate alloc] init];
-    savePath = [NSString stringWithFormat:@"%@/%@/recent/%@%@.aac", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], [RuntimeStatus instance].usrSelf.UID, self.dateToRecord, OTHER_UID];
+    savePath = [NSString stringWithFormat:@"%@/%@/recent/%@%@.aac", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], [RuntimeStatus instance].usrSelf.UID, self.dateToRecord, self.toChatUsr.UID];
     NSError *err;
     NSFileManager *fm = [NSFileManager defaultManager];
     [fm createDirectoryAtPath:[savePath stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:&err];
@@ -154,30 +156,56 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 5;
+    return [self.toChatUsr.msgs count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell;
-    
+    ChatMessage *msg = [self.toChatUsr.msgs objectAtIndex:[indexPath row]];
+    if ( NSOrderedSame == [msg.owner compare:@"1"] ) {//other message
+        OtherMsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"otherMsgCell" forIndexPath:indexPath];
+        if (cell == nil) {
+            cell = [[OtherMsgTableViewCell alloc] init];
+        }
+        cell.headImg.image = [UIImage imageNamed:@"5.png"];
+        cell.labelMsg.text = msg.msg;
+        
+        return cell;
+    }
+    else {//self message
+        SelfMsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"selfMsgCell" forIndexPath:indexPath];
+        if (cell == nil) {
+            cell = [[SelfMsgTableViewCell alloc] init];
+        }
+        cell.headImg.image = [UIImage imageNamed:@"head.jpg"];
+        cell.labelMsg.text = msg.msg;
+        
+        return cell;
+    }
+}
 
-    cell = [tableView dequeueReusableCellWithIdentifier:@"otherMsgCell" forIndexPath:indexPath];
-    cell = [tableView dequeueReusableCellWithIdentifier:@"selfMsgCell" forIndexPath:indexPath];
-    return cell;
+- (void)configCell:(UITableViewCell *)cell{
+    
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSError *playerError;
-    self.player = nil;
-    self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:self.recordPath] error:&playerError];
-    if (self.player == nil)
-    {
-        NSLog(@"ERror creating player: %@", [playerError description]);
-    }else{
-        [self.player play];
+    ChatMessage *msg =  [self.toChatUsr.msgs objectAtIndex:[indexPath row]];
+    if ( NSOrderedSame == [msg.type compare:MSG_TYPE_SOUND]) {
+        NSError *playerError;
+        self.player = nil;
+        self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:[self msgDataReadPath:msg]] error:&playerError];
+        if (self.player == nil)
+        {
+            NSLog(@"ERror creating player: %@", [playerError description]);
+        }else{
+            [self.player play];
+        }
     }
+}
+                       
+- (NSString *)msgDataReadPath:(ChatMessage *)msg{
+    return [NSString stringWithFormat:@"%@/%@/recent/%@",[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], [RuntimeStatus instance].usrSelf.UID, msg.msg];
 }
 
 // Override to support conditional editing of the table view.
@@ -220,17 +248,6 @@
  // Pass the selected object to the new view controller.
  }
  */
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 
 @end

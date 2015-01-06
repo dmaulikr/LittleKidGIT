@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+#define MSG_OWNER_SELF      @"0"
+#define MSG_OWNER_OTHER     @"1"
+#define MSG_TYPE_TXT        @"0"
+#define MSG_TYPE_SOUND      @"1"
+#define MSG_TYPE_IMG        @"2"
+
 @interface ChatMessage : NSObject <NSCoding>
 
 @property(nonatomic, strong)NSString *owner;//0,self;1,other
