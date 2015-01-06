@@ -57,6 +57,14 @@
 #pragma mark - UserSelf Class
 @implementation UserSelf
 
+- (id)init{
+    self = [super init];
+    if (self) {
+        self.friends = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
 - (id)initWithUID:(NSString *)UID{
     NSError *err;
     NSData *usrData = [NSData dataWithContentsOfFile:[self usrDataPathWithUID:UID] options:NSDataReadingUncached error:&err];//keep options in mind
@@ -214,6 +222,18 @@
 
 - (NSString *)soundPathWithMsg:(ChatMessage *)msg{
     return [NSString stringWithFormat:@"%@/%@/recent/%@",[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], [RuntimeStatus instance].usrSelf.UID, msg.msg];
+}
+
+/* must called after the new message has been added to the msgs list */
+- (void)saveNewMsgData:(NSData *)msgData{
+    NSError *err;
+    ChatMessage *newMsg = [self.msgs lastObject];
+    if ( NSOrderedSame == [newMsg.type compare:MSG_TYPE_SOUND] ) {
+        [msgData writeToFile:[self soundPathWithMsg:newMsg] options:NSDataWritingAtomic error:&err];
+        if (err) {
+            NSLog(@"%@",err);
+        }
+    }
 }
 
 - (void)loadServerData{

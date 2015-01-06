@@ -260,7 +260,9 @@ forLocalNotification:(UILocalNotification *)notification
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext{
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFI_GET_RECENT_MSG object:nil userInfo:[NSDictionary dictionaryWithObject:data forKey:@"key"]];
+    
+    [[RuntimeStatus instance] procNewChatMsg:data];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFI_GET_RECENT_MSG object:nil userInfo:nil];
 }
 
 /**

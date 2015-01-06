@@ -11,7 +11,7 @@
 #import "PacketNetData.h"
 
 #define SERVER_URL_STRING   @"http:\\www.baidu.com"
-#define HTTP_METHOD @"POST"
+#define HTTP_METHOD @"GET"
 #define TIME_OUT_MAX 10
 
 @interface HTTTClient : NSObject

@@ -33,8 +33,7 @@
     // Do any additional setup after loading the view.
     self.toChatUsr = [[RuntimeStatus instance].recentUsrList objectAtIndex:self.toChatUsrIndex];
     [self prepareRecord];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshChat:) name:NOTIFI_GET_NEW_MSG object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshChat:) name:NOTIFI_GET_RECENT_MSG object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,11 +42,7 @@
 }
 
 - (void)freshChat:(NSNotification *)notification{
-    NSLog(@"freshChat");
-    NSString *nameString = [notification name];
-    NSString *objectString = [notification object];
-    NSDictionary *dictionary = [notification userInfo];
-    NSLog(@"name = %@,object = %@,userInfo = %@",nameString,objectString,[dictionary objectForKey:@"key"]);
+    [self.msgTableView reloadData];
 }
 
 - (IBAction)touchDownRecord:(id)sender {

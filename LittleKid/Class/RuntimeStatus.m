@@ -30,6 +30,10 @@
         self.realTalkUsrPwd = @"";
         self.realTalkRoomNumber = @"1";
         self.realTalkRoomPwd = @"";
+        self.realTalkOnlineUsrList = [[NSMutableArray alloc] init];
+        self.usrSelf = [[UserSelf alloc] init];
+        self.recentUsrList = [[NSMutableArray alloc] init];
+        self.signAccountUID = [[NSString alloc] init];
     }
     return self;
 }
@@ -105,9 +109,36 @@
 }
 
 - (void)procNewChatMsg:(NSData *)newChatMsgData{
+    NSDictionary *dictRcvdMsg = [NSKeyedUnarchiver unarchiveObjectWithData:newChatMsgData];
+    if (dictRcvdMsg == nil) {
+        return;
+    }
+    NSString *chatMsgUID = [dictRcvdMsg objectForKey:CHATMSG_KEY_UID];
+    ChatMessage *newChatMsg = [dictRcvdMsg objectForKey:CHATMSG_KEY_CHATMSG];
+    NSData *msgData = [dictRcvdMsg objectForKey:CHATMSG_KEY_SOUND_DATA];
+    if (chatMsgUID == nil || newChatMsg == nil || msgData == nil) {
+        return;
+    }
+    NSInteger flag = 0;
+    for (UserOther *recent1Usr in self.recentUsrList) {
+        if ( [recent1Usr.UID compare:chatMsgUID] == NSOrderedSame ) {
+            flag = 1;
+            [recent1Usr.msgs addObject:newChatMsg];
+            [recent1Usr saveNewMsgData:msgData];
+            [recent1Usr save];
+        }
+    }
+    if (flag == 1) {
+        UserOther *newRecentUser = [[UserOther alloc] init];
+        newRecentUser.msgs = [[NSMutableArray alloc] initWithObjects:newChatMsg, nil];
+        [newRecentUser saveNewMsgData:msgData];
+        [newRecentUser save];
+        [[RuntimeStatus instance].recentUsrList addObject:newRecentUser];
+    }
     
-
+    
 }
+
 
 
 @end

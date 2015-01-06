@@ -30,6 +30,7 @@
 
 @property(strong, nonatomic)NSMutableArray *friends;
 
+- (id)init;
 - (id)initWithUID:(NSString *)UID;
 - (BOOL)save;
 - (NSString *)usrDataPathWithUID:(NSString *)UID;
@@ -51,5 +52,6 @@
 - (NSString *)usrDataPath;
 - (void)loadServerData;
 - (NSData *)packetLastChatMsg;
+- (void)saveNewMsgData:(NSData *)msgData;
 
 @end

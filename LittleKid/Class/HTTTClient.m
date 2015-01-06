@@ -63,7 +63,7 @@ typedef void(^httpResponseHandler)(NSURLResponse *response, NSData *data, NSErro
     NSURL *serverUrl = [NSURL URLWithString:[SERVER_URL_STRING stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:serverUrl];
     [request setHTTPMethod:HTTP_METHOD];
-    [request setHTTPBody:Pkt];
+    //[request setHTTPBody:Pkt];
     [request setTimeoutInterval:TIME_OUT_MAX];
     return request;
 }
@@ -85,11 +85,12 @@ httpResponseHandler handleRecentMsg = ^(NSURLResponse *response, NSData *data, N
     }
     else{
         NSLog(@"handleRecentMsg connection success");
+        
+        
+        
+        
+        [HTTTClient notify:NOTIFI_GET_RECENT_MSG withdataDict:[HTTTClient dictWithData:[NSData dataWithBytes:"hello world" length:11]]];
     }
-    
-    
-    [HTTTClient notify:NOTIFI_GET_RECENT_MSG withdataDict:[HTTTClient dictWithData:[NSData dataWithBytes:"hello world" length:11]]];
-    
 };
 
 httpResponseHandler handleFriendList = ^(NSURLResponse *response, NSData *data, NSError *connectionError){
@@ -98,11 +99,11 @@ httpResponseHandler handleFriendList = ^(NSURLResponse *response, NSData *data, 
     }
     else{
         NSLog(@"handleFriendList connection success");
+        
+        
+        
+        [HTTTClient notify:NOTIFI_GET_FRIEND_LIST withdataDict:nil];
     }
-    
-    
-    [HTTTClient notify:NOTIFI_GET_FRIEND_LIST withdataDict:nil];
-    
 };
 
 httpResponseHandler handleSignIn = ^(NSURLResponse *response, NSData *data, NSError *connectionError){
@@ -111,11 +112,12 @@ httpResponseHandler handleSignIn = ^(NSURLResponse *response, NSData *data, NSEr
     }
     else{
         NSLog(@"handleSignIn connection success");
+        
+        
+        
+        
     }
-    
-    
     [HTTTClient notify:NOTIFI_SIGN_IN withdataDict:[HTTTClient dictWithData:[NSData dataWithBytes:"hello world" length:11]]];
-    
 };
 
 httpResponseHandler handleSignUp = ^(NSURLResponse *response, NSData *data, NSError *connectionError){
@@ -124,11 +126,13 @@ httpResponseHandler handleSignUp = ^(NSURLResponse *response, NSData *data, NSEr
     }
     else{
         NSLog(@"handleSignUp connection success");
+        
+        
+        
+        
+        
+        [HTTTClient notify:NOTIFI_SIGN_UP withdataDict:nil];
     }
-    
-    
-    [HTTTClient notify:NOTIFI_SIGN_UP withdataDict:nil];
-    
 };
 
 httpResponseHandler handleRetrievePwd = ^(NSURLResponse *response, NSData *data, NSError *connectionError){
@@ -137,10 +141,12 @@ httpResponseHandler handleRetrievePwd = ^(NSURLResponse *response, NSData *data,
     }
     else{
         NSLog(@"handleRetrievePwd connection success");
+        
+        
+        
+        
+        [HTTTClient notify:NOTIFI_RETRIEVE_PASSWORD withdataDict:nil];
     }
-    
-    [HTTTClient notify:NOTIFI_RETRIEVE_PASSWORD withdataDict:nil];
-    
 };
 
 httpResponseHandler handleCheckCode = ^(NSURLResponse *response, NSData *data, NSError *connectionError){
@@ -149,11 +155,11 @@ httpResponseHandler handleCheckCode = ^(NSURLResponse *response, NSData *data, N
     }
     else{
         NSLog(@"handleCheckCode connection success");
+        
+        
+        
+        [HTTTClient notify:NOTIFI_GET_CHECK_CODE withdataDict:nil];
     }
-    
-    
-    [HTTTClient notify:NOTIFI_GET_CHECK_CODE withdataDict:nil];
-    
 };
 
 httpResponseHandler handleAddFriend = ^(NSURLResponse *response, NSData *data, NSError *connectionError){
@@ -162,11 +168,12 @@ httpResponseHandler handleAddFriend = ^(NSURLResponse *response, NSData *data, N
     }
     else{
         NSLog(@"handleAddFriend connection success");
+        
+        
+        
+        
+        [HTTTClient notify:NOTIFI_ADD_FRIEND withdataDict:nil];
     }
-    
-    
-    [HTTTClient notify:NOTIFI_ADD_FRIEND withdataDict:nil];
-    
 };
 
 httpResponseHandler handleSendMsg = ^(NSURLResponse *response, NSData *data, NSError *connectionError){
@@ -175,11 +182,12 @@ httpResponseHandler handleSendMsg = ^(NSURLResponse *response, NSData *data, NSE
     }
     else{
         NSLog(@"handleSendMsg connection success");
+        
+        
+        
+        
+        [HTTTClient notify:NOTIFI_SEND_MSG withdataDict:nil];
     }
-    
-    
-    
-    [HTTTClient notify:NOTIFI_SEND_MSG withdataDict:nil];
 };
 
 httpResponseHandler handleSelfMsg = ^(NSURLResponse *response, NSData *data, NSError *connectionError){
@@ -188,11 +196,13 @@ httpResponseHandler handleSelfMsg = ^(NSURLResponse *response, NSData *data, NSE
     }
     else{
         NSLog(@"handleSelfMsg connection success");
+        
+        
+        
+        
+        
+        [HTTTClient notify:NOTIFI_GET_SELF_MSG withdataDict:nil];
     }
-    
-    
-    
-    [HTTTClient notify:NOTIFI_GET_SELF_MSG withdataDict:nil];
 };
 
 @end
