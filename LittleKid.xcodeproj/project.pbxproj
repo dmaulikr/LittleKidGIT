@@ -18,6 +18,12 @@
 		5708760D1A5D137B00892B53 /* wo_0013_erweima.png in Resources */ = {isa = PBXBuildFile; fileRef = 5708760C1A5D137B00892B53 /* wo_0013_erweima.png */; };
 		5708760F1A5D141100892B53 /* wo_0019_xingxing.png in Resources */ = {isa = PBXBuildFile; fileRef = 5708760E1A5D141100892B53 /* wo_0019_xingxing.png */; };
 		570876111A5D161700892B53 /* wo_0012_scan.png in Resources */ = {isa = PBXBuildFile; fileRef = 570876101A5D161700892B53 /* wo_0012_scan.png */; };
+		570876141A5D58DA00892B53 /* denglu_0006_mima.png in Resources */ = {isa = PBXBuildFile; fileRef = 570876121A5D58DA00892B53 /* denglu_0006_mima.png */; };
+		570876151A5D58DA00892B53 /* denglu_0008_yonghuming-.png in Resources */ = {isa = PBXBuildFile; fileRef = 570876131A5D58DA00892B53 /* denglu_0008_yonghuming-.png */; };
+		570876171A5D5CA400892B53 /* denglu_0009_圆角矩形-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 570876161A5D5CA400892B53 /* denglu_0009_圆角矩形-2.png */; };
+		570876191A5D5E2D00892B53 /* denglu_0005_cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 570876181A5D5E2D00892B53 /* denglu_0005_cloud.png */; };
+		5708761C1A5D5FD400892B53 /* denglu_0007_rainbow.png in Resources */ = {isa = PBXBuildFile; fileRef = 5708761A1A5D5FD400892B53 /* denglu_0007_rainbow.png */; };
+		5708761D1A5D5FD400892B53 /* denglu_0013_animals.png in Resources */ = {isa = PBXBuildFile; fileRef = 5708761B1A5D5FD400892B53 /* denglu_0013_animals.png */; };
 		5715B14C1A5146B4002E9E79 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 5715B14A1A5146B4002E9E79 /* pinyin.c */; };
 		57211CCE1A53F88C001A1A47 /* libanychatcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57211CBD1A53F88C001A1A47 /* libanychatcore.a */; };
 		57211CCF1A53F88C001A1A47 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57211CBE1A53F88C001A1A47 /* libavcodec.a */; };
@@ -88,6 +94,12 @@
 		5708760C1A5D137B00892B53 /* wo_0013_erweima.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wo_0013_erweima.png; sourceTree = "<group>"; };
 		5708760E1A5D141100892B53 /* wo_0019_xingxing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wo_0019_xingxing.png; sourceTree = "<group>"; };
 		570876101A5D161700892B53 /* wo_0012_scan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wo_0012_scan.png; sourceTree = "<group>"; };
+		570876121A5D58DA00892B53 /* denglu_0006_mima.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = denglu_0006_mima.png; sourceTree = "<group>"; };
+		570876131A5D58DA00892B53 /* denglu_0008_yonghuming-.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "denglu_0008_yonghuming-.png"; sourceTree = "<group>"; };
+		570876161A5D5CA400892B53 /* denglu_0009_圆角矩形-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "denglu_0009_圆角矩形-2.png"; sourceTree = "<group>"; };
+		570876181A5D5E2D00892B53 /* denglu_0005_cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = denglu_0005_cloud.png; sourceTree = "<group>"; };
+		5708761A1A5D5FD400892B53 /* denglu_0007_rainbow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = denglu_0007_rainbow.png; sourceTree = "<group>"; };
+		5708761B1A5D5FD400892B53 /* denglu_0013_animals.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = denglu_0013_animals.png; sourceTree = "<group>"; };
 		5715B14A1A5146B4002E9E79 /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
 		5715B14B1A5146B4002E9E79 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
 		57211CBA1A53F7D6001A1A47 /* AnyChatDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatDefine.h; path = anyChatSDK/include/AnyChatDefine.h; sourceTree = SOURCE_ROOT; };
@@ -321,6 +333,12 @@
 		E422F8AC1A43FE0300CF2F9C /* image */ = {
 			isa = PBXGroup;
 			children = (
+				5708761A1A5D5FD400892B53 /* denglu_0007_rainbow.png */,
+				5708761B1A5D5FD400892B53 /* denglu_0013_animals.png */,
+				570876181A5D5E2D00892B53 /* denglu_0005_cloud.png */,
+				570876161A5D5CA400892B53 /* denglu_0009_圆角矩形-2.png */,
+				570876121A5D58DA00892B53 /* denglu_0006_mima.png */,
+				570876131A5D58DA00892B53 /* denglu_0008_yonghuming-.png */,
 				570876101A5D161700892B53 /* wo_0012_scan.png */,
 				5708760E1A5D141100892B53 /* wo_0019_xingxing.png */,
 				5708760C1A5D137B00892B53 /* wo_0013_erweima.png */,
@@ -470,17 +488,23 @@
 				570876091A5D059100892B53 /* wo_bg_green.png in Resources */,
 				5767F0B21A541D33003CE13D /* selected.png in Resources */,
 				5708760F1A5D141100892B53 /* wo_0019_xingxing.png in Resources */,
+				570876141A5D58DA00892B53 /* denglu_0006_mima.png in Resources */,
 				570876071A5D051800892B53 /* wo_bg_yello.png in Resources */,
 				E422F8A21A43FDE800CF2F9C /* Images.xcassets in Resources */,
 				E422F8B01A43FE0300CF2F9C /* head.jpg in Resources */,
 				570876011A5CF82100892B53 /* wo_bg_ball.png in Resources */,
 				5767F0B31A541D33003CE13D /* unSelected.png in Resources */,
+				5708761C1A5D5FD400892B53 /* denglu_0007_rainbow.png in Resources */,
 				570876051A5CF82100892B53 /* wo_bg_zong.png in Resources */,
+				570876171A5D5CA400892B53 /* denglu_0009_圆角矩形-2.png in Resources */,
+				570876191A5D5E2D00892B53 /* denglu_0005_cloud.png in Resources */,
 				E422F8AF1A43FE0300CF2F9C /* 5.png in Resources */,
+				5708761D1A5D5FD400892B53 /* denglu_0013_animals.png in Resources */,
 				570876021A5CF82100892B53 /* wo_bg_red.png in Resources */,
 				570876111A5D161700892B53 /* wo_0012_scan.png in Resources */,
 				5708760B1A5D070000892B53 /* wo_button_hand.png in Resources */,
 				E422F89F1A43FDE800CF2F9C /* LaunchScreen.xib in Resources */,
+				570876151A5D58DA00892B53 /* denglu_0008_yonghuming-.png in Resources */,
 				570876041A5CF82100892B53 /* wo_bg_woblue.png in Resources */,
 				E422F8A01A43FDE800CF2F9C /* Main.storyboard in Resources */,
 			);

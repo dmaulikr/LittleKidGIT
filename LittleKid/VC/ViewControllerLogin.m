@@ -21,6 +21,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.profileImageview.layer.cornerRadius = self.profileImageview.frame.size.width / 2;
+    self.profileImageview.clipsToBounds = YES;
     // Do any additional setup after loading the view.
 }
 

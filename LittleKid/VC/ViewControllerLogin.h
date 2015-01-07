@@ -10,4 +10,6 @@
 
 @interface ViewControllerLogin : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIImageView *profileImageview;
+
 @end
