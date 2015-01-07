@@ -7,6 +7,7 @@
 //
 
 #import "ViewControllerSelf.h"
+#import "MyselfBackGdView.h"
 
 
 @interface ViewControllerSelf ()
@@ -25,16 +26,20 @@
     
     ///add staruiview
     
-    self.starUIView.notSelectedImage = [UIImage imageNamed:@"unSelected.png"];
-    self.starUIView.halfSelectedImage = [UIImage imageNamed:@"unSelected.png"];
-    self.starUIView.fullSelectedImage = [UIImage imageNamed:@"selected.png"];
-    self.starUIView.rating = 0;
-    self.starUIView.editable = YES;
-    self.starUIView.maxRating = 5;
+//    self.starUIView.notSelectedImage = [UIImage imageNamed:@"unSelected.png"];
+//    self.starUIView.halfSelectedImage = [UIImage imageNamed:@"unSelected.png"];
+//    self.starUIView.fullSelectedImage = [UIImage imageNamed:@"selected.png"];
+//    self.starUIView.rating = 0;
+//    self.starUIView.editable = YES;
+//    self.starUIView.maxRating = 5;
     self.starUIView.delegate = self;
+
+//    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"haha.png"]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshTest:) name:@"newRemoteMsg" object:nil];
 }
+
+
 
 - (void)viewWillDisappear:(BOOL)animated{
     NSLog(@"");
