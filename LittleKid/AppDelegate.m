@@ -271,6 +271,7 @@ withFilterContext:(id)filterContext{
  **/
 - (void)udpSocketDidClose:(GCDAsyncUdpSocket *)sock withError:(NSError *)error{
     NSLog(@"socket did close");
+    [self createUdpP2P];
 }
 
 

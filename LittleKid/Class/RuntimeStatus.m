@@ -41,13 +41,12 @@
 - (void)loadLocalInfo{
     self.usrSelf = [[UserSelf alloc] initWithUID:self.signAccountUID];
     [self loadLocalRecent];
-    //[self testCode];
     
 }
 
 - (void)testCode{
     //self.usrSelf.UID = @"0000";
-    self.usrSelf.nickName = @"lyon";
+    self.usrSelf.nickName = @"自己";
     self.usrSelf.headPicture = @"head.jpg";
     //self.usrSelf.signature = @"小钱长老了老钱";
     //self.usrSelf.address = @"启明704";
@@ -59,7 +58,7 @@
     }
     UserOther *friend = [[UserOther alloc] init];
     friend.UID = @"15926305768";
-    friend.nickName = @"吴相鑫";
+    friend.nickName = @"第二个朋友";
     friend.headPicture = @"head.jpg";
     friend.signature = @"相信男神";
     friend.address = @"启明704";
@@ -76,7 +75,7 @@
     friend.msgs = [[NSMutableArray alloc] init];
     [friend.msgs addObject:msg];
     [self.usrSelf.friends addObject:friend];
-    friend.signature = @"第二个朋友";
+    friend.nickName = @"吴相鑫";
     [self.usrSelf.friends addObject:friend];
     [self.recentUsrList addObject:friend];
     friend.UID = @"13164696487";
@@ -84,6 +83,11 @@
     friend.usrIP = @"127.0.0.1";
     friend.usrPort = @"20107";
     [self.recentUsrList addObject:friend];
+    //save
+    [[RuntimeStatus instance].usrSelf save];
+    for (UserOther *recent1Usr in [RuntimeStatus instance].recentUsrList) {
+        [recent1Usr save];
+    }
 }
 
 /* must called after load the usrself */
@@ -96,6 +100,7 @@
     NSString *recentUsrsRootPath = [self recentDir];
     NSArray *recentUsrsPathArr = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:recentUsrsRootPath error:&err];
     if (err) {
+        [self testCode];
         return;
     }
     if ( [recentUsrsPathArr count] == 0 ) {// decide if it's an empty array
@@ -124,24 +129,20 @@
     if (chatMsgUID == nil || newChatMsg == nil || msgData == nil) {
         return;
     }
-    NSInteger flag = 0;
     for (UserOther *recent1Usr in self.recentUsrList) {
         if ( [recent1Usr.UID compare:chatMsgUID] == NSOrderedSame ) {
-            flag = 1;
             [recent1Usr.msgs addObject:newChatMsg];
             [recent1Usr saveNewMsgData:msgData];
             [recent1Usr save];
+            return;
         }
     }
-    if (flag == 1) {
-        UserOther *newRecentUser = [[UserOther alloc] init];
-        newRecentUser.msgs = [[NSMutableArray alloc] initWithObjects:newChatMsg, nil];
-        [newRecentUser saveNewMsgData:msgData];
-        [newRecentUser save];
-        [[RuntimeStatus instance].recentUsrList addObject:newRecentUser];
-    }
-    
-    
+    //new msg for new recentUsr
+    UserOther *newRecentUser = [[UserOther alloc] init];
+    newRecentUser.msgs = [[NSMutableArray alloc] initWithObjects:newChatMsg, nil];
+    [newRecentUser saveNewMsgData:msgData];
+    [newRecentUser save];
+    [[RuntimeStatus instance].recentUsrList addObject:newRecentUser];
 }
 
 

@@ -19,7 +19,7 @@
 @property(strong, atomic) AVAudioPlayer *player;
 @property(strong, atomic) NSDictionary *recorderSettingsDict;
 @property (strong, nonatomic) NSString *dateToRecordStr;
-@property(weak, nonatomic) UserOther *toChatUsr;/* @property设置 */
+@property(strong, nonatomic) UserOther *toChatUsr;/* @property设置 */
 
 
 @end
@@ -40,7 +40,9 @@
 }
 
 - (void)freshChat:(NSNotification *)notification{
-    [self.msgTableView reloadData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.msgTableView reloadData];
+    });
 }
 
 - (IBAction)touchDownRecord:(id)sender {

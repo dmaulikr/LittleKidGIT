@@ -134,7 +134,7 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
     if (self = [super initWithCoder:aDecoder]) {
-        self.friends = [aDecoder decodeObjectForKey:USR_FRIENDS];
+        self.friends = [[NSMutableArray alloc] initWithArray:[aDecoder decodeObjectForKey:USR_FRIENDS]];
     }
     return self;
 }
@@ -167,6 +167,7 @@
     NSData *usrData = [NSData dataWithContentsOfFile:path options:NSDataReadingUncached error:&err];//keep options in mind
     if (err) {
         NSLog(@"Other no data, read data error: %@",err);
+        self = [[UserOther alloc] init];
         return self;
     }
     self = [NSKeyedUnarchiver unarchiveObjectWithData:usrData];
@@ -174,6 +175,7 @@
         //
     }
     else{
+        self = [[UserOther alloc] init];
         NSLog(@"others unarchieve failed");
     }
     return  self;
@@ -220,7 +222,7 @@
     if (self = [super initWithCoder:aDecoder]) {
         self.usrIP = [aDecoder decodeObjectForKey:USR_IP];
         self.usrPort = [aDecoder decodeObjectForKey:USR_PORT];
-        self.msgs = [aDecoder decodeObjectForKey:USR_MSG];
+        self.msgs = [[NSMutableArray alloc] initWithArray:[aDecoder decodeObjectForKey:USR_MSG]];
     }
     return self;
 }
@@ -233,7 +235,7 @@
  */
 - (NSData *)packetLastChatMsg{
     ChatMessage *lastMsg = [self.msgs lastObject];
-    if ([lastMsg.type compare:MSG_TYPE_SOUND]) {
+    if ( [lastMsg.type compare:MSG_TYPE_SOUND] == NSOrderedSame ) {
         NSData *soundData = [NSData dataWithContentsOfFile:[self soundPathWithMsg:lastMsg]];
         NSDictionary *dictToSent = [NSDictionary dictionaryWithObjectsAndKeys:self.UID, CHATMSG_KEY_UID, lastMsg, CHATMSG_KEY_CHATMSG, soundData, CHATMSG_KEY_SOUND_DATA, nil];
         return [NSKeyedArchiver archivedDataWithRootObject:dictToSent];
