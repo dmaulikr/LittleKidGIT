@@ -46,7 +46,7 @@
 @property(nonatomic, strong)NSString *usrPort;
 @property(nonatomic, strong)NSMutableArray *msgs;
 
-
+- (id)init;
 - (id)initWithPath:(NSString *)path;
 - (BOOL)save;
 - (NSString *)usrDataPath;

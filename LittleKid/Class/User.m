@@ -25,6 +25,21 @@
 #pragma mark - User Class
 @implementation User
 
+- (id)init{
+    self = [super init];
+    if (self) {
+        self.UID = [[NSString alloc] init];
+        self.nickName = [[NSString alloc] init];
+        self.headPicture = [[NSString alloc] init];
+        self.signature = [[NSString alloc] init];
+        self.address = [[NSString alloc] init];
+        self.age = [[NSString alloc] init];
+        self.gender = [[NSString alloc] init];
+        self.state = [[NSString alloc] init];
+    }
+    return self;
+}
+
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:self.UID forKey:USR_UID];
     [aCoder encodeObject:self.nickName forKey:USR_NICKNAME];
@@ -87,7 +102,7 @@
 
 - (NSString *)usrDataPathWithUID:(NSString *)UID{
     NSString *str = [NSString stringWithFormat:@"%@/%@/%@.xcui", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], UID, UID];
-    //NSLog(@"%@",str);
+    NSLog(@"%@",str);
     return str;
 }
 
@@ -135,6 +150,16 @@
 
 #pragma mark - UserOther class
 @implementation UserOther
+
+- (id)init{
+    self = [super init];
+    if (self) {
+        self.usrIP = [[NSString alloc] init];
+        self.usrPort = [[NSString alloc] init];
+        self.msgs = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
 
 /* This method is special for recentMsgList creating */
 - (id)initWithPath:(NSString *)path{

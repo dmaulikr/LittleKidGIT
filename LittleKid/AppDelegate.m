@@ -21,6 +21,7 @@
 //        CLLocationManager *clloc = [[CLLocationManager alloc] init];
 //        [clloc requestAlwaysAuthorization];
 //    }
+    [RuntimeStatus instance];
     [self registerNotifications: application];
     //后台时有服务器推送，进入程序即调用下方法(可能)，此时可判断推送调用方法。remote推送是会自动调用的。
     [self procLaunchOptios:launchOptions];

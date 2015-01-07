@@ -12,16 +12,14 @@
 #import "OtherMsgTableViewCell.h"
 #import "RuntimeStatus.h"
 
-#define OTHER_UID @"12345"
-
 @interface ViewControllerChat ()
 
 @property (weak, nonatomic) IBOutlet UITableView *msgTableView;
 @property(strong, atomic) AVAudioRecorder *recorder;
 @property(strong, atomic) AVAudioPlayer *player;
 @property(strong, atomic) NSDictionary *recorderSettingsDict;
-@property (strong, nonatomic) NSDate *dateToRecord;
-@property(weak, nonatomic) UserOther *toChatUsr;
+@property (strong, nonatomic) NSString *dateToRecordStr;
+@property(weak, nonatomic) UserOther *toChatUsr;/* @property设置 */
 
 
 @end
@@ -48,6 +46,9 @@
 - (IBAction)touchDownRecord:(id)sender {
     NSError *error = nil;
     self.recorder = [[AVAudioRecorder alloc] initWithURL:[NSURL URLWithString:[self msgDataSavePath]] settings:self.recorderSettingsDict error:&error];
+    if (error) {
+        NSLog(@"recorder error: %@",error);
+    }
     if (self.recorder) {
         self.recorder.meteringEnabled = YES;
         [self.recorder prepareToRecord];
@@ -79,7 +80,7 @@
     ChatMessage *newMsg = [[ChatMessage alloc] init];
     newMsg.owner = MSG_OWNER_SELF;
     newMsg.type = MSG_TYPE_SOUND;
-    newMsg.timeStamp = [NSString stringWithFormat:@"%@",self.dateToRecord];
+    newMsg.timeStamp = self.dateToRecordStr;
     newMsg.msg = [NSString stringWithFormat:@"%@%@.aac", self.toChatUsr.UID, newMsg.timeStamp];
     [self.toChatUsr.msgs addObject:newMsg];
     return YES;
@@ -132,11 +133,17 @@
 /* 存储时使用这个path，读取信息时字节用msg.msg做path */
 -(NSString *)msgDataSavePath{
     NSString *savePath;
-    self.dateToRecord = [[NSDate alloc] init];
-    savePath = [NSString stringWithFormat:@"%@/%@/recent/%@%@.aac", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], [RuntimeStatus instance].usrSelf.UID, self.dateToRecord, self.toChatUsr.UID];
+    NSDate *dateToRecord = [NSDate date];
+    NSDateFormatter *fmDate = [[NSDateFormatter alloc] init];
+    [fmDate setDateFormat:@"YYYY-MM-DD-HH-MM-SS"];
+    self.dateToRecordStr = [fmDate stringFromDate:dateToRecord];
+    savePath = [NSString stringWithFormat:@"%@/%@/recent/%@%@.aac", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], [RuntimeStatus instance].usrSelf.UID, self.toChatUsr.UID, self.dateToRecordStr];
     NSError *err;
     NSFileManager *fm = [NSFileManager defaultManager];
     [fm createDirectoryAtPath:[savePath stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:&err];
+    if(err){
+        NSLog(@"recordSavePath dir create err: %@",err);
+    }
     return savePath;
 }
 

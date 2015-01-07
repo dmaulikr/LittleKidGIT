@@ -50,8 +50,10 @@
 }
 
 - (IBAction)btnTest:(id)sender {
-    NSLog(@"being selected, save self info");
     [[RuntimeStatus instance].usrSelf save];
+    for (UserOther *recent1Usr in [RuntimeStatus instance].recentUsrList) {
+        [recent1Usr save];
+    }
     self.labelDisp.text = @"save finished";
     
 }

@@ -18,7 +18,10 @@
 - (id)init{
     self = [super init];
     if (self) {
-        //
+        self.owner = [[NSString alloc] init];
+        self.type = [[NSString alloc] init];
+        self.timeStamp = [[NSString alloc] init];
+        self.msg = [[NSString alloc] init];
     }
     
     return self;

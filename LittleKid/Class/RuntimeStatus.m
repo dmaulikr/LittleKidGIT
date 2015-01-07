@@ -46,7 +46,7 @@
 }
 
 - (void)testCode{
-    self.usrSelf.UID = @"0000";
+    //self.usrSelf.UID = @"0000";
     self.usrSelf.nickName = @"lyon";
     self.usrSelf.headPicture = @"head.jpg";
     //self.usrSelf.signature = @"小钱长老了老钱";
@@ -58,16 +58,16 @@
         self.usrSelf.friends = [[NSMutableArray alloc] init];
     }
     UserOther *friend = [[UserOther alloc] init];
-    friend.UID = @"13164696487";
-    friend.nickName = @"lyon";
+    friend.UID = @"15926305768";
+    friend.nickName = @"吴相鑫";
     friend.headPicture = @"head.jpg";
-    friend.signature = @"小钱长老了老钱";
+    friend.signature = @"相信男神";
     friend.address = @"启明704";
-    friend.age = @"20";
+    friend.age = @"22";
     friend.gender = @"男";
     friend.state = @"1";
     friend.usrIP = @"127.0.0.1";
-    friend.usrPort = @"8888";
+    friend.usrPort = @"20107";
     ChatMessage *msg = [[ChatMessage alloc] init];
     msg.owner = @"1";
     msg.type = @"whatever";
@@ -78,6 +78,12 @@
     [self.usrSelf.friends addObject:friend];
     friend.signature = @"第二个朋友";
     [self.usrSelf.friends addObject:friend];
+    [self.recentUsrList addObject:friend];
+    friend.UID = @"13164696487";
+    friend.nickName = @"自己";
+    friend.usrIP = @"127.0.0.1";
+    friend.usrPort = @"20107";
+    [self.recentUsrList addObject:friend];
 }
 
 /* must called after load the usrself */
@@ -86,7 +92,6 @@
 }
 
 - (void)loadLocalRecent{
-    self.recentUsrList = [[NSMutableArray alloc] init];
     NSError *err;
     NSString *recentUsrsRootPath = [self recentDir];
     NSArray *recentUsrsPathArr = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:recentUsrsRootPath error:&err];
