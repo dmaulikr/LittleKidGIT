@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		570875F71A5CE2FE00892B53 /* MyselfBackGdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 570875F61A5CE2FE00892B53 /* MyselfBackGdView.m */; };
+		570875FF1A5CF82100892B53 /* wo_0024_5岁.png in Resources */ = {isa = PBXBuildFile; fileRef = 570875F81A5CF82100892B53 /* wo_0024_5岁.png */; };
+		570876001A5CF82100892B53 /* wo_0026_10.png in Resources */ = {isa = PBXBuildFile; fileRef = 570875F91A5CF82100892B53 /* wo_0026_10.png */; };
+		570876011A5CF82100892B53 /* wo_bg_ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 570875FA1A5CF82100892B53 /* wo_bg_ball.png */; };
+		570876021A5CF82100892B53 /* wo_bg_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 570875FB1A5CF82100892B53 /* wo_bg_red.png */; };
+		570876031A5CF82100892B53 /* wo_bg_skyblue.png in Resources */ = {isa = PBXBuildFile; fileRef = 570875FC1A5CF82100892B53 /* wo_bg_skyblue.png */; };
+		570876041A5CF82100892B53 /* wo_bg_woblue.png in Resources */ = {isa = PBXBuildFile; fileRef = 570875FD1A5CF82100892B53 /* wo_bg_woblue.png */; };
+		570876051A5CF82100892B53 /* wo_bg_zong.png in Resources */ = {isa = PBXBuildFile; fileRef = 570875FE1A5CF82100892B53 /* wo_bg_zong.png */; };
+		570876071A5D051800892B53 /* wo_bg_yello.png in Resources */ = {isa = PBXBuildFile; fileRef = 570876061A5D051800892B53 /* wo_bg_yello.png */; };
+		570876091A5D059100892B53 /* wo_bg_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 570876081A5D059100892B53 /* wo_bg_green.png */; };
+		5708760B1A5D070000892B53 /* wo_button_hand.png in Resources */ = {isa = PBXBuildFile; fileRef = 5708760A1A5D070000892B53 /* wo_button_hand.png */; };
 		5715B14C1A5146B4002E9E79 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 5715B14A1A5146B4002E9E79 /* pinyin.c */; };
 		57211CCE1A53F88C001A1A47 /* libanychatcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57211CBD1A53F88C001A1A47 /* libanychatcore.a */; };
 		57211CCF1A53F88C001A1A47 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57211CBE1A53F88C001A1A47 /* libavcodec.a */; };
@@ -72,6 +83,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		570875F51A5CE2FE00892B53 /* MyselfBackGdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyselfBackGdView.h; sourceTree = "<group>"; };
+		570875F61A5CE2FE00892B53 /* MyselfBackGdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyselfBackGdView.m; sourceTree = "<group>"; };
+		570875F81A5CF82100892B53 /* wo_0024_5岁.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wo_0024_5岁.png"; sourceTree = "<group>"; };
+		570875F91A5CF82100892B53 /* wo_0026_10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wo_0026_10.png; sourceTree = "<group>"; };
+		570875FA1A5CF82100892B53 /* wo_bg_ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wo_bg_ball.png; sourceTree = "<group>"; };
+		570875FB1A5CF82100892B53 /* wo_bg_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wo_bg_red.png; sourceTree = "<group>"; };
+		570875FC1A5CF82100892B53 /* wo_bg_skyblue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wo_bg_skyblue.png; sourceTree = "<group>"; };
+		570875FD1A5CF82100892B53 /* wo_bg_woblue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wo_bg_woblue.png; sourceTree = "<group>"; };
+		570875FE1A5CF82100892B53 /* wo_bg_zong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wo_bg_zong.png; sourceTree = "<group>"; };
+		570876061A5D051800892B53 /* wo_bg_yello.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wo_bg_yello.png; sourceTree = "<group>"; };
+		570876081A5D059100892B53 /* wo_bg_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wo_bg_green.png; sourceTree = "<group>"; };
+		5708760A1A5D070000892B53 /* wo_button_hand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wo_button_hand.png; sourceTree = "<group>"; };
 		5715B14A1A5146B4002E9E79 /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
 		5715B14B1A5146B4002E9E79 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
 		57211CBA1A53F7D6001A1A47 /* AnyChatDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatDefine.h; path = anyChatSDK/include/AnyChatDefine.h; sourceTree = SOURCE_ROOT; };
@@ -199,6 +222,8 @@
 			children = (
 				5767F0AD1A541B14003CE13D /* RateView.h */,
 				5767F0AE1A541B14003CE13D /* RateView.m */,
+				570875F51A5CE2FE00892B53 /* MyselfBackGdView.h */,
+				570875F61A5CE2FE00892B53 /* MyselfBackGdView.m */,
 			);
 			path = RatingView;
 			sourceTree = "<group>";
@@ -331,6 +356,16 @@
 		E422F8AC1A43FE0300CF2F9C /* image */ = {
 			isa = PBXGroup;
 			children = (
+				5708760A1A5D070000892B53 /* wo_button_hand.png */,
+				570876081A5D059100892B53 /* wo_bg_green.png */,
+				570876061A5D051800892B53 /* wo_bg_yello.png */,
+				570875F81A5CF82100892B53 /* wo_0024_5岁.png */,
+				570875F91A5CF82100892B53 /* wo_0026_10.png */,
+				570875FA1A5CF82100892B53 /* wo_bg_ball.png */,
+				570875FB1A5CF82100892B53 /* wo_bg_red.png */,
+				570875FC1A5CF82100892B53 /* wo_bg_skyblue.png */,
+				570875FD1A5CF82100892B53 /* wo_bg_woblue.png */,
+				570875FE1A5CF82100892B53 /* wo_bg_zong.png */,
 				5767F0B01A541D33003CE13D /* selected.png */,
 				5767F0B11A541D33003CE13D /* unSelected.png */,
 				E422F8AD1A43FE0300CF2F9C /* 5.png */,
@@ -476,12 +511,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				570876031A5CF82100892B53 /* wo_bg_skyblue.png in Resources */,
+				570876001A5CF82100892B53 /* wo_0026_10.png in Resources */,
+				570875FF1A5CF82100892B53 /* wo_0024_5岁.png in Resources */,
+				570876091A5D059100892B53 /* wo_bg_green.png in Resources */,
 				5767F0B21A541D33003CE13D /* selected.png in Resources */,
+				570876071A5D051800892B53 /* wo_bg_yello.png in Resources */,
 				E422F8A21A43FDE800CF2F9C /* Images.xcassets in Resources */,
 				E422F8B01A43FE0300CF2F9C /* head.jpg in Resources */,
+				570876011A5CF82100892B53 /* wo_bg_ball.png in Resources */,
 				5767F0B31A541D33003CE13D /* unSelected.png in Resources */,
+				570876051A5CF82100892B53 /* wo_bg_zong.png in Resources */,
 				E422F8AF1A43FE0300CF2F9C /* 5.png in Resources */,
+				570876021A5CF82100892B53 /* wo_bg_red.png in Resources */,
+				5708760B1A5D070000892B53 /* wo_button_hand.png in Resources */,
 				E422F89F1A43FDE800CF2F9C /* LaunchScreen.xib in Resources */,
+				570876041A5CF82100892B53 /* wo_bg_woblue.png in Resources */,
 				E422F8A01A43FDE800CF2F9C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -502,6 +547,7 @@
 			files = (
 				5715B14C1A5146B4002E9E79 /* pinyin.c in Sources */,
 				E422F8E51A4459C200CF2F9C /* RuntimeStatus.m in Sources */,
+				570875F71A5CE2FE00892B53 /* MyselfBackGdView.m in Sources */,
 				E422F8A71A43FDE800CF2F9C /* ViewControllerLogin.m in Sources */,
 				E4B101A41A4EA2D7004E1224 /* ContactTableViewCell.m in Sources */,
 				E422F8A91A43FDE800CF2F9C /* ViewControllerRecent.m in Sources */,
