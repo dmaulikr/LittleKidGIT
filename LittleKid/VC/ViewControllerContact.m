@@ -104,7 +104,10 @@
                 break;
             }
         }
-        ///add-1
+        ///add-4
+        if (contact.phoneNumber==nil) {
+            contact.phoneNumber = @" ";
+        }
         [dicInfoLocal setObject:contact.phoneNumber forKey:@"phoneNumber"];
         
          ///add
