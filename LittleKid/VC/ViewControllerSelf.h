@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "RuntimeStatus.h"
-#import "RateView.h"
 
 @interface ViewControllerSelf : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
-@property (strong, nonatomic) IBOutlet RateView *starUIView;
 
 @end

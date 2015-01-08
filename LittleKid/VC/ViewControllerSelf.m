@@ -7,7 +7,6 @@
 //
 
 #import "ViewControllerSelf.h"
-#import "MyselfBackGdView.h"
 
 
 @interface ViewControllerSelf ()
@@ -24,15 +23,6 @@
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
     self.profileImageView.clipsToBounds = YES;
     
-    ///add staruiview
-    
-//    self.starUIView.notSelectedImage = [UIImage imageNamed:@"unSelected.png"];
-//    self.starUIView.halfSelectedImage = [UIImage imageNamed:@"unSelected.png"];
-//    self.starUIView.fullSelectedImage = [UIImage imageNamed:@"selected.png"];
-//    self.starUIView.rating = 0;
-//    self.starUIView.editable = YES;
-//    self.starUIView.maxRating = 5;
-    self.starUIView.delegate = self;
 
 //    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"haha.png"]];
     
