@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) AnyChatPlatform   *anyChat;
 @property (strong, nonatomic) AVCaptureVideoPreviewLayer    *localVideoSurface;
+
+
 @property (strong, nonatomic) IBOutlet UIImageView          *remoteVideoSurface;
 @property (strong, nonatomic) IBOutlet UIView               *theLocalView;
 @property (weak, nonatomic) IBOutlet UIButton               *switchCameraBtn;
@@ -282,9 +284,16 @@
 
 - (IBAction)FinishVideoChatBtnClicked:(id)sender
 {
+    [self endWork];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (IBAction)onReturnBtnClick:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)endWork{
     [self FinishVideoChat];
     [self onLogout];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction) OnSwitchCameraBtnClicked:(id)sender
@@ -367,15 +376,5 @@
     return isDidLoad;
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

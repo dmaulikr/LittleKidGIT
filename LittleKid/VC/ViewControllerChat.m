@@ -20,6 +20,8 @@
 @property(strong, atomic) NSDictionary *recorderSettingsDict;
 @property (strong, nonatomic) NSString *dateToRecordStr;
 @property(strong, nonatomic) UserOther *toChatUsr;/* @property设置 */
+@property (weak, nonatomic) IBOutlet UIView *viewPanel;
+
 
 
 @end
@@ -29,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setUI];
     self.toChatUsr = [[RuntimeStatus instance].recentUsrList objectAtIndex:self.toChatUsrIndex];
     [self prepareRecord];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshChat:) name:NOTIFI_GET_RECENT_MSG object:nil];
@@ -37,6 +40,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setUI{
+    self.msgTableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"liaotian_background.png"]];
+    self.viewPanel.layer.cornerRadius = 20.f;
 }
 
 - (void)freshChat:(NSNotification *)notification{
@@ -172,6 +180,7 @@
             cell = [[OtherMsgTableViewCell alloc] init];
         }
         cell.headImg.image = [UIImage imageNamed:@"5.png"];
+        cell.headImg.layer.cornerRadius = 5.0f;
         cell.labelMsg.text = msg.msg;
         
         return cell;
@@ -182,6 +191,7 @@
             cell = [[SelfMsgTableViewCell alloc] init];
         }
         cell.headImg.image = [UIImage imageNamed:@"head.jpg"];
+        cell.headImg.layer.cornerRadius = 5.0f;
         cell.labelMsg.text = msg.msg;
         
         return cell;
