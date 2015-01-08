@@ -27,6 +27,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshRecentContacts:) name:NOTIFI_GET_RECENT_MSG object:nil];
     self.headImage = [UIImage imageNamed:@"head.jpg"];
     self.iconImage = [UIImage imageNamed:@"5.png"];
+    
+    ///-2 add bg
+    UIImage* img = [UIImage imageNamed:@"zuijin_bg_00179.png"];
+    self.view.layer.contents = (id) img.CGImage;
+    
     //get info from local
     [[RuntimeStatus instance] loadLocalInfo];
     //get info from server
@@ -91,6 +96,13 @@
     if (cell == nil) {
         cell = [[RecentTableViewCell alloc] init];
     }
+    
+    ///add-2
+    //cell所在的层绘制圆角
+//    cell.selectedBackgroundView.layer.cornerRadius =20;
+//    cell.selectedBackgroundView.layer.masksToBounds = YES;
+
+    
     cell.nickName.text = @"now can";
     if (self.str != nil) {
         cell.share.text = self.str;
