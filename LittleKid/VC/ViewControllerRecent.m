@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setUI];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshRecentContacts:) name:NOTIFI_GET_RECENT_MSG object:nil];
     self.headImage = [UIImage imageNamed:@"head.jpg"];
@@ -36,6 +37,10 @@
     
     //[self waitStatus];
     
+}
+
+- (void)setUI{
+    self.recentTableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"zuijin_background.png"]];
 }
 
 /* display a waiting indictor */
@@ -54,8 +59,9 @@
 }
 
 - (void)freshRecentContacts:(NSNotification *)notification{
-    [self.recentTableView reloadData];
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.recentTableView reloadData];
+    });
 }
 
 #pragma mark - Table view data source
@@ -99,9 +105,9 @@
     return cell;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    return @"最近的";
-}
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+//    return @"最近的";
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 100;

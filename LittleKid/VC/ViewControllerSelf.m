@@ -11,8 +11,6 @@
 
 @interface ViewControllerSelf ()
 
-@property (weak, nonatomic) IBOutlet UILabel *labelDisp;
-
 @end
 
 @implementation ViewControllerSelf
@@ -32,7 +30,7 @@
 
 
 - (void)viewWillDisappear:(BOOL)animated{
-    NSLog(@"");
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,21 +41,6 @@
 - (void)freshTest:(NSNotification *)notify{
     NSLog(@"I also get the newRemoteMsg");
 }
-
-- (IBAction)btnTest:(id)sender {
-    [[RuntimeStatus instance].usrSelf save];
-    for (UserOther *recent1Usr in [RuntimeStatus instance].recentUsrList) {
-        [recent1Usr save];
-    }
-    self.labelDisp.text = @"save finished";
-    
-}
-
-- (IBAction)btnDisp:(id)sender {
-    self.labelDisp.text = [NSString stringWithFormat:@"%@,%@,%@,%@,%@",[RuntimeStatus instance].usrSelf.UID, [RuntimeStatus instance].usrSelf.signature, [RuntimeStatus instance].usrSelf.gender, [RuntimeStatus instance].usrSelf.headPicture, [RuntimeStatus instance].usrSelf.state];
-}
-
-
 
 #pragma mark - Table view data source
 
@@ -74,13 +57,13 @@
 }
 
 
- - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
- UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellShare" forIndexPath:indexPath];
+// - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+// UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellShare" forIndexPath:indexPath];
  
  // Configure the cell...
  
- return cell;
- }
+// return cell;
+// }
 
 
 /*
