@@ -140,7 +140,7 @@ httpResponseHandler handleSignIn = ^(NSURLResponse *response, NSData *data, NSEr
         NSLog(@"handleSignIn connection success");
         NSError *err;
         NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&err];
-        NSLog(@"%@",arr);
+        //NSLog(@"%@",arr);
         
         
      [HTTTClient notify:NOTIFI_SIGN_IN withdataDict:[HTTTClient dictWithData:[NSData dataWithBytes:"hello world" length:11]]];   

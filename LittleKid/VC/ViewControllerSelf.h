@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RuntimeStatus.h"
 
-@interface ViewControllerSelf : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface ViewControllerSelf : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 
 @end

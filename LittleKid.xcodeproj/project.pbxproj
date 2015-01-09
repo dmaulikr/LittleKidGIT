@@ -72,6 +72,12 @@
 		E43ED3301A5E9BA000A8D90D /* liaotian_chess.png in Resources */ = {isa = PBXBuildFile; fileRef = E43ED31D1A5E9BA000A8D90D /* liaotian_chess.png */; };
 		E43ED3311A5E9BA000A8D90D /* liaotian_microphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E43ED31E1A5E9BA000A8D90D /* liaotian_microphone.png */; };
 		E43ED3321A5E9BA000A8D90D /* liaotian_returnBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = E43ED31F1A5E9BA000A8D90D /* liaotian_returnBtn.png */; };
+		E4A538551A5FF864002456A4 /* ViewControllerImpInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A538541A5FF864002456A4 /* ViewControllerImpInfo.m */; };
+		E4A538581A5FFC99002456A4 /* ViewControllerFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A538571A5FFC99002456A4 /* ViewControllerFriend.m */; };
+		E4A5385E1A5FFCFB002456A4 /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A5385D1A5FFCFB002456A4 /* FriendTableViewCell.m */; };
+		E4A538631A600786002456A4 /* libaudio_processing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4A538601A600786002456A4 /* libaudio_processing.a */; };
+		E4A538641A600786002456A4 /* libsignal_processing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4A538611A600786002456A4 /* libsignal_processing.a */; };
+		E4A538651A600786002456A4 /* libsystem_wrappers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4A538621A600786002456A4 /* libsystem_wrappers.a */; };
 		E4A85E2C1A5A780100C0A222 /* OtherMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A85E2B1A5A780100C0A222 /* OtherMsgTableViewCell.m */; };
 		E4A85E2F1A5A781400C0A222 /* SelfMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A85E2E1A5A781400C0A222 /* SelfMsgTableViewCell.m */; };
 		E4B1017A1A4CF01B004E1224 /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B101791A4CF01B004E1224 /* RecentTableViewCell.m */; };
@@ -109,8 +115,6 @@
 		5715B14A1A5146B4002E9E79 /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
 		5715B14B1A5146B4002E9E79 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
 		571A70D21A5DC955002C8322 /* zuijin_bg_00179.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zuijin_bg_00179.png; sourceTree = "<group>"; };
-		571A70DB1A5E2871002C8322 /* ViewControllerImpInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerImpInfo.h; sourceTree = "<group>"; };
-		571A70DC1A5E2871002C8322 /* ViewControllerImpInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerImpInfo.m; sourceTree = "<group>"; };
 		571A70DF1A5E2EDE002C8322 /* impinfo_boy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_boy.png; sourceTree = "<group>"; };
 		571A70E01A5E2EDE002C8322 /* impinfo_girl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_girl.png; sourceTree = "<group>"; };
 		571A70E31A5E5E6B002C8322 /* impinfo_birth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_birth.png; sourceTree = "<group>"; };
@@ -190,6 +194,15 @@
 		E43ED31D1A5E9BA000A8D90D /* liaotian_chess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liaotian_chess.png; sourceTree = "<group>"; };
 		E43ED31E1A5E9BA000A8D90D /* liaotian_microphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liaotian_microphone.png; sourceTree = "<group>"; };
 		E43ED31F1A5E9BA000A8D90D /* liaotian_returnBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liaotian_returnBtn.png; sourceTree = "<group>"; };
+		E4A538531A5FF864002456A4 /* ViewControllerImpInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerImpInfo.h; sourceTree = "<group>"; };
+		E4A538541A5FF864002456A4 /* ViewControllerImpInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerImpInfo.m; sourceTree = "<group>"; };
+		E4A538561A5FFC99002456A4 /* ViewControllerFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerFriend.h; sourceTree = "<group>"; };
+		E4A538571A5FFC99002456A4 /* ViewControllerFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerFriend.m; sourceTree = "<group>"; };
+		E4A5385C1A5FFCFB002456A4 /* FriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewCell.h; sourceTree = "<group>"; };
+		E4A5385D1A5FFCFB002456A4 /* FriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewCell.m; sourceTree = "<group>"; };
+		E4A538601A600786002456A4 /* libaudio_processing.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libaudio_processing.a; sourceTree = "<group>"; };
+		E4A538611A600786002456A4 /* libsignal_processing.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsignal_processing.a; sourceTree = "<group>"; };
+		E4A538621A600786002456A4 /* libsystem_wrappers.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsystem_wrappers.a; sourceTree = "<group>"; };
 		E4A85E2A1A5A780100C0A222 /* OtherMsgTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherMsgTableViewCell.h; sourceTree = "<group>"; };
 		E4A85E2B1A5A780100C0A222 /* OtherMsgTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherMsgTableViewCell.m; sourceTree = "<group>"; };
 		E4A85E2D1A5A781400C0A222 /* SelfMsgTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfMsgTableViewCell.h; sourceTree = "<group>"; };
@@ -217,9 +230,12 @@
 				57211CDE1A53F88C001A1A47 /* libyuv.a in Frameworks */,
 				57211CD31A53F88C001A1A47 /* libmediacore.a in Frameworks */,
 				57211CD11A53F88C001A1A47 /* libavutil.a in Frameworks */,
+				E4A538631A600786002456A4 /* libaudio_processing.a in Frameworks */,
 				E41C54401A45266200334465 /* libstdc++.6.dylib in Frameworks */,
 				57211CDC1A53F88C001A1A47 /* libx264.a in Frameworks */,
+				E4A538641A600786002456A4 /* libsignal_processing.a in Frameworks */,
 				57211CDA1A53F88C001A1A47 /* libvo-amrwbenc.a in Frameworks */,
+				E4A538651A600786002456A4 /* libsystem_wrappers.a in Frameworks */,
 				57211CCE1A53F88C001A1A47 /* libanychatcore.a in Frameworks */,
 				57211CD81A53F88C001A1A47 /* libswresample.a in Frameworks */,
 				57211CCF1A53F88C001A1A47 /* libavcodec.a in Frameworks */,
@@ -348,8 +364,6 @@
 				E4B1019B1A4E8F77004E1224 /* typedef.h */,
 				E4B1019C1A4E9002004E1224 /* HTTTClient.h */,
 				E4B1019D1A4E9002004E1224 /* HTTTClient.m */,
-				E4B1019F1A4E9948004E1224 /* PacketNetData.h */,
-				E4B101A01A4E9948004E1224 /* PacketNetData.m */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -357,8 +371,8 @@
 		E422F88D1A43FDE800CF2F9C /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				571A70DC1A5E2871002C8322 /* ViewControllerImpInfo.m */,
-				571A70DB1A5E2871002C8322 /* ViewControllerImpInfo.h */,
+				5715B14A1A5146B4002E9E79 /* pinyin.c */,
+				5715B14B1A5146B4002E9E79 /* pinyin.h */,
 				E422F88E1A43FDE800CF2F9C /* ViewControllerContact.h */,
 				E422F88F1A43FDE800CF2F9C /* ViewControllerContact.m */,
 				E422F8901A43FDE800CF2F9C /* ViewControllerInfo.h */,
@@ -371,6 +385,8 @@
 				E422F8991A43FDE800CF2F9C /* ViewControllerRecent.m */,
 				E422F89A1A43FDE800CF2F9C /* ViewControllerSelf.h */,
 				E422F89B1A43FDE800CF2F9C /* ViewControllerSelf.m */,
+				E4A538531A5FF864002456A4 /* ViewControllerImpInfo.h */,
+				E4A538541A5FF864002456A4 /* ViewControllerImpInfo.m */,
 				E422F89C1A43FDE800CF2F9C /* ViewControllerChat.h */,
 				E422F89D1A43FDE800CF2F9C /* ViewControllerChat.m */,
 				E422F8E61A445CC400CF2F9C /* ViewControllerRealTalk.h */,
@@ -383,8 +399,10 @@
 				E4A85E2D1A5A781400C0A222 /* SelfMsgTableViewCell.h */,
 				E4A85E2E1A5A781400C0A222 /* SelfMsgTableViewCell.m */,
 				E4B101A31A4EA2D7004E1224 /* ContactTableViewCell.m */,
-				5715B14A1A5146B4002E9E79 /* pinyin.c */,
-				5715B14B1A5146B4002E9E79 /* pinyin.h */,
+				E4A538561A5FFC99002456A4 /* ViewControllerFriend.h */,
+				E4A538571A5FFC99002456A4 /* ViewControllerFriend.m */,
+				E4A5385C1A5FFCFB002456A4 /* FriendTableViewCell.h */,
+				E4A5385D1A5FFCFB002456A4 /* FriendTableViewCell.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -444,6 +462,17 @@
 			path = ViewControllerChat;
 			sourceTree = "<group>";
 		};
+		E4A5385F1A600786002456A4 /* audioprocess */ = {
+			isa = PBXGroup;
+			children = (
+				E4A538601A600786002456A4 /* libaudio_processing.a */,
+				E4A538611A600786002456A4 /* libsignal_processing.a */,
+				E4A538621A600786002456A4 /* libsystem_wrappers.a */,
+			);
+			name = audioprocess;
+			path = anyChatSDK/libs/audioprocess;
+			sourceTree = SOURCE_ROOT;
+		};
 		E4A8D2DC1A53DAE6000BFAA3 /* anyChatSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -467,6 +496,7 @@
 		E4A8D2E11A53DAE6000BFAA3 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				E4A5385F1A600786002456A4 /* audioprocess */,
 				57211CBD1A53F88C001A1A47 /* libanychatcore.a */,
 				57211CBE1A53F88C001A1A47 /* libavcodec.a */,
 				57211CBF1A53F88C001A1A47 /* libavformat.a */,
@@ -622,10 +652,12 @@
 				5715B14C1A5146B4002E9E79 /* pinyin.c in Sources */,
 				E422F8E51A4459C200CF2F9C /* RuntimeStatus.m in Sources */,
 				E422F8A71A43FDE800CF2F9C /* ViewControllerLogin.m in Sources */,
+				E4A5385E1A5FFCFB002456A4 /* FriendTableViewCell.m in Sources */,
 				E4B101A41A4EA2D7004E1224 /* ContactTableViewCell.m in Sources */,
 				E422F8A91A43FDE800CF2F9C /* ViewControllerRecent.m in Sources */,
 				E422F8A51A43FDE800CF2F9C /* ViewControllerInfo.m in Sources */,
 				E422F8A31A43FDE800CF2F9C /* LittleKid.xcdatamodeld in Sources */,
+				E4A538551A5FF864002456A4 /* ViewControllerImpInfo.m in Sources */,
 				E422F8AA1A43FDE800CF2F9C /* ViewControllerSelf.m in Sources */,
 				E422F8E81A445CC400CF2F9C /* ViewControllerRealTalk.m in Sources */,
 				E4E729AE1A4BB6FD000FA552 /* ChatMessage.m in Sources */,
@@ -640,6 +672,7 @@
 				E422F8AB1A43FDE800CF2F9C /* ViewControllerChat.m in Sources */,
 				E4B1017A1A4CF01B004E1224 /* RecentTableViewCell.m in Sources */,
 				E40DA0971A416F6000CA1431 /* main.m in Sources */,
+				E4A538581A5FFC99002456A4 /* ViewControllerFriend.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

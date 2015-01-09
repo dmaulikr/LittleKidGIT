@@ -2,8 +2,8 @@
 //  ViewControllerImpInfo.h
 //  LittleKid
 //
-//  Created by XC on 15-1-8.
-//  Copyright (c) 2015年 李允恺. All rights reserved.
+//  Created by 吴相鑫 on 1/9/15.
+//  Copyright (c) 2015 吴相鑫. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
