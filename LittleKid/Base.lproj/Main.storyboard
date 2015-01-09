@@ -1025,7 +1025,7 @@
         <!--我的小伙伴-->
         <scene sceneID="TVr-Ox-mZk">
             <objects>
-                <viewController id="KkB-Ru-t9F" sceneMemberID="viewController">
+                <viewController id="KkB-Ru-t9F" customClass="ViewControllerFriend" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eEN-oi-aZW"/>
                         <viewControllerLayoutGuide type="bottom" id="Z4T-7C-CJp"/>
@@ -1162,7 +1162,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nac-CV-82n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2265" y="2272"/>
+            <point key="canvasLocation" x="1590" y="2947"/>
         </scene>
         <!--View Controller Real Talk-->
         <scene sceneID="DA7-1A-aaw">
