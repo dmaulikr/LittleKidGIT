@@ -12,6 +12,8 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    self.headPicture.layer.cornerRadius = (self.headPicture.layer.frame.size.height/2);
+    self.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"zuijin_roundCornerRect"]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
