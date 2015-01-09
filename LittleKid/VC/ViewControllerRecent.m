@@ -32,8 +32,9 @@
     //get info from local
     [[RuntimeStatus instance] loadLocalInfo];
     //get info from server
-    [HTTTClient sendData:nil withProtocol:GET_RECENT_MSG];
-    [HTTTClient sendData:nil withProtocol:GET_SELF_MSG];
+//    [HTTTClient sendData:nil withProtocol:GET_RECENT_MSG];
+//    [HTTTClient sendData:nil withProtocol:GET_FRIEND_LIST];
+//    [HTTTClient sendData:nil withProtocol:GET_SELF_MSG];
     
     //[self waitStatus];
     

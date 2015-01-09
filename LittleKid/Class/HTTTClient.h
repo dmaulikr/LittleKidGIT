@@ -8,10 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "typedef.h"
-#import "PacketNetData.h"
+@class RuntimeStatus;
 
-#define SERVER_URL_STRING   @"http:\\www.baidu.com"
-#define HTTP_METHOD @"GET"
+#define HTTP_SERVER_ROOT_URL_STR   @"http://childrensns.sinaapp.com/User"
 #define TIME_OUT_MAX 10
 
 @interface HTTTClient : NSObject
