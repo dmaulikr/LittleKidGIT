@@ -425,13 +425,13 @@
                                 <exclude reference="M8v-Vh-fJN"/>
                                 <exclude reference="tj5-3i-7Yq"/>
                                 <exclude reference="zAz-xe-ATH"/>
+                                <exclude reference="AhB-tB-FYZ"/>
                                 <exclude reference="M9X-rF-nNC"/>
                                 <exclude reference="uxG-y6-NL1"/>
                                 <exclude reference="3c7-ZB-Tbs"/>
                                 <exclude reference="5dk-AL-aME"/>
                                 <exclude reference="cgH-oU-ZZN"/>
                                 <exclude reference="wf3-CB-J0i"/>
-                                <exclude reference="AhB-tB-FYZ"/>
                                 <exclude reference="3Xe-kt-8cc"/>
                                 <exclude reference="98d-sI-4cw"/>
                                 <exclude reference="g37-db-JbA"/>
@@ -440,11 +440,11 @@
                                 <exclude reference="Xqe-QJ-Aqh"/>
                                 <exclude reference="bqv-rj-GLp"/>
                                 <exclude reference="eL8-45-wur"/>
+                                <exclude reference="iG4-2P-Aha"/>
                                 <exclude reference="5kP-Mq-Fdx"/>
                                 <exclude reference="IXt-4g-96y"/>
                                 <exclude reference="O68-di-q5z"/>
                                 <exclude reference="W0f-sF-MQF"/>
-                                <exclude reference="iG4-2P-Aha"/>
                                 <exclude reference="8oJ-Io-EKc"/>
                             </mask>
                         </variation>
@@ -462,9 +462,9 @@
                                 <include reference="rQb-vt-IRC"/>
                                 <include reference="WXx-jT-c23"/>
                                 <include reference="eL8-45-wur"/>
+                                <include reference="iG4-2P-Aha"/>
                                 <include reference="O68-di-q5z"/>
                                 <include reference="W0f-sF-MQF"/>
-                                <include reference="iG4-2P-Aha"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -476,20 +476,20 @@
                                 <include reference="WZi-Id-q66"/>
                                 <include reference="tj5-3i-7Yq"/>
                                 <include reference="zAz-xe-ATH"/>
+                                <include reference="AhB-tB-FYZ"/>
+                                <include reference="ERD-XC-oMV"/>
                                 <include reference="M9X-rF-nNC"/>
                                 <include reference="5dk-AL-aME"/>
                                 <include reference="cgH-oU-ZZN"/>
-                                <include reference="AhB-tB-FYZ"/>
-                                <include reference="ERD-XC-oMV"/>
                                 <include reference="98d-sI-4cw"/>
                                 <include reference="g37-db-JbA"/>
                                 <include reference="J9s-HE-nf3"/>
                                 <include reference="Xqe-QJ-Aqh"/>
                                 <include reference="bqv-rj-GLp"/>
                                 <include reference="wbQ-uv-zmm"/>
+                                <include reference="h11-yM-vLY"/>
                                 <include reference="5kP-Mq-Fdx"/>
                                 <include reference="IXt-4g-96y"/>
-                                <include reference="h11-yM-vLY"/>
                                 <include reference="8oJ-Io-EKc"/>
                             </mask>
                         </variation>
@@ -523,28 +523,36 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="邮箱" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eKV-EZ-3fe">
-                                <rect key="frame" x="16" y="179" width="270" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="邮箱" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eKV-EZ-3fe">
+                                <rect key="frame" x="42" y="263" width="270" height="50"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="手机" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dqy-jc-LZB">
-                                <rect key="frame" x="16" y="103" width="270" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="手机" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dqy-jc-LZB">
+                                <rect key="frame" x="42" y="100" width="270" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="7iP-0j-oxH"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="7iP-0j-oxH"/>
+                                    </mask>
+                                </variation>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GKW-fW-2sP">
-                                <rect key="frame" x="16" y="141" width="270" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GKW-fW-2sP">
+                                <rect key="frame" x="42" y="169" width="270" height="50"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="孩子年龄" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wHz-MB-GPz">
-                                <rect key="frame" x="16" y="222" width="270" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="孩子年龄" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wHz-MB-GPz">
+                                <rect key="frame" x="42" y="351" width="270" height="50"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OSN-IS-pCS">
-                                <rect key="frame" x="71" y="260" width="123" height="29"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OSN-IS-pCS">
+                                <rect key="frame" x="116" y="428" width="123" height="51"/>
                                 <segments>
                                     <segment title="男孩"/>
                                     <segment title="女孩"/>
@@ -552,6 +560,56 @@
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="GKW-fW-2sP" secondAttribute="trailing" constant="20" id="156-kn-NN8"/>
+                            <constraint firstItem="dqy-jc-LZB" firstAttribute="top" secondItem="x2X-Yx-7Hh" secondAttribute="bottom" constant="20" id="5fQ-9q-t6K"/>
+                            <constraint firstAttribute="centerX" secondItem="GKW-fW-2sP" secondAttribute="centerX" id="79J-B0-hBi"/>
+                            <constraint firstItem="wHz-MB-GPz" firstAttribute="leading" secondItem="wgD-6o-zlO" secondAttribute="leadingMargin" constant="20" id="7TJ-2D-5EM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dqy-jc-LZB" secondAttribute="trailing" constant="20" id="87m-zw-ZLW"/>
+                            <constraint firstItem="eKV-EZ-3fe" firstAttribute="height" secondItem="OSN-IS-pCS" secondAttribute="height" id="Eez-Cg-DIR"/>
+                            <constraint firstItem="eKV-EZ-3fe" firstAttribute="leading" secondItem="wgD-6o-zlO" secondAttribute="leadingMargin" constant="20" id="H1x-al-e8b"/>
+                            <constraint firstItem="GKW-fW-2sP" firstAttribute="top" secondItem="dqy-jc-LZB" secondAttribute="bottom" constant="20" id="Nj6-Fa-Vol"/>
+                            <constraint firstAttribute="centerX" secondItem="wHz-MB-GPz" secondAttribute="centerX" id="RRC-3N-AUo"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wHz-MB-GPz" secondAttribute="trailing" constant="20" id="RoS-DB-he3"/>
+                            <constraint firstItem="wHz-MB-GPz" firstAttribute="top" secondItem="eKV-EZ-3fe" secondAttribute="bottom" constant="20" id="TDn-H5-JFR"/>
+                            <constraint firstAttribute="centerX" secondItem="dqy-jc-LZB" secondAttribute="centerX" id="WPI-CP-Suk"/>
+                            <constraint firstItem="OSN-IS-pCS" firstAttribute="top" secondItem="wHz-MB-GPz" secondAttribute="bottom" constant="20" id="YSl-Sb-yy7"/>
+                            <constraint firstItem="dqy-jc-LZB" firstAttribute="leading" secondItem="wgD-6o-zlO" secondAttribute="leadingMargin" constant="20" id="beh-zK-BNb"/>
+                            <constraint firstItem="wHz-MB-GPz" firstAttribute="height" secondItem="dqy-jc-LZB" secondAttribute="height" id="dmX-6A-Hnq"/>
+                            <constraint firstItem="eKV-EZ-3fe" firstAttribute="height" secondItem="dqy-jc-LZB" secondAttribute="height" id="edg-sr-did"/>
+                            <constraint firstItem="GKW-fW-2sP" firstAttribute="height" secondItem="dqy-jc-LZB" secondAttribute="height" id="iZK-m6-eNX"/>
+                            <constraint firstItem="eKV-EZ-3fe" firstAttribute="top" secondItem="GKW-fW-2sP" secondAttribute="bottom" constant="20" id="nIM-Re-mOW"/>
+                            <constraint firstAttribute="centerX" secondItem="OSN-IS-pCS" secondAttribute="centerX" id="rLJ-ob-QeZ"/>
+                            <constraint firstAttribute="centerX" secondItem="eKV-EZ-3fe" secondAttribute="centerX" id="tLg-M9-QBa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="eKV-EZ-3fe" secondAttribute="trailing" constant="20" id="tpR-cb-KD8"/>
+                            <constraint firstItem="GKW-fW-2sP" firstAttribute="leading" secondItem="wgD-6o-zlO" secondAttribute="leadingMargin" constant="20" id="uSl-Za-gDm"/>
+                        </constraints>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="5fQ-9q-t6K"/>
+                                <include reference="87m-zw-ZLW"/>
+                                <include reference="WPI-CP-Suk"/>
+                                <include reference="beh-zK-BNb"/>
+                                <include reference="156-kn-NN8"/>
+                                <include reference="79J-B0-hBi"/>
+                                <include reference="Nj6-Fa-Vol"/>
+                                <include reference="iZK-m6-eNX"/>
+                                <include reference="uSl-Za-gDm"/>
+                                <include reference="Eez-Cg-DIR"/>
+                                <include reference="H1x-al-e8b"/>
+                                <include reference="edg-sr-did"/>
+                                <include reference="nIM-Re-mOW"/>
+                                <include reference="tLg-M9-QBa"/>
+                                <include reference="tpR-cb-KD8"/>
+                                <include reference="7TJ-2D-5EM"/>
+                                <include reference="RRC-3N-AUo"/>
+                                <include reference="RoS-DB-he3"/>
+                                <include reference="TDn-H5-JFR"/>
+                                <include reference="dmX-6A-Hnq"/>
+                                <include reference="YSl-Sb-yy7"/>
+                                <include reference="rLJ-ob-QeZ"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="基本信息" id="nhT-Wg-HKa">
                         <barButtonItem key="rightBarButtonItem" title="下一步" id="I4x-Po-DrG">
