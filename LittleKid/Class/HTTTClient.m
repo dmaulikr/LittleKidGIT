@@ -7,65 +7,88 @@
 //
 
 #import "HTTTClient.h"
+#import "RuntimeStatus.h"
 
 typedef void(^httpResponseHandler)(NSURLResponse *response, NSData *data, NSError *connectionError);
 
 
 @implementation HTTTClient
 
-+ (void)sendData:(NSData *)data withProtocol:(NET_PROTOCOL)protocol{
-    NSData *pkt = [PacketNetData packetWithData:data];
-    httpResponseHandler httpHandler = [HTTTClient handlerWithProtocol:protocol];
-    if (httpHandler == NULL) {
-        NSLog(@"http handler err");
-        return;
-    }
-    [NSURLConnection sendAsynchronousRequest:[HTTTClient requestWithPkt2Sent:pkt] queue:[[NSOperationQueue alloc]init] completionHandler:httpHandler];
-}
-
 /* http handler FSM */
-+ (httpResponseHandler) handlerWithProtocol:(NET_PROTOCOL)protocol{
++ (void)sendData:(NSData *)data withProtocol:(NET_PROTOCOL)protocol{
+    //NSData *pkt = data;//每个类自己打包数据
+    httpResponseHandler httpHandler;
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] init];
+    NSString *selfUID = [RuntimeStatus instance].usrSelf.UID;
+    NSString *urlStr;
     switch (protocol) {
         case GET_RECENT_MSG:
-            return handleRecentMsg;
+            httpHandler = handleRecentMsg;
+            urlStr = [NSString stringWithFormat:@"%@/messages/%@",HTTP_SERVER_ROOT_URL_STR, selfUID];
+            [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
+            [urlRequest setHTTPMethod:@"GET"];
+            
             break;
         case GET_FRIEND_LIST:
-            return handleFriendList;
+            httpHandler = handleFriendList;
+            urlStr = [NSString stringWithFormat:@"%@/friends/%@",HTTP_SERVER_ROOT_URL_STR, selfUID];
+            [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
+            [urlRequest setHTTPMethod:@"GET"];
             break;
         case SIGN_IN:
-            return handleSignIn;
+            httpHandler = handleSignIn;
+            urlStr = [NSString stringWithFormat:@"%@",HTTP_SERVER_ROOT_URL_STR];
+            [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
+            [urlRequest setHTTPMethod:@"GET"];
+            //setbody
             break;
         case SIGN_UP:
-            return handleSignUp;
+            httpHandler = handleSignUp;
+            urlStr = [NSString stringWithFormat:@"%@",HTTP_SERVER_ROOT_URL_STR];
+            [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
+            [urlRequest setHTTPMethod:@"POST"];
+            
             break;
         case GET_CHECK_CODE:
-            return handleCheckCode;
+            httpHandler = handleCheckCode;
+            urlStr = [NSString stringWithFormat:@"%@",HTTP_SERVER_ROOT_URL_STR];
+            [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
+            [urlRequest setHTTPMethod:@"GET"];
+            
             break;
         case RETRIEVE_PASSWORD:
-            return handleRetrievePwd;
+            httpHandler = handleRetrievePwd;
+            urlStr = [NSString stringWithFormat:@"%@",HTTP_SERVER_ROOT_URL_STR];
+            [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
+            [urlRequest setHTTPMethod:@"POST"];
+            
             break;
         case ADD_FRIEND:
-            return handleAddFriend;
+            httpHandler = handleAddFriend;
+            urlStr = [NSString stringWithFormat:@"%@/friends/%@", HTTP_SERVER_ROOT_URL_STR, selfUID];
+            [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
+            [urlRequest setHTTPMethod:@"POST"];
+            
             break;
         case SEND_MSG:
-            return handleSendMsg;
+            httpHandler = handleSendMsg;
+            urlStr = [NSString stringWithFormat:@"%@",HTTP_SERVER_ROOT_URL_STR];
+            [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
+            [urlRequest setHTTPMethod:@"POST"];
+            
             break;
         case GET_SELF_MSG:
-            return handleSelfMsg;
+            httpHandler = handleSelfMsg;
+            urlStr = [NSString stringWithFormat:@"%@",HTTP_SERVER_ROOT_URL_STR];
+            [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
+            [urlRequest setHTTPMethod:@"GET"];
             break;
         default:
-            return NULL;
+            NSLog(@"no this protocol, pCode:%d",protocol);
+            return;
             break;
     }
-}
-
-+ (NSMutableURLRequest *)requestWithPkt2Sent:(NSData *)Pkt{
-    NSURL *serverUrl = [NSURL URLWithString:[SERVER_URL_STRING stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:serverUrl];
-    [request setHTTPMethod:HTTP_METHOD];
-    //[request setHTTPBody:Pkt];
-    [request setTimeoutInterval:TIME_OUT_MAX];
-    return request;
+    [NSURLConnection sendAsynchronousRequest:urlRequest queue:[[NSOperationQueue alloc] init] completionHandler:httpHandler];
 }
 
 + (void)notify:(NSString *)notifiStr withdataDict:(NSDictionary *)dataDict{
@@ -73,6 +96,9 @@ typedef void(^httpResponseHandler)(NSURLResponse *response, NSData *data, NSErro
 }
 
 + (NSDictionary *)dictWithData:(NSData *)data{
+    if (data == nil) {
+        return nil;
+    }
     return [NSDictionary dictionaryWithObject:data forKey:@"key"];
 }
 
@@ -112,12 +138,13 @@ httpResponseHandler handleSignIn = ^(NSURLResponse *response, NSData *data, NSEr
     }
     else{
         NSLog(@"handleSignIn connection success");
+        NSError *err;
+        NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&err];
+        NSLog(@"%@",arr);
         
         
-        
-        
+     [HTTTClient notify:NOTIFI_SIGN_IN withdataDict:[HTTTClient dictWithData:[NSData dataWithBytes:"hello world" length:11]]];   
     }
-    [HTTTClient notify:NOTIFI_SIGN_IN withdataDict:[HTTTClient dictWithData:[NSData dataWithBytes:"hello world" length:11]]];
 };
 
 httpResponseHandler handleSignUp = ^(NSURLResponse *response, NSData *data, NSError *connectionError){

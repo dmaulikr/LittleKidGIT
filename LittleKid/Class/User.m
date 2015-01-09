@@ -25,21 +25,6 @@
 #pragma mark - User Class
 @implementation User
 
-- (id)init{
-    self = [super init];
-    if (self) {
-        self.UID = [[NSString alloc] init];
-        self.nickName = [[NSString alloc] init];
-        self.headPicture = [[NSString alloc] init];
-        self.signature = [[NSString alloc] init];
-        self.address = [[NSString alloc] init];
-        self.age = [[NSString alloc] init];
-        self.gender = [[NSString alloc] init];
-        self.state = [[NSString alloc] init];
-    }
-    return self;
-}
-
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:self.UID forKey:USR_UID];
     [aCoder encodeObject:self.nickName forKey:USR_NICKNAME];
@@ -65,12 +50,40 @@
     return self;
 }
 
+- (id)init{
+    self = [super init];
+    if (self) {
+        self.UID = [[NSString alloc] init];
+        self.nickName = [[NSString alloc] init];
+        self.headPicture = [[NSString alloc] init];
+        self.signature = [[NSString alloc] init];
+        self.address = [[NSString alloc] init];
+        self.age = [[NSString alloc] init];
+        self.gender = [[NSString alloc] init];
+        self.state = [[NSString alloc] init];
+    }
+    return self;
+}
+
 
 @end
 
 
 #pragma mark - UserSelf Class
 @implementation UserSelf
+
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    [super encodeWithCoder:aCoder];
+    NSArray *fixedFriendsArr = [NSArray arrayWithArray:self.friends];
+    [aCoder encodeObject:fixedFriendsArr forKey:USR_FRIENDS];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    if (self = [super initWithCoder:aDecoder]) {
+        self.friends = [[NSMutableArray alloc] initWithArray:[aDecoder decodeObjectForKey:USR_FRIENDS]];
+    }
+    return self;
+}
 
 - (id)init{
     self = [super init];
@@ -126,19 +139,6 @@
     return YES;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder{
-    [super encodeWithCoder:aCoder];
-    NSArray *fixedFriendsArr = [NSArray arrayWithArray:self.friends];
-    [aCoder encodeObject:fixedFriendsArr forKey:USR_FRIENDS];
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder{
-    if (self = [super initWithCoder:aDecoder]) {
-        self.friends = [[NSMutableArray alloc] initWithArray:[aDecoder decodeObjectForKey:USR_FRIENDS]];
-    }
-    return self;
-}
-
 - (void)loadServerData{
     
 }
@@ -150,6 +150,28 @@
 
 #pragma mark - UserOther class
 @implementation UserOther
+
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    [super encodeWithCoder:aCoder];
+    [aCoder encodeObject:self.usrIP forKey:USR_IP];
+    [aCoder encodeObject:self.usrPort forKey:USR_PORT];
+    if (self.msgs == nil) {
+        return;
+    }
+    else{
+        NSArray *fixedmsgArr = [NSArray arrayWithArray:self.msgs];
+        [aCoder encodeObject:fixedmsgArr forKey:USR_MSG];
+    }
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder{//mutable的初始化方法一定要注意
+    if (self = [super initWithCoder:aDecoder]) {
+        self.usrIP = [aDecoder decodeObjectForKey:USR_IP];
+        self.usrPort = [aDecoder decodeObjectForKey:USR_PORT];
+        self.msgs = [[NSMutableArray alloc] initWithArray:[aDecoder decodeObjectForKey:USR_MSG]];
+    }
+    return self;
+}
 
 - (id)init{
     self = [super init];
@@ -203,28 +225,6 @@
     }
     
     return YES;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder{
-    [super encodeWithCoder:aCoder];
-    [aCoder encodeObject:self.usrIP forKey:USR_IP];
-    [aCoder encodeObject:self.usrPort forKey:USR_PORT];
-    if (self.msgs == nil) {
-        return;
-    }
-    else{
-        NSArray *fixedmsgArr = [NSArray arrayWithArray:self.msgs];
-        [aCoder encodeObject:fixedmsgArr forKey:USR_MSG];
-    }
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder{
-    if (self = [super initWithCoder:aDecoder]) {
-        self.usrIP = [aDecoder decodeObjectForKey:USR_IP];
-        self.usrPort = [aDecoder decodeObjectForKey:USR_PORT];
-        self.msgs = [[NSMutableArray alloc] initWithArray:[aDecoder decodeObjectForKey:USR_MSG]];
-    }
-    return self;
 }
 
 

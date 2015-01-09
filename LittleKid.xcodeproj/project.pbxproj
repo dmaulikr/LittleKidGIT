@@ -77,7 +77,6 @@
 		E4B1017A1A4CF01B004E1224 /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B101791A4CF01B004E1224 /* RecentTableViewCell.m */; };
 		E4B101801A4D2A0A004E1224 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1017F1A4D2A0A004E1224 /* GCDAsyncUdpSocket.m */; };
 		E4B1019E1A4E9002004E1224 /* HTTTClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1019D1A4E9002004E1224 /* HTTTClient.m */; };
-		E4B101A11A4E9948004E1224 /* PacketNetData.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B101A01A4E9948004E1224 /* PacketNetData.m */; };
 		E4B101A41A4EA2D7004E1224 /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B101A31A4EA2D7004E1224 /* ContactTableViewCell.m */; };
 		E4E729A51A4BADC2000FA552 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E729A41A4BADC2000FA552 /* User.m */; };
 		E4E729AE1A4BB6FD000FA552 /* ChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = E4E729AD1A4BB6FD000FA552 /* ChatMessage.m */; };
@@ -202,8 +201,6 @@
 		E4B1019B1A4E8F77004E1224 /* typedef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = typedef.h; sourceTree = "<group>"; };
 		E4B1019C1A4E9002004E1224 /* HTTTClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTTClient.h; sourceTree = "<group>"; };
 		E4B1019D1A4E9002004E1224 /* HTTTClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTTClient.m; sourceTree = "<group>"; };
-		E4B1019F1A4E9948004E1224 /* PacketNetData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PacketNetData.h; sourceTree = "<group>"; };
-		E4B101A01A4E9948004E1224 /* PacketNetData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PacketNetData.m; sourceTree = "<group>"; };
 		E4B101A21A4EA2D7004E1224 /* ContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactTableViewCell.h; sourceTree = "<group>"; };
 		E4B101A31A4EA2D7004E1224 /* ContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactTableViewCell.m; sourceTree = "<group>"; };
 		E4E729A31A4BADC2000FA552 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -643,7 +640,6 @@
 				E422F8AB1A43FDE800CF2F9C /* ViewControllerChat.m in Sources */,
 				E4B1017A1A4CF01B004E1224 /* RecentTableViewCell.m in Sources */,
 				E40DA0971A416F6000CA1431 /* main.m in Sources */,
-				E4B101A11A4E9948004E1224 /* PacketNetData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
