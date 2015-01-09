@@ -10,6 +10,7 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "pinyin.h"
+#import "ctype.h"
 
 
 @interface ViewControllerContact ()
@@ -120,7 +121,7 @@
     
     //排序
     //建立一个字典，字典保存key是A-Z  值是数组
-
+    BOOL hasExtra = NO;
     
     for ( NSDictionary*dic in self.dataArrayDic) {
          NSString* str=[dic objectForKey:@"firstName"];
@@ -133,6 +134,15 @@
             //转换为小写
             strFirLetter= [self upperStr:[str substringToIndex:1]];
         }
+        
+        //判断是否为数字，是则对应的字典key为＃
+        char a = [strFirLetter characterAtIndex:0];
+        
+        if (isdigit(a)) {
+            strFirLetter = @"~";
+            hasExtra = YES;
+        }
+        
         
         if ([[self.contactDic allKeys]containsObject:strFirLetter]) {
             //判断index字典中，是否有这个key如果有，取出值进行追加操作
@@ -148,6 +158,10 @@
     
     self.initials = [[self.contactDic allKeys] sortedArrayUsingSelector:@selector(compare:)];
     
+//    if (hasExtra)
+//        [self.initials lastObject] = @"#";
+    
+
 //    NSLog(@"%@", self.contactDic);
 //    NSLog(@"***************%@++++++++++++++++++",self.initials);
 }
