@@ -427,6 +427,10 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="3c7-ZB-Tbs"/>
+                                <exclude reference="5dk-AL-aME"/>
+                                <exclude reference="cgH-oU-ZZN"/>
+                                <exclude reference="wf3-CB-J0i"/>
                                 <exclude reference="Cbb-GT-yLj"/>
                                 <exclude reference="Ha1-We-1fq"/>
                                 <exclude reference="L6V-r6-oVR"/>
@@ -439,10 +443,6 @@
                                 <exclude reference="AhB-tB-FYZ"/>
                                 <exclude reference="M9X-rF-nNC"/>
                                 <exclude reference="uxG-y6-NL1"/>
-                                <exclude reference="3c7-ZB-Tbs"/>
-                                <exclude reference="5dk-AL-aME"/>
-                                <exclude reference="cgH-oU-ZZN"/>
-                                <exclude reference="wf3-CB-J0i"/>
                                 <exclude reference="3Xe-kt-8cc"/>
                                 <exclude reference="98d-sI-4cw"/>
                                 <exclude reference="g37-db-JbA"/>
@@ -461,14 +461,14 @@
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
+                                <include reference="3c7-ZB-Tbs"/>
+                                <include reference="wf3-CB-J0i"/>
                                 <include reference="Ha1-We-1fq"/>
                                 <include reference="L6V-r6-oVR"/>
                                 <include reference="Xek-QH-Juj"/>
                                 <include reference="CsY-om-Oi5"/>
                                 <include reference="M8v-Vh-fJN"/>
                                 <include reference="uxG-y6-NL1"/>
-                                <include reference="3c7-ZB-Tbs"/>
-                                <include reference="wf3-CB-J0i"/>
                                 <include reference="3Xe-kt-8cc"/>
                                 <include reference="rQb-vt-IRC"/>
                                 <include reference="WXx-jT-c23"/>
@@ -480,6 +480,8 @@
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
                             <mask key="constraints">
+                                <include reference="5dk-AL-aME"/>
+                                <include reference="cgH-oU-ZZN"/>
                                 <include reference="Cbb-GT-yLj"/>
                                 <include reference="jiU-Al-VLk"/>
                                 <include reference="C1p-VM-K7n"/>
@@ -490,8 +492,6 @@
                                 <include reference="AhB-tB-FYZ"/>
                                 <include reference="ERD-XC-oMV"/>
                                 <include reference="M9X-rF-nNC"/>
-                                <include reference="5dk-AL-aME"/>
-                                <include reference="cgH-oU-ZZN"/>
                                 <include reference="98d-sI-4cw"/>
                                 <include reference="g37-db-JbA"/>
                                 <include reference="J9s-HE-nf3"/>
@@ -1470,7 +1470,7 @@
         <scene sceneID="7mA-F9-MFd">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iMQ-YS-cxp" userLabel="我的小伙伴" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="联系人" id="Si5-dI-9gN" userLabel="我的小伙伴"/>
+                    <tabBarItem key="tabBarItem" title="小伙伴" id="Si5-dI-9gN" userLabel="我的小伙伴"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vzG-Yz-Kfh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
