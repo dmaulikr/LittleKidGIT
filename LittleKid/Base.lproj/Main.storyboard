@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EqM-qm-1tu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8pt-Lc-5Fp">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -1125,71 +1125,38 @@
                         <viewControllerLayoutGuide type="top" id="vGE-nh-Eli"/>
                         <viewControllerLayoutGuide type="bottom" id="M7S-dg-T1X"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tn6-TH-Zar">
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="tn6-TH-Zar">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="impinfo_bg_arc_blue.png" translatesAutoresizingMaskIntoConstraints="NO" id="2Mo-XG-mCC">
-                                <rect key="frame" x="19" y="64" width="282" height="362"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="impinfo_bg_arc_blue.png" translatesAutoresizingMaskIntoConstraints="NO" id="Dhe-qx-PBr">
+                                <rect key="frame" x="24" y="143" width="255" height="242"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="242" id="IjQ-QN-TOQ"/>
+                                    <constraint firstAttribute="width" constant="255" id="jvg-4e-T8V"/>
+                                </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="impinfo_bg_arc_yellow.png" translatesAutoresizingMaskIntoConstraints="NO" id="STb-Fj-ed8">
-                                <rect key="frame" x="43" y="121" width="237" height="45"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="impinfo_bg_arc_yellow.png" translatesAutoresizingMaskIntoConstraints="NO" id="STb-Fj-ed8">
+                                <rect key="frame" x="30" y="161" width="237" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="TAj-C1-TAg"/>
+                                    <constraint firstAttribute="width" constant="237" id="cO8-Dc-TIT"/>
+                                </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="impinfo_nick.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ogt-Ay-WfO">
-                                <rect key="frame" x="54" y="129" width="45" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="impinfo_bg_arc_yellow.png" translatesAutoresizingMaskIntoConstraints="NO" id="8qh-az-CTg">
+                                <rect key="frame" x="30" y="234" width="237" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="237" id="fVC-JP-uUS"/>
+                                    <constraint firstAttribute="height" constant="45" id="yZl-hN-bgS"/>
+                                </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="impinfo_bg_arc_yellow.png" translatesAutoresizingMaskIntoConstraints="NO" id="8qh-az-CTg">
-                                <rect key="frame" x="43" y="214" width="237" height="45"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="impinfo_bg_arc_yellow.png" translatesAutoresizingMaskIntoConstraints="NO" id="qj3-J0-eLw">
+                                <rect key="frame" x="30" y="307" width="234" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="8Pz-H9-vRf"/>
+                                    <constraint firstAttribute="width" constant="237" id="ptC-7z-IpB"/>
+                                </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="impinfo_sex.png" translatesAutoresizingMaskIntoConstraints="NO" id="t8Y-It-kaI">
-                                <rect key="frame" x="54" y="222" width="45" height="30"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="impinfo_bg_arc_yellow.png" translatesAutoresizingMaskIntoConstraints="NO" id="qj3-J0-eLw">
-                                <rect key="frame" x="46" y="307" width="234" height="45"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="impinfo_birth.png" translatesAutoresizingMaskIntoConstraints="NO" id="xon-G4-hnI">
-                                <rect key="frame" x="54" y="315" width="45" height="30"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="impinfo_date.png" translatesAutoresizingMaskIntoConstraints="NO" id="wpd-4Y-EjV">
-                                <rect key="frame" x="137" y="315" width="114" height="30"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="head.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4n7-pJ-11U">
-                                <rect key="frame" x="120" y="25" width="75" height="75"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="impinfo_bg_bottom.png" translatesAutoresizingMaskIntoConstraints="NO" id="J8I-Y0-Lnq">
-                                <rect key="frame" x="0.0" y="373" width="320" height="185"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="impinfo_bg_up.png" translatesAutoresizingMaskIntoConstraints="NO" id="SHP-t8-gbt">
-                                <rect key="frame" x="19" y="20" width="83" height="86"/>
-                            </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mar-Gd-FUD">
-                                <rect key="frame" x="114" y="129" width="160" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Pk-lA-BO3">
-                                <rect key="frame" x="102" y="315" width="37" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3qV-VB-xOm">
-                                <rect key="frame" x="158" y="315" width="25" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ldn-12-nzy">
-                                <rect key="frame" x="206" y="315" width="25" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3Rx-nS-Kmy">
-                                <rect key="frame" x="137" y="224" width="90" height="29"/>
-                                <segments>
-                                    <segment title="" image="impinfo_boy.png"/>
-                                    <segment title="" image="impinfo_girl.png"/>
-                                </segments>
-                            </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqY-Ww-oox">
                                 <rect key="frame" x="125" y="373" width="65" height="53"/>
                                 <state key="normal" title="完成" backgroundImage="impinfo_star.png">
@@ -1197,13 +1164,66 @@
                                     <color key="titleShadowColor" red="0.77258211678832112" green="0.063367756791673793" blue="0.11999061845411975" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3Rx-nS-Kmy">
+                                <rect key="frame" x="149" y="243" width="90" height="29"/>
+                                <segments>
+                                    <segment title="男"/>
+                                    <segment title="女"/>
+                                </segments>
+                            </segmentedControl>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="impinfo_bg_up.png" translatesAutoresizingMaskIntoConstraints="NO" id="SHP-t8-gbt">
+                                <rect key="frame" x="11" y="64" width="83" height="86"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="86" id="aAA-YH-6V8"/>
+                                    <constraint firstAttribute="width" constant="83" id="jvV-Im-3W4"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="impinfo_bg_bottom.png" translatesAutoresizingMaskIntoConstraints="NO" id="J8I-Y0-Lnq">
+                                <rect key="frame" x="16" y="373" width="295" height="178"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="295" id="BIA-Gs-qtJ"/>
+                                    <constraint firstAttribute="height" constant="178" id="Rw1-v8-Ese"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="head.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4n7-pJ-11U">
+                                <rect key="frame" x="126" y="84" width="75" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="ET0-Kw-Jlm"/>
+                                    <constraint firstAttribute="height" constant="75" id="aQA-hy-0AD"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="impinfo_date.png" translatesAutoresizingMaskIntoConstraints="NO" id="wpd-4Y-EjV">
+                                <rect key="frame" x="137" y="315" width="114" height="30"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="impinfo_birth.png" translatesAutoresizingMaskIntoConstraints="NO" id="xon-G4-hnI">
+                                <rect key="frame" x="54" y="315" width="45" height="30"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="impinfo_sex.png" translatesAutoresizingMaskIntoConstraints="NO" id="t8Y-It-kaI">
+                                <rect key="frame" x="54" y="241" width="45" height="30"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="impinfo_nick.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ogt-Ay-WfO">
+                                <rect key="frame" x="54" y="169" width="45" height="30"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.81087477189781021" green="0.014975072642666842" blue="0.032016209135174549" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="qj3-J0-eLw" firstAttribute="top" secondItem="8qh-az-CTg" secondAttribute="bottom" constant="28" id="0Sc-Ra-YfO"/>
+                            <constraint firstAttribute="centerY" secondItem="Dhe-qx-PBr" secondAttribute="centerY" constant="36" id="2Gn-gE-7Ro"/>
+                            <constraint firstItem="SHP-t8-gbt" firstAttribute="top" secondItem="vGE-nh-Eli" secondAttribute="bottom" id="967-Ch-lbG"/>
+                            <constraint firstItem="M7S-dg-T1X" firstAttribute="top" secondItem="J8I-Y0-Lnq" secondAttribute="bottom" id="9bd-Yj-wfx"/>
+                            <constraint firstItem="Dhe-qx-PBr" firstAttribute="top" secondItem="vGE-nh-Eli" secondAttribute="bottom" constant="79" id="NZx-sK-MvG"/>
+                            <constraint firstAttribute="centerX" secondItem="SHP-t8-gbt" secondAttribute="centerX" id="WYP-YF-DNJ"/>
+                            <constraint firstItem="STb-Fj-ed8" firstAttribute="top" secondItem="vGE-nh-Eli" secondAttribute="bottom" constant="97" id="Wk2-kM-hzT"/>
+                            <constraint firstItem="4n7-pJ-11U" firstAttribute="top" secondItem="vGE-nh-Eli" secondAttribute="bottom" constant="20" id="fjc-Sm-COn"/>
+                            <constraint firstItem="8qh-az-CTg" firstAttribute="top" secondItem="STb-Fj-ed8" secondAttribute="bottom" constant="28" id="gsa-w4-0fN"/>
+                            <constraint firstAttribute="centerX" secondItem="4n7-pJ-11U" secondAttribute="centerX" id="oHo-rN-9gh"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nac-CV-82n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1590" y="2947"/>
+            <point key="canvasLocation" x="1730" y="3253"/>
         </scene>
         <!--View Controller Real Talk-->
         <scene sceneID="DA7-1A-aaw">
@@ -1557,9 +1577,7 @@
         <image name="impinfo_bg_bottom.png" width="640" height="364"/>
         <image name="impinfo_bg_up.png" width="180" height="184"/>
         <image name="impinfo_birth.png" width="144" height="52"/>
-        <image name="impinfo_boy.png" width="63" height="62"/>
         <image name="impinfo_date.png" width="206" height="40"/>
-        <image name="impinfo_girl.png" width="60" height="74"/>
         <image name="impinfo_nick.png" width="99" height="51"/>
         <image name="impinfo_sex.png" width="99" height="51"/>
         <image name="impinfo_star.png" width="136" height="129"/>
@@ -1587,6 +1605,6 @@
         <image name="登陆.png" width="500" height="119"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BXi-mn-8Gv"/>
+        <segue reference="x7y-XV-pXK"/>
     </inferredMetricsTieBreakers>
 </document>

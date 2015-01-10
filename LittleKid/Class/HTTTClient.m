@@ -143,8 +143,9 @@ httpResponseHandler handleSignIn = ^(NSURLResponse *response, NSData *data, NSEr
         //NSLog(@"%@",arr);
         
         
-     [HTTTClient notify:NOTIFI_SIGN_IN withdataDict:[HTTTClient dictWithData:[NSData dataWithBytes:"hello world" length:11]]];   
+     
     }
+    [HTTTClient notify:NOTIFI_SIGN_IN withdataDict:[HTTTClient dictWithData:[NSData dataWithBytes:"hello world" length:11]]];   
 };
 
 httpResponseHandler handleSignUp = ^(NSURLResponse *response, NSData *data, NSError *connectionError){
