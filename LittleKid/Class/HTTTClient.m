@@ -44,10 +44,10 @@ typedef void(^httpResponseHandler)(NSURLResponse *response, NSData *data, NSErro
             break;
         case SIGN_UP:
             httpHandler = handleSignUp;
-            urlStr = [NSString stringWithFormat:@"%@",HTTP_SERVER_ROOT_URL_STR];
+            urlStr = [NSString stringWithFormat:@"%@/user", HTTP_SERVER_ROOT_URL_STR];
             [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
             [urlRequest setHTTPMethod:@"POST"];
-            
+            [urlRequest setHTTPBody:data];
             break;
         case GET_CHECK_CODE:
             httpHandler = handleCheckCode;
@@ -153,7 +153,8 @@ httpResponseHandler handleSignUp = ^(NSURLResponse *response, NSData *data, NSEr
     }
     else{
         NSLog(@"handleSignUp connection success");
-        
+        NSLog(@"%@",response);
+//        NSData *data = [NSJSONSerialization JSONObjectWithData:data options:<#(NSJSONReadingOptions)#> error:<#(NSError *__autoreleasing *)#>]
         
         
         

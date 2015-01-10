@@ -884,7 +884,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="1" green="0.12104473189999999" blue="0.02425412326" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="headPicture" destination="tFd-qG-uoD" id="WrL-sC-1Ag"/>
@@ -948,6 +948,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="headImg" destination="8pR-UQ-eI6" id="Xdt-J4-Atu"/>
                                             <outlet property="labelMsg" destination="Zp1-6b-Q8Z" id="RAn-Z0-bAH"/>
@@ -972,6 +973,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="headImg" destination="cfY-Il-qaA" id="qTo-Bk-L1Q"/>
                                             <outlet property="labelMsg" destination="soC-ZJ-V0Y" id="YpT-xF-7Um"/>
@@ -1582,6 +1584,6 @@
         <image name="登陆.png" width="500" height="119"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="x7y-XV-pXK"/>
+        <segue reference="BXi-mn-8Gv"/>
     </inferredMetricsTieBreakers>
 </document>
