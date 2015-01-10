@@ -10,4 +10,11 @@
 
 @interface FriendTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *headPicture;
+@property (weak, nonatomic) IBOutlet UILabel *nickName;
+@property (weak, nonatomic) IBOutlet UILabel *starNumber;
+@property (weak, nonatomic) IBOutlet UILabel *state;
+@property (weak, nonatomic) IBOutlet UILabel *signature;
+
+
 @end

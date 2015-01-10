@@ -1056,12 +1056,51 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O2S-vX-dwP" id="GXT-Tp-DRJ">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="5.png" translatesAutoresizingMaskIntoConstraints="NO" id="4HW-fe-IVs">
+                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="昵称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fh-1M-f0w">
+                                                    <rect key="frame" x="70" y="0.0" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="zuijin_star.png" translatesAutoresizingMaskIntoConstraints="NO" id="uPr-9n-Zk4">
+                                                    <rect key="frame" x="115" y="0.0" width="20" height="20"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2R-Ti-jOU">
+                                                    <rect key="frame" x="139" y="0.0" width="12" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="[在线]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8b-TK-gHV">
+                                                    <rect key="frame" x="70" y="19" width="43" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="签名，我是他的小伙伴老钱" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mjn-BY-d9H">
+                                                    <rect key="frame" x="131" y="22" width="172" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="headPicture" destination="4HW-fe-IVs" id="qSq-hY-you"/>
+                                            <outlet property="nickName" destination="1fh-1M-f0w" id="Xjn-G0-YUm"/>
+                                            <outlet property="signature" destination="Mjn-BY-d9H" id="YX6-v1-UjS"/>
+                                            <outlet property="starNumber" destination="O2R-Ti-jOU" id="Xcr-Ca-WKJ"/>
+                                            <outlet property="state" destination="o8b-TK-gHV" id="3Jl-zb-ing"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="KkB-Ru-t9F" id="FqM-lN-fKV"/>
-                                    <outlet property="delegate" destination="KkB-Ru-t9F" id="pwG-1d-TWa"/>
+                                    <outlet property="delegate" destination="KkB-Ru-t9F" id="cTv-en-HWd"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -1069,6 +1108,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="我的小伙伴" id="N3O-YH-PAl"/>
                     <connections>
+                        <outlet property="friendTableView" destination="t5c-Fg-vg1" id="9n2-7p-YRn"/>
                         <segue destination="ImT-sf-p6h" kind="show" identifier="segueToAB" id="L9g-Rl-xab"/>
                     </connections>
                 </viewController>
