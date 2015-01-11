@@ -21,6 +21,87 @@
 		5708761C1A5D5FD400892B53 /* denglu_0007_rainbow.png in Resources */ = {isa = PBXBuildFile; fileRef = 5708761A1A5D5FD400892B53 /* denglu_0007_rainbow.png */; };
 		5708761D1A5D5FD400892B53 /* denglu_0013_animals.png in Resources */ = {isa = PBXBuildFile; fileRef = 5708761B1A5D5FD400892B53 /* denglu_0013_animals.png */; };
 		5715B14C1A5146B4002E9E79 /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = 5715B14A1A5146B4002E9E79 /* pinyin.c */; };
+		571643FA1A62B53A00021BE9 /* GameControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 571643911A62B53A00021BE9 /* GameControl.m */; };
+		571643FB1A62B53A00021BE9 /* MouseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 571643931A62B53A00021BE9 /* MouseView.m */; };
+		571644031A62B53A00021BE9 /* RNGridMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 571643A11A62B53A00021BE9 /* RNGridMenu.m */; };
+		571644051A62B53A00021BE9 /* CheseInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 571643A61A62B53A00021BE9 /* CheseInterface.m */; };
+		571644061A62B53A00021BE9 /* CheseTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 571643A81A62B53A00021BE9 /* CheseTools.m */; };
+		571644071A62B53A00021BE9 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 571643AA1A62B53A00021BE9 /* RootViewController.m */; };
+		571644081A62B53A00021BE9 /* AppIconchese.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643AC1A62B53A00021BE9 /* AppIconchese.png */; };
+		571644091A62B53A00021BE9 /* button.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 571643AD1A62B53A00021BE9 /* button.jpg */; };
+		5716440A1A62B53A00021BE9 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643AE1A62B53A00021BE9 /* button.png */; };
+		5716440B1A62B53A00021BE9 /* CheseBackGround.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 571643AF1A62B53A00021BE9 /* CheseBackGround.jpg */; };
+		5716440C1A62B53A00021BE9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643B11A62B53A00021BE9 /* Default.png */; };
+		5716440D1A62B53A00021BE9 /* GameBG01.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643B21A62B53A00021BE9 /* GameBG01.png */; };
+		5716440E1A62B53A00021BE9 /* GameBG02.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643B31A62B53A00021BE9 /* GameBG02.png */; };
+		5716440F1A62B53A00021BE9 /* GameBG03.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643B41A62B53A00021BE9 /* GameBG03.png */; };
+		571644101A62B53A00021BE9 /* GameBG04.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643B51A62B53A00021BE9 /* GameBG04.png */; };
+		571644111A62B53A00021BE9 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643B61A62B53A00021BE9 /* Icon.png */; };
+		571644121A62B53A00021BE9 /* Mole01.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643B71A62B53A00021BE9 /* Mole01.png */; };
+		571644131A62B53A00021BE9 /* Mole02.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643B81A62B53A00021BE9 /* Mole02.png */; };
+		571644141A62B53A00021BE9 /* Mole03.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643B91A62B53A00021BE9 /* Mole03.png */; };
+		571644151A62B53A00021BE9 /* Mole04.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643BA1A62B53A00021BE9 /* Mole04.png */; };
+		571644161A62B53A00021BE9 /* Mole05.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643BB1A62B53A00021BE9 /* Mole05.png */; };
+		571644171A62B53A00021BE9 /* Mole06.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643BC1A62B53A00021BE9 /* Mole06.png */; };
+		571644181A62B53A00021BE9 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643BE1A62B53A00021BE9 /* arrow.png */; };
+		571644191A62B53A00021BE9 /* attachment.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643BF1A62B53A00021BE9 /* attachment.png */; };
+		5716441A1A62B53A00021BE9 /* block.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643C01A62B53A00021BE9 /* block.png */; };
+		5716441B1A62B53A00021BE9 /* bluetooth.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643C11A62B53A00021BE9 /* bluetooth.png */; };
+		5716441C1A62B53A00021BE9 /* cube.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643C21A62B53A00021BE9 /* cube.png */; };
+		5716441D1A62B53A00021BE9 /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643C31A62B53A00021BE9 /* download.png */; };
+		5716441E1A62B53A00021BE9 /* enter.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643C41A62B53A00021BE9 /* enter.png */; };
+		5716441F1A62B53A00021BE9 /* file.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643C51A62B53A00021BE9 /* file.png */; };
+		571644201A62B53A00021BE9 /* github.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643C61A62B53A00021BE9 /* github.png */; };
+		571644211A62B53A00021BE9 /* 菜单二级(悔棋）.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643C71A62B53A00021BE9 /* 菜单二级(悔棋）.png */; };
+		571644221A62B53A00021BE9 /* 菜单二级（求和）.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643C81A62B53A00021BE9 /* 菜单二级（求和）.png */; };
+		571644231A62B53A00021BE9 /* 菜单二级（认输）.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643C91A62B53A00021BE9 /* 菜单二级（认输）.png */; };
+		571644241A62B53A00021BE9 /* more.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 571643CA1A62B53A00021BE9 /* more.jpg */; };
+		571644251A62B53A00021BE9 /* myphoto.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 571643CB1A62B53A00021BE9 /* myphoto.jpg */; };
+		571644261A62B53A00021BE9 /* opponent.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 571643CC1A62B53A00021BE9 /* opponent.jpg */; };
+		571644271A62B53A00021BE9 /* 0.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643CE1A62B53A00021BE9 /* 0.png */; };
+		571644281A62B53A00021BE9 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643CF1A62B53A00021BE9 /* 1.png */; };
+		571644291A62B53A00021BE9 /* 10.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643D01A62B53A00021BE9 /* 10.png */; };
+		5716442A1A62B53A00021BE9 /* 100.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643D11A62B53A00021BE9 /* 100.png */; };
+		5716442B1A62B53A00021BE9 /* 101.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643D21A62B53A00021BE9 /* 101.png */; };
+		5716442C1A62B53A00021BE9 /* 102.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643D31A62B53A00021BE9 /* 102.png */; };
+		5716442D1A62B53A00021BE9 /* 103.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643D41A62B53A00021BE9 /* 103.png */; };
+		5716442E1A62B53A00021BE9 /* 104.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643D51A62B53A00021BE9 /* 104.png */; };
+		5716442F1A62B53A00021BE9 /* 105.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643D61A62B53A00021BE9 /* 105.png */; };
+		571644301A62B53A00021BE9 /* 106.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643D71A62B53A00021BE9 /* 106.png */; };
+		571644311A62B53A00021BE9 /* 11.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643D81A62B53A00021BE9 /* 11.png */; };
+		571644321A62B53A00021BE9 /* 110.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643D91A62B53A00021BE9 /* 110.png */; };
+		571644331A62B53A00021BE9 /* 111.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643DA1A62B53A00021BE9 /* 111.png */; };
+		571644341A62B53A00021BE9 /* 112.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643DB1A62B53A00021BE9 /* 112.png */; };
+		571644351A62B53A00021BE9 /* 113.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643DC1A62B53A00021BE9 /* 113.png */; };
+		571644361A62B53A00021BE9 /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643DD1A62B53A00021BE9 /* 114.png */; };
+		571644371A62B53A00021BE9 /* 115.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643DE1A62B53A00021BE9 /* 115.png */; };
+		571644381A62B53A00021BE9 /* 116.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643DF1A62B53A00021BE9 /* 116.png */; };
+		571644391A62B53A00021BE9 /* 12.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643E01A62B53A00021BE9 /* 12.png */; };
+		5716443A1A62B53A00021BE9 /* 13.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643E11A62B53A00021BE9 /* 13.png */; };
+		5716443B1A62B53A00021BE9 /* 14.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643E21A62B53A00021BE9 /* 14.png */; };
+		5716443C1A62B53A00021BE9 /* 15.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643E31A62B53A00021BE9 /* 15.png */; };
+		5716443D1A62B53A00021BE9 /* 16.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643E41A62B53A00021BE9 /* 16.png */; };
+		5716443E1A62B53A00021BE9 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643E51A62B53A00021BE9 /* 2.png */; };
+		5716443F1A62B53A00021BE9 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643E61A62B53A00021BE9 /* 3.png */; };
+		571644401A62B53A00021BE9 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643E71A62B53A00021BE9 /* 4.png */; };
+		571644411A62B53A00021BE9 /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643E81A62B53A00021BE9 /* 5.png */; };
+		571644421A62B53A00021BE9 /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643E91A62B53A00021BE9 /* 6.png */; };
+		571644431A62B53A00021BE9 /* Block.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643EA1A62B53A00021BE9 /* Block.png */; };
+		571644441A62B53A00021BE9 /* Chess.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643EB1A62B53A00021BE9 /* Chess.png */; };
+		571644451A62B53A00021BE9 /* ChessBoard1.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643EC1A62B53A00021BE9 /* ChessBoard1.png */; };
+		571644461A62B53A00021BE9 /* ChessBoard2.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643ED1A62B53A00021BE9 /* ChessBoard2.png */; };
+		571644471A62B53A00021BE9 /* ChessBoard3.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643EE1A62B53A00021BE9 /* ChessBoard3.png */; };
+		571644481A62B53A00021BE9 /* ChessBoard4.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643EF1A62B53A00021BE9 /* ChessBoard4.png */; };
+		571644491A62B53A00021BE9 /* ChessBoard5.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643F01A62B53A00021BE9 /* ChessBoard5.png */; };
+		5716444A1A62B53A00021BE9 /* ChessBoard6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 571643F11A62B53A00021BE9 /* ChessBoard6.jpg */; };
+		5716444B1A62B53A00021BE9 /* ChessBoard7.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643F21A62B53A00021BE9 /* ChessBoard7.png */; };
+		5716444C1A62B53A00021BE9 /* ChessBoard8.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643F31A62B53A00021BE9 /* ChessBoard8.png */; };
+		5716444D1A62B53A00021BE9 /* 菜单.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643F41A62B53A00021BE9 /* 菜单.png */; };
+		5716444E1A62B53A00021BE9 /* 象棋主界面.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643F51A62B53A00021BE9 /* 象棋主界面.png */; };
+		5716444F1A62B53A00021BE9 /* 象棋棋盘.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643F61A62B53A00021BE9 /* 象棋棋盘.png */; };
+		571644501A62B53A00021BE9 /* 象棋界面3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 571643F71A62B53A00021BE9 /* 象棋界面3.jpg */; };
+		571644511A62B53A00021BE9 /* 象棋界面（人头男）.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643F81A62B53A00021BE9 /* 象棋界面（人头男）.png */; };
+		571644521A62B53A00021BE9 /* 象棋界面（人头）.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643F91A62B53A00021BE9 /* 象棋界面（人头）.png */; };
 		57211CCE1A53F88C001A1A47 /* libanychatcore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57211CBD1A53F88C001A1A47 /* libanychatcore.a */; };
 		57211CCF1A53F88C001A1A47 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57211CBE1A53F88C001A1A47 /* libavcodec.a */; };
 		57211CD01A53F88C001A1A47 /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57211CBF1A53F88C001A1A47 /* libavformat.a */; };
@@ -129,6 +210,93 @@
 		5708761B1A5D5FD400892B53 /* denglu_0013_animals.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = denglu_0013_animals.png; sourceTree = "<group>"; };
 		5715B14A1A5146B4002E9E79 /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
 		5715B14B1A5146B4002E9E79 /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
+		571643901A62B53A00021BE9 /* GameControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameControl.h; sourceTree = "<group>"; };
+		571643911A62B53A00021BE9 /* GameControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameControl.m; sourceTree = "<group>"; };
+		571643921A62B53A00021BE9 /* MouseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseView.h; sourceTree = "<group>"; };
+		571643931A62B53A00021BE9 /* MouseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MouseView.m; sourceTree = "<group>"; };
+		571643A01A62B53A00021BE9 /* RNGridMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNGridMenu.h; sourceTree = "<group>"; };
+		571643A11A62B53A00021BE9 /* RNGridMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGridMenu.m; sourceTree = "<group>"; };
+		571643A51A62B53A00021BE9 /* CheseInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheseInterface.h; sourceTree = "<group>"; };
+		571643A61A62B53A00021BE9 /* CheseInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheseInterface.m; sourceTree = "<group>"; };
+		571643A71A62B53A00021BE9 /* CheseTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheseTools.h; sourceTree = "<group>"; };
+		571643A81A62B53A00021BE9 /* CheseTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheseTools.m; sourceTree = "<group>"; };
+		571643A91A62B53A00021BE9 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		571643AA1A62B53A00021BE9 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		571643AC1A62B53A00021BE9 /* AppIconchese.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconchese.png; sourceTree = "<group>"; };
+		571643AD1A62B53A00021BE9 /* button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = button.jpg; sourceTree = "<group>"; };
+		571643AE1A62B53A00021BE9 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
+		571643AF1A62B53A00021BE9 /* CheseBackGround.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = CheseBackGround.jpg; sourceTree = "<group>"; };
+		571643B11A62B53A00021BE9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		571643B21A62B53A00021BE9 /* GameBG01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GameBG01.png; sourceTree = "<group>"; };
+		571643B31A62B53A00021BE9 /* GameBG02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GameBG02.png; sourceTree = "<group>"; };
+		571643B41A62B53A00021BE9 /* GameBG03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GameBG03.png; sourceTree = "<group>"; };
+		571643B51A62B53A00021BE9 /* GameBG04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GameBG04.png; sourceTree = "<group>"; };
+		571643B61A62B53A00021BE9 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		571643B71A62B53A00021BE9 /* Mole01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mole01.png; sourceTree = "<group>"; };
+		571643B81A62B53A00021BE9 /* Mole02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mole02.png; sourceTree = "<group>"; };
+		571643B91A62B53A00021BE9 /* Mole03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mole03.png; sourceTree = "<group>"; };
+		571643BA1A62B53A00021BE9 /* Mole04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mole04.png; sourceTree = "<group>"; };
+		571643BB1A62B53A00021BE9 /* Mole05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mole05.png; sourceTree = "<group>"; };
+		571643BC1A62B53A00021BE9 /* Mole06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mole06.png; sourceTree = "<group>"; };
+		571643BE1A62B53A00021BE9 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		571643BF1A62B53A00021BE9 /* attachment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = attachment.png; sourceTree = "<group>"; };
+		571643C01A62B53A00021BE9 /* block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block.png; sourceTree = "<group>"; };
+		571643C11A62B53A00021BE9 /* bluetooth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bluetooth.png; sourceTree = "<group>"; };
+		571643C21A62B53A00021BE9 /* cube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cube.png; sourceTree = "<group>"; };
+		571643C31A62B53A00021BE9 /* download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = download.png; sourceTree = "<group>"; };
+		571643C41A62B53A00021BE9 /* enter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enter.png; sourceTree = "<group>"; };
+		571643C51A62B53A00021BE9 /* file.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = file.png; sourceTree = "<group>"; };
+		571643C61A62B53A00021BE9 /* github.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = github.png; sourceTree = "<group>"; };
+		571643C71A62B53A00021BE9 /* 菜单二级(悔棋）.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "菜单二级(悔棋）.png"; sourceTree = "<group>"; };
+		571643C81A62B53A00021BE9 /* 菜单二级（求和）.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "菜单二级（求和）.png"; sourceTree = "<group>"; };
+		571643C91A62B53A00021BE9 /* 菜单二级（认输）.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "菜单二级（认输）.png"; sourceTree = "<group>"; };
+		571643CA1A62B53A00021BE9 /* more.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = more.jpg; sourceTree = "<group>"; };
+		571643CB1A62B53A00021BE9 /* myphoto.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = myphoto.jpg; sourceTree = "<group>"; };
+		571643CC1A62B53A00021BE9 /* opponent.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = opponent.jpg; sourceTree = "<group>"; };
+		571643CE1A62B53A00021BE9 /* 0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0.png; sourceTree = "<group>"; };
+		571643CF1A62B53A00021BE9 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		571643D01A62B53A00021BE9 /* 10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 10.png; sourceTree = "<group>"; };
+		571643D11A62B53A00021BE9 /* 100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 100.png; sourceTree = "<group>"; };
+		571643D21A62B53A00021BE9 /* 101.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 101.png; sourceTree = "<group>"; };
+		571643D31A62B53A00021BE9 /* 102.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 102.png; sourceTree = "<group>"; };
+		571643D41A62B53A00021BE9 /* 103.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 103.png; sourceTree = "<group>"; };
+		571643D51A62B53A00021BE9 /* 104.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 104.png; sourceTree = "<group>"; };
+		571643D61A62B53A00021BE9 /* 105.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 105.png; sourceTree = "<group>"; };
+		571643D71A62B53A00021BE9 /* 106.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 106.png; sourceTree = "<group>"; };
+		571643D81A62B53A00021BE9 /* 11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 11.png; sourceTree = "<group>"; };
+		571643D91A62B53A00021BE9 /* 110.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 110.png; sourceTree = "<group>"; };
+		571643DA1A62B53A00021BE9 /* 111.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 111.png; sourceTree = "<group>"; };
+		571643DB1A62B53A00021BE9 /* 112.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 112.png; sourceTree = "<group>"; };
+		571643DC1A62B53A00021BE9 /* 113.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 113.png; sourceTree = "<group>"; };
+		571643DD1A62B53A00021BE9 /* 114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 114.png; sourceTree = "<group>"; };
+		571643DE1A62B53A00021BE9 /* 115.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 115.png; sourceTree = "<group>"; };
+		571643DF1A62B53A00021BE9 /* 116.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 116.png; sourceTree = "<group>"; };
+		571643E01A62B53A00021BE9 /* 12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 12.png; sourceTree = "<group>"; };
+		571643E11A62B53A00021BE9 /* 13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 13.png; sourceTree = "<group>"; };
+		571643E21A62B53A00021BE9 /* 14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 14.png; sourceTree = "<group>"; };
+		571643E31A62B53A00021BE9 /* 15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 15.png; sourceTree = "<group>"; };
+		571643E41A62B53A00021BE9 /* 16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 16.png; sourceTree = "<group>"; };
+		571643E51A62B53A00021BE9 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		571643E61A62B53A00021BE9 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
+		571643E71A62B53A00021BE9 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
+		571643E81A62B53A00021BE9 /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
+		571643E91A62B53A00021BE9 /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6.png; sourceTree = "<group>"; };
+		571643EA1A62B53A00021BE9 /* Block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Block.png; sourceTree = "<group>"; };
+		571643EB1A62B53A00021BE9 /* Chess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Chess.png; sourceTree = "<group>"; };
+		571643EC1A62B53A00021BE9 /* ChessBoard1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessBoard1.png; sourceTree = "<group>"; };
+		571643ED1A62B53A00021BE9 /* ChessBoard2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessBoard2.png; sourceTree = "<group>"; };
+		571643EE1A62B53A00021BE9 /* ChessBoard3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessBoard3.png; sourceTree = "<group>"; };
+		571643EF1A62B53A00021BE9 /* ChessBoard4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessBoard4.png; sourceTree = "<group>"; };
+		571643F01A62B53A00021BE9 /* ChessBoard5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessBoard5.png; sourceTree = "<group>"; };
+		571643F11A62B53A00021BE9 /* ChessBoard6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ChessBoard6.jpg; sourceTree = "<group>"; };
+		571643F21A62B53A00021BE9 /* ChessBoard7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessBoard7.png; sourceTree = "<group>"; };
+		571643F31A62B53A00021BE9 /* ChessBoard8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChessBoard8.png; sourceTree = "<group>"; };
+		571643F41A62B53A00021BE9 /* 菜单.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "菜单.png"; sourceTree = "<group>"; };
+		571643F51A62B53A00021BE9 /* 象棋主界面.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "象棋主界面.png"; sourceTree = "<group>"; };
+		571643F61A62B53A00021BE9 /* 象棋棋盘.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "象棋棋盘.png"; sourceTree = "<group>"; };
+		571643F71A62B53A00021BE9 /* 象棋界面3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "象棋界面3.jpg"; sourceTree = "<group>"; };
+		571643F81A62B53A00021BE9 /* 象棋界面（人头男）.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "象棋界面（人头男）.png"; sourceTree = "<group>"; };
+		571643F91A62B53A00021BE9 /* 象棋界面（人头）.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "象棋界面（人头）.png"; sourceTree = "<group>"; };
 		57211CBA1A53F7D6001A1A47 /* AnyChatDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatDefine.h; path = anyChatSDK/include/AnyChatDefine.h; sourceTree = SOURCE_ROOT; };
 		57211CBB1A53F7D6001A1A47 /* AnyChatErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatErrorCode.h; path = anyChatSDK/include/AnyChatErrorCode.h; sourceTree = SOURCE_ROOT; };
 		57211CBC1A53F7D6001A1A47 /* AnyChatPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatPlatform.h; path = anyChatSDK/include/AnyChatPlatform.h; sourceTree = SOURCE_ROOT; };
@@ -279,6 +447,145 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5716438F1A62B53A00021BE9 /* 打地鼠 */ = {
+			isa = PBXGroup;
+			children = (
+				571643901A62B53A00021BE9 /* GameControl.h */,
+				571643911A62B53A00021BE9 /* GameControl.m */,
+				571643921A62B53A00021BE9 /* MouseView.h */,
+				571643931A62B53A00021BE9 /* MouseView.m */,
+			);
+			path = "打地鼠";
+			sourceTree = "<group>";
+		};
+		571643941A62B53A00021BE9 /* chinese chess */ = {
+			isa = PBXGroup;
+			children = (
+				571643A01A62B53A00021BE9 /* RNGridMenu.h */,
+				571643A11A62B53A00021BE9 /* RNGridMenu.m */,
+			);
+			path = "chinese chess";
+			sourceTree = "<group>";
+		};
+		571643A41A62B53A00021BE9 /* GUI */ = {
+			isa = PBXGroup;
+			children = (
+				571643A51A62B53A00021BE9 /* CheseInterface.h */,
+				571643A61A62B53A00021BE9 /* CheseInterface.m */,
+				571643A71A62B53A00021BE9 /* CheseTools.h */,
+				571643A81A62B53A00021BE9 /* CheseTools.m */,
+				571643A91A62B53A00021BE9 /* RootViewController.h */,
+				571643AA1A62B53A00021BE9 /* RootViewController.m */,
+			);
+			path = GUI;
+			sourceTree = "<group>";
+		};
+		571643AB1A62B53A00021BE9 /* Res */ = {
+			isa = PBXGroup;
+			children = (
+				571643AC1A62B53A00021BE9 /* AppIconchese.png */,
+				571643AD1A62B53A00021BE9 /* button.jpg */,
+				571643AE1A62B53A00021BE9 /* button.png */,
+				571643AF1A62B53A00021BE9 /* CheseBackGround.jpg */,
+				571643B01A62B53A00021BE9 /* gameRes */,
+				571643BD1A62B53A00021BE9 /* icons */,
+				571643CA1A62B53A00021BE9 /* more.jpg */,
+				571643CB1A62B53A00021BE9 /* myphoto.jpg */,
+				571643CC1A62B53A00021BE9 /* opponent.jpg */,
+				571643CD1A62B53A00021BE9 /* 象棋资源 */,
+			);
+			path = Res;
+			sourceTree = "<group>";
+		};
+		571643B01A62B53A00021BE9 /* gameRes */ = {
+			isa = PBXGroup;
+			children = (
+				571643B11A62B53A00021BE9 /* Default.png */,
+				571643B21A62B53A00021BE9 /* GameBG01.png */,
+				571643B31A62B53A00021BE9 /* GameBG02.png */,
+				571643B41A62B53A00021BE9 /* GameBG03.png */,
+				571643B51A62B53A00021BE9 /* GameBG04.png */,
+				571643B61A62B53A00021BE9 /* Icon.png */,
+				571643B71A62B53A00021BE9 /* Mole01.png */,
+				571643B81A62B53A00021BE9 /* Mole02.png */,
+				571643B91A62B53A00021BE9 /* Mole03.png */,
+				571643BA1A62B53A00021BE9 /* Mole04.png */,
+				571643BB1A62B53A00021BE9 /* Mole05.png */,
+				571643BC1A62B53A00021BE9 /* Mole06.png */,
+			);
+			path = gameRes;
+			sourceTree = "<group>";
+		};
+		571643BD1A62B53A00021BE9 /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				571643BE1A62B53A00021BE9 /* arrow.png */,
+				571643BF1A62B53A00021BE9 /* attachment.png */,
+				571643C01A62B53A00021BE9 /* block.png */,
+				571643C11A62B53A00021BE9 /* bluetooth.png */,
+				571643C21A62B53A00021BE9 /* cube.png */,
+				571643C31A62B53A00021BE9 /* download.png */,
+				571643C41A62B53A00021BE9 /* enter.png */,
+				571643C51A62B53A00021BE9 /* file.png */,
+				571643C61A62B53A00021BE9 /* github.png */,
+				571643C71A62B53A00021BE9 /* 菜单二级(悔棋）.png */,
+				571643C81A62B53A00021BE9 /* 菜单二级（求和）.png */,
+				571643C91A62B53A00021BE9 /* 菜单二级（认输）.png */,
+			);
+			path = icons;
+			sourceTree = "<group>";
+		};
+		571643CD1A62B53A00021BE9 /* 象棋资源 */ = {
+			isa = PBXGroup;
+			children = (
+				571643CE1A62B53A00021BE9 /* 0.png */,
+				571643CF1A62B53A00021BE9 /* 1.png */,
+				571643D01A62B53A00021BE9 /* 10.png */,
+				571643D11A62B53A00021BE9 /* 100.png */,
+				571643D21A62B53A00021BE9 /* 101.png */,
+				571643D31A62B53A00021BE9 /* 102.png */,
+				571643D41A62B53A00021BE9 /* 103.png */,
+				571643D51A62B53A00021BE9 /* 104.png */,
+				571643D61A62B53A00021BE9 /* 105.png */,
+				571643D71A62B53A00021BE9 /* 106.png */,
+				571643D81A62B53A00021BE9 /* 11.png */,
+				571643D91A62B53A00021BE9 /* 110.png */,
+				571643DA1A62B53A00021BE9 /* 111.png */,
+				571643DB1A62B53A00021BE9 /* 112.png */,
+				571643DC1A62B53A00021BE9 /* 113.png */,
+				571643DD1A62B53A00021BE9 /* 114.png */,
+				571643DE1A62B53A00021BE9 /* 115.png */,
+				571643DF1A62B53A00021BE9 /* 116.png */,
+				571643E01A62B53A00021BE9 /* 12.png */,
+				571643E11A62B53A00021BE9 /* 13.png */,
+				571643E21A62B53A00021BE9 /* 14.png */,
+				571643E31A62B53A00021BE9 /* 15.png */,
+				571643E41A62B53A00021BE9 /* 16.png */,
+				571643E51A62B53A00021BE9 /* 2.png */,
+				571643E61A62B53A00021BE9 /* 3.png */,
+				571643E71A62B53A00021BE9 /* 4.png */,
+				571643E81A62B53A00021BE9 /* 5.png */,
+				571643E91A62B53A00021BE9 /* 6.png */,
+				571643EA1A62B53A00021BE9 /* Block.png */,
+				571643EB1A62B53A00021BE9 /* Chess.png */,
+				571643EC1A62B53A00021BE9 /* ChessBoard1.png */,
+				571643ED1A62B53A00021BE9 /* ChessBoard2.png */,
+				571643EE1A62B53A00021BE9 /* ChessBoard3.png */,
+				571643EF1A62B53A00021BE9 /* ChessBoard4.png */,
+				571643F01A62B53A00021BE9 /* ChessBoard5.png */,
+				571643F11A62B53A00021BE9 /* ChessBoard6.jpg */,
+				571643F21A62B53A00021BE9 /* ChessBoard7.png */,
+				571643F31A62B53A00021BE9 /* ChessBoard8.png */,
+				571643F41A62B53A00021BE9 /* 菜单.png */,
+				571643F51A62B53A00021BE9 /* 象棋主界面.png */,
+				571643F61A62B53A00021BE9 /* 象棋棋盘.png */,
+				571643F71A62B53A00021BE9 /* 象棋界面3.jpg */,
+				571643F81A62B53A00021BE9 /* 象棋界面（人头男）.png */,
+				571643F91A62B53A00021BE9 /* 象棋界面（人头）.png */,
+			);
+			path = "象棋资源";
+			sourceTree = "<group>";
+		};
 		571A70DE1A5E2EDE002C8322 /* ImpInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -329,11 +636,14 @@
 		E40DA0931A416F6000CA1431 /* LittleKid */ = {
 			isa = PBXGroup;
 			children = (
+				5716438F1A62B53A00021BE9 /* 打地鼠 */,
+				571643941A62B53A00021BE9 /* chinese chess */,
+				571643A41A62B53A00021BE9 /* GUI */,
+				571643AB1A62B53A00021BE9 /* Res */,
 				E422F8801A43FDE800CF2F9C /* AppDelegate.h */,
 				E422F8811A43FDE800CF2F9C /* AppDelegate.m */,
 				E422F8851A43FDE800CF2F9C /* Main.storyboard */,
 				E422F8831A43FDE800CF2F9C /* LaunchScreen.xib */,
-				E422F8821A43FDE800CF2F9C /* Base.lproj */,
 				E422F88A1A43FDE800CF2F9C /* Images.xcassets */,
 				E422F88B1A43FDE800CF2F9C /* LittleKid.xcdatamodeld */,
 				E422F8871A43FDE800CF2F9C /* Class */,
@@ -370,13 +680,6 @@
 				E40DA0B21A416F6000CA1431 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E422F8821A43FDE800CF2F9C /* Base.lproj */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Base.lproj;
 			sourceTree = "<group>";
 		};
 		E422F8871A43FDE800CF2F9C /* Class */ = {
@@ -628,54 +931,129 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5716443C1A62B53A00021BE9 /* 15.png in Resources */,
+				5716444A1A62B53A00021BE9 /* ChessBoard6.jpg in Resources */,
 				5759E24F1A5FC6AC002A9315 /* 密码.png in Resources */,
+				571644181A62B53A00021BE9 /* arrow.png in Resources */,
+				571644481A62B53A00021BE9 /* ChessBoard4.png in Resources */,
 				570876031A5CF82100892B53 /* wo_bg_skyblue.png in Resources */,
 				57B6515E1A6120D1002A78F9 /* impinfo_bg_up.png in Resources */,
+				5716444E1A62B53A00021BE9 /* 象棋主界面.png in Resources */,
+				571644101A62B53A00021BE9 /* GameBG04.png in Resources */,
+				5716443E1A62B53A00021BE9 /* 2.png in Resources */,
 				57B651641A6120D1002A78F9 /* impinfo_sex.png in Resources */,
+				5716441C1A62B53A00021BE9 /* cube.png in Resources */,
 				5708760D1A5D137B00892B53 /* wo_0013_erweima.png in Resources */,
+				571644411A62B53A00021BE9 /* 5.png in Resources */,
+				571644421A62B53A00021BE9 /* 6.png in Resources */,
 				57B6515F1A6120D1002A78F9 /* impinfo_birth.png in Resources */,
 				E43ED3301A5E9BA000A8D90D /* liaotian_chess.png in Resources */,
 				570876091A5D059100892B53 /* wo_bg_green.png in Resources */,
+				5716444C1A62B53A00021BE9 /* ChessBoard8.png in Resources */,
+				571644341A62B53A00021BE9 /* 112.png in Resources */,
+				571644351A62B53A00021BE9 /* 113.png in Resources */,
+				5716442A1A62B53A00021BE9 /* 100.png in Resources */,
 				E43ED32F1A5E9BA000A8D90D /* liaotian_bubble2.png in Resources */,
+				5716440B1A62B53A00021BE9 /* CheseBackGround.jpg in Resources */,
 				5767F0B21A541D33003CE13D /* selected.png in Resources */,
+				5716440A1A62B53A00021BE9 /* button.png in Resources */,
+				571644471A62B53A00021BE9 /* ChessBoard3.png in Resources */,
+				571644111A62B53A00021BE9 /* Icon.png in Resources */,
+				5716442D1A62B53A00021BE9 /* 103.png in Resources */,
 				5708760F1A5D141100892B53 /* wo_0019_xingxing.png in Resources */,
+				5716442B1A62B53A00021BE9 /* 101.png in Resources */,
 				570876071A5D051800892B53 /* wo_bg_yello.png in Resources */,
+				571644491A62B53A00021BE9 /* ChessBoard5.png in Resources */,
 				57B651631A6120D1002A78F9 /* impinfo_nick.png in Resources */,
 				E422F8A21A43FDE800CF2F9C /* Images.xcassets in Resources */,
+				571644241A62B53A00021BE9 /* more.jpg in Resources */,
+				571644171A62B53A00021BE9 /* Mole06.png in Resources */,
+				571644271A62B53A00021BE9 /* 0.png in Resources */,
+				571644141A62B53A00021BE9 /* Mole03.png in Resources */,
+				5716443A1A62B53A00021BE9 /* 13.png in Resources */,
 				57B651651A6120D1002A78F9 /* impinfo_star.png in Resources */,
 				E422F8B01A43FE0300CF2F9C /* head.jpg in Resources */,
+				5716441E1A62B53A00021BE9 /* enter.png in Resources */,
+				571644431A62B53A00021BE9 /* Block.png in Resources */,
 				570876011A5CF82100892B53 /* wo_bg_ball.png in Resources */,
 				5759E2521A5FCA65002A9315 /* 云登陆.png in Resources */,
+				5716443F1A62B53A00021BE9 /* 3.png in Resources */,
 				5767F0B31A541D33003CE13D /* unSelected.png in Resources */,
+				571644091A62B53A00021BE9 /* button.jpg in Resources */,
+				5716441F1A62B53A00021BE9 /* file.png in Resources */,
 				5708761C1A5D5FD400892B53 /* denglu_0007_rainbow.png in Resources */,
+				5716441D1A62B53A00021BE9 /* download.png in Resources */,
+				5716441B1A62B53A00021BE9 /* bluetooth.png in Resources */,
 				57B651601A6120D1002A78F9 /* impinfo_boy.png in Resources */,
 				570876051A5CF82100892B53 /* wo_bg_zong.png in Resources */,
+				571644211A62B53A00021BE9 /* 菜单二级(悔棋）.png in Resources */,
+				571644361A62B53A00021BE9 /* 114.png in Resources */,
 				E43ED2D61A5E24A900A8D90D /* zuijin_star.png in Resources */,
 				E43ED3311A5E9BA000A8D90D /* liaotian_microphone.png in Resources */,
+				571644451A62B53A00021BE9 /* ChessBoard1.png in Resources */,
+				571644331A62B53A00021BE9 /* 111.png in Resources */,
+				571644311A62B53A00021BE9 /* 11.png in Resources */,
 				5759E2531A5FCA65002A9315 /* 云注册.png in Resources */,
+				571644401A62B53A00021BE9 /* 4.png in Resources */,
+				571644501A62B53A00021BE9 /* 象棋界面3.jpg in Resources */,
 				E43ED2D91A5E24A900A8D90D /* zuijin_roundCornerRect.png in Resources */,
+				5716444D1A62B53A00021BE9 /* 菜单.png in Resources */,
 				E422F8AF1A43FE0300CF2F9C /* 5.png in Resources */,
+				571644321A62B53A00021BE9 /* 110.png in Resources */,
+				5716442F1A62B53A00021BE9 /* 105.png in Resources */,
+				571644221A62B53A00021BE9 /* 菜单二级（求和）.png in Resources */,
+				5716443D1A62B53A00021BE9 /* 16.png in Resources */,
+				571644441A62B53A00021BE9 /* Chess.png in Resources */,
 				57B651621A6120D1002A78F9 /* impinfo_girl.png in Resources */,
+				571644191A62B53A00021BE9 /* attachment.png in Resources */,
 				57B6515C1A6120D1002A78F9 /* impinfo_bg_arc_yellow.png in Resources */,
+				571644381A62B53A00021BE9 /* 116.png in Resources */,
 				57B6515D1A6120D1002A78F9 /* impinfo_bg_bottom.png in Resources */,
+				571644081A62B53A00021BE9 /* AppIconchese.png in Resources */,
 				57B651491A60E820002A78F9 /* reg_bg_blue.png in Resources */,
+				571644151A62B53A00021BE9 /* Mole04.png in Resources */,
+				5716444F1A62B53A00021BE9 /* 象棋棋盘.png in Resources */,
+				5716444B1A62B53A00021BE9 /* ChessBoard7.png in Resources */,
+				5716440F1A62B53A00021BE9 /* GameBG03.png in Resources */,
 				57B6514F1A60F067002A78F9 /* juxing.png in Resources */,
+				5716441A1A62B53A00021BE9 /* block.png in Resources */,
 				57B651671A61236E002A78F9 /* impinfo_bg_arc_blue.png in Resources */,
 				5708761D1A5D5FD400892B53 /* denglu_0013_animals.png in Resources */,
 				570876021A5CF82100892B53 /* wo_bg_red.png in Resources */,
+				571644131A62B53A00021BE9 /* Mole02.png in Resources */,
 				57B6514A1A60E820002A78F9 /* touxiang.png in Resources */,
 				570876111A5D161700892B53 /* wo_0012_scan.png in Resources */,
+				5716440D1A62B53A00021BE9 /* GameBG01.png in Resources */,
 				E43ED32D1A5E9BA000A8D90D /* liaotian_background.png in Resources */,
 				5759E24E1A5FC6AC002A9315 /* 登陆.png in Resources */,
+				571644301A62B53A00021BE9 /* 106.png in Resources */,
+				5716443B1A62B53A00021BE9 /* 14.png in Resources */,
 				5708760B1A5D070000892B53 /* wo_button_hand.png in Resources */,
+				571644391A62B53A00021BE9 /* 12.png in Resources */,
 				E422F89F1A43FDE800CF2F9C /* LaunchScreen.xib in Resources */,
+				571644251A62B53A00021BE9 /* myphoto.jpg in Resources */,
 				E43ED3321A5E9BA000A8D90D /* liaotian_returnBtn.png in Resources */,
+				571644281A62B53A00021BE9 /* 1.png in Resources */,
+				571644291A62B53A00021BE9 /* 10.png in Resources */,
 				E43ED2E11A5E24A900A8D90D /* zuijin_background.png in Resources */,
+				5716440C1A62B53A00021BE9 /* Default.png in Resources */,
+				571644521A62B53A00021BE9 /* 象棋界面（人头）.png in Resources */,
+				571644511A62B53A00021BE9 /* 象棋界面（人头男）.png in Resources */,
 				570876041A5CF82100892B53 /* wo_bg_woblue.png in Resources */,
+				571644461A62B53A00021BE9 /* ChessBoard2.png in Resources */,
+				571644161A62B53A00021BE9 /* Mole05.png in Resources */,
 				E422F8A01A43FDE800CF2F9C /* Main.storyboard in Resources */,
+				571644261A62B53A00021BE9 /* opponent.jpg in Resources */,
+				571644371A62B53A00021BE9 /* 115.png in Resources */,
+				571644121A62B53A00021BE9 /* Mole01.png in Resources */,
 				57B6514D1A60E98B002A78F9 /* beijing.png in Resources */,
+				571644231A62B53A00021BE9 /* 菜单二级（认输）.png in Resources */,
 				57B651611A6120D1002A78F9 /* impinfo_date.png in Resources */,
+				5716440E1A62B53A00021BE9 /* GameBG02.png in Resources */,
+				5716442E1A62B53A00021BE9 /* 104.png in Resources */,
 				E43ED32E1A5E9BA000A8D90D /* liaotian_bubble1.png in Resources */,
+				5716442C1A62B53A00021BE9 /* 102.png in Resources */,
+				571644201A62B53A00021BE9 /* github.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,17 +1074,21 @@
 				5715B14C1A5146B4002E9E79 /* pinyin.c in Sources */,
 				E422F8E51A4459C200CF2F9C /* RuntimeStatus.m in Sources */,
 				E422F8A71A43FDE800CF2F9C /* ViewControllerLogin.m in Sources */,
+				571644051A62B53A00021BE9 /* CheseInterface.m in Sources */,
 				E4A5385E1A5FFCFB002456A4 /* FriendTableViewCell.m in Sources */,
 				E4B101A41A4EA2D7004E1224 /* ContactTableViewCell.m in Sources */,
 				E422F8A91A43FDE800CF2F9C /* ViewControllerRecent.m in Sources */,
 				E422F8A51A43FDE800CF2F9C /* ViewControllerInfo.m in Sources */,
 				E422F8A31A43FDE800CF2F9C /* LittleKid.xcdatamodeld in Sources */,
 				E4A538551A5FF864002456A4 /* ViewControllerImpInfo.m in Sources */,
+				571644071A62B53A00021BE9 /* RootViewController.m in Sources */,
 				E422F8AA1A43FDE800CF2F9C /* ViewControllerSelf.m in Sources */,
 				E422F8E81A445CC400CF2F9C /* ViewControllerRealTalk.m in Sources */,
 				E4E729AE1A4BB6FD000FA552 /* ChatMessage.m in Sources */,
 				E4B101801A4D2A0A004E1224 /* GCDAsyncUdpSocket.m in Sources */,
 				E4E729A51A4BADC2000FA552 /* User.m in Sources */,
+				571644031A62B53A00021BE9 /* RNGridMenu.m in Sources */,
+				571644061A62B53A00021BE9 /* CheseTools.m in Sources */,
 				E422F8A81A43FDE800CF2F9C /* ViewControllerMsgCheck.m in Sources */,
 				E422F89E1A43FDE800CF2F9C /* AppDelegate.m in Sources */,
 				E422F8A41A43FDE800CF2F9C /* ViewControllerContact.m in Sources */,
@@ -715,7 +1097,9 @@
 				E4A85E2C1A5A780100C0A222 /* OtherMsgTableViewCell.m in Sources */,
 				E422F8AB1A43FDE800CF2F9C /* ViewControllerChat.m in Sources */,
 				E4B1017A1A4CF01B004E1224 /* RecentTableViewCell.m in Sources */,
+				571643FB1A62B53A00021BE9 /* MouseView.m in Sources */,
 				E40DA0971A416F6000CA1431 /* main.m in Sources */,
+				571643FA1A62B53A00021BE9 /* GameControl.m in Sources */,
 				E4A538581A5FFC99002456A4 /* ViewControllerFriend.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
