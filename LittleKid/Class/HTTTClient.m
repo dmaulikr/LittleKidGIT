@@ -24,14 +24,13 @@ typedef void(^httpResponseHandler)(NSURLResponse *response, NSData *data, NSErro
     switch (protocol) {
         case GET_RECENT_MSG:
             httpHandler = handleRecentMsg;
-            urlStr = [NSString stringWithFormat:@"%@/messages/%@",HTTP_SERVER_ROOT_URL_STR, selfUID];
+            urlStr = [NSString stringWithFormat:@"%@/message/%@",HTTP_SERVER_ROOT_URL_STR, selfUID];
             [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
             [urlRequest setHTTPMethod:@"GET"];
-            
             break;
         case GET_FRIEND_LIST:
             httpHandler = handleFriendList;
-            urlStr = [NSString stringWithFormat:@"%@/friends/%@",HTTP_SERVER_ROOT_URL_STR, selfUID];
+            urlStr = [NSString stringWithFormat:@"%@/friend/%@",HTTP_SERVER_ROOT_URL_STR, selfUID];
             [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
             [urlRequest setHTTPMethod:@"GET"];
             break;
@@ -65,21 +64,21 @@ typedef void(^httpResponseHandler)(NSURLResponse *response, NSData *data, NSErro
             break;
         case ADD_FRIEND:
             httpHandler = handleAddFriend;
-            urlStr = [NSString stringWithFormat:@"%@/friends/%@", HTTP_SERVER_ROOT_URL_STR, selfUID];
+            urlStr = [NSString stringWithFormat:@"%@/friend/%@", HTTP_SERVER_ROOT_URL_STR, selfUID];
             [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
             [urlRequest setHTTPMethod:@"POST"];
-            
+            [urlRequest setHTTPBody:data];
             break;
         case SEND_MSG:
             httpHandler = handleSendMsg;
-            urlStr = [NSString stringWithFormat:@"%@",HTTP_SERVER_ROOT_URL_STR];
+            urlStr = [NSString stringWithFormat:@"%@/message/%@",HTTP_SERVER_ROOT_URL_STR, selfUID];
             [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
             [urlRequest setHTTPMethod:@"POST"];
-            
+            [urlRequest setHTTPBody:data];
             break;
         case GET_SELF_MSG:
             httpHandler = handleSelfMsg;
-            urlStr = [NSString stringWithFormat:@"%@",HTTP_SERVER_ROOT_URL_STR];
+            urlStr = [NSString stringWithFormat:@"%@/user/%@",HTTP_SERVER_ROOT_URL_STR, selfUID];
             [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
             [urlRequest setHTTPMethod:@"GET"];
             break;
