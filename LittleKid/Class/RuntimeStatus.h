@@ -30,6 +30,7 @@
 
 + (instancetype)instance;
 - (void)loadLocalInfo;
+- (void)loadServerRecentMsg:(NSData *)serverJsonData;
 - (void)procNewChatMsg:(NSData *)newChatMsgData;
 
 @end

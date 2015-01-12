@@ -174,6 +174,7 @@
 		E4A538631A600786002456A4 /* libaudio_processing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4A538601A600786002456A4 /* libaudio_processing.a */; };
 		E4A538641A600786002456A4 /* libsignal_processing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4A538611A600786002456A4 /* libsignal_processing.a */; };
 		E4A538651A600786002456A4 /* libsystem_wrappers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4A538621A600786002456A4 /* libsystem_wrappers.a */; };
+		E4A5DCB21A63AF59001531AB /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = E4A5DCB01A63AF59001531AB /* pinyin.c */; };
 		E4A85E2C1A5A780100C0A222 /* OtherMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A85E2B1A5A780100C0A222 /* OtherMsgTableViewCell.m */; };
 		E4A85E2F1A5A781400C0A222 /* SelfMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A85E2E1A5A781400C0A222 /* SelfMsgTableViewCell.m */; };
 		E4B1017A1A4CF01B004E1224 /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B101791A4CF01B004E1224 /* RecentTableViewCell.m */; };
@@ -297,6 +298,18 @@
 		571643F71A62B53A00021BE9 /* 象棋界面3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "象棋界面3.jpg"; sourceTree = "<group>"; };
 		571643F81A62B53A00021BE9 /* 象棋界面（人头男）.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "象棋界面（人头男）.png"; sourceTree = "<group>"; };
 		571643F91A62B53A00021BE9 /* 象棋界面（人头）.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "象棋界面（人头）.png"; sourceTree = "<group>"; };
+		571A70D21A5DC955002C8322 /* zuijin_bg_00179.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zuijin_bg_00179.png; sourceTree = "<group>"; };
+		571A70DF1A5E2EDE002C8322 /* impinfo_boy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_boy.png; sourceTree = "<group>"; };
+		571A70E01A5E2EDE002C8322 /* impinfo_girl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_girl.png; sourceTree = "<group>"; };
+		571A70E31A5E5E6B002C8322 /* impinfo_birth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_birth.png; sourceTree = "<group>"; };
+		571A70E41A5E5E6B002C8322 /* impinfo_date.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_date.png; sourceTree = "<group>"; };
+		571A70E51A5E5E6B002C8322 /* impinfo_nick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_nick.png; sourceTree = "<group>"; };
+		571A70E61A5E5E6B002C8322 /* impinfo_sex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_sex.png; sourceTree = "<group>"; };
+		571A70EB1A5E6149002C8322 /* impinfo_bg_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_bg_bottom.png; sourceTree = "<group>"; };
+		571A70EC1A5E6149002C8322 /* impinfo_bg_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_bg_up.png; sourceTree = "<group>"; };
+		571A70EF1A5E61D2002C8322 /* impinfo_bg_arc_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_bg_arc_blue.png; sourceTree = "<group>"; };
+		571A70F11A5E62B6002C8322 /* impinfo_bg_arc_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_bg_arc_yellow.png; sourceTree = "<group>"; };
+		571A70F21A5E62B6002C8322 /* impinfo_star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_star.png; sourceTree = "<group>"; };
 		57211CBA1A53F7D6001A1A47 /* AnyChatDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatDefine.h; path = anyChatSDK/include/AnyChatDefine.h; sourceTree = SOURCE_ROOT; };
 		57211CBB1A53F7D6001A1A47 /* AnyChatErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatErrorCode.h; path = anyChatSDK/include/AnyChatErrorCode.h; sourceTree = SOURCE_ROOT; };
 		57211CBC1A53F7D6001A1A47 /* AnyChatPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatPlatform.h; path = anyChatSDK/include/AnyChatPlatform.h; sourceTree = SOURCE_ROOT; };
@@ -389,6 +402,8 @@
 		E4A538601A600786002456A4 /* libaudio_processing.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libaudio_processing.a; sourceTree = "<group>"; };
 		E4A538611A600786002456A4 /* libsignal_processing.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsignal_processing.a; sourceTree = "<group>"; };
 		E4A538621A600786002456A4 /* libsystem_wrappers.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsystem_wrappers.a; sourceTree = "<group>"; };
+		E4A5DCB01A63AF59001531AB /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
+		E4A5DCB11A63AF59001531AB /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
 		E4A85E2A1A5A780100C0A222 /* OtherMsgTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherMsgTableViewCell.h; sourceTree = "<group>"; };
 		E4A85E2B1A5A780100C0A222 /* OtherMsgTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherMsgTableViewCell.m; sourceTree = "<group>"; };
 		E4A85E2D1A5A781400C0A222 /* SelfMsgTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfMsgTableViewCell.h; sourceTree = "<group>"; };
@@ -685,6 +700,8 @@
 		E422F8871A43FDE800CF2F9C /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				E4A5DCB01A63AF59001531AB /* pinyin.c */,
+				E4A5DCB11A63AF59001531AB /* pinyin.h */,
 				E4B1017E1A4D2A0A004E1224 /* GCDAsyncUdpSocket.h */,
 				E4B1017F1A4D2A0A004E1224 /* GCDAsyncUdpSocket.m */,
 				E422F8E31A4459C200CF2F9C /* RuntimeStatus.h */,
@@ -703,8 +720,6 @@
 		E422F88D1A43FDE800CF2F9C /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				5715B14A1A5146B4002E9E79 /* pinyin.c */,
-				5715B14B1A5146B4002E9E79 /* pinyin.h */,
 				E422F88E1A43FDE800CF2F9C /* ViewControllerContact.h */,
 				E422F88F1A43FDE800CF2F9C /* ViewControllerContact.m */,
 				E422F8901A43FDE800CF2F9C /* ViewControllerInfo.h */,
@@ -1071,7 +1086,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5715B14C1A5146B4002E9E79 /* pinyin.c in Sources */,
+				E4A5DCB21A63AF59001531AB /* pinyin.c in Sources */,
 				E422F8E51A4459C200CF2F9C /* RuntimeStatus.m in Sources */,
 				E422F8A71A43FDE800CF2F9C /* ViewControllerLogin.m in Sources */,
 				571644051A62B53A00021BE9 /* CheseInterface.m in Sources */,

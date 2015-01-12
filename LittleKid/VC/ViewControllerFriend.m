@@ -8,9 +8,11 @@
 
 #import "ViewControllerFriend.h"
 #import "FriendTableViewCell.h"
+#import "RuntimeStatus.h"
 
 @interface ViewControllerFriend ()
 
+@property (weak, nonatomic) IBOutlet UITableView *friendTableView;
 
 
 @end
@@ -20,11 +22,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setUI];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshTable) name:NOTIFI_GET_FRIEND_LIST object:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setUI{
+    
+}
+
+- (void)freshTable{
+    [self.friendTableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -36,25 +49,34 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 2;
+    return 1+[[RuntimeStatus instance].usrSelf.friends count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([indexPath row]==0) {
+//    if ( indexPath.row == 0 ) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellToAddressBook" forIndexPath:indexPath];
         return cell;
-    }
-    else{
-        FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellFriend" forIndexPath:indexPath];
-        if (cell == nil) {
-            cell = [[FriendTableViewCell alloc] init];
-        }
-        return  cell;
-    }
+//    }
+//    else{// 一个BUG，加载friendCell老是挂掉，还没找到原因
+//        UserOther *friend = [[RuntimeStatus instance].usrSelf.friends objectAtIndex:indexPath.row-1];//you must minus 1 as cell number is 1 more than array count
+//        FriendTableViewCell *cell;
+//        cell = [tableView dequeueReusableCellWithIdentifier:@"cellFriend" forIndexPath:indexPath];
+//        if (cell == nil) {
+//            cell = [[FriendTableViewCell alloc] init];
+//        }
+//        cell.nickName.text = friend.nickName;
+//        cell.state.text = friend.state;
+//        cell.starNumber.text = @"5";
+//        cell.signature.text = friend.signature;
+//        return  cell;
+//    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == 0) {
+        [self performSegueWithIdentifier:@"segueToAB" sender:self];
+    }
    }
 
 

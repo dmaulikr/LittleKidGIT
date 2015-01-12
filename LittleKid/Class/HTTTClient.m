@@ -24,14 +24,13 @@ typedef void(^httpResponseHandler)(NSURLResponse *response, NSData *data, NSErro
     switch (protocol) {
         case GET_RECENT_MSG:
             httpHandler = handleRecentMsg;
-            urlStr = [NSString stringWithFormat:@"%@/messages/%@",HTTP_SERVER_ROOT_URL_STR, selfUID];
+            urlStr = [NSString stringWithFormat:@"%@/message/%@",HTTP_SERVER_ROOT_URL_STR, selfUID];
             [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
             [urlRequest setHTTPMethod:@"GET"];
-            
             break;
         case GET_FRIEND_LIST:
             httpHandler = handleFriendList;
-            urlStr = [NSString stringWithFormat:@"%@/friends/%@",HTTP_SERVER_ROOT_URL_STR, selfUID];
+            urlStr = [NSString stringWithFormat:@"%@/friend/%@",HTTP_SERVER_ROOT_URL_STR, selfUID];
             [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
             [urlRequest setHTTPMethod:@"GET"];
             break;
@@ -44,10 +43,10 @@ typedef void(^httpResponseHandler)(NSURLResponse *response, NSData *data, NSErro
             break;
         case SIGN_UP:
             httpHandler = handleSignUp;
-            urlStr = [NSString stringWithFormat:@"%@",HTTP_SERVER_ROOT_URL_STR];
+            urlStr = [NSString stringWithFormat:@"%@/user", HTTP_SERVER_ROOT_URL_STR];
             [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
             [urlRequest setHTTPMethod:@"POST"];
-            
+            [urlRequest setHTTPBody:data];
             break;
         case GET_CHECK_CODE:
             httpHandler = handleCheckCode;
@@ -65,21 +64,21 @@ typedef void(^httpResponseHandler)(NSURLResponse *response, NSData *data, NSErro
             break;
         case ADD_FRIEND:
             httpHandler = handleAddFriend;
-            urlStr = [NSString stringWithFormat:@"%@/friends/%@", HTTP_SERVER_ROOT_URL_STR, selfUID];
+            urlStr = [NSString stringWithFormat:@"%@/friend/%@", HTTP_SERVER_ROOT_URL_STR, selfUID];
             [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
             [urlRequest setHTTPMethod:@"POST"];
-            
+            [urlRequest setHTTPBody:data];
             break;
         case SEND_MSG:
             httpHandler = handleSendMsg;
-            urlStr = [NSString stringWithFormat:@"%@",HTTP_SERVER_ROOT_URL_STR];
+            urlStr = [NSString stringWithFormat:@"%@/message/%@",HTTP_SERVER_ROOT_URL_STR, selfUID];
             [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
             [urlRequest setHTTPMethod:@"POST"];
-            
+            [urlRequest setHTTPBody:data];
             break;
         case GET_SELF_MSG:
             httpHandler = handleSelfMsg;
-            urlStr = [NSString stringWithFormat:@"%@",HTTP_SERVER_ROOT_URL_STR];
+            urlStr = [NSString stringWithFormat:@"%@/user/%@",HTTP_SERVER_ROOT_URL_STR, selfUID];
             [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
             [urlRequest setHTTPMethod:@"GET"];
             break;
@@ -111,10 +110,7 @@ httpResponseHandler handleRecentMsg = ^(NSURLResponse *response, NSData *data, N
     }
     else{
         NSLog(@"handleRecentMsg connection success");
-        
-        
-        
-        
+        [[RuntimeStatus instance] loadServerRecentMsg:data];
         [HTTTClient notify:NOTIFI_GET_RECENT_MSG withdataDict:[HTTTClient dictWithData:[NSData dataWithBytes:"hello world" length:11]]];
     }
 };
@@ -125,9 +121,7 @@ httpResponseHandler handleFriendList = ^(NSURLResponse *response, NSData *data, 
     }
     else{
         NSLog(@"handleFriendList connection success");
-        
-        
-        
+        [[RuntimeStatus instance].usrSelf loadServerFriendList:data];
         [HTTTClient notify:NOTIFI_GET_FRIEND_LIST withdataDict:nil];
     }
 };
@@ -154,12 +148,14 @@ httpResponseHandler handleSignUp = ^(NSURLResponse *response, NSData *data, NSEr
     }
     else{
         NSLog(@"handleSignUp connection success");
-        
-        
-        
-        
-        
-        [HTTTClient notify:NOTIFI_SIGN_UP withdataDict:nil];
+        NSLog(@"%@",response);
+        NSError *err;
+        NSDictionary *signUpResData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&err];
+        if(err){
+            NSLog(@"signup jsonData error: %@", err);
+        }
+        // keep in mind that data content havn't been decided
+        [HTTTClient notify:NOTIFI_SIGN_UP withdataDict:signUpResData];
     }
 };
 
@@ -224,11 +220,7 @@ httpResponseHandler handleSelfMsg = ^(NSURLResponse *response, NSData *data, NSE
     }
     else{
         NSLog(@"handleSelfMsg connection success");
-        
-        
-        
-        
-        
+        [[RuntimeStatus instance].usrSelf loadServerSelfInfo:data];
         [HTTTClient notify:NOTIFI_GET_SELF_MSG withdataDict:nil];
     }
 };

@@ -10,7 +10,7 @@
 #import "typedef.h"
 @class RuntimeStatus;
 
-#define HTTP_SERVER_ROOT_URL_STR   @"http://childrensns.sinaapp.com/User"
+#define HTTP_SERVER_ROOT_URL_STR   @"http://littlekid.huakexunce.com"
 #define TIME_OUT_MAX 10
 
 @interface HTTTClient : NSObject

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EqM-qm-1tu">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -515,7 +515,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="956.25" y="36.75"/>
+            <point key="canvasLocation" x="942" y="36"/>
         </scene>
         <!--基本信息-->
         <scene sceneID="JbJ-Fs-ehj">
@@ -925,7 +925,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="1" green="0.12104473189999999" blue="0.02425412326" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="headPicture" destination="tFd-qG-uoD" id="WrL-sC-1Ag"/>
@@ -989,6 +989,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="headImg" destination="8pR-UQ-eI6" id="Xdt-J4-Atu"/>
                                             <outlet property="labelMsg" destination="Zp1-6b-Q8Z" id="RAn-Z0-bAH"/>
@@ -1013,6 +1014,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="headImg" destination="cfY-Il-qaA" id="qTo-Bk-L1Q"/>
                                             <outlet property="labelMsg" destination="soC-ZJ-V0Y" id="YpT-xF-7Um"/>
@@ -1079,7 +1081,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellToAddressBook" id="ILn-gD-lgZ" customClass="ToAddressBookTableViewCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellToAddressBook" id="ILn-gD-lgZ">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ILn-gD-lgZ" id="BDA-42-twM">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1097,12 +1099,51 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O2S-vX-dwP" id="GXT-Tp-DRJ">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="head.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4HW-fe-IVs">
+                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="昵称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fh-1M-f0w">
+                                                    <rect key="frame" x="70" y="0.0" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="zuijin_star.png" translatesAutoresizingMaskIntoConstraints="NO" id="uPr-9n-Zk4">
+                                                    <rect key="frame" x="115" y="0.0" width="20" height="20"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2R-Ti-jOU">
+                                                    <rect key="frame" x="139" y="0.0" width="12" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="[在线]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8b-TK-gHV">
+                                                    <rect key="frame" x="70" y="19" width="43" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="签名，我是他的小伙伴老钱" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mjn-BY-d9H">
+                                                    <rect key="frame" x="131" y="22" width="172" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="headPicture" destination="4HW-fe-IVs" id="0OG-1j-m99"/>
+                                            <outlet property="nickName" destination="1fh-1M-f0w" id="Xjn-G0-YUm"/>
+                                            <outlet property="signature" destination="Mjn-BY-d9H" id="YX6-v1-UjS"/>
+                                            <outlet property="starNumber" destination="O2R-Ti-jOU" id="Xcr-Ca-WKJ"/>
+                                            <outlet property="state" destination="o8b-TK-gHV" id="3Jl-zb-ing"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="KkB-Ru-t9F" id="FqM-lN-fKV"/>
-                                    <outlet property="delegate" destination="KkB-Ru-t9F" id="pwG-1d-TWa"/>
+                                    <outlet property="delegate" destination="KkB-Ru-t9F" id="cTv-en-HWd"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -1110,6 +1151,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="我的小伙伴" id="N3O-YH-PAl"/>
                     <connections>
+                        <outlet property="friendTableView" destination="t5c-Fg-vg1" id="9n2-7p-YRn"/>
                         <segue destination="ImT-sf-p6h" kind="show" identifier="segueToAB" id="L9g-Rl-xab"/>
                     </connections>
                 </viewController>
@@ -1416,7 +1458,7 @@
                                 <rect key="frame" x="-31" y="-303" width="458" height="780"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wo_bg_ball.png" translatesAutoresizingMaskIntoConstraints="NO" id="Zql-Al-vGu">
-                                <rect key="frame" x="67" y="92" width="180" height="180"/>
+                                <rect key="frame" x="51" y="92" width="196" height="180"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wo_bg_skyblue.png" translatesAutoresizingMaskIntoConstraints="NO" id="FgP-lm-8an">
                                 <rect key="frame" x="-5" y="280" width="331" height="317"/>
@@ -1506,7 +1548,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VLH-u7-xOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1590" y="2256"/>
+            <point key="canvasLocation" x="1590" y="2276"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wcG-1W-bMV">
@@ -1549,7 +1591,7 @@
         <scene sceneID="7mA-F9-MFd">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iMQ-YS-cxp" userLabel="我的小伙伴" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="联系人" id="Si5-dI-9gN" userLabel="我的小伙伴"/>
+                    <tabBarItem key="tabBarItem" title="小伙伴" id="Si5-dI-9gN" userLabel="我的小伙伴"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vzG-Yz-Kfh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1585,7 +1627,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="5.png" width="254" height="390"/>
+        <image name="5.png" width="56" height="55"/>
         <image name="beijing.png" width="640" height="375"/>
         <image name="denglu_0007_rainbow.png" width="192" height="173"/>
         <image name="denglu_0013_animals.png" width="640" height="275"/>
