@@ -54,23 +54,23 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([indexPath row]==0) {
+//    if ( indexPath.row == 0 ) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellToAddressBook" forIndexPath:indexPath];
         return cell;
-    }
-    else{
-        UserOther *friend = [[RuntimeStatus instance].usrSelf.friends objectAtIndex:indexPath.row-1];//you must minus 1 as cell number is 1 more than array count
-        FriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellFriend" forIndexPath:indexPath];
-        if (cell == nil) {
-            cell = [[FriendTableViewCell alloc] init];
-        }
-//        cell.headPicture.image = [friend loadHeadPicture];
-        cell.nickName.text = friend.nickName;
-        cell.state.text = friend.state;
-        cell.starNumber.text = @"5";
-        cell.signature.text = friend.signature;
-        return  cell;
-    }
+//    }
+//    else{// 一个BUG，加载friendCell老是挂掉，还没找到原因
+//        UserOther *friend = [[RuntimeStatus instance].usrSelf.friends objectAtIndex:indexPath.row-1];//you must minus 1 as cell number is 1 more than array count
+//        FriendTableViewCell *cell;
+//        cell = [tableView dequeueReusableCellWithIdentifier:@"cellFriend" forIndexPath:indexPath];
+//        if (cell == nil) {
+//            cell = [[FriendTableViewCell alloc] init];
+//        }
+//        cell.nickName.text = friend.nickName;
+//        cell.state.text = friend.state;
+//        cell.starNumber.text = @"5";
+//        cell.signature.text = friend.signature;
+//        return  cell;
+//    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -1054,7 +1054,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O2S-vX-dwP" id="GXT-Tp-DRJ">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="5.png" translatesAutoresizingMaskIntoConstraints="NO" id="4HW-fe-IVs">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="head.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4HW-fe-IVs">
                                                     <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="昵称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fh-1M-f0w">
@@ -1087,7 +1087,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="headPicture" destination="4HW-fe-IVs" id="qSq-hY-you"/>
+                                            <outlet property="headPicture" destination="4HW-fe-IVs" id="0OG-1j-m99"/>
                                             <outlet property="nickName" destination="1fh-1M-f0w" id="Xjn-G0-YUm"/>
                                             <outlet property="signature" destination="Mjn-BY-d9H" id="YX6-v1-UjS"/>
                                             <outlet property="starNumber" destination="O2R-Ti-jOU" id="Xcr-Ca-WKJ"/>
@@ -1579,6 +1579,6 @@
         <image name="登陆.png" width="500" height="119"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BXi-mn-8Gv"/>
+        <segue reference="x7y-XV-pXK"/>
     </inferredMetricsTieBreakers>
 </document>
