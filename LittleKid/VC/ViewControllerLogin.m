@@ -36,18 +36,14 @@
         [alert show];
         return;
     }
-    
-    //test signUP
     NSError *err;
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:self.account.text, @"uid", self.password.text, @"pwd", @"nickLyon", @"nickname", nil];
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:self.account.text, @"uid", self.password.text, @"pwd", nil];
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject: dict options:NSJSONWritingPrettyPrinted error:&err];
     if (err) {
         NSLog(@"%@",err);
         return;
     }
-    [HTTTClient sendData:jsonData withProtocol:SIGN_UP];
-    //test end
-    
+    [HTTTClient sendData:jsonData withProtocol:SIGN_IN];
     [[NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_SIGN_IN object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         NSLog(@"I get the login reply");
         //check if right, then

@@ -142,6 +142,16 @@
 - (void)loadServerData{
     
 }
+/* 打包signUp数据, return nil when err */
+- (NSData *)packetSignUpJsonData{
+    NSError *err;
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:self.UID, USR_UID, self.nickName, USR_NICKNAME, self.headPicture, USR_HEAD_PICTURE, self.address, USR_ADDRESS, self.age, USR_AGE, self.gender, USR_GENDER, self.signature, USR_SIGNATURE, nil];
+    NSData *signUpJsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&err];
+    if (err) {
+        return nil;
+    }
+    return signUpJsonData;
+}
 
 
 @end

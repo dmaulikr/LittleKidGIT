@@ -35,6 +35,7 @@
 - (BOOL)save;
 - (NSString *)usrDataPathWithUID:(NSString *)UID;
 - (void)loadServerData;
+- (NSData *)packetSignUpJsonData;
 
 @end
 

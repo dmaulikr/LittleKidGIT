@@ -153,12 +153,13 @@ httpResponseHandler handleSignUp = ^(NSURLResponse *response, NSData *data, NSEr
     else{
         NSLog(@"handleSignUp connection success");
         NSLog(@"%@",response);
-//        NSData *data = [NSJSONSerialization JSONObjectWithData:data options:<#(NSJSONReadingOptions)#> error:<#(NSError *__autoreleasing *)#>]
-        
-        
-        
-        
-        [HTTTClient notify:NOTIFI_SIGN_UP withdataDict:nil];
+        NSError *err;
+        NSDictionary *signUpResData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&err];
+        if(err){
+            NSLog(@"signup jsonData error: %@", err);
+        }
+        // keep in mind that data content havn't been decided
+        [HTTTClient notify:NOTIFI_SIGN_UP withdataDict:signUpResData];
     }
 };
 

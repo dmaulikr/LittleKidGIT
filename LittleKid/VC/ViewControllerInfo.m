@@ -7,6 +7,7 @@
 //
 
 #import "ViewControllerInfo.h"
+#import "RuntimeStatus.h"
 
 @interface ViewControllerInfo ()
 
@@ -23,28 +24,55 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_SIGN_UP object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+        //code here to decide if segue to next
+        if (note) {
+            NSLog(@"get notify");
+        }
+        //判断是否重账号，获取短信验证码
+        [self performSegueWithIdentifier:@"segueFromInfo" sender:self];
+    }];
 }
-
-- (IBAction)onNextToCheckInfo:(id)sender {
-    
-    //check telephone,email, etc
-    NSLog(@"%@",self.account.text);
-    if (self.account.text.length == 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"account error" message:@"some error" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    
-    //if fail, return. don't go to next page
-    [self performSegueWithIdentifier:@"segueFromInfo" sender:sender];
-    
-    
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)onNextToCheckInfo:(id)sender {
+    if ([self checkMsg] == NO) {//本地check是否合法
+        return;
+    }
+    [self addMsgToUsrself];
+    NSData *signUpJsondata = [[RuntimeStatus instance].usrSelf packetSignUpJsonData];
+    [HTTTClient sendData:signUpJsondata withProtocol:SIGN_UP];
+    [self waitStatus];
+}
+
+-(void)waitStatus{
+    //wait status view
+}
+
+
+- (BOOL)checkMsg{
+    //check telephone,email, etc
+    NSLog(@"%@",self.account.text);
+    if (self.account.text.length == 0 || self.account.text.length != 11 ) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"账号错误" message:@"请输入11位手机号码" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+        [alert show];
+        return NO;    //if fail, return. don't go to next page
+    }
+    //other msg check
+
+    
+    
+    return YES;
+}
+
+-(void)addMsgToUsrself{
+    [RuntimeStatus instance].usrSelf.UID = self.account.text;
+    //add other msgs to usrSelf
+
 }
 
 /*
