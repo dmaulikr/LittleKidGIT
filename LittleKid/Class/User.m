@@ -139,9 +139,14 @@
     return YES;
 }
 
-- (void)loadServerData{
+- (void)loadServerSelfInfo:(NSData *)serverJsonData{
     
 }
+
+- (void)loadServerFriendList:(NSData *)serverJsonData{
+    
+}
+
 /* 打包signUp数据, return nil when err */
 - (NSData *)packetSignUpJsonData{
     NSError *err;
@@ -152,7 +157,6 @@
     }
     return signUpJsonData;
 }
-
 
 @end
 

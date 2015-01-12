@@ -110,10 +110,7 @@ httpResponseHandler handleRecentMsg = ^(NSURLResponse *response, NSData *data, N
     }
     else{
         NSLog(@"handleRecentMsg connection success");
-        
-        
-        
-        
+        [[RuntimeStatus instance] loadServerRecentMsg:data];
         [HTTTClient notify:NOTIFI_GET_RECENT_MSG withdataDict:[HTTTClient dictWithData:[NSData dataWithBytes:"hello world" length:11]]];
     }
 };
@@ -124,9 +121,7 @@ httpResponseHandler handleFriendList = ^(NSURLResponse *response, NSData *data, 
     }
     else{
         NSLog(@"handleFriendList connection success");
-        
-        
-        
+        [[RuntimeStatus instance].usrSelf loadServerFriendList:data];
         [HTTTClient notify:NOTIFI_GET_FRIEND_LIST withdataDict:nil];
     }
 };
@@ -224,11 +219,7 @@ httpResponseHandler handleSelfMsg = ^(NSURLResponse *response, NSData *data, NSE
     }
     else{
         NSLog(@"handleSelfMsg connection success");
-        
-        
-        
-        
-        
+        [[RuntimeStatus instance].usrSelf loadServerSelfInfo:data];
         [HTTTClient notify:NOTIFI_GET_SELF_MSG withdataDict:nil];
     }
 };

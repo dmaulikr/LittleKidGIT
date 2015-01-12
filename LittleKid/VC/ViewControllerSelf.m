@@ -18,16 +18,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
-    self.profileImageView.clipsToBounds = YES;
-    
-
-//    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"haha.png"]];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshTest:) name:@"newRemoteMsg" object:nil];
+    [self setUI];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshSelfMsg:) name:NOTIFI_GET_SELF_MSG object:nil];
 }
 
-
+- (void)setUI{
+    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
+    self.profileImageView.clipsToBounds = YES;
+    //    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"haha.png"]];
+    
+    
+}
 
 - (void)viewWillDisappear:(BOOL)animated{
     
@@ -38,7 +39,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)freshTest:(NSNotification *)notify{
+- (void)freshSelfMsg:(NSNotification *)notify{
     NSLog(@"I also get the newRemoteMsg");
 }
 

@@ -34,7 +34,8 @@
 - (id)initWithUID:(NSString *)UID;
 - (BOOL)save;
 - (NSString *)usrDataPathWithUID:(NSString *)UID;
-- (void)loadServerData;
+- (void)loadServerSelfInfo:(NSData *)serverJsonData;
+- (void)loadServerFriendList:(NSData *)serverJsonData;
 - (NSData *)packetSignUpJsonData;
 
 @end

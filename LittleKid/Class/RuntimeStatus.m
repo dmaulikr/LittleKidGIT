@@ -146,5 +146,11 @@
 }
 
 
+- (void)loadServerRecentMsg:(NSData *)serverJsonData{
+    
+}
+
+
+
 
 @end
