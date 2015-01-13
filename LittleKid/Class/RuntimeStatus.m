@@ -43,7 +43,7 @@
     self.usrSelf.headPicture = @"head.jpg";
     //self.usrSelf.signature = @"小钱长老了老钱";
     //self.usrSelf.address = @"启明704";
-    self.usrSelf.age = @"20";
+    self.usrSelf.birthday = @"20";
     self.usrSelf.gender = @"男";
     self.usrSelf.state = @"1";
     if(self.usrSelf.friends == nil){
@@ -55,7 +55,7 @@
     friend.headPicture = @"head.jpg";
     friend.signature = @"相信男神";
     friend.address = @"启明704";
-    friend.age = @"22";
+    friend.birthday = @"22";
     friend.gender = @"男";
     friend.state = @"1";
     friend.usrIP = @"127.0.0.1";

@@ -9,19 +9,6 @@
 #import "User.h"
 #import "RuntimeStatus.h"
 
-#define USR_UID @"UID"
-#define USR_NICKNAME @"nickName"
-#define USR_HEAD_PICTURE @"headPicture"
-#define USR_SIGNATURE @"signature"
-#define USR_ADDRESS @"address"
-#define USR_AGE @"age"
-#define USR_GENDER @"gender"
-#define USR_STATE @"state"
-#define USR_FRIENDS @"friends"
-#define USR_IP @"IP"
-#define USR_PORT @"PORT"
-#define USR_MSG @"MSG"
-
 #pragma mark - User Class
 @implementation User
 
@@ -31,7 +18,7 @@
     [aCoder encodeObject:self.headPicture forKey:USR_HEAD_PICTURE];
     [aCoder encodeObject:self.signature forKey:USR_SIGNATURE];
     [aCoder encodeObject:self.address forKey:USR_ADDRESS];
-    [aCoder encodeObject:self.age forKey:USR_AGE];
+    [aCoder encodeObject:self.birthday forKey:USR_BIRTHDAY];
     [aCoder encodeObject:self.gender forKey:USR_GENDER];
     [aCoder encodeObject:self.state forKey:USR_STATE];
 }
@@ -43,7 +30,7 @@
         self.headPicture = [aDecoder decodeObjectForKey:USR_HEAD_PICTURE];
         self.signature = [aDecoder decodeObjectForKey:USR_SIGNATURE];
         self.address = [aDecoder decodeObjectForKey:USR_ADDRESS];
-        self.age = [aDecoder decodeObjectForKey:USR_AGE];
+        self.birthday = [aDecoder decodeObjectForKey:USR_BIRTHDAY];
         self.gender = [aDecoder decodeObjectForKey:USR_GENDER];
         self.state = [aDecoder decodeObjectForKey:USR_STATE];
     }
@@ -58,7 +45,7 @@
         self.headPicture = [[NSString alloc] init];
         self.signature = [[NSString alloc] init];
         self.address = [[NSString alloc] init];
-        self.age = [[NSString alloc] init];
+        self.birthday = [[NSString alloc] init];
         self.gender = [[NSString alloc] init];
         self.state = [[NSString alloc] init];
     }
@@ -140,17 +127,54 @@
 }
 
 - (void)loadServerSelfInfo:(NSData *)serverJsonData{
+    NSError *err;
+    NSDictionary *selfInfoDict = [NSJSONSerialization JSONObjectWithData:serverJsonData options:NSJSONReadingAllowFragments error:&err];
+    if (err) {
+        NSLog(@"selfinfo err: %@",err);
+        return;
+    }
+    self.nickName = [selfInfoDict objectForKey:USR_NICKNAME];
+    self.birthday = [selfInfoDict objectForKey:USR_BIRTHDAY];
+    self.signature = [selfInfoDict objectForKey:USR_SIGNATURE];
+    self.state = [selfInfoDict objectForKey:USR_STATE];
+    //go on
+    
     
 }
 
 - (void)loadServerFriendList:(NSData *)serverJsonData{
+    NSError *err;
+    NSDictionary *friendsDict = [NSJSONSerialization JSONObjectWithData:serverJsonData options:NSJSONReadingAllowFragments error:&err];
+    if (err) {
+        NSLog(@"friendsDict err: %@",err);
+        return;
+    }
+    NSArray *friendlist = [friendsDict objectForKey:@"friendlist"];
+    if (friendlist == nil) {
+        return;
+    }
+    //update friendslist
+    
+}
+
+- (void)addFriend:(NSData *)serverJsonData{
+    NSError *err;
+    NSDictionary *addFriendDict = [NSJSONSerialization JSONObjectWithData:serverJsonData options:NSJSONReadingAllowFragments error:&err];
+    if (err) {
+        NSLog(@"addfriendinfo err: %@",err);
+    }
+    NSString *ack = [addFriendDict objectForKey:@"ack"];
+    if (ack == nil) {
+        return;
+    }
+    //go on
     
 }
 
 /* 打包signUp数据, return nil when err */
 - (NSData *)packetSignUpJsonData{
     NSError *err;
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:self.UID, USR_UID, self.nickName, USR_NICKNAME, self.headPicture, USR_HEAD_PICTURE, self.address, USR_ADDRESS, self.age, USR_AGE, self.gender, USR_GENDER, self.signature, USR_SIGNATURE, nil];
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:self.UID, USR_UID, self.nickName, USR_NICKNAME, self.headPicture, USR_HEAD_PICTURE, self.address, USR_ADDRESS, self.birthday, USR_BIRTHDAY, self.gender, USR_GENDER, self.signature, USR_SIGNATURE, nil];
     NSData *signUpJsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&err];
     if (err) {
         return nil;

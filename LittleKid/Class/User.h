@@ -11,6 +11,20 @@
 
 @class RuntimeStatus;
 
+#define USR_UID @"uid"
+#define USR_NICKNAME @"nickname"
+#define USR_HEAD_PICTURE @"headpicture"
+#define USR_SIGNATURE @"signature"
+#define USR_ADDRESS @"address"
+#define USR_BIRTHDAY @"birthday"
+#define USR_GENDER @"gender"
+#define USR_STATE @"state"
+#define USR_FRIENDS @"friends"
+#define USR_IP @"IP"
+#define USR_PORT @"PORT"
+#define USR_MSG @"MSG"
+
+
 #pragma mark - User Class
 @interface User : NSObject <NSCoding>
 
@@ -19,7 +33,7 @@
 @property(nonatomic, strong) NSString *headPicture;
 @property(nonatomic, strong) NSString *signature;
 @property(nonatomic, strong) NSString *address;
-@property(nonatomic, strong) NSString *age;
+@property(nonatomic, strong) NSString *birthday;
 @property(nonatomic, strong) NSString *gender;
 @property(nonatomic) NSString* state;/* 0,不在线，1，在线 */
 
@@ -37,6 +51,7 @@
 - (void)loadServerSelfInfo:(NSData *)serverJsonData;
 - (void)loadServerFriendList:(NSData *)serverJsonData;
 - (NSData *)packetSignUpJsonData;
+- (void)addFriend:(NSData *)serverJsonData;
 
 @end
 

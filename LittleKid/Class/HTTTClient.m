@@ -192,10 +192,7 @@ httpResponseHandler handleAddFriend = ^(NSURLResponse *response, NSData *data, N
     }
     else{
         NSLog(@"handleAddFriend connection success");
-        
-        
-        
-        
+        [[RuntimeStatus instance].usrSelf addFriend:data];
         [HTTTClient notify:NOTIFI_ADD_FRIEND withdataDict:nil];
     }
 };
