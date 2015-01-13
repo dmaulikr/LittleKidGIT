@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSMutableArray *recentUsrList;/* UsrOther */
 @property (strong, nonatomic) GCDAsyncUdpSocket *udpP2P;
 @property (strong, nonatomic) NSString *signAccountUID;
+@property (strong, nonatomic) HTTTClient *httpClient;
 
 + (instancetype)instance;
 - (void)loadLocalInfo;

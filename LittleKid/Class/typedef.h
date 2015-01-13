@@ -21,6 +21,7 @@ typedef enum NET_PROTOCOL{
     SEND_MSG,
     SERVER_REQUEST,
     GET_SELF_MSG,
+    HEART_BEAT,
 }NET_PROTOCOL;
 
 /* notification defination */

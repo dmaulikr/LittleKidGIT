@@ -27,6 +27,7 @@
         self.usrSelf = [[UserSelf alloc] init];
         self.recentUsrList = [[NSMutableArray alloc] init];
         self.signAccountUID = [[NSString alloc] init];
+        self.httpClient = [[HTTTClient alloc] init];
     }
     return self;
 }

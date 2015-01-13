@@ -11,8 +11,22 @@
 
 typedef void(^httpResponseHandler)(NSURLResponse *response, NSData *data, NSError *connectionError);
 
+@interface HTTTClient ()
+
++ (void)remindServer;
+
+@end
+
 
 @implementation HTTTClient
+
+- (id)init{
+    self = [super init];
+    if (self) {
+    [self heartBeat];
+    }
+    return self;
+}
 
 /* http handler FSM */
 + (void)sendData:(NSData *)data withProtocol:(NET_PROTOCOL)protocol{
@@ -79,6 +93,12 @@ typedef void(^httpResponseHandler)(NSURLResponse *response, NSData *data, NSErro
         case GET_SELF_MSG:
             httpHandler = handleSelfMsg;
             urlStr = [NSString stringWithFormat:@"%@/user/%@",HTTP_SERVER_ROOT_URL_STR, selfUID];
+            [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
+            [urlRequest setHTTPMethod:@"GET"];
+            break;
+        case HEART_BEAT:
+            httpHandler = handleHeartBeat;
+            urlStr = [NSString stringWithFormat:@"%@/heartbeat/%@",HTTP_SERVER_ROOT_URL_STR, selfUID];
             [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
             [urlRequest setHTTPMethod:@"GET"];
             break;
@@ -221,5 +241,33 @@ httpResponseHandler handleSelfMsg = ^(NSURLResponse *response, NSData *data, NSE
         [HTTTClient notify:NOTIFI_GET_SELF_MSG withdataDict:nil];
     }
 };
+
+httpResponseHandler handleHeartBeat = ^(NSURLResponse *response, NSData *data, NSError *connectionError){
+    if (connectionError) {
+        NSLog(@"http err: %@",connectionError.localizedDescription);
+        //失败重建措施
+        //[HTTTClient remidServer];
+    }
+    else{
+        NSLog(@"handleheatBeat connection success");
+        NSLog(@"%@",response);
+        //resolve response IP,Port,etc
+        
+    }
+};
+
+/* 内网穿透心跳包 */
+- (void)heartBeat{//not in the main queue
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSTimer *heartBeatTimer = [NSTimer timerWithTimeInterval:20 target:self selector:@selector(remindServer) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] run];
+    });
+}
+
++ (void)remindServer{
+    [HTTTClient sendData:nil withProtocol:HEART_BEAT];
+}
+
+
 
 @end
