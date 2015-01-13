@@ -24,13 +24,6 @@
 {
     self = [super init];
     if (self) {
-        self.realTalkServerIP = @"demo.anychat.cn";
-        self.realTalkServerPort = @"8906";
-        self.realTalkUsrName = @"self_iOS";
-        self.realTalkUsrPwd = @"";
-        self.realTalkRoomNumber = @"1";
-        self.realTalkRoomPwd = @"";
-        self.realTalkOnlineUsrList = [[NSMutableArray alloc] init];
         self.usrSelf = [[UserSelf alloc] init];
         self.recentUsrList = [[NSMutableArray alloc] init];
         self.signAccountUID = [[NSString alloc] init];

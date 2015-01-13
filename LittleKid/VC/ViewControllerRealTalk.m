@@ -43,20 +43,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.realTalkServerIP = @"demo.anychat.cn";
+    self.realTalkServerPort = @"8906";
+    self.realTalkUsrName = @"self_iOS";
+    self.realTalkUsrPwd = @"";
+    self.realTalkRoomNumber = @"1";
+    self.realTalkRoomPwd = @"";
+    self.realTalkOnlineUsrList = [[NSMutableArray alloc] init];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(AnyChatNotifyHandler:) name:@"ANYCHATNOTIFY" object:nil];
     [AnyChatPlatform InitSDK:0];
     self.anyChat = [[AnyChatPlatform alloc] init];
     self.anyChat.notifyMsgDelegate = self;
-    [AnyChatPlatform Connect:[RuntimeStatus instance].realTalkServerIP : [[RuntimeStatus instance].realTalkServerPort intValue]];
-    [AnyChatPlatform Login:[RuntimeStatus instance].realTalkUsrName : [RuntimeStatus instance].realTalkUsrPwd];
+    [AnyChatPlatform Connect:self.realTalkServerIP : [self.realTalkServerPort intValue]];
+    [AnyChatPlatform Login:self.realTalkUsrName : self.realTalkUsrPwd];
 }
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     
     [textField resignFirstResponder];
-    [RuntimeStatus instance].realTalkRemoteUsrID = textField.text;
-    [self StartVideoChat:[[RuntimeStatus instance].realTalkRemoteUsrID intValue]];
+    self.realTalkRemoteUsrID = textField.text;
+    [self StartVideoChat:[self.realTalkRemoteUsrID intValue]];
     return  YES;
 }
 
@@ -88,10 +96,10 @@
     if(dwErrorCode == GV_ERR_SUCCESS)
     {
         NSLog(@"login success");
-        [RuntimeStatus instance].realTalkUsrID = [NSString stringWithFormat:@"%d",dwUserId];
-        NSLog(@"self usrID is %@",[RuntimeStatus instance].realTalkUsrID);
+        self.realTalkUsrID = [NSString stringWithFormat:@"%d",dwUserId];
+        NSLog(@"self usrID is %@",self.realTalkUsrID);
         //[self saveSettings];  //save correct configuration
-        [AnyChatPlatform EnterRoom:[[RuntimeStatus instance].realTalkRoomNumber intValue] : [RuntimeStatus instance].realTalkRoomPwd];
+        [AnyChatPlatform EnterRoom:[self.realTalkRoomNumber intValue] : self.realTalkRoomPwd];
     }
     else
     {
@@ -116,7 +124,7 @@
 // 房间在线用户消息
 - (void) OnAnyChatOnlineUser:(int) dwUserNum : (int) dwRoomId
 {
-    [RuntimeStatus instance].realTalkOnlineUsrList = [self getOnlineUserArray];
+    self.realTalkOnlineUsrList = [self getOnlineUserArray];
     NSLog(@"have got the user number, %d",dwUserNum);
     
 }
@@ -124,19 +132,19 @@
 // 用户进入房间消息
 - (void) OnAnyChatUserEnterRoom:(int) dwUserId
 {
-    [RuntimeStatus instance].realTalkOnlineUsrList = [self getOnlineUserArray];
+    self.realTalkOnlineUsrList = [self getOnlineUserArray];
     NSLog(@"someone got in");
 }
 
 // 用户退出房间消息
 - (void) OnAnyChatUserLeaveRoom:(int) dwUserId
 {
-    if ([[RuntimeStatus instance].realTalkRemoteUsrID intValue] == dwUserId ) {
+    if ([self.realTalkRemoteUsrID intValue] == dwUserId ) {
         [self FinishVideoChat];
-        [RuntimeStatus instance].realTalkRemoteUsrID = @"-1";
+        self.realTalkRemoteUsrID = @"-1";
     }
     NSLog(@"someone got out");
-    [RuntimeStatus instance].realTalkOnlineUsrList = [self getOnlineUserArray];
+    self.realTalkOnlineUsrList = [self getOnlineUserArray];
 }
 
 // 网络断开消息
@@ -190,7 +198,7 @@
 - (NSMutableArray *) getOnlineUserArray
 {
     NSMutableArray *onlineUserList = [[NSMutableArray alloc] initWithArray:[AnyChatPlatform GetOnlineUser]];
-    [onlineUserList insertObject:[RuntimeStatus instance].realTalkUsrID atIndex:0];
+    [onlineUserList insertObject:self.realTalkUsrID atIndex:0];
     return onlineUserList;
 }
 
@@ -232,7 +240,7 @@
     [AnyChatPlatform SetVideoPos:userid: self.remoteVideoSurface:0:0:0:0];
     [AnyChatPlatform UserCameraControl:userid : YES];
     
-    [RuntimeStatus instance].realTalkRemoteUsrID = [NSString stringWithFormat:@"%d",userid];
+    self.realTalkRemoteUsrID = [NSString stringWithFormat:@"%d",userid];
     
     //[AnyChatPlatform SetSDKOptionInt:BRAC_SO_LOCALVIDEO_ORIENTATION : self.interfaceOrientation];
 }
@@ -244,10 +252,10 @@
     [AnyChatPlatform UserSpeakControl: -1 : NO];
     [AnyChatPlatform UserCameraControl: -1 : NO];
     
-    [AnyChatPlatform UserSpeakControl:  [[RuntimeStatus instance].realTalkRemoteUsrID intValue] : NO];
-    [AnyChatPlatform UserCameraControl: [[RuntimeStatus instance].realTalkRemoteUsrID intValue] : NO];
+    [AnyChatPlatform UserSpeakControl:  [self.realTalkRemoteUsrID intValue] : NO];
+    [AnyChatPlatform UserCameraControl: [self.realTalkRemoteUsrID intValue] : NO];
     
-    [RuntimeStatus instance].realTalkRemoteUsrID = [NSString stringWithFormat:@"%d",-1];
+    self.realTalkRemoteUsrID = [NSString stringWithFormat:@"%d",-1];
 }
 
 - (IBAction)OnCloseVoiceBtnClicked:(id)sender
@@ -361,7 +369,7 @@
     
     while (isDidLoad == NO && theTimes < 5000)
     {
-        videoHeight = [AnyChatPlatform GetUserVideoHeight:[[RuntimeStatus instance].realTalkRemoteUsrID intValue]];
+        videoHeight = [AnyChatPlatform GetUserVideoHeight:[self.realTalkRemoteUsrID intValue]];
         
         if (videoHeight > 0) {
             isDidLoad = YES;
