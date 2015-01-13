@@ -9,6 +9,7 @@
 #import "RootViewController.h"
 #import "CheseInterface.h"
 #import "CheseTools.h"
+#import "RuntimeStatus.h"
 //extern int ischessReverse;
 @interface RootViewController ()
 @property (weak, nonatomic) IBOutlet UIView *moreView;
@@ -30,6 +31,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    [NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_CHESS_MOVE object:nil queue:[NSOperationQueue mainQueue] usingBlock:<#^(NSNotification *note)block#>
+    
     
     UIImageView *bacakGroundImage = [[UIImageView alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     
@@ -118,11 +121,17 @@
     [self showWhoShouldPlayChese:0];
 }
 
+//(void)(^callbackMoveChess)(NSNotification *notify) = ^(NSNotification *notify){
+//    
+//};
+
+
+
 - (void)Restart
 {
     [_cheseInterface removeFromSuperview];
     
-    _cheseInterface = [[CheseInterface alloc]initWithFrame:CGRectMake(0, chessStartPointY, 300, 300)];
+    _cheseInterface = [[CheseInterface alloc]initWithFrame:CGRectMake(1, chessStartPointY, 300, 300)];
     _cheseInterface.center = CGPointMake(self.view.bounds.size.width/2.0, self.view.bounds.size.height/2.0);
     _cheseInterface.delegate = self;
     [self.view addSubview:_cheseInterface];

@@ -262,8 +262,10 @@ forLocalNotification:(UILocalNotification *)notification
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext{
     
-    [[RuntimeStatus instance] procNewChatMsg:data];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFI_GET_RECENT_MSG object:nil userInfo:nil];
+//    [[RuntimeStatus instance] procNewChatMsg:data];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFI_GET_RECENT_MSG object:nil userInfo:nil];
+    NSLog(@"receive data success");
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFI_CHESS_MOVE object:data userInfo:nil];
 }
 
 /**
