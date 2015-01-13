@@ -39,7 +39,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)onNextToCheckInfo:(id)sender {
+- (IBAction)onBtnSignUp:(id)sender {
     if ([self checkMsg] == NO) {//本地check是否合法
         return;
     }
