@@ -16,7 +16,6 @@ extern int ischessReverse;
 int cheseIndex[9][10];//存储棋子的小标索引,以及棋子的类型(黑方/红方),最后一个数组位有三种状态,0空位 1.黑车 2、黑马 3、黑像 4、黑士5、黑将 6、黑炮 7、黑卒  101 红车 102 红马 103 红相 104 红士 105 红帅 106 红炮 107 红兵
 int blackChesePngIndex[16] = {0,1,2,3,4,3,2,1,0,5,5,6,6,6,6,6};
 int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,106,106,106};
-bool isopponentplay = 0;
 - (instancetype)init
 {
     self = [super init];
@@ -62,12 +61,14 @@ bool isopponentplay = 0;
             NSLog(@"err:%@",err);
             return;
         }
+        if (isShouldBlackChessPlayer||isShouldRedChessPlayer) {
+            return;
+        }
         NSString *chess_x = [dict objectForKey:@"CHESS_X"];
          NSString *chess_tag = [dict objectForKey:@"CHESS_TAG"];
         NSInteger tag = [chess_tag integerValue];
         _optionButton = (UIButton *)[self viewWithTag:tag];
 //        NSLog(@"receve a data:%@",err);
-        isopponentplay = TRUE;
         if (chess_x == nil)
         {
             NSString *chess_newtag = [dict objectForKey:@"NEW_CHESS_TAG"];
@@ -85,7 +86,7 @@ bool isopponentplay = 0;
             _pointLocation.y = 2*chessStartPointY + ((lenthOfUnitHight*9) - y);
             
             
-            [self move];
+            [self opponentmovechess];
         }
 
     });
@@ -109,7 +110,7 @@ bool isopponentplay = 0;
     _isShouldremoveChesePieces = NO;
     _optionButton = nil;
     [self addSubview:_cheseView];
-    if(0)
+    if(1)
     //if (frame.origin.x)
     {
         [self loadUpChesePieces:redChesePngIndex];//加载上面棋盘
@@ -217,7 +218,7 @@ bool isopponentplay = 0;
         if (i==1)
         {
             btn.frame = CGRectMake(chessStartPointX+lenthOfUnitWidth*7, chessStartPointY+lenthOfUnitHight*7, widthChesePieces,lenthChesePieces);
-            btn.tag = 11+i+chessindex[0];
+            btn.tag = 11-i+chessindex[0];
             cheseIndex[7][7] = btn.tag;
         }
         [btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d.png",chessindex[0]+5]] forState:UIControlStateNormal];
@@ -268,8 +269,7 @@ bool isopponentplay = 0;
         {
             //不是一家人也要判断吃子规则是否满足,不满足还是不能吃
            
-            if (!isopponentplay)
-            {
+            
                 NSString *str_tag = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",_optionButton.tag]];
                 NSString *str_newtag = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",chesePieces.tag]];
                 NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:str_tag,@"CHESS_TAG",str_newtag, @"NEW_CHESS_TAG", nil];
@@ -279,12 +279,14 @@ bool isopponentplay = 0;
                     NSLog(@"chess move data error: %@",err);
                     return;
                 }
-                [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.1.19" port:20107 withTimeout:30 tag:11];
+                 [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.1.11" port:20107 withTimeout:30 tag:11];
+                 [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.1.12" port:20108 withTimeout:30 tag:11];
               //  [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.10.105" port:20108 withTimeout:30 tag:11];
             
               //  [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.10.106" port:20107 withTimeout:30 tag:11];
-                isopponentplay = FALSE;
-            }
+                
+         
+            
             [self removeChesePiecesAnimation:chesePieces];
         }
     }
@@ -410,8 +412,6 @@ bool isopponentplay = 0;
     //传地址就是为了能够更好的调整移动位置
     if (_isLegal)
     {
-        if (!isopponentplay)
-        {
             NSString *str_tag = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",_optionButton.tag]];
             NSString *str_x = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",(NSInteger)(_pointLocation.x)]];
             NSString *str_y = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",(NSInteger)(_pointLocation.y)]];
@@ -422,16 +422,47 @@ bool isopponentplay = 0;
                 NSLog(@"chess move data error: %@",err);
                 return;
             }
-            [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.1.19" port:20107 withTimeout:30 tag:11];
+             [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.1.11" port:20107 withTimeout:30 tag:11];
+             [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.1.12" port:20108 withTimeout:30 tag:11];
        //     [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.10.105" port:20108 withTimeout:30 tag:11];
        //     [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.10.106" port:20107 withTimeout:30 tag:11];
-            isopponentplay = FALSE;
-        }
+            
         
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
 
             _optionButton.layer.transform = CATransform3DTranslate(_optionButton.layer.transform, _pointLocation.x - _optionButton.frame.origin.x, _pointLocation.y - _optionButton.frame.origin.y, 0);
 
+        } completion:^(BOOL finished) {
+            [self moveComplete];
+        }];
+    }
+}
+-(void)opponentmovechess
+{
+    if (_optionButton.tag<100)
+    {
+        _isLegal = isLegalRuleToJumpNewLocationOfChese(_optionButton, _optionButton.frame, &_pointLocation,cheseIndex);
+        if (_isLegal) {
+            [_optionButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d.png",blackChesePngIndex[_optionButton.tag-1]]] forState:UIControlStateNormal];
+            // [_delegate showWhoShouldPlayChese:2];
+        }
+    }
+    else
+    {
+        _isLegal = isLegalRuleToJumpNewLocationOfChese(_optionButton, _optionButton.frame, &_pointLocation,cheseIndex);
+        if (_isLegal) {
+            [_optionButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d.png",redChesePngIndex[_optionButton.tag - 101]]] forState:UIControlStateNormal];
+            //   [_delegate showWhoShouldPlayChese:1];
+        }
+    }
+    //传地址就是为了能够更好的调整移动位置
+    if (_isLegal)
+    {
+        
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            
+            _optionButton.layer.transform = CATransform3DTranslate(_optionButton.layer.transform, _pointLocation.x - _optionButton.frame.origin.x, _pointLocation.y - _optionButton.frame.origin.y, 0);
+            
         } completion:^(BOOL finished) {
             [self moveComplete];
         }];
