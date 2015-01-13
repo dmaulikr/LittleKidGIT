@@ -43,8 +43,5 @@ typedef enum NET_PROTOCOL{
 #define CHATMSG_KEY_CHATMSG     @"CHATMSG_KEY_CHATMSG"
 #define CHATMSG_KEY_UID         @"CHATMSG_KEY_UID"
 
-/* UDPP2P tag defination */
-#define TAG_CHATMSG 5
-
 
 #endif

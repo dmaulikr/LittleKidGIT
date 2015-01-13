@@ -82,7 +82,10 @@
 }
 
 -(BOOL)sendMsg{
-    [[RuntimeStatus instance].udpP2P sendData:[self.toChatUsr packetLastChatMsg] toHost:self.toChatUsr.usrIP port:self.toChatUsr.usrPort.intValue withTimeout:3 tag:TAG_CHATMSG];
+    //if p2p is OK, go to p2p, else go to http
+    
+    //p2p
+    [[RuntimeStatus instance].udpP2P sendData:[self.toChatUsr packetLastChatMsg] toUser:self.toChatUsr];
     return YES;
 }
 

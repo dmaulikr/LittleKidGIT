@@ -27,7 +27,7 @@
     [self procLaunchOptios:launchOptions];
 //    NSString *post=@"postData";
 //    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    [self createUdpP2P];
+    
     
     return YES;
 }
@@ -226,54 +226,6 @@ forLocalNotification:(UILocalNotification *)notification
         }
     }
 }
-
-#pragma mark - UDPP2P
-
-- (void)createUdpP2P{
-    NSError *err;
-    [RuntimeStatus instance].udpP2P = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
-    if (![[RuntimeStatus instance].udpP2P bindToPort:20107 error:&err] ) {
-        NSLog(@"bind error, %@",[err description]);
-    }
-    err = nil;
-    [[RuntimeStatus instance].udpP2P beginReceiving:&err];
-//    [[RuntimeStatus instance].udpP2P sendData:[NSData dataWithBytes:"hello world" length:11] toHost:@"192.168.1.20" port:20108 withTimeout:3 tag:0];
-}
-
-/**
- * Called when the datagram with the given tag has been sent.
- **/
-- (void)udpSocket:(GCDAsyncUdpSocket *)sock didSendDataWithTag:(long)tag{
-    
-}
-
-/**
- * Called if an error occurs while trying to send a datagram.
- * This could be due to a timeout, or something more serious such as the data being too large to fit in a sigle packet.
- **/
-- (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error{
-    
-}
-
-/**
- * Called when the socket has received the requested datagram.
- **/
-- (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data
-      fromAddress:(NSData *)address
-withFilterContext:(id)filterContext{
-    
-    [[RuntimeStatus instance] procNewChatMsg:data];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFI_GET_RECENT_MSG object:nil userInfo:nil];
-}
-
-/**
- * Called when the socket is closed.
- **/
-- (void)udpSocketDidClose:(GCDAsyncUdpSocket *)sock withError:(NSError *)error{
-    NSLog(@"socket did close");
-    [self createUdpP2P];
-}
-
 
 
 @end

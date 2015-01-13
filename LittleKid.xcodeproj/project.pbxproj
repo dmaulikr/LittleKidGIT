@@ -150,6 +150,7 @@
 		E43ED3301A5E9BA000A8D90D /* liaotian_chess.png in Resources */ = {isa = PBXBuildFile; fileRef = E43ED31D1A5E9BA000A8D90D /* liaotian_chess.png */; };
 		E43ED3311A5E9BA000A8D90D /* liaotian_microphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E43ED31E1A5E9BA000A8D90D /* liaotian_microphone.png */; };
 		E43ED3321A5E9BA000A8D90D /* liaotian_returnBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = E43ED31F1A5E9BA000A8D90D /* liaotian_returnBtn.png */; };
+		E48D20B61A64E3D80099537F /* UDPP2P.m in Sources */ = {isa = PBXBuildFile; fileRef = E48D20B51A64E3D80099537F /* UDPP2P.m */; };
 		E4A538551A5FF864002456A4 /* ViewControllerImpInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A538541A5FF864002456A4 /* ViewControllerImpInfo.m */; };
 		E4A538581A5FFC99002456A4 /* ViewControllerFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A538571A5FFC99002456A4 /* ViewControllerFriend.m */; };
 		E4A5385E1A5FFCFB002456A4 /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A5385D1A5FFCFB002456A4 /* FriendTableViewCell.m */; };
@@ -361,6 +362,8 @@
 		E43ED31D1A5E9BA000A8D90D /* liaotian_chess.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liaotian_chess.png; sourceTree = "<group>"; };
 		E43ED31E1A5E9BA000A8D90D /* liaotian_microphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liaotian_microphone.png; sourceTree = "<group>"; };
 		E43ED31F1A5E9BA000A8D90D /* liaotian_returnBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liaotian_returnBtn.png; sourceTree = "<group>"; };
+		E48D20B41A64E3D80099537F /* UDPP2P.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UDPP2P.h; sourceTree = "<group>"; };
+		E48D20B51A64E3D80099537F /* UDPP2P.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UDPP2P.m; sourceTree = "<group>"; };
 		E4A538531A5FF864002456A4 /* ViewControllerImpInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerImpInfo.h; sourceTree = "<group>"; };
 		E4A538541A5FF864002456A4 /* ViewControllerImpInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerImpInfo.m; sourceTree = "<group>"; };
 		E4A538561A5FFC99002456A4 /* ViewControllerFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerFriend.h; sourceTree = "<group>"; };
@@ -698,6 +701,8 @@
 				E4B1019B1A4E8F77004E1224 /* typedef.h */,
 				E4B1019C1A4E9002004E1224 /* HTTTClient.h */,
 				E4B1019D1A4E9002004E1224 /* HTTTClient.m */,
+				E48D20B41A64E3D80099537F /* UDPP2P.h */,
+				E48D20B51A64E3D80099537F /* UDPP2P.m */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -1088,6 +1093,7 @@
 				E4B101801A4D2A0A004E1224 /* GCDAsyncUdpSocket.m in Sources */,
 				E4E729A51A4BADC2000FA552 /* User.m in Sources */,
 				571644031A62B53A00021BE9 /* RNGridMenu.m in Sources */,
+				E48D20B61A64E3D80099537F /* UDPP2P.m in Sources */,
 				571644061A62B53A00021BE9 /* CheseTools.m in Sources */,
 				E422F8A81A43FDE800CF2F9C /* ViewControllerMsgCheck.m in Sources */,
 				E422F89E1A43FDE800CF2F9C /* AppDelegate.m in Sources */,

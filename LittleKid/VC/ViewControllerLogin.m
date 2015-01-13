@@ -52,10 +52,6 @@
             [self performSegueWithIdentifier:SIGN_IN_SEGUE sender:nil];
         }
     }];
-    NSString *str = [self.account.text stringByAppendingString:self.password.text];
-    //login to server
-    [HTTTClient sendData:[NSData dataWithBytes:[str UTF8String] length:[str length]] withProtocol:SIGN_IN];
-    //if fail, alert
 }
 
 - (BOOL)checkSignInInfo:(NSNotification *)note{
