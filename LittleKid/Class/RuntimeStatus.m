@@ -84,8 +84,8 @@
     friend.usrPort = @"20107";
     [self.recentUsrList addObject:friend];
     //save
-    [[RuntimeStatus instance].usrSelf save];
-    for (UserOther *recent1Usr in [RuntimeStatus instance].recentUsrList) {
+    [self.usrSelf save];
+    for (UserOther *recent1Usr in self.recentUsrList) {
         [recent1Usr save];
     }
 }
@@ -142,7 +142,7 @@
     newRecentUser.msgs = [[NSMutableArray alloc] initWithObjects:newChatMsg, nil];
     [newRecentUser saveNewMsgData:msgData];
     [newRecentUser save];
-    [[RuntimeStatus instance].recentUsrList addObject:newRecentUser];
+    [self.recentUsrList addObject:newRecentUser];
 }
 
 

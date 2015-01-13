@@ -1265,7 +1265,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nac-CV-82n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1730" y="3253"/>
+            <point key="canvasLocation" x="1608" y="2947"/>
         </scene>
         <!--View Controller Real Talk-->
         <scene sceneID="DA7-1A-aaw">
@@ -1348,7 +1348,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JyB-m3-Ox6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="295" y="3892"/>
+            <point key="canvasLocation" x="951" y="3644"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="ecl-u2-Vci">
@@ -1366,7 +1366,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rkf-h8-8lg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="991" y="3662"/>
+            <point key="canvasLocation" x="313" y="3644"/>
         </scene>
         <!--通讯录-->
         <scene sceneID="d6g-Dm-R71">
