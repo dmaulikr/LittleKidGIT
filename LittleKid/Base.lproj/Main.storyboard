@@ -263,6 +263,9 @@
                                         <include reference="nzG-AR-32k"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="UPI-Xz-BO6"/>
+                                </connections>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="denglu_0013_animals.png" translatesAutoresizingMaskIntoConstraints="NO" id="Tu2-f5-JWC">
                                 <rect key="frame" x="0.0" y="447" width="320" height="121"/>
@@ -329,6 +332,9 @@
                                         <include reference="jPV-fM-n4B"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="qMs-no-KL3"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.7776003649635036" green="0.13554972627737227" blue="0.039575729927007301" alpha="1" colorSpace="calibratedRGB"/>
@@ -876,12 +882,6 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bNw-iu-Qxu" id="9ZF-xA-a0l">
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="吃饺子吧" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GsI-Rd-Ec7">
-                                                    <rect key="frame" x="147" y="52" width="78" height="25"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="5.png" translatesAutoresizingMaskIntoConstraints="NO" id="MNM-X0-fcG">
                                                     <rect key="frame" x="109" y="52" width="23" height="25"/>
                                                 </imageView>
@@ -898,7 +898,13 @@
                                                     <rect key="frame" x="240" y="22" width="50" height="47"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="动态" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6SV-Oh-KyG">
-                                                    <rect key="frame" x="182" y="28" width="43" height="25"/>
+                                                    <rect key="frame" x="174" y="22" width="43" height="25"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="吃饺子吧" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GsI-Rd-Ec7">
+                                                    <rect key="frame" x="154" y="51" width="78" height="25"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1650,6 +1656,6 @@
         <image name="登陆.png" width="500" height="119"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BXi-mn-8Gv"/>
+        <segue reference="x7y-XV-pXK"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -10,9 +10,26 @@
 #import "RuntimeStatus.h"
 #import "GCDAsyncUdpSocket.h"
 
+@interface ResendClass : NSObject
+
+@property(strong, nonatomic) NSData *data;
+@property(strong, nonatomic) UserOther *user;
+@property(strong, nonatomic) NSDate *date;
+
+- (id)initWithData:(NSData *)data user:(UserOther *)user date:(NSDate *)date;
+
+@end
+
+
+
+#define P2P_TIMEOUT 3
+#define P2P_SENT_TIMESTAMP  @"P2P_SENT_TIMESTAMP"
+#define P2P_SENT_DATA @"P2P_SENT_DATA"
+
 @interface UDPP2P()
 
 @property(strong, nonatomic)GCDAsyncUdpSocket *udpSocket;
+@property(strong, nonatomic)NSMutableArray *resendInfoList;
 
 @end
 
@@ -28,14 +45,40 @@
         }
         err = nil;
         [self.udpSocket beginReceiving:&err];
+        self.resendInfoList = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 - (void)sendData:(NSData *)data toUser:(UserOther *)user{
+    //对发送数据作包装
+    NSDate *sendTime = [[NSDate alloc] init];
+    NSDictionary *sentdict = [[NSDictionary alloc] initWithObjectsAndKeys:sendTime, P2P_SENT_TIMESTAMP, data, P2P_SENT_DATA, nil];
+    NSError *err;
+    NSData *sentjsonData = [NSJSONSerialization dataWithJSONObject:sentdict options:NSJSONWritingPrettyPrinted error:&err];
+    if (err) {
+        NSLog(@"jsondata error: %@",err);
+    }
     NSString *hostIP = user.usrIP;
     uint16_t hostPort = [user.usrPort intValue];
-    [self.udpSocket sendData:data toHost:hostIP port:hostPort withTimeout:3 tag:12];
+    [self.udpSocket sendData:sentjsonData toHost:hostIP port:hostPort withTimeout:3 tag:12];
+    //重传处理
+    ResendClass *resendMsg = [[ResendClass alloc] initWithData:sentjsonData user:user date:sendTime];
+    [self.resendInfoList addObject:resendMsg];
+    [NSTimer scheduledTimerWithTimeInterval:P2P_TIMEOUT target:self selector:@selector(resend) userInfo:nil repeats:NO];
+    [[NSRunLoop currentRunLoop] run];
+}
+
+- (void)resend{
+    //判断何组数据重传
+    
+    //重传
+//    NSString *hostIP = self.tempUsrToResend.usrIP;
+//    uint16_t hostPort = [self.tempUsrToResend.usrPort intValue];
+//    [self.udpSocket sendData:self.tempDataToResend toHost:hostIP port:hostPort withTimeout:3 tag:12];
+    [NSTimer scheduledTimerWithTimeInterval:P2P_TIMEOUT target:self selector:@selector(resend) userInfo:nil repeats:NO];
+    [[NSRunLoop currentRunLoop] run];
+
 }
 
 
@@ -45,7 +88,7 @@
  * Called when the datagram with the given tag has been sent.
  **/
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didSendDataWithTag:(long)tag{
-    NSLog(@"send data success");
+    NSLog(@"did send data with tag");
 }
 
 /**
@@ -53,7 +96,7 @@
  * This could be due to a timeout, or something more serious such as the data being too large to fit in a sigle packet.
  **/
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didNotSendDataWithTag:(long)tag dueToError:(NSError *)error{
-    NSLog(@"send data err: %@",error);
+    NSLog(@"didn't send data with tag. err: %@",error);
     //重传机制
 }
 
@@ -63,9 +106,20 @@
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext{
+    //1.判断ack及时间戳，以判断某条信息接收是否成功，如失败，则重传，如成功，则清楚该条消息的temp数组
+    NSError *err;
+    NSDictionary *rcvdDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&err];
+    if (err) {
+        //返回失败的ack，让对方重传
+        
+        
+//        return;
+    }
     
-    [[RuntimeStatus instance] procNewChatMsg:data];
+    NSData *rcvdData = [rcvdDict objectForKey:P2P_SENT_DATA];
+    [[RuntimeStatus instance] procNewChatMsg:rcvdData];
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFI_GET_RECENT_MSG object:nil userInfo:nil];
+    
 }
 
 /**
@@ -74,7 +128,22 @@ withFilterContext:(id)filterContext{
 - (void)udpSocketDidClose:(GCDAsyncUdpSocket *)sock withError:(NSError *)error{
     NSLog(@"socket did close");
     //some processing
-    
 }
 
 @end
+
+@implementation ResendClass
+
+- (id)initWithData:(NSData *)data user:(UserOther *)user date:(NSDate *)date{
+    self = [super init];
+    if (self) {
+        self.data = data;
+        self.user = user;
+        self.date = date;
+    }
+    return self;
+}
+
+@end
+
+

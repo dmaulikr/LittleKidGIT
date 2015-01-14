@@ -25,8 +25,18 @@
     self.profileImageview.layer.cornerRadius = self.profileImageview.frame.size.width / 2;
     self.profileImageview.clipsToBounds = YES;
     // Do any additional setup after loading the view.
+    self.account.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wo_button_hand"]];
+    self.account.leftViewMode = UITextFieldViewModeAlways;
+    
+    UITapGestureRecognizer *gestureTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeKeyBoard)];
+    gestureTap.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer:gestureTap];
 }
 
+- (void)removeKeyBoard{
+    [self.account resignFirstResponder];
+    [self.password resignFirstResponder];
+}
 
 #define SIGN_IN_SEGUE   @"signInSegue"
 
