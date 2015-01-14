@@ -48,7 +48,7 @@
     }
     /* 封装数据并发送 */
     NSError *err;
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:self.account.text, @"uid", self.password.text, @"pwd", nil];
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:self.account.text, USR_UID, self.password.text, USR_PWD, nil];
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject: dict options:NSJSONWritingPrettyPrinted error:&err];
     if (err) {
         NSLog(@"%@",err);
@@ -66,8 +66,8 @@
 }
 
 - (BOOL)checkSignInInfo:(NSNotification *)note{
-    
-    
+    NSDictionary *signInAckDict = note.userInfo;
+    NSLog(@"%@",signInAckDict);
     return YES;
 }
 

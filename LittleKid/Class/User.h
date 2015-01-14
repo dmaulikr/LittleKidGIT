@@ -12,6 +12,7 @@
 @class RuntimeStatus;
 
 #define USR_UID @"uid"
+#define USR_PWD @"password"
 #define USR_NICKNAME @"nickname"
 #define USR_HEAD_PICTURE @"headpicture"
 #define USR_SIGNATURE @"signature"
@@ -35,13 +36,14 @@
 @property(nonatomic, strong) NSString *address;
 @property(nonatomic, strong) NSString *birthday;
 @property(nonatomic, strong) NSString *gender;
-@property(nonatomic) NSString* state;/* 0,不在线，1，在线 */
+@property(nonatomic) NSString* state;/* 0,不在线，1，在线, 2, ... */
 
 @end
 
 #pragma mark - UserSelf Class
 @interface UserSelf : User <NSCoding>
 
+@property(strong, nonatomic)NSString *pwd;
 @property(strong, nonatomic)NSMutableArray *friends;
 
 - (id)init;
@@ -50,6 +52,7 @@
 - (NSString *)usrDataPathWithUID:(NSString *)UID;
 - (void)loadServerSelfInfo:(NSData *)serverJsonData;
 - (void)loadServerFriendList:(NSData *)serverJsonData;
+- (void)addSignUpMsgToUsrselfWithUID:(NSString *)uid pwd:(NSString *)pwd;
 - (NSData *)packetSignUpJsonData;
 - (void)addFriend:(NSData *)serverJsonData;
 

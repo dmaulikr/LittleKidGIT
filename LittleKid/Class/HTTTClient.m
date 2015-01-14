@@ -158,8 +158,9 @@ httpResponseHandler handleSignIn = ^(NSURLResponse *response, NSData *data, NSEr
             NSLog(@"err json : %@",err);
         }
         NSLog(@"%@",dict);
+        [HTTTClient notify:NOTIFI_SIGN_IN withdataDict:dict];
     }
-    [HTTTClient notify:NOTIFI_SIGN_IN withdataDict:[HTTTClient dictWithData:[NSData dataWithBytes:"hello world" length:11]]];   
+    
 };
 
 httpResponseHandler handleSignUp = ^(NSURLResponse *response, NSData *data, NSError *connectionError){

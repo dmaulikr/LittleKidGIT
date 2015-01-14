@@ -637,8 +637,8 @@
                     <navigationItem key="navigationItem" title="基本信息" id="nhT-Wg-HKa"/>
                     <connections>
                         <outlet property="account" destination="dqy-jc-LZB" id="cJx-1E-Goc"/>
-                        <outlet property="email" destination="eKV-EZ-3fe" id="c2q-0a-pdZ"/>
                         <outlet property="password" destination="GKW-fW-2sP" id="Wxn-yN-NTf"/>
+                        <outlet property="passwordCheck" destination="eKV-EZ-3fe" id="g3S-bP-d3x"/>
                         <segue destination="1VK-JR-O7d" kind="show" identifier="segueFromInfo" id="uXr-Xe-jwf"/>
                     </connections>
                 </viewController>

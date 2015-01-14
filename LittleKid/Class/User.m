@@ -61,12 +61,14 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [super encodeWithCoder:aCoder];
+    [aCoder encodeObject:self.pwd forKey:USR_PWD];
     NSArray *fixedFriendsArr = [NSArray arrayWithArray:self.friends];
     [aCoder encodeObject:fixedFriendsArr forKey:USR_FRIENDS];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
     if (self = [super initWithCoder:aDecoder]) {
+        self.pwd = [[NSString alloc] initWithString:[aDecoder decodeObjectForKey:USR_PWD]];
         self.friends = [[NSMutableArray alloc] initWithArray:[aDecoder decodeObjectForKey:USR_FRIENDS]];
     }
     return self;
@@ -75,6 +77,7 @@
 - (id)init{
     self = [super init];
     if (self) {
+        self.pwd = [[NSString alloc] init];
         self.friends = [[NSMutableArray alloc] init];
     }
     return self;
@@ -171,10 +174,15 @@
     
 }
 
+- (void)addSignUpMsgToUsrselfWithUID:(NSString *)uid pwd:(NSString *)pwd{
+    self.UID = uid;
+    self.pwd = pwd;
+}
+
 /* 打包signUp数据, return nil when err */
 - (NSData *)packetSignUpJsonData{
     NSError *err;
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:self.UID, USR_UID, self.nickName, USR_NICKNAME, self.headPicture, USR_HEAD_PICTURE, self.address, USR_ADDRESS, self.birthday, USR_BIRTHDAY, self.gender, USR_GENDER, self.signature, USR_SIGNATURE, nil];
+    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:self.UID, USR_UID, self.pwd, USR_PWD, nil];
     NSData *signUpJsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&err];
     if (err) {
         return nil;
