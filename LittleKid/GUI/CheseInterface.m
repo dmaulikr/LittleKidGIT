@@ -45,7 +45,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
                 cheseIndex[i][j] = noneOccupy;//初始化全部为0
             }
         }
-        
+        self.userother = [[UserOther alloc]init];
 //        [self loadCheseInterface:frame];
     }
     return self;
