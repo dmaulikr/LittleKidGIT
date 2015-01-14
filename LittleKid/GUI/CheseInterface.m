@@ -9,6 +9,8 @@
 #import "CheseInterface.h"
 #import "CheseTools.h"
 #import "RootViewController.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 @implementation CheseInterface
 static  BOOL isShouldBlackChessPlayer = YES;
 static BOOL isShouldRedChessPlayer = YES;
@@ -92,6 +94,21 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
     });
     
 }
+- (void) touchChessMusic
+{
+    NSURL *url = [[NSBundle mainBundle]URLForResource:@"chosechess" withExtension:@"wav"];
+    SystemSoundID soundId =0;
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &soundId);
+    AudioServicesPlaySystemSound(soundId);
+}
+- (void) removechessMusic
+{
+    NSURL *url = [[NSBundle mainBundle]URLForResource:@"removechess" withExtension:@"wav"];
+    SystemSoundID soundId =0;
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &soundId);
+    AudioServicesPlaySystemSound(soundId);
+}
+
 - (void)loadCheseInterface
 {
     
@@ -109,6 +126,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
     //CGRectContainsPoint(<#CGRect rect#>, <#CGPoint point#>)判断选中点是否在点击范围的方法
     _isShouldremoveChesePieces = NO;
     _optionButton = nil;
+    
     [self addSubview:_cheseView];
     if(self.ischessReverse)
     {
@@ -248,6 +266,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
 
 - (void)moveChesePieces:(UIButton *)chesePieces
 {
+    
     if (_optionButton)//前一个子还没有清空,表示不是移动到空位置上,而是移动到对方的子上了
     {
         if (abs((int)_optionButton.tag-(int)chesePieces.tag)<=16)//一家人,当然不能吃了
@@ -292,6 +311,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
     {
         if (isShouldBlackChessPlayer) {
             _isLegal = NO;
+            [self touchChessMusic];
             _optionButton = chesePieces;
             [_optionButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d.png",blackChesePngIndex[chesePieces.tag - 1]+10]] forState:UIControlStateNormal];
            // _isShouldremoveChesePieces = YES;
@@ -302,6 +322,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
     {
         if (isShouldRedChessPlayer) {
             _isLegal = NO;
+            [self touchChessMusic];
             _optionButton = chesePieces;
             [_optionButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d.png",redChesePngIndex[chesePieces.tag - 101]+10]] forState:UIControlStateNormal];
           //  isShouldBlackChessPlayer = NO;
@@ -337,8 +358,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
       //  _optionButton = nil;
         return;
     }
-    
-    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         
         
         _optionButton.frame = chesePieces.frame;
@@ -471,6 +491,8 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
     
     isShouldBlackChessPlayer = !isShouldBlackChessPlayer;
     isShouldRedChessPlayer = !isShouldRedChessPlayer;
+    [self removechessMusic];
+
     if (ischessToolsReverse) {
         isShouldRedChessPlayer = FALSE;
     }

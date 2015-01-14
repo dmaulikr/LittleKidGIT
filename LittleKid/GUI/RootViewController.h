@@ -10,6 +10,7 @@
 #import "RNGridMenu.h"
 #import "GameControl.h"
 #import "RuntimeStatus.h"
+#import <AVFoundation/AVFoundation.h>
 
 @class CheseInterface;
 @interface RootViewController : UIViewController<GameControlDelegate,RNGridMenuDelegate>
@@ -18,6 +19,7 @@
 @property (retain,readwrite,nonatomic)CheseInterface * cheseInterface;
 @property (retain,nonatomic,readwrite) UILabel * label;
 @property  bool blackOrRed;//0 red 1 black
+@property (strong,nonatomic) AVAudioPlayer *play;
 - (void)showWhoShouldPlayChese:(NSInteger)num;
 @end
 // 版权属于原作者

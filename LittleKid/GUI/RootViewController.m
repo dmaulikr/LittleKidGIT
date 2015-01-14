@@ -35,7 +35,12 @@
     
     
     UIImageView *bacakGroundImage = [[UIImageView alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-    
+    NSString *path = [[NSBundle mainBundle]pathForResource:@"music" ofType:@"wav"];
+    NSURL *url = [[NSURL alloc]initFileURLWithPath:path];
+    self.play = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:nil];
+    self.play.numberOfLoops = -1;
+    [self.play prepareToPlay];
+    [self.play play];
     bacakGroundImage.image = [UIImage imageNamed:@"象棋主界面.png"];
     bacakGroundImage.userInteractionEnabled = YES;
     [self.view addSubview:bacakGroundImage];

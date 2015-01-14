@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "__28-[CheseInterface moveChess:]_block_invoke:CheseInterface.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_optionButton">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "isLegalVehicleJumpRule:CheseTools.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[CheseInterface moveChess:]:CheseInterface.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[AppDelegate udpSocket:didReceiveData:fromAddress:withFilterContext:]:AppDelegate.m">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

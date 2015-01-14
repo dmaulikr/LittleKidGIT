@@ -122,6 +122,11 @@
 		572E3F6E1A63BA1300323683 /* yanzhengma_08.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F591A63BA1300323683 /* yanzhengma_08.png */; };
 		572E3F6F1A63BA1300323683 /* yanzhengmaduanxin.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F5A1A63BA1300323683 /* yanzhengmaduanxin.png */; };
 		572E3F701A63BA1300323683 /* zhengtituceng.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F5B1A63BA1300323683 /* zhengtituceng.png */; };
+		573E15231A669A3500245A50 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 573E15211A669A3500245A50 /* AudioToolbox.framework */; };
+		573E15241A669A3500245A50 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 573E15221A669A3500245A50 /* AVFoundation.framework */; };
+		573E15281A66A29300245A50 /* music.wav in Resources */ = {isa = PBXBuildFile; fileRef = 573E15271A66A29300245A50 /* music.wav */; };
+		573E152D1A66B11B00245A50 /* chosechess.wav in Resources */ = {isa = PBXBuildFile; fileRef = 573E152B1A66B11B00245A50 /* chosechess.wav */; };
+		573E152E1A66B11B00245A50 /* removechess.wav in Resources */ = {isa = PBXBuildFile; fileRef = 573E152C1A66B11B00245A50 /* removechess.wav */; };
 		5759E24E1A5FC6AC002A9315 /* 登陆.png in Resources */ = {isa = PBXBuildFile; fileRef = 5759E24C1A5FC6AC002A9315 /* 登陆.png */; };
 		5759E24F1A5FC6AC002A9315 /* 密码.png in Resources */ = {isa = PBXBuildFile; fileRef = 5759E24D1A5FC6AC002A9315 /* 密码.png */; };
 		5759E2521A5FCA65002A9315 /* 云登陆.png in Resources */ = {isa = PBXBuildFile; fileRef = 5759E2501A5FCA65002A9315 /* 云登陆.png */; };
@@ -341,6 +346,11 @@
 		572E3F591A63BA1300323683 /* yanzhengma_08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yanzhengma_08.png; sourceTree = "<group>"; };
 		572E3F5A1A63BA1300323683 /* yanzhengmaduanxin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yanzhengmaduanxin.png; sourceTree = "<group>"; };
 		572E3F5B1A63BA1300323683 /* zhengtituceng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zhengtituceng.png; sourceTree = "<group>"; };
+		573E15211A669A3500245A50 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		573E15221A669A3500245A50 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		573E15271A66A29300245A50 /* music.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = music.wav; sourceTree = "<group>"; };
+		573E152B1A66B11B00245A50 /* chosechess.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chosechess.wav; sourceTree = "<group>"; };
+		573E152C1A66B11B00245A50 /* removechess.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = removechess.wav; sourceTree = "<group>"; };
 		5759E24C1A5FC6AC002A9315 /* 登陆.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "登陆.png"; path = "LittleKid/image/登陆.png"; sourceTree = SOURCE_ROOT; };
 		5759E24D1A5FC6AC002A9315 /* 密码.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "密码.png"; path = "LittleKid/image/密码.png"; sourceTree = SOURCE_ROOT; };
 		5759E2501A5FCA65002A9315 /* 云登陆.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "云登陆.png"; path = "LittleKid/image/云登陆.png"; sourceTree = SOURCE_ROOT; };
@@ -458,6 +468,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				573E15231A669A3500245A50 /* AudioToolbox.framework in Frameworks */,
+				573E15241A669A3500245A50 /* AVFoundation.framework in Frameworks */,
 				E4B7A9C01A63E1E2003F7E8E /* libanychatcore.a in Frameworks */,
 				E4B7A9CA1A63E1E2003F7E8E /* libswresample.a in Frameworks */,
 				E4B7A9CF1A63E1E2003F7E8E /* libyuv.a in Frameworks */,
@@ -528,6 +540,9 @@
 		571643AB1A62B53A00021BE9 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				573E152B1A66B11B00245A50 /* chosechess.wav */,
+				573E152C1A66B11B00245A50 /* removechess.wav */,
+				573E15271A66A29300245A50 /* music.wav */,
 				571643AC1A62B53A00021BE9 /* AppIconchese.png */,
 				571643AD1A62B53A00021BE9 /* button.jpg */,
 				571643AE1A62B53A00021BE9 /* button.png */,
@@ -751,6 +766,8 @@
 			isa = PBXGroup;
 			children = (
 				E40DA0B21A416F6000CA1431 /* Info.plist */,
+				573E15211A669A3500245A50 /* AudioToolbox.framework */,
+				573E15221A669A3500245A50 /* AVFoundation.framework */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1054,6 +1071,7 @@
 				5716441E1A62B53A00021BE9 /* enter.png in Resources */,
 				572E3F6A1A63BA1300323683 /* yanzhengma1.png in Resources */,
 				571644431A62B53A00021BE9 /* Block.png in Resources */,
+				573E152E1A66B11B00245A50 /* removechess.wav in Resources */,
 				570876011A5CF82100892B53 /* wo_bg_ball.png in Resources */,
 				572E3F661A63BA1300323683 /* xinpengyou_0007_到这个号码.png in Resources */,
 				572E3F651A63BA1300323683 /* xinpengyou_0006_请输入验证码.png in Resources */,
@@ -1143,6 +1161,7 @@
 				571644121A62B53A00021BE9 /* Mole01.png in Resources */,
 				57B6514D1A60E98B002A78F9 /* beijing.png in Resources */,
 				571644231A62B53A00021BE9 /* 菜单二级（认输）.png in Resources */,
+				573E15281A66A29300245A50 /* music.wav in Resources */,
 				572E3F621A63BA1300323683 /* tijiao.png in Resources */,
 				57B651611A6120D1002A78F9 /* impinfo_date.png in Resources */,
 				5716440E1A62B53A00021BE9 /* GameBG02.png in Resources */,
@@ -1150,6 +1169,7 @@
 				572E3F641A63BA1300323683 /* xinpengyou_0004_矩形-1.png in Resources */,
 				E43ED32E1A5E9BA000A8D90D /* liaotian_bubble1.png in Resources */,
 				5716442C1A62B53A00021BE9 /* 102.png in Resources */,
+				573E152D1A66B11B00245A50 /* chosechess.wav in Resources */,
 				571644201A62B53A00021BE9 /* github.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
