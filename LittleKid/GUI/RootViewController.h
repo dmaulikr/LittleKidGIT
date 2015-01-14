@@ -17,7 +17,7 @@
 //@property(nonatomic) int blackOrRed;
 @property (retain,readwrite,nonatomic)CheseInterface * cheseInterface;
 @property (retain,nonatomic,readwrite) UILabel * label;
-@property  int blackOrRed;
+@property  bool blackOrRed;//0 red 1 black
 - (void)showWhoShouldPlayChese:(NSInteger)num;
 @end
 // 版权属于原作者

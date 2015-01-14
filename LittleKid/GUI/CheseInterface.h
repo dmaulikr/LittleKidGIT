@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "User.h"
 
 @interface CheseInterface : UIView
 @property (assign,readwrite,nonatomic)id delegate;
@@ -19,6 +20,8 @@
 @property (assign)int theDeadBlackCheseNumber;
 @property (assign)int theDeadRedCheseNumber;
 @property (assign)BOOL ischessReverse;
+-(void)loadCheseInterface;
+@property (strong,nonatomic) UserOther *userother;
 @end
 //int ischessReverse;
 // 版权属于原作者

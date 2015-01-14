@@ -12,7 +12,7 @@
 @implementation CheseInterface
 static  BOOL isShouldBlackChessPlayer = YES;
 static BOOL isShouldRedChessPlayer = YES;
-extern int ischessReverse;
+extern bool ischessReverse;
 int cheseIndex[9][10];//存储棋子的小标索引,以及棋子的类型(黑方/红方),最后一个数组位有三种状态,0空位 1.黑车 2、黑马 3、黑像 4、黑士5、黑将 6、黑炮 7、黑卒  101 红车 102 红马 103 红相 104 红士 105 红帅 106 红炮 107 红兵
 int blackChesePngIndex[16] = {0,1,2,3,4,3,2,1,0,5,5,6,6,6,6,6};
 int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,106,106,106};
@@ -46,7 +46,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
             }
         }
         
-        [self loadCheseInterface:frame];
+//        [self loadCheseInterface:frame];
     }
     return self;
 }
@@ -92,10 +92,10 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
     });
     
 }
-- (void)loadCheseInterface:(CGRect)frame
+- (void)loadCheseInterface
 {
     
-    CGRect rect = frame;
+    CGRect rect = self.frame;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveChess:) name:NOTIFI_CHESS_MOVE object:nil];
 //    [[RuntimeStatus instance].udpP2P sendData:[NSData dataWithBytes:"hello world" length:11] toHost:@"192.168.1.13" port:20108 withTimeout:3 tag:0];
@@ -110,8 +110,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
     _isShouldremoveChesePieces = NO;
     _optionButton = nil;
     [self addSubview:_cheseView];
-    if(1)
-    //if (frame.origin.x)
+    if(self.ischessReverse)
     {
         [self loadUpChesePieces:redChesePngIndex];//加载上面棋盘
         [self loadDownChesePieces:blackChesePngIndex];
@@ -279,8 +278,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
                     NSLog(@"chess move data error: %@",err);
                     return;
                 }
-                 [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.1.11" port:20107 withTimeout:30 tag:11];
-                 [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.1.12" port:20108 withTimeout:30 tag:11];
+                [[RuntimeStatus instance].udpP2P sendData:jsonData toUser:self.userother];
               //  [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.10.105" port:20108 withTimeout:30 tag:11];
             
               //  [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.10.106" port:20107 withTimeout:30 tag:11];
@@ -422,8 +420,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
                 NSLog(@"chess move data error: %@",err);
                 return;
             }
-             [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.1.11" port:20107 withTimeout:30 tag:11];
-             [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.1.12" port:20108 withTimeout:30 tag:11];
+        [[RuntimeStatus instance].udpP2P sendData:jsonData toUser:self.userother];
        //     [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.10.105" port:20108 withTimeout:30 tag:11];
        //     [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.10.106" port:20107 withTimeout:30 tag:11];
             

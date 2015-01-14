@@ -44,10 +44,15 @@
 //    ischessReverse = self.blackOrRed;
 //    _cheseInterface = [[CheseInterface alloc]initWithFrame:CGRectMake(0+self.blackOrRed, chessboardStartPointy, chessboardWidth, chessboardHight)];
     _cheseInterface = [[CheseInterface alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    _cheseInterface.ischessReverse = 1;
+    _cheseInterface.userother.usrIP = @"192.168.1.15";
+    _cheseInterface.userother.usrPort = @"20107";
+    [_cheseInterface loadCheseInterface];
     _cheseInterface.center = CGPointMake(self.view.bounds.size.width/2.0, self.view.bounds.size.height/2.0);
     _cheseInterface.delegate = self;
     [self.view addSubview:_cheseInterface];
-    _cheseInterface.ischessReverse = self.blackOrRed;
+    
+    
     UIButton * moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
     moreButton.frame = CGRectMake(0, 510, 60, 60);
     UIImage * tmpimage = [UIImage imageNamed:@"菜单.png"];
