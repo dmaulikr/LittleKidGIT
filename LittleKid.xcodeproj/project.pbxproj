@@ -101,6 +101,27 @@
 		571644501A62B53A00021BE9 /* 象棋界面3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 571643F71A62B53A00021BE9 /* 象棋界面3.jpg */; };
 		571644511A62B53A00021BE9 /* 象棋界面（人头男）.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643F81A62B53A00021BE9 /* 象棋界面（人头男）.png */; };
 		571644521A62B53A00021BE9 /* 象棋界面（人头）.png in Resources */ = {isa = PBXBuildFile; fileRef = 571643F91A62B53A00021BE9 /* 象棋界面（人头）.png */; };
+		572E3F5C1A63BA1300323683 /* beijing.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F471A63BA1300323683 /* beijing.png */; };
+		572E3F5D1A63BA1300323683 /* chatu.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F481A63BA1300323683 /* chatu.png */; };
+		572E3F5E1A63BA1300323683 /* fanhuijian.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F491A63BA1300323683 /* fanhuijian.png */; };
+		572E3F5F1A63BA1300323683 /* jieshouduanxinwenzi.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F4A1A63BA1300323683 /* jieshouduanxinwenzi.png */; };
+		572E3F601A63BA1300323683 /* juxing.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F4B1A63BA1300323683 /* juxing.png */; };
+		572E3F611A63BA1300323683 /* tianxieyanzhengma.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F4C1A63BA1300323683 /* tianxieyanzhengma.png */; };
+		572E3F621A63BA1300323683 /* tijiao.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F4D1A63BA1300323683 /* tijiao.png */; };
+		572E3F631A63BA1300323683 /* xinpengyou_0000_我们已发送.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F4E1A63BA1300323683 /* xinpengyou_0000_我们已发送.png */; };
+		572E3F641A63BA1300323683 /* xinpengyou_0004_矩形-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F4F1A63BA1300323683 /* xinpengyou_0004_矩形-1.png */; };
+		572E3F651A63BA1300323683 /* xinpengyou_0006_请输入验证码.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F501A63BA1300323683 /* xinpengyou_0006_请输入验证码.png */; };
+		572E3F661A63BA1300323683 /* xinpengyou_0007_到这个号码.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F511A63BA1300323683 /* xinpengyou_0007_到这个号码.png */; };
+		572E3F671A63BA1300323683 /* xinpengyou_0011_图层-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F521A63BA1300323683 /* xinpengyou_0011_图层-4.png */; };
+		572E3F681A63BA1300323683 /* xinpengyou_0013_图层-6.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F531A63BA1300323683 /* xinpengyou_0013_图层-6.png */; };
+		572E3F691A63BA1300323683 /* xinpengyou_0015_图层-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F541A63BA1300323683 /* xinpengyou_0015_图层-1.png */; };
+		572E3F6A1A63BA1300323683 /* yanzhengma1.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F551A63BA1300323683 /* yanzhengma1.png */; };
+		572E3F6B1A63BA1300323683 /* yanzhengma_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F561A63BA1300323683 /* yanzhengma_01.png */; };
+		572E3F6C1A63BA1300323683 /* yanzhengma_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F571A63BA1300323683 /* yanzhengma_02.png */; };
+		572E3F6D1A63BA1300323683 /* yanzhengma_04.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F581A63BA1300323683 /* yanzhengma_04.png */; };
+		572E3F6E1A63BA1300323683 /* yanzhengma_08.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F591A63BA1300323683 /* yanzhengma_08.png */; };
+		572E3F6F1A63BA1300323683 /* yanzhengmaduanxin.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F5A1A63BA1300323683 /* yanzhengmaduanxin.png */; };
+		572E3F701A63BA1300323683 /* zhengtituceng.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F5B1A63BA1300323683 /* zhengtituceng.png */; };
 		5759E24E1A5FC6AC002A9315 /* 登陆.png in Resources */ = {isa = PBXBuildFile; fileRef = 5759E24C1A5FC6AC002A9315 /* 登陆.png */; };
 		5759E24F1A5FC6AC002A9315 /* 密码.png in Resources */ = {isa = PBXBuildFile; fileRef = 5759E24D1A5FC6AC002A9315 /* 密码.png */; };
 		5759E2521A5FCA65002A9315 /* 云登陆.png in Resources */ = {isa = PBXBuildFile; fileRef = 5759E2501A5FCA65002A9315 /* 云登陆.png */; };
@@ -299,6 +320,27 @@
 		57211CBA1A53F7D6001A1A47 /* AnyChatDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatDefine.h; path = anyChatSDK/include/AnyChatDefine.h; sourceTree = SOURCE_ROOT; };
 		57211CBB1A53F7D6001A1A47 /* AnyChatErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatErrorCode.h; path = anyChatSDK/include/AnyChatErrorCode.h; sourceTree = SOURCE_ROOT; };
 		57211CBC1A53F7D6001A1A47 /* AnyChatPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatPlatform.h; path = anyChatSDK/include/AnyChatPlatform.h; sourceTree = SOURCE_ROOT; };
+		572E3F471A63BA1300323683 /* beijing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beijing.png; sourceTree = "<group>"; };
+		572E3F481A63BA1300323683 /* chatu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatu.png; sourceTree = "<group>"; };
+		572E3F491A63BA1300323683 /* fanhuijian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fanhuijian.png; sourceTree = "<group>"; };
+		572E3F4A1A63BA1300323683 /* jieshouduanxinwenzi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jieshouduanxinwenzi.png; sourceTree = "<group>"; };
+		572E3F4B1A63BA1300323683 /* juxing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = juxing.png; sourceTree = "<group>"; };
+		572E3F4C1A63BA1300323683 /* tianxieyanzhengma.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tianxieyanzhengma.png; sourceTree = "<group>"; };
+		572E3F4D1A63BA1300323683 /* tijiao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tijiao.png; sourceTree = "<group>"; };
+		572E3F4E1A63BA1300323683 /* xinpengyou_0000_我们已发送.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xinpengyou_0000_我们已发送.png"; sourceTree = "<group>"; };
+		572E3F4F1A63BA1300323683 /* xinpengyou_0004_矩形-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xinpengyou_0004_矩形-1.png"; sourceTree = "<group>"; };
+		572E3F501A63BA1300323683 /* xinpengyou_0006_请输入验证码.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xinpengyou_0006_请输入验证码.png"; sourceTree = "<group>"; };
+		572E3F511A63BA1300323683 /* xinpengyou_0007_到这个号码.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xinpengyou_0007_到这个号码.png"; sourceTree = "<group>"; };
+		572E3F521A63BA1300323683 /* xinpengyou_0011_图层-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xinpengyou_0011_图层-4.png"; sourceTree = "<group>"; };
+		572E3F531A63BA1300323683 /* xinpengyou_0013_图层-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xinpengyou_0013_图层-6.png"; sourceTree = "<group>"; };
+		572E3F541A63BA1300323683 /* xinpengyou_0015_图层-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xinpengyou_0015_图层-1.png"; sourceTree = "<group>"; };
+		572E3F551A63BA1300323683 /* yanzhengma1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yanzhengma1.png; sourceTree = "<group>"; };
+		572E3F561A63BA1300323683 /* yanzhengma_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yanzhengma_01.png; sourceTree = "<group>"; };
+		572E3F571A63BA1300323683 /* yanzhengma_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yanzhengma_02.png; sourceTree = "<group>"; };
+		572E3F581A63BA1300323683 /* yanzhengma_04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yanzhengma_04.png; sourceTree = "<group>"; };
+		572E3F591A63BA1300323683 /* yanzhengma_08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yanzhengma_08.png; sourceTree = "<group>"; };
+		572E3F5A1A63BA1300323683 /* yanzhengmaduanxin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yanzhengmaduanxin.png; sourceTree = "<group>"; };
+		572E3F5B1A63BA1300323683 /* zhengtituceng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zhengtituceng.png; sourceTree = "<group>"; };
 		5759E24C1A5FC6AC002A9315 /* 登陆.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "登陆.png"; path = "LittleKid/image/登陆.png"; sourceTree = SOURCE_ROOT; };
 		5759E24D1A5FC6AC002A9315 /* 密码.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "密码.png"; path = "LittleKid/image/密码.png"; sourceTree = SOURCE_ROOT; };
 		5759E2501A5FCA65002A9315 /* 云登陆.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "云登陆.png"; path = "LittleKid/image/云登陆.png"; sourceTree = SOURCE_ROOT; };
@@ -607,6 +649,34 @@
 			path = ImpInfo;
 			sourceTree = "<group>";
 		};
+		572E3F461A63BA1300323683 /* verificationCode */ = {
+			isa = PBXGroup;
+			children = (
+				572E3F471A63BA1300323683 /* beijing.png */,
+				572E3F481A63BA1300323683 /* chatu.png */,
+				572E3F491A63BA1300323683 /* fanhuijian.png */,
+				572E3F4A1A63BA1300323683 /* jieshouduanxinwenzi.png */,
+				572E3F4B1A63BA1300323683 /* juxing.png */,
+				572E3F4C1A63BA1300323683 /* tianxieyanzhengma.png */,
+				572E3F4D1A63BA1300323683 /* tijiao.png */,
+				572E3F4E1A63BA1300323683 /* xinpengyou_0000_我们已发送.png */,
+				572E3F4F1A63BA1300323683 /* xinpengyou_0004_矩形-1.png */,
+				572E3F501A63BA1300323683 /* xinpengyou_0006_请输入验证码.png */,
+				572E3F511A63BA1300323683 /* xinpengyou_0007_到这个号码.png */,
+				572E3F521A63BA1300323683 /* xinpengyou_0011_图层-4.png */,
+				572E3F531A63BA1300323683 /* xinpengyou_0013_图层-6.png */,
+				572E3F541A63BA1300323683 /* xinpengyou_0015_图层-1.png */,
+				572E3F551A63BA1300323683 /* yanzhengma1.png */,
+				572E3F561A63BA1300323683 /* yanzhengma_01.png */,
+				572E3F571A63BA1300323683 /* yanzhengma_02.png */,
+				572E3F581A63BA1300323683 /* yanzhengma_04.png */,
+				572E3F591A63BA1300323683 /* yanzhengma_08.png */,
+				572E3F5A1A63BA1300323683 /* yanzhengmaduanxin.png */,
+				572E3F5B1A63BA1300323683 /* zhengtituceng.png */,
+			);
+			path = verificationCode;
+			sourceTree = "<group>";
+		};
 		57B6514B1A60E841002A78F9 /* registor */ = {
 			isa = PBXGroup;
 			children = (
@@ -747,6 +817,7 @@
 		E422F8AC1A43FE0300CF2F9C /* image */ = {
 			isa = PBXGroup;
 			children = (
+				572E3F461A63BA1300323683 /* verificationCode */,
 				57B6514B1A60E841002A78F9 /* registor */,
 				571A70DE1A5E2EDE002C8322 /* ImpInfo */,
 				E43ED30D1A5E9BA000A8D90D /* ViewControllerChat */,
@@ -954,6 +1025,7 @@
 				57B6515F1A6120D1002A78F9 /* impinfo_birth.png in Resources */,
 				E43ED3301A5E9BA000A8D90D /* liaotian_chess.png in Resources */,
 				570876091A5D059100892B53 /* wo_bg_green.png in Resources */,
+				572E3F601A63BA1300323683 /* juxing.png in Resources */,
 				5716444C1A62B53A00021BE9 /* ChessBoard8.png in Resources */,
 				571644341A62B53A00021BE9 /* 112.png in Resources */,
 				571644351A62B53A00021BE9 /* 113.png in Resources */,
@@ -973,15 +1045,20 @@
 				E422F8A21A43FDE800CF2F9C /* Images.xcassets in Resources */,
 				571644241A62B53A00021BE9 /* more.jpg in Resources */,
 				571644171A62B53A00021BE9 /* Mole06.png in Resources */,
+				572E3F691A63BA1300323683 /* xinpengyou_0015_图层-1.png in Resources */,
 				571644271A62B53A00021BE9 /* 0.png in Resources */,
 				571644141A62B53A00021BE9 /* Mole03.png in Resources */,
 				5716443A1A62B53A00021BE9 /* 13.png in Resources */,
 				57B651651A6120D1002A78F9 /* impinfo_star.png in Resources */,
 				E422F8B01A43FE0300CF2F9C /* head.jpg in Resources */,
 				5716441E1A62B53A00021BE9 /* enter.png in Resources */,
+				572E3F6A1A63BA1300323683 /* yanzhengma1.png in Resources */,
 				571644431A62B53A00021BE9 /* Block.png in Resources */,
 				570876011A5CF82100892B53 /* wo_bg_ball.png in Resources */,
+				572E3F661A63BA1300323683 /* xinpengyou_0007_到这个号码.png in Resources */,
+				572E3F651A63BA1300323683 /* xinpengyou_0006_请输入验证码.png in Resources */,
 				5759E2521A5FCA65002A9315 /* 云登陆.png in Resources */,
+				572E3F671A63BA1300323683 /* xinpengyou_0011_图层-4.png in Resources */,
 				5716443F1A62B53A00021BE9 /* 3.png in Resources */,
 				5767F0B31A541D33003CE13D /* unSelected.png in Resources */,
 				571644091A62B53A00021BE9 /* button.jpg in Resources */,
@@ -989,19 +1066,25 @@
 				5708761C1A5D5FD400892B53 /* denglu_0007_rainbow.png in Resources */,
 				5716441D1A62B53A00021BE9 /* download.png in Resources */,
 				5716441B1A62B53A00021BE9 /* bluetooth.png in Resources */,
+				572E3F6C1A63BA1300323683 /* yanzhengma_02.png in Resources */,
 				57B651601A6120D1002A78F9 /* impinfo_boy.png in Resources */,
 				570876051A5CF82100892B53 /* wo_bg_zong.png in Resources */,
 				571644211A62B53A00021BE9 /* 菜单二级(悔棋）.png in Resources */,
+				572E3F5D1A63BA1300323683 /* chatu.png in Resources */,
 				571644361A62B53A00021BE9 /* 114.png in Resources */,
+				572E3F5E1A63BA1300323683 /* fanhuijian.png in Resources */,
 				E43ED2D61A5E24A900A8D90D /* zuijin_star.png in Resources */,
 				E43ED3311A5E9BA000A8D90D /* liaotian_microphone.png in Resources */,
 				571644451A62B53A00021BE9 /* ChessBoard1.png in Resources */,
+				572E3F6E1A63BA1300323683 /* yanzhengma_08.png in Resources */,
 				571644331A62B53A00021BE9 /* 111.png in Resources */,
 				571644311A62B53A00021BE9 /* 11.png in Resources */,
 				5759E2531A5FCA65002A9315 /* 云注册.png in Resources */,
 				571644401A62B53A00021BE9 /* 4.png in Resources */,
+				572E3F611A63BA1300323683 /* tianxieyanzhengma.png in Resources */,
 				571644501A62B53A00021BE9 /* 象棋界面3.jpg in Resources */,
 				E43ED2D91A5E24A900A8D90D /* zuijin_roundCornerRect.png in Resources */,
+				572E3F631A63BA1300323683 /* xinpengyou_0000_我们已发送.png in Resources */,
 				5716444D1A62B53A00021BE9 /* 菜单.png in Resources */,
 				E422F8AF1A43FE0300CF2F9C /* 5.png in Resources */,
 				571644321A62B53A00021BE9 /* 110.png in Resources */,
@@ -1014,6 +1097,7 @@
 				57B6515C1A6120D1002A78F9 /* impinfo_bg_arc_yellow.png in Resources */,
 				571644381A62B53A00021BE9 /* 116.png in Resources */,
 				57B6515D1A6120D1002A78F9 /* impinfo_bg_bottom.png in Resources */,
+				572E3F6F1A63BA1300323683 /* yanzhengmaduanxin.png in Resources */,
 				571644081A62B53A00021BE9 /* AppIconchese.png in Resources */,
 				57B651491A60E820002A78F9 /* reg_bg_blue.png in Resources */,
 				571644151A62B53A00021BE9 /* Mole04.png in Resources */,
@@ -1026,14 +1110,19 @@
 				5708761D1A5D5FD400892B53 /* denglu_0013_animals.png in Resources */,
 				570876021A5CF82100892B53 /* wo_bg_red.png in Resources */,
 				571644131A62B53A00021BE9 /* Mole02.png in Resources */,
+				572E3F6D1A63BA1300323683 /* yanzhengma_04.png in Resources */,
+				572E3F5F1A63BA1300323683 /* jieshouduanxinwenzi.png in Resources */,
 				57B6514A1A60E820002A78F9 /* touxiang.png in Resources */,
 				570876111A5D161700892B53 /* wo_0012_scan.png in Resources */,
 				5716440D1A62B53A00021BE9 /* GameBG01.png in Resources */,
+				572E3F681A63BA1300323683 /* xinpengyou_0013_图层-6.png in Resources */,
 				E43ED32D1A5E9BA000A8D90D /* liaotian_background.png in Resources */,
 				5759E24E1A5FC6AC002A9315 /* 登陆.png in Resources */,
 				571644301A62B53A00021BE9 /* 106.png in Resources */,
 				5716443B1A62B53A00021BE9 /* 14.png in Resources */,
 				5708760B1A5D070000892B53 /* wo_button_hand.png in Resources */,
+				572E3F5C1A63BA1300323683 /* beijing.png in Resources */,
+				572E3F701A63BA1300323683 /* zhengtituceng.png in Resources */,
 				571644391A62B53A00021BE9 /* 12.png in Resources */,
 				E422F89F1A43FDE800CF2F9C /* LaunchScreen.xib in Resources */,
 				571644251A62B53A00021BE9 /* myphoto.jpg in Resources */,
@@ -1045,6 +1134,7 @@
 				571644521A62B53A00021BE9 /* 象棋界面（人头）.png in Resources */,
 				571644511A62B53A00021BE9 /* 象棋界面（人头男）.png in Resources */,
 				570876041A5CF82100892B53 /* wo_bg_woblue.png in Resources */,
+				572E3F6B1A63BA1300323683 /* yanzhengma_01.png in Resources */,
 				571644461A62B53A00021BE9 /* ChessBoard2.png in Resources */,
 				571644161A62B53A00021BE9 /* Mole05.png in Resources */,
 				E422F8A01A43FDE800CF2F9C /* Main.storyboard in Resources */,
@@ -1053,9 +1143,11 @@
 				571644121A62B53A00021BE9 /* Mole01.png in Resources */,
 				57B6514D1A60E98B002A78F9 /* beijing.png in Resources */,
 				571644231A62B53A00021BE9 /* 菜单二级（认输）.png in Resources */,
+				572E3F621A63BA1300323683 /* tijiao.png in Resources */,
 				57B651611A6120D1002A78F9 /* impinfo_date.png in Resources */,
 				5716440E1A62B53A00021BE9 /* GameBG02.png in Resources */,
 				5716442E1A62B53A00021BE9 /* 104.png in Resources */,
+				572E3F641A63BA1300323683 /* xinpengyou_0004_矩形-1.png in Resources */,
 				E43ED32E1A5E9BA000A8D90D /* liaotian_bubble1.png in Resources */,
 				5716442C1A62B53A00021BE9 /* 102.png in Resources */,
 				571644201A62B53A00021BE9 /* github.png in Resources */,

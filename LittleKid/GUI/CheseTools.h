@@ -33,7 +33,7 @@ typedef struct index
 
 #define chessboardStartPointy 30
 
-#define chessStartPointY chessboardStartPointy+60//-20
+#define chessStartPointY (chessboardStartPointy+60)//-20
 
 
 
