@@ -16,7 +16,7 @@
 @interface HTTTClient : NSObject
 
 - (id)init;
-+ (void)sendData:(NSData *)data withProtocol:(NET_PROTOCOL)protocol;
++ (void)sendData:(NSDictionary *)data withProtocol:(NET_PROTOCOL)protocol;
 - (void)heartBeat;
 
 @end

@@ -33,8 +33,14 @@
     // Do any additional setup after loading the view.
     [self setUI];
     self.toChatUsr = [[RuntimeStatus instance].recentUsrList objectAtIndex:self.toChatUsrIndex];
+    [self testCode];
     [self prepareRecord];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshChat:) name:NOTIFI_GET_RECENT_MSG object:nil];
+}
+
+- (void)testCode{
+    self.toChatUsr.usrIP = @"127.0.0.1";
+    self.toChatUsr.usrPort = @"20107";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -85,7 +91,7 @@
     //if p2p is OK, go to p2p, else go to http
     
     //p2p
-    [[RuntimeStatus instance].udpP2P sendData:[self.toChatUsr packetLastChatMsg] toUser:self.toChatUsr];
+    [[RuntimeStatus instance].udpP2P sendDict:[self.toChatUsr packetLastChatMsg] toUser:self.toChatUsr withProtocol:RECENT_MSG_POST];
     return YES;
 }
 

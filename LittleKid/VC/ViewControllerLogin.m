@@ -47,14 +47,8 @@
         return;
     }
     /* 封装数据并发送 */
-    NSError *err;
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:self.account.text, USR_UID, self.password.text, USR_PWD, nil];
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject: dict options:NSJSONWritingPrettyPrinted error:&err];
-    if (err) {
-        NSLog(@"%@",err);
-        return;
-    }
-    [HTTTClient sendData:jsonData withProtocol:SIGN_IN];
+    NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:self.account.text, USR_UID, self.password.text, USR_PWD, nil];
+    [HTTTClient sendData:jsonDict withProtocol:SIGN_IN];
     [[NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_SIGN_IN object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {//返回消息的回调
         NSLog(@"I get the login reply");
         //check if right, then

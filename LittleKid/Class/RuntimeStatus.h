@@ -22,7 +22,7 @@
 
 + (instancetype)instance;
 - (void)loadLocalInfo;
-- (void)loadServerRecentMsg:(NSData *)serverJsonData;
-- (void)procNewChatMsg:(NSData *)newChatMsgData;
+- (void)loadServerRecentMsg:(NSArray *)serverRecentMsgList;
+- (void)procNewChatMsg:(NSArray *)newChatMsgList;
 
 @end

@@ -50,11 +50,11 @@
 - (id)initWithUID:(NSString *)UID;
 - (BOOL)save;
 - (NSString *)usrDataPathWithUID:(NSString *)UID;
-- (void)loadServerSelfInfo:(NSData *)serverJsonData;
-- (void)loadServerFriendList:(NSData *)serverJsonData;
+- (void)loadServerSelfInfo:(NSDictionary *)serverSelfInfoDict;
+- (void)loadServerFriendList:(NSArray *)serverFriendList;
 - (void)addSignUpMsgToUsrselfWithUID:(NSString *)uid pwd:(NSString *)pwd;
-- (NSData *)packetSignUpJsonData;
-- (void)addFriend:(NSData *)serverJsonData;
+- (NSDictionary *)packetSignUpDict;
+- (void)addFriend:(NSDictionary *)serverAddFriendAck;
 
 @end
 
@@ -71,7 +71,7 @@
 - (BOOL)save;
 - (NSString *)usrDataPath;
 - (void)loadServerData;
-- (NSData *)packetLastChatMsg;
-- (void)saveNewMsgData:(NSData *)msgData;
+- (NSDictionary *)packetLastChatMsg;
+- (void)saveNewMsgData:(NSDictionary *)msgData;
 
 @end

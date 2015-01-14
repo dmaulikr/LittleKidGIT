@@ -11,17 +11,20 @@
 
 /* net communication order define */
 typedef enum NET_PROTOCOL{
-    GET_RECENT_MSG = 0X01,
+    RECENT_MSG_GET = 0X01,
+    RECENT_MSG_POST,
     GET_FRIEND_LIST,
     SIGN_IN,
     SIGN_UP,
     GET_CHECK_CODE,
     RETRIEVE_PASSWORD,
     ADD_FRIEND,
-    SEND_MSG,
     SERVER_REQUEST,
-    GET_SELF_MSG,
+    SELF_MSG_GET,
+    SELF_MSG_POST,
     HEART_BEAT,
+    P2P_ACK,
+    CHESS,
 }NET_PROTOCOL;
 
 /* notification defination */
@@ -33,7 +36,7 @@ typedef enum NET_PROTOCOL{
 #define NOTIFI_GET_CHECK_CODE       @"NOTIFI_GET_CHECK_CODE"
 #define NOTIFI_RETRIEVE_PASSWORD    @"NOTIFI_RETRIEVE_PASSWORD"
 #define NOTIFI_ADD_FRIEND           @"NOTIFI_ADD_FRIEND"
-#define NOTIFI_SEND_MSG             @"NOTIFI_SEND_MSG"
+#define NOTIFI_MSG_POST             @"NOTIFI_MSG_POST"
 #define NOTIFI_SERVER_REQUEST       @"NOTIFI_SERVER_REQUEST"
 #define NOTIFI_GET_SELF_MSG         @"NOTIFI_GET_SELF_MSG"
 #define NOTIFI_GET_NEW_MSG          @"NOTIFI_GET_NEW_MSG"

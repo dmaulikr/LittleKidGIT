@@ -7,16 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "typedef.h"
 @class RuntimeStatus;
 @class UserOther;
 
 /* UDPP2P tag defination */
-#define TAG_CHATMSG 5
-#define TAG_CHESS   10
+#define P2P_TAG_CHATMSG 5
+#define P2P_TAG_CHESS   10
+#define P2P_TAG_ACK     15
 
 @interface UDPP2P : NSObject
 
 - (id)init;
-- (void)sendData:(NSData *)data toUser:(UserOther *)user;
+- (void)sendDict:(NSDictionary *)data toUser:(UserOther *)user withProtocol:(NET_PROTOCOL)protocol;
 
 @end

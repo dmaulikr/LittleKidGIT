@@ -129,49 +129,23 @@
     return YES;
 }
 
-- (void)loadServerSelfInfo:(NSData *)serverJsonData{
-    NSError *err;
-    NSDictionary *selfInfoDict = [NSJSONSerialization JSONObjectWithData:serverJsonData options:NSJSONReadingAllowFragments error:&err];
-    if (err) {
-        NSLog(@"selfinfo err: %@",err);
-        return;
-    }
-    self.nickName = [selfInfoDict objectForKey:USR_NICKNAME];
-    self.birthday = [selfInfoDict objectForKey:USR_BIRTHDAY];
-    self.signature = [selfInfoDict objectForKey:USR_SIGNATURE];
-    self.state = [selfInfoDict objectForKey:USR_STATE];
+- (void)loadServerSelfInfo:(NSDictionary *)serverSelfInfoDict{
+    self.nickName = [serverSelfInfoDict objectForKey:USR_NICKNAME];
+    self.birthday = [serverSelfInfoDict objectForKey:USR_BIRTHDAY];
+    self.signature = [serverSelfInfoDict objectForKey:USR_SIGNATURE];
+    self.state = [serverSelfInfoDict objectForKey:USR_STATE];
     //go on
     
     
 }
 
-- (void)loadServerFriendList:(NSData *)serverJsonData{
-    NSError *err;
-    NSDictionary *friendsDict = [NSJSONSerialization JSONObjectWithData:serverJsonData options:NSJSONReadingAllowFragments error:&err];
-    if (err) {
-        NSLog(@"friendsDict err: %@",err);
-        return;
-    }
-    NSArray *friendlist = [friendsDict objectForKey:@"friendlist"];
-    if (friendlist == nil) {
-        return;
-    }
+- (void)loadServerFriendList:(NSArray *)serverFriendList{
     //update friendslist
     
 }
 
-- (void)addFriend:(NSData *)serverJsonData{
-    NSError *err;
-    NSDictionary *addFriendDict = [NSJSONSerialization JSONObjectWithData:serverJsonData options:NSJSONReadingAllowFragments error:&err];
-    if (err) {
-        NSLog(@"addfriendinfo err: %@",err);
-    }
-    NSString *ack = [addFriendDict objectForKey:@"ack"];
-    if (ack == nil) {
-        return;
-    }
-    //go on
-    
+- (void)addFriend:(NSDictionary *)serverAddFriendAck{
+
 }
 
 - (void)addSignUpMsgToUsrselfWithUID:(NSString *)uid pwd:(NSString *)pwd{
@@ -180,14 +154,9 @@
 }
 
 /* 打包signUp数据, return nil when err */
-- (NSData *)packetSignUpJsonData{
-    NSError *err;
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:self.UID, USR_UID, self.pwd, USR_PWD, nil];
-    NSData *signUpJsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&err];
-    if (err) {
-        return nil;
-    }
-    return signUpJsonData;
+- (NSDictionary *)packetSignUpDict{
+    NSDictionary *signUpDict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"\"%@\"",self.UID], USR_UID, [NSString stringWithFormat:@"\"%@\"",self.pwd], USR_PWD, @"\"nickname\"", @"nickname", nil];
+    return signUpDict;
 }
 
 @end
@@ -279,12 +248,12 @@
  字典
  
  */
-- (NSData *)packetLastChatMsg{
+- (NSDictionary *)packetLastChatMsg{
     ChatMessage *lastMsg = [self.msgs lastObject];
     if ( [lastMsg.type compare:MSG_TYPE_SOUND] == NSOrderedSame ) {
         NSData *soundData = [NSData dataWithContentsOfFile:[self soundPathWithMsg:lastMsg]];
         NSDictionary *dictToSent = [NSDictionary dictionaryWithObjectsAndKeys:self.UID, CHATMSG_KEY_UID, lastMsg, CHATMSG_KEY_CHATMSG, soundData, CHATMSG_KEY_SOUND_DATA, nil];
-        return [NSKeyedArchiver archivedDataWithRootObject:dictToSent];
+        return dictToSent;
     }
     else{
         return nil;

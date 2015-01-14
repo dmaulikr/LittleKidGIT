@@ -46,8 +46,8 @@
         return;
     }
     [[RuntimeStatus instance].usrSelf addSignUpMsgToUsrselfWithUID:self.account.text pwd:self.password.text];
-    NSData *signUpJsondata = [[RuntimeStatus instance].usrSelf packetSignUpJsonData];
-    [HTTTClient sendData:signUpJsondata withProtocol:SIGN_UP];
+    NSDictionary *signUpDict = [[RuntimeStatus instance].usrSelf packetSignUpDict];
+    [HTTTClient sendData:signUpDict withProtocol:SIGN_UP];
     [self waitStatus];
 }
 
