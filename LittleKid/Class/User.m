@@ -155,7 +155,7 @@
 
 /* 打包signUp数据, return nil when err */
 - (NSDictionary *)packetSignUpDict{
-    NSDictionary *signUpDict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"\"%@\"",self.UID], USR_UID, [NSString stringWithFormat:@"\"%@\"",self.pwd], USR_PWD, @"\"nickname\"", @"nickname", nil];
+    NSDictionary *signUpDict = [[NSDictionary alloc] initWithObjectsAndKeys:self.UID, USR_UID, self.pwd, USR_PWD, @"nickname", @"nickname", nil];
     return signUpDict;
 }
 
@@ -250,16 +250,16 @@
  */
 - (NSDictionary *)packetLastChatMsg{
     ChatMessage *lastMsg = [self.msgs lastObject];
+    NSData *data;
     if ( [lastMsg.type compare:MSG_TYPE_SOUND] == NSOrderedSame ) {
-        NSData *soundData = [NSData dataWithContentsOfFile:[self soundPathWithMsg:lastMsg]];
-        NSDictionary *dictToSent = [NSDictionary dictionaryWithObjectsAndKeys:self.UID, CHATMSG_KEY_UID, lastMsg, CHATMSG_KEY_CHATMSG, soundData, CHATMSG_KEY_SOUND_DATA, nil];
-        return dictToSent;
+        //sound data转成string才能转json
+        data = [[NSData alloc] initWithContentsOfFile:[self soundPathWithMsg:lastMsg]];
+        if (data == nil) {
+            NSLog(@"data == nil ");
+        }
     }
-    else{
-        return nil;
-    }
-
-
+    NSDictionary *dictToSent = [[NSDictionary alloc] initWithObjectsAndKeys:self.UID, CHATMSG_KEY_UID, [NSKeyedArchiver archivedDataWithRootObject:lastMsg], CHATMSG_KEY_CHATMSG, lastMsg.timeStamp, CHATMSG_KEY_TIMESTAMP, data, CHATMSG_KEY_SOUND_DATA, nil];
+    return dictToSent;
 }
 
 - (NSString *)soundPathWithMsg:(ChatMessage *)msg{

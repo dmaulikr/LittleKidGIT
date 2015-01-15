@@ -113,31 +113,31 @@
     }
 }
 
-- (void)procNewChatMsg:(NSArray *)newChatMsgList{
-//    NSDictionary *dictRcvdMsg = [NSKeyedUnarchiver unarchiveObjectWithData:newChatMsgList];
-//    if (dictRcvdMsg == nil) {
-//        return;
-//    }
-//    NSString *chatMsgUID = [dictRcvdMsg objectForKey:CHATMSG_KEY_UID];
-//    ChatMessage *newChatMsg = [dictRcvdMsg objectForKey:CHATMSG_KEY_CHATMSG];
-//    NSData *msgData = [dictRcvdMsg objectForKey:CHATMSG_KEY_SOUND_DATA];
-//    if (chatMsgUID == nil || newChatMsg == nil || msgData == nil) {
-//        return;
-//    }
-//    for (UserOther *recent1Usr in self.recentUsrList) {
-//        if ( [recent1Usr.UID compare:chatMsgUID] == NSOrderedSame ) {
-//            [recent1Usr.msgs addObject:newChatMsg];
-//            [recent1Usr saveNewMsgData:msgData];
-//            [recent1Usr save];
-//            return;
-//        }
-//    }
-//    //new msg for new recentUsr
-//    UserOther *newRecentUser = [[UserOther alloc] init];
-//    newRecentUser.msgs = [[NSMutableArray alloc] initWithObjects:newChatMsg, nil];
-//    [newRecentUser saveNewMsgData:msgData];
-//    [newRecentUser save];
-//    [self.recentUsrList addObject:newRecentUser];
+- (void)procNewP2PChatMsg:(NSDictionary *)newChatMsgDict{
+    NSString *chatMsgUID = [newChatMsgDict objectForKey:CHATMSG_KEY_UID];
+    NSData *chatMsgBody = [newChatMsgDict objectForKey:CHATMSG_KEY_CHATMSG];
+    ChatMessage *chatMsg = [NSKeyedUnarchiver unarchiveObjectWithData:chatMsgBody];
+    NSData *chatMsgData = [newChatMsgDict objectForKey:CHATMSG_KEY_SOUND_DATA];
+    if (chatMsgUID == nil || chatMsg == nil || chatMsgData == nil) {
+        return;
+    }
+    for (UserOther *recent1Usr in self.recentUsrList) {
+        if ( [recent1Usr.UID compare:chatMsgUID] == NSOrderedSame ) {
+            //add the msg to it
+            [recent1Usr.msgs addObject:chatMsg];
+            [recent1Usr save];
+            return;
+        }
+    }
+    //new msg for new recentUsr
+    UserOther *newRecentUser = [[UserOther alloc] init];
+    //对新用户赋值操作
+    newRecentUser.UID = chatMsgUID;
+    [newRecentUser.msgs addObject:chatMsg];
+    [newRecentUser save];
+    //怎么保存音频数据？？
+    
+    [self.recentUsrList addObject:newRecentUser];
 }
 
 

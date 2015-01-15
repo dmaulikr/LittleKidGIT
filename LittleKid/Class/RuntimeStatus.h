@@ -23,6 +23,6 @@
 + (instancetype)instance;
 - (void)loadLocalInfo;
 - (void)loadServerRecentMsg:(NSArray *)serverRecentMsgList;
-- (void)procNewChatMsg:(NSArray *)newChatMsgList;
+- (void)procNewP2PChatMsg:(NSDictionary *)newChatMsgDict;
 
 @end

@@ -46,6 +46,7 @@ typedef void(^httpResponseHandler)(NSURLResponse *response, NSData *data, NSErro
             urlStr = [NSString stringWithFormat:@"%@/message/%@",HTTP_SERVER_ROOT_URL_STR, selfUID];
             [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
             [urlRequest setHTTPMethod:@"GET"];
+            
             break;
         case GET_FRIEND_LIST:
             httpHandler = handleFriendList;

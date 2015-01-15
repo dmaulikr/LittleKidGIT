@@ -39,7 +39,7 @@
 }
 
 - (void)testCode{
-    self.toChatUsr.usrIP = @"127.0.0.1";
+    self.toChatUsr.usrIP = @"192.168.1.19";
     self.toChatUsr.usrPort = @"20107";
 }
 
@@ -91,6 +91,8 @@
     //if p2p is OK, go to p2p, else go to http
     
     //p2p
+    self.toChatUsr.usrIP = @"127.0.0.1";
+    self.toChatUsr.usrPort = @"20107";
     [[RuntimeStatus instance].udpP2P sendDict:[self.toChatUsr packetLastChatMsg] toUser:self.toChatUsr withProtocol:RECENT_MSG_POST];
     return YES;
 }

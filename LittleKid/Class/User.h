@@ -72,6 +72,6 @@
 - (NSString *)usrDataPath;
 - (void)loadServerData;
 - (NSDictionary *)packetLastChatMsg;
-- (void)saveNewMsgData:(NSDictionary *)msgData;
+- (void)saveNewMsgData:(NSDictionary *)msgData;/* 与procNewP2PMsg矛盾 */
 
 @end

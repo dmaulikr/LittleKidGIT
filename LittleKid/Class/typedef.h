@@ -11,8 +11,8 @@
 
 /* net communication order define */
 typedef enum NET_PROTOCOL{
-    RECENT_MSG_GET = 0X01,
-    RECENT_MSG_POST,
+    RECENT_MSG_GET = 0X01,/* 向服务器请求消息，不用在P2P中 */
+    RECENT_MSG_POST,    /* P2P协议采用POST，ACK也是 */
     GET_FRIEND_LIST,
     SIGN_IN,
     SIGN_UP,
@@ -40,11 +40,6 @@ typedef enum NET_PROTOCOL{
 #define NOTIFI_SERVER_REQUEST       @"NOTIFI_SERVER_REQUEST"
 #define NOTIFI_GET_SELF_MSG         @"NOTIFI_GET_SELF_MSG"
 #define NOTIFI_GET_NEW_MSG          @"NOTIFI_GET_NEW_MSG"
-
-/* dict keys defination */
-#define CHATMSG_KEY_SOUND_DATA  @"CHATMSG_KEY_SOUND_DATA"
-#define CHATMSG_KEY_CHATMSG     @"CHATMSG_KEY_CHATMSG"
-#define CHATMSG_KEY_UID         @"CHATMSG_KEY_UID"
 
 
 #endif

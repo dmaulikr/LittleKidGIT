@@ -14,15 +14,15 @@
 
 @property(strong, nonatomic) NSData *data;
 @property(strong, nonatomic) UserOther *user;
-@property(strong, nonatomic) NSDate *date;
+@property(strong, nonatomic) NSString *date;
 
-- (id)initWithData:(NSData *)data user:(UserOther *)user date:(NSDate *)date;
+- (id)initWithData:(NSData *)data user:(UserOther *)user dateStr:(NSString *)dateStr;
 
 @end
 
 
 
-#define P2P_TIMEOUT             3
+#define P2P_TIMEOUT             5
 #define P2P_SENT_TIMESTAMP      @"P2P_SENT_TIMESTAMP"
 #define P2P_SENT_DATA           @"P2P_SENT_DATA"
 #define P2P_SENT_PROTOCOL       @"P2P_SENT_PROTOCOL"
@@ -42,7 +42,7 @@
     if (self) {
         NSError *err;
         self.udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
-        if (![self.udpSocket bindToPort:20107 error:&err] ) {
+        if (![self.udpSocket bindToPort:P2P_PORT error:&err] ) {
             NSLog(@"bind error, %@",err);
         }
         err = nil;
@@ -53,27 +53,24 @@
 }
 
 - (void)sendDict:(NSDictionary *)data toUser:(UserOther *)user withProtocol:(NET_PROTOCOL)protocol{
-    //对发送数据作包装
-    NSDate *sendTime = [[NSDate alloc] init];
-    NSDictionary *sentdict = [[NSDictionary alloc]
-                              initWithObjectsAndKeys:sendTime, P2P_SENT_TIMESTAMP,
-                                                     data, P2P_SENT_DATA,
-                                                     [NSNumber numberWithInteger:protocol], P2P_SENT_PROTOCOL,
-                                                     nil];
-    if ( NO == [NSJSONSerialization isValidJSONObject:sentdict] ) {
-        NSLog(@"NO json valid");
+    if ( data == nil ) {
         return;
     }
-    NSError *err;
-    NSData *sentjsonData = [NSJSONSerialization dataWithJSONObject:sentdict options:NSJSONWritingPrettyPrinted error:&err];
-    if (err) {
-        NSLog(@"jsondata error: %@",err);
-    }
+    NSDate *sendTime = [NSDate date];
+    NSDateFormatter *fmDate = [[NSDateFormatter alloc] init];
+    [fmDate setDateFormat:@"YYYY-MM-DD-HH-MM-SS"];
+    NSString *sendTimeStr = [fmDate stringFromDate:sendTime];
+    NSDictionary *sentdict = [[NSDictionary alloc]
+                              initWithObjectsAndKeys:sendTimeStr, P2P_SENT_TIMESTAMP,
+                                                     data, P2P_SENT_DATA,
+                                                     [NSNumber numberWithInt:protocol], P2P_SENT_PROTOCOL,
+                                                     nil];
     NSString *hostIP = user.usrIP;
     uint16_t hostPort = [user.usrPort intValue];
-    [self.udpSocket sendData:sentjsonData toHost:hostIP port:hostPort withTimeout:3 tag:12];
+    NSData *sentData = [NSKeyedArchiver archivedDataWithRootObject:sentdict];
+    [self.udpSocket sendData:sentData toHost:hostIP port:hostPort withTimeout:3 tag:12];
     //重传处理
-    ResendClass *resendMsg = [[ResendClass alloc] initWithData:sentjsonData user:user date:sendTime];
+    ResendClass *resendMsg = [[ResendClass alloc] initWithData:sentData user:user dateStr:sendTimeStr];
     [self.resendInfoList addObject:resendMsg];
     if ( [self.resendInfoList count] >= P2P_SENT_MSG_POOL_SIZE ) {//最多同时保存5个数据，超过则丢掉最早的包
         [self.resendInfoList removeObjectAtIndex:0];
@@ -118,10 +115,8 @@
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data
       fromAddress:(NSData *)address
 withFilterContext:(id)filterContext{
-    
-    NSError *err;
-    NSDictionary *rcvdDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&err];
-    if (err) {//协议包不合格式
+    NSDictionary *rcvdDict = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    if ( rcvdDict == nil ) {//协议包不合格式
         return;//丢掉
     }
     //1.判断是否是ack
@@ -129,19 +124,19 @@ withFilterContext:(id)filterContext{
     //2.如果是，做重传的临时信息删除处理
     NET_PROTOCOL protocol = ((NSNumber *)([rcvdDict objectForKey:P2P_SENT_PROTOCOL])).integerValue;
     if ( protocol == P2P_ACK ) {//如果是一个ack包，删除重传数据
-        NSDate *timestamp = [rcvdDict objectForKey:P2P_SENT_TIMESTAMP];
+        NSString *timestamp = [rcvdDict objectForKey:P2P_SENT_TIMESTAMP];
         for ( ResendClass* temp1Msg in self.resendInfoList ) {
-            if ( temp1Msg.date == timestamp ) {
+            if ( NSOrderedSame == [temp1Msg.date compare:timestamp] ) {
                 [self.resendInfoList removeObject:temp1Msg];
             }
         }
         return;
     }
     else{//接收到消息包
-        NSData *rcvdData = [rcvdDict objectForKey:P2P_SENT_DATA];
+        NSDictionary *rcvdDataDict = [rcvdDict objectForKey:P2P_SENT_DATA];//消息包主体必然为Dict类型
         switch (protocol) {
-            case RECENT_MSG_GET:
-//                [[RuntimeStatus instance] procNewChatMsg:rcvdData];
+            case RECENT_MSG_POST:
+//                [[RuntimeStatus instance] procNewP2PChatMsg:rcvdDataDict];
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFI_GET_RECENT_MSG object:nil userInfo:nil];
                 
                 break;
@@ -152,17 +147,21 @@ withFilterContext:(id)filterContext{
                 break;
         }
         //返回ack,包含ack协议，timestamp，用底层函数做
-        NSDate *rcvdTimestamp = [rcvdDict objectForKey:P2P_SENT_TIMESTAMP];
+        NSString *rcvdTimestamp = [rcvdDict objectForKey:P2P_SENT_TIMESTAMP];
         NSDictionary *ackDict = [[NSDictionary alloc] initWithObjectsAndKeys:rcvdTimestamp, P2P_SENT_TIMESTAMP,
                                                                              [NSNumber numberWithInteger:P2P_ACK], P2P_SENT_PROTOCOL,
                                                                              nil];
-        NSError *err;
-        NSData *ackJsonData = [NSJSONSerialization dataWithJSONObject:ackDict options:NSJSONWritingPrettyPrinted error:&err];
-        if (err) {
-            NSLog(@"packet ack err: %@",err);
+        NSData *ackData = [NSKeyedArchiver archivedDataWithRootObject:ackDict];
+        if ( ackData == nil ) {
+            NSLog(@"packet ack err");
             return;
         }
-        [self.udpSocket sendData:ackJsonData toAddress:address withTimeout:P2P_TIMEOUT tag:P2P_TAG_ACK];
+        static int i =0;
+        i++;
+        if (i==5) {
+            [self.udpSocket sendData:ackData toAddress:address withTimeout:P2P_TIMEOUT tag:P2P_TAG_ACK];
+            i = 0;
+        }
     }
 }
 /**
@@ -171,6 +170,13 @@ withFilterContext:(id)filterContext{
 - (void)udpSocketDidClose:(GCDAsyncUdpSocket *)sock withError:(NSError *)error{
     NSLog(@"socket did close");
     //some processing
+    NSError *err;
+    self.udpSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_global_queue(0, 0)];
+    if (![self.udpSocket bindToPort:P2P_PORT error:&err] ) {
+        NSLog(@"bind error, %@",err);
+    }
+    err = nil;
+    [self.udpSocket beginReceiving:&err];
 }
 
 @end
@@ -179,12 +185,12 @@ withFilterContext:(id)filterContext{
 
 @implementation ResendClass
 
-- (id)initWithData:(NSData *)data user:(UserOther *)user date:(NSDate *)date{
+- (id)initWithData:(NSData *)data user:(UserOther *)user dateStr:(NSString *)dateStr{
     self = [super init];
     if (self) {
         self.data = data;
         self.user = user;
-        self.date = date;
+        self.date = dateStr;
     }
     return self;
 }
