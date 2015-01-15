@@ -13,8 +13,10 @@
 @interface ResendClass : NSObject
 
 @property(strong, nonatomic) NSData *data;
-@property(strong, nonatomic) UserOther *user;
+@property(strong, nonatomic) NSString *userIP;
+@property(strong, nonatomic) NSString *userPort;
 @property(strong, nonatomic) NSString *date;
+@property(assign, nonatomic) NSInteger resendCont;
 
 - (id)initWithData:(NSData *)data user:(UserOther *)user dateStr:(NSString *)dateStr;
 
@@ -26,12 +28,15 @@
 #define P2P_SENT_TIMESTAMP      @"P2P_SENT_TIMESTAMP"
 #define P2P_SENT_DATA           @"P2P_SENT_DATA"
 #define P2P_SENT_PROTOCOL       @"P2P_SENT_PROTOCOL"
+#define P2P_MAX_RESEND_NUM      5
 #define P2P_SENT_MSG_POOL_SIZE  5
+#define P2P_RCVD_MSG_POOL_SIZE  5
 
 @interface UDPP2P()
 
 @property(strong, nonatomic)GCDAsyncUdpSocket *udpSocket;
 @property(strong, nonatomic)NSMutableArray *resendInfoList;
+@property(strong, nonatomic)NSMutableArray *rcvdPktTimeStampList;
 
 @end
 
@@ -48,6 +53,7 @@
         err = nil;
         [self.udpSocket beginReceiving:&err];
         self.resendInfoList = [[NSMutableArray alloc] init];
+        self.rcvdPktTimeStampList = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -81,16 +87,54 @@
 
 - (void)resend{
     //重传最早的一个数据
-    if ( [self.resendInfoList count] == 0 || self.resendInfoList == nil) {
+    if ( self.resendInfoList == nil || [self.resendInfoList count] == 0 ) {
         return;
     }
     ResendClass *firstMsg = [self.resendInfoList firstObject];
-    NSString *hostIP = firstMsg.user.usrIP;
-    uint16_t hostPort = [firstMsg.user.usrPort intValue];
-    [self.udpSocket sendData:firstMsg.data toHost:hostIP port:hostPort withTimeout:P2P_TIMEOUT tag:P2P_TAG_CHATMSG];
+    if ( firstMsg.resendCont > P2P_MAX_RESEND_NUM ) {//达到最大重传次数,则向服务器推送保存
+        [self handleWithServer];
+        [self.resendInfoList removeObject:firstMsg];
+    }
+    firstMsg.resendCont = firstMsg.resendCont + 1;
+    [self.udpSocket sendData:firstMsg.data toHost:firstMsg.userIP port:[firstMsg.userPort intValue] withTimeout:P2P_TIMEOUT tag:P2P_TAG_CHATMSG];
     [NSTimer scheduledTimerWithTimeInterval:P2P_TIMEOUT target:self selector:@selector(resend) userInfo:nil repeats:NO];
     [[NSRunLoop currentRunLoop] run];
 
+}
+
+- (void)handleWithServer{
+    
+}
+/* 包含ack协议，timestamp，用底层函数做 */
+- (void)ackWithRcvdDict:(NSDictionary *)rcvdDict address:(NSData *)address{
+    
+    NSString *rcvdTimestamp = [rcvdDict objectForKey:P2P_SENT_TIMESTAMP];
+    NSDictionary *ackDict = [[NSDictionary alloc] initWithObjectsAndKeys:rcvdTimestamp, P2P_SENT_TIMESTAMP,
+                             [NSNumber numberWithInteger:P2P_ACK], P2P_SENT_PROTOCOL,
+                             nil];
+    NSData *ackData = [NSKeyedArchiver archivedDataWithRootObject:ackDict];
+    [self.udpSocket sendData:ackData toAddress:address withTimeout:P2P_TIMEOUT tag:P2P_TAG_ACK];
+}
+/* ret:NO 是一个没收到过的包
+ *  ret: Yes  已收到过此包
+ */
+- (BOOL)isEverRcvdDict:(NSDictionary *)rcvdDict{
+    NSString *timeStamp = [rcvdDict objectForKey:P2P_SENT_TIMESTAMP];
+    if ( self.rcvdPktTimeStampList == nil || [self.rcvdPktTimeStampList count] == 0 ) {
+        [self.rcvdPktTimeStampList addObject:timeStamp];
+        return NO;
+    }
+    for (NSString *everRcvdPktTimeStamp in self.rcvdPktTimeStampList) {
+        if ( NSOrderedSame == [everRcvdPktTimeStamp compare:timeStamp] ) {
+            return YES;//是收到过的包
+        }
+    }
+    //没查到这个包
+    [self.rcvdPktTimeStampList addObject:timeStamp];
+    if ( [self.rcvdPktTimeStampList count] > P2P_RCVD_MSG_POOL_SIZE ) {
+        [self.rcvdPktTimeStampList removeObjectAtIndex:0];
+    }
+    return NO;
 }
 
 #pragma mark - UDPP2P
@@ -111,7 +155,6 @@
 /**
  * Called when the socket has received the requested datagram.
  * 目前如果发的包如果解析不了或者丢了，都是靠超时处理的
- * 目前的BUG：如果数据包在超时之后才到达对方，将造成数据包重传。
  **/
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data
       fromAddress:(NSData *)address
@@ -121,7 +164,7 @@ withFilterContext:(id)filterContext{
         return;//丢掉
     }
     //1.判断是否是ack
-    //2.如果不是，判断协议，处理数据，返回ack
+    //2.如果不是，返回ack，判断协议，处理数据
     //2.如果是，做重传的临时信息删除处理
     NET_PROTOCOL protocol = ((NSNumber *)([rcvdDict objectForKey:P2P_SENT_PROTOCOL])).integerValue;
     if ( protocol == P2P_ACK ) {//如果是一个ack包，删除重传数据
@@ -134,13 +177,12 @@ withFilterContext:(id)filterContext{
         return;
     }
     else{//接收到消息包
-         //返回ack,包含ack协议，timestamp，用底层函数做
-        NSString *rcvdTimestamp = [rcvdDict objectForKey:P2P_SENT_TIMESTAMP];
-        NSDictionary *ackDict = [[NSDictionary alloc] initWithObjectsAndKeys:rcvdTimestamp, P2P_SENT_TIMESTAMP,
-                                 [NSNumber numberWithInteger:P2P_ACK], P2P_SENT_PROTOCOL,
-                                 nil];
-        NSData *ackData = [NSKeyedArchiver archivedDataWithRootObject:ackDict];
-        [self.udpSocket sendData:ackData toAddress:address withTimeout:P2P_TIMEOUT tag:P2P_TAG_ACK];
+         //做ack处理
+        [self ackWithRcvdDict:rcvdDict address:address];
+        //重复包判断
+        if ( YES == [self isEverRcvdDict:rcvdDict] ) {
+            return;
+        }
         //处理消息包
         NSDictionary *rcvdDataDict = [rcvdDict objectForKey:P2P_SENT_DATA];//消息包主体必然为Dict类型
         switch (protocol) {
@@ -186,8 +228,10 @@ withFilterContext:(id)filterContext{
     self = [super init];
     if (self) {
         self.data = data;
-        self.user = user;
+        self.userIP = user.usrIP;
+        self.userPort = user.usrPort;
         self.date = dateStr;
+        self.resendCont = 0;
     }
     return self;
 }
