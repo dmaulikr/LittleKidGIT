@@ -11,18 +11,8 @@
 
 @interface ViewControllerContact : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-
-
 @end
 
-/* contact class define */
-@interface Contact : NSObject
-
-@property(nonatomic, strong) NSString *firstName;
-@property(nonatomic, strong) NSString *lastName;
-@property(nonatomic, strong) NSString *phoneNumber;
-
-@end
 
 
 
