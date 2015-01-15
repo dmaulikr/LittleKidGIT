@@ -20,6 +20,7 @@
 @property (retain,nonatomic,readwrite) UILabel * label;
 @property  bool blackOrRed;//0 red 1 black
 @property (strong,nonatomic) AVAudioPlayer *play;
+@property int sendCmd;
 - (void)showWhoShouldPlayChese:(NSInteger)num;
 @end
 // 版权属于原作者

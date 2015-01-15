@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "User.h"
+#import "RNGridMenu.h"
 
 @interface CheseInterface : UIView
 @property (assign,readwrite,nonatomic)id delegate;

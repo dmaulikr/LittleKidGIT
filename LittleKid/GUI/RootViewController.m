@@ -41,23 +41,24 @@
     self.play.numberOfLoops = -1;
     [self.play prepareToPlay];
     [self.play play];
+//    [self.play stop];
     bacakGroundImage.image = [UIImage imageNamed:@"象棋主界面.png"];
     bacakGroundImage.userInteractionEnabled = YES;
     [self.view addSubview:bacakGroundImage];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(procCmd:) name:NOTIFI_CHESS_MOVE object:nil];
     self.view.backgroundColor = [UIColor blackColor];
 //    ischessReverse = self.blackOrRed;
 //    _cheseInterface = [[CheseInterface alloc]initWithFrame:CGRectMake(0+self.blackOrRed, chessboardStartPointy, chessboardWidth, chessboardHight)];
     _cheseInterface = [[CheseInterface alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-    _cheseInterface.ischessReverse = 0;
-    _cheseInterface.userother.usrIP = @"192.168.1.12";//15//mac 12 iphone
+    _cheseInterface.ischessReverse = 1;
+    _cheseInterface.userother.usrIP = @"192.168.1.11";//15//mac 11 iphone
     _cheseInterface.userother.usrPort = @"20107";
     [_cheseInterface loadCheseInterface];
     _cheseInterface.center = CGPointMake(self.view.bounds.size.width/2.0, self.view.bounds.size.height/2.0);
     _cheseInterface.delegate = self;
     [self.view addSubview:_cheseInterface];
     
-    
+    self.sendCmd = 0;
     UIButton * moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
     moreButton.frame = CGRectMake(0, 510, 60, 60);
     UIImage * tmpimage = [UIImage imageNamed:@"菜单.png"];
@@ -130,27 +131,205 @@
 //    [self.view addGestureRecognizer:longPress];
     [self showWhoShouldPlayChese:0];
 }
-
+- (void)procCmd:(NSNotification *)notify
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSData *jsonData = notify.object ;
+        NSError *err;
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:&err];
+        if (err) {
+            //process when err
+            NSLog(@"err:%@",err);
+            return;
+        }
+        //        if (isShouldBlackChessPlayer||isShouldRedChessPlayer) {
+        //            return;
+        //        }
+        NSString *chess_cmd = [dict objectForKey:@"CHESS_CMD"];
+        NSInteger cmdindex = [chess_cmd integerValue];
+        //        NSLog(@"receve a data:%@",err);
+        switch (cmdindex)
+        {
+            case CHESS_CMD_BACKMOVE://RESTAT
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请求重新开始" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:@"不可以", nil];
+                [alert setTag:22];
+                [alert show];
+                break;
+            }
+            case CHESS_CMD_DRAWOFFER:
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方请求和局" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:@"不可以", nil];
+                [alert setTag:23];
+                [alert show];
+                break;
+            }
+            case CHESS_CMD_DEFEAL:
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方认输" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
+                [alert setTag:24];
+                [alert show];
+                break;
+            }
+            case CHESS_CMD_ACK:
+            {
+                NSString *chessack = [dict objectForKey:@"CHESS_CHOOSE"];
+                switch (self.sendCmd)
+                {
+                    case CHESS_CMD_BACKMOVE:
+                    {
+                        if ([chessack  isEqual: @"可以"])
+                        {
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意重新开始" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
+                            [alert setTag:25];
+                            [alert show];
+                        }
+                        else
+                        {
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方不同意重新开始" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
+                            [alert setTag:26];
+                            [alert show];
+                        }
+                        
+                        
+                        break;
+                    }
+                    case CHESS_CMD_DRAWOFFER:
+                    {
+                        if ([chessack  isEqual: @"可以"])
+                        {
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意和局" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
+                            [alert setTag:27];
+                            [alert show];
+                        }
+                        else
+                        {
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方不同意和局" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
+                            [alert setTag:28];
+                            [alert show];
+                        }
+                    }
+                    case CHESS_CMD_DEFEAL:
+                    {
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意认输" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
+                        [alert setTag:29];
+                        [alert show];
+                        break;
+                    }
+                    default:
+                        break;
+                }
+                break;
+            }
+            default:
+                break;
+        }
+        
+    });
+    
+}
+- (void)sendack:(NSString *) string
+{
+    NSString *str_cmd = [[NSString alloc]initWithFormat:@"%d",CHESS_CMD_ACK];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:str_cmd,@"CHESS_CMD",string,@"CHESS_CHOOSE", nil];
+    NSError *err;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&err];
+    if (err) {
+        NSLog(@"chess move data error: %@",err);
+        return;
+    }
+    [[RuntimeStatus instance].udpP2P sendData:jsonData toUser:_cheseInterface.userother];
+}
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if ([alertView tag] == 22)
+    {    // it's the Error alert
+        if (buttonIndex == 0)
+        {
+            [self sendack:@"可以"];
+            [self Restart];
+        }
+        else
+        {
+            [self sendack:@"不可以"];
+        }
+    }
+    if ([alertView tag] ==23)
+    {
+        if (buttonIndex == 0)
+        {
+            [self sendack:@"可以"];
+            [self Restart];
+        }
+        else
+        {
+            [self sendack:@"不可以"];
+            
+        }
+    }
+    if ([alertView tag] ==24)
+    {
+        [self sendack:@"可以"];
+        [self Restart];
+    }
+    if ([alertView tag] ==25)
+    {
+        [self Restart];
+    }
+    if ([alertView tag] ==27)
+    {
+        [self Restart];
+    }
+    if ([alertView tag] ==29)
+    {
+        [self Restart];
+    }
+    
+}
 //(void)(^callbackMoveChess)(NSNotification *notify) = ^(NSNotification *notify){
 //    
 //};
+
+- (void)sendchessRequest :(NSInteger)index
+{
+    NSString *chesscmdtype = [[NSString alloc]initWithFormat:@"%d", index+2];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:chesscmdtype,@"CHESS_CMD", nil];
+    NSError *err;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&err];
+    if (err) {
+        NSLog(@"chess move data error: %@",err);
+        return;
+    }
+    [[RuntimeStatus instance].udpP2P sendData:jsonData toUser:_cheseInterface.userother];
+}
 
 
 
 - (void)Restart
 {
-    [_cheseInterface removeFromSuperview];
-    
-    _cheseInterface = [[CheseInterface alloc]initWithFrame:CGRectMake(1, chessStartPointY, 300, 300)];
-    _cheseInterface.center = CGPointMake(self.view.bounds.size.width/2.0, self.view.bounds.size.height/2.0);
-    _cheseInterface.delegate = self;
-    [self.view addSubview:_cheseInterface];
-    [self showWhoShouldPlayChese:0];
+//    [_cheseInterface removeFromSuperview];
+    [_cheseInterface loadCheseInterface];
+//    [self.view addSubview:_cheseInterface];
 }
 #pragma mark - RNGridMenuDelegate
 
 - (void)gridMenu:(RNGridMenu *)gridMenu willDismissWithSelectedItem:(RNGridMenuItem *)item atIndex:(NSInteger)itemIndex {
     NSLog(@"Dismissed with item %d: %@", itemIndex, item.title);
+    [self sendchessRequest:itemIndex];
+    switch (itemIndex) {
+        case 0:
+            self.sendCmd = CHESS_CMD_BACKMOVE;
+            break;
+        case 1:
+            self.sendCmd = CHESS_CMD_DRAWOFFER;
+            break;
+        case 2:
+            self.sendCmd = CHESS_CMD_DEFEAL;
+            break;
+            
+        default:
+            break;
+    }
+    
 }
 
 #pragma mark - Private

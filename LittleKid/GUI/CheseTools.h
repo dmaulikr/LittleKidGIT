@@ -35,6 +35,12 @@ typedef struct index
 
 #define chessStartPointY (chessboardStartPointy+60)//-20
 
+#define CHESS_CMD_MOVE  0
+#define CHESS_CMD_REMOVE 1
+#define CHESS_CMD_BACKMOVE 2
+#define CHESS_CMD_DRAWOFFER 3
+#define CHESS_CMD_DEFEAL 4
+#define CHESS_CMD_ACK 5
 
 
 #define chessStartPointX 0//-10
