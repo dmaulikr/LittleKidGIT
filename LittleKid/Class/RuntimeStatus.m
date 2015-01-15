@@ -43,8 +43,8 @@
     //self.usrSelf.UID = @"0000";
     self.usrSelf.nickName = @"自己";
     self.usrSelf.headPicture = @"head.jpg";
-    //self.usrSelf.signature = @"小钱长老了老钱";
-    //self.usrSelf.address = @"启明704";
+    self.usrSelf.signature = @"小钱长老了老钱";
+    self.usrSelf.address = @"启明704";
     self.usrSelf.birthday = @"20";
     self.usrSelf.gender = @"男";
     self.usrSelf.state = @"1";
@@ -60,10 +60,10 @@
     friend.birthday = @"22";
     friend.gender = @"男";
     friend.state = @"1";
-    friend.usrIP = @"127.0.0.1";
+    friend.usrIP = @"192.168.3.1";
     friend.usrPort = @"20107";
     ChatMessage *msg = [[ChatMessage alloc] init];
-    msg.owner = @"1";
+    msg.ownerUID = @"15926305768";
     msg.type = @"whatever";
     msg.msg = @"do it or not?";
     msg.timeStamp = @"时间先用string类型";
@@ -114,29 +114,20 @@
 }
 
 - (void)procNewP2PChatMsg:(NSDictionary *)newChatMsgDict{
-    NSString *chatMsgUID = [newChatMsgDict objectForKey:CHATMSG_KEY_UID];
-    NSData *chatMsgBody = [newChatMsgDict objectForKey:CHATMSG_KEY_CHATMSG];
-    ChatMessage *chatMsg = [NSKeyedUnarchiver unarchiveObjectWithData:chatMsgBody];
-    NSData *chatMsgData = [newChatMsgDict objectForKey:CHATMSG_KEY_SOUND_DATA];
-    if (chatMsgUID == nil || chatMsg == nil || chatMsgData == nil) {
-        return;
-    }
+    ChatMessage *newMsg = [NSKeyedUnarchiver unarchiveObjectWithData:[newChatMsgDict objectForKey:CHATMSG_KEY_CHATMSG]];
     for (UserOther *recent1Usr in self.recentUsrList) {
-        if ( [recent1Usr.UID compare:chatMsgUID] == NSOrderedSame ) {
-            //add the msg to it
-            [recent1Usr.msgs addObject:chatMsg];
-            [recent1Usr save];
+        if ([recent1Usr.UID compare:newMsg.ownerUID]) {
+            [recent1Usr procNewChatMsgWithDict:newChatMsgDict];
             return;
         }
     }
+    //陌生消息处理
     //new msg for new recentUsr
     UserOther *newRecentUser = [[UserOther alloc] init];
     //对新用户赋值操作
-    newRecentUser.UID = chatMsgUID;
-    [newRecentUser.msgs addObject:chatMsg];
-    [newRecentUser save];
-    //怎么保存音频数据？？
-    
+    newRecentUser.UID = newMsg.ownerUID;
+    [newRecentUser procNewChatMsgWithDict:newChatMsgDict];
+    //将新用户加入列表
     [self.recentUsrList addObject:newRecentUser];
 }
 

@@ -111,6 +111,7 @@
 /**
  * Called when the socket has received the requested datagram.
  * 目前如果发的包如果解析不了或者丢了，都是靠超时处理的
+ * 目前的BUG：如果数据包在超时之后才到达对方，将造成数据包重传。
  **/
 - (void)udpSocket:(GCDAsyncUdpSocket *)sock didReceiveData:(NSData *)data
       fromAddress:(NSData *)address
@@ -133,34 +134,30 @@ withFilterContext:(id)filterContext{
         return;
     }
     else{//接收到消息包
+         //返回ack,包含ack协议，timestamp，用底层函数做
+        NSString *rcvdTimestamp = [rcvdDict objectForKey:P2P_SENT_TIMESTAMP];
+        NSDictionary *ackDict = [[NSDictionary alloc] initWithObjectsAndKeys:rcvdTimestamp, P2P_SENT_TIMESTAMP,
+                                 [NSNumber numberWithInteger:P2P_ACK], P2P_SENT_PROTOCOL,
+                                 nil];
+        NSData *ackData = [NSKeyedArchiver archivedDataWithRootObject:ackDict];
+        [self.udpSocket sendData:ackData toAddress:address withTimeout:P2P_TIMEOUT tag:P2P_TAG_ACK];
+        //处理消息包
         NSDictionary *rcvdDataDict = [rcvdDict objectForKey:P2P_SENT_DATA];//消息包主体必然为Dict类型
         switch (protocol) {
             case RECENT_MSG_POST:
-//                [[RuntimeStatus instance] procNewP2PChatMsg:rcvdDataDict];
+            {
+                [[RuntimeStatus instance] procNewP2PChatMsg:rcvdDataDict];
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFI_GET_RECENT_MSG object:nil userInfo:nil];
                 
                 break;
+            }
             case CHESS:
+            {
                 
                 break;
+            }
             default:
                 break;
-        }
-        //返回ack,包含ack协议，timestamp，用底层函数做
-        NSString *rcvdTimestamp = [rcvdDict objectForKey:P2P_SENT_TIMESTAMP];
-        NSDictionary *ackDict = [[NSDictionary alloc] initWithObjectsAndKeys:rcvdTimestamp, P2P_SENT_TIMESTAMP,
-                                                                             [NSNumber numberWithInteger:P2P_ACK], P2P_SENT_PROTOCOL,
-                                                                             nil];
-        NSData *ackData = [NSKeyedArchiver archivedDataWithRootObject:ackDict];
-        if ( ackData == nil ) {
-            NSLog(@"packet ack err");
-            return;
-        }
-        static int i =0;
-        i++;
-        if (i==5) {
-            [self.udpSocket sendData:ackData toAddress:address withTimeout:P2P_TIMEOUT tag:P2P_TAG_ACK];
-            i = 0;
         }
     }
 }

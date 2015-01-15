@@ -222,6 +222,7 @@
     return [NSString stringWithFormat:@"%@/%@/recent/%@.xcui", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], [RuntimeStatus instance].usrSelf.UID, self.UID];
 }
 
+/* 该函数只保存chatmsg，而不保存msg对应的音频等数据，这些数据在接收到新消息时由消息自行保存. */
 - (BOOL)save{
     NSData *usrData = [NSKeyedArchiver archivedDataWithRootObject:self];
     NSError *err;
@@ -258,7 +259,7 @@
             NSLog(@"data == nil ");
         }
     }
-    NSDictionary *dictToSent = [[NSDictionary alloc] initWithObjectsAndKeys:self.UID, CHATMSG_KEY_UID, [NSKeyedArchiver archivedDataWithRootObject:lastMsg], CHATMSG_KEY_CHATMSG, lastMsg.timeStamp, CHATMSG_KEY_TIMESTAMP, data, CHATMSG_KEY_SOUND_DATA, nil];
+    NSDictionary *dictToSent = [[NSDictionary alloc] initWithObjectsAndKeys:[NSKeyedArchiver archivedDataWithRootObject:lastMsg], CHATMSG_KEY_CHATMSG, data, CHATMSG_KEY_DATA, nil];
     return dictToSent;
 }
 
@@ -266,16 +267,21 @@
     return [NSString stringWithFormat:@"%@/%@/recent/%@",[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], [RuntimeStatus instance].usrSelf.UID, msg.msg];
 }
 
-/* must called after the new message has been added to the msgs list */
-- (void)saveNewMsgData:(NSData *)msgData{
-    NSError *err;
-    ChatMessage *newMsg = [self.msgs lastObject];
+/* 收到新消息数组，调用此函数 */
+- (void)procNewChatMsgWithDict:(NSDictionary *)newChatMsgDict{
+    ChatMessage *newMsg = [NSKeyedUnarchiver unarchiveObjectWithData:[newChatMsgDict objectForKey:CHATMSG_KEY_CHATMSG]];
+    NSData *newMsgData = [newChatMsgDict objectForKey:CHATMSG_KEY_DATA];
+    [self.msgs addObject:newMsg];
+    //保存消息数据
     if ( NSOrderedSame == [newMsg.type compare:MSG_TYPE_SOUND] ) {
-        [msgData writeToFile:[self soundPathWithMsg:newMsg] options:NSDataWritingAtomic error:&err];
+        NSError *err;
+        [newMsgData writeToFile:[self soundPathWithMsg:newMsg] options:NSDataWritingAtomic error:&err];
         if (err) {
             NSLog(@"%@",err);
         }
     }
+    //保存该最近联系人所有信息
+    [self save];
 }
 
 - (void)loadServerData{

@@ -11,6 +11,7 @@
 @class RuntimeStatus;
 
 #define HTTP_SERVER_ROOT_URL_STR   @"http://littlekid.huakexunce.com"
+//#define HTTP_SERVER_ROOT_URL_STR   @"http://192.168.1.19"
 #define TIME_OUT_MAX 10
 
 @interface HTTTClient : NSObject

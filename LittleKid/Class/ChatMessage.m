@@ -18,7 +18,7 @@
 - (id)init{
     self = [super init];
     if (self) {
-        self.owner = [[NSString alloc] init];
+        self.ownerUID = [[NSString alloc] init];
         self.type = [[NSString alloc] init];
         self.timeStamp = [[NSString alloc] init];
         self.msg = [[NSString alloc] init];
@@ -28,7 +28,7 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{
-    [aCoder encodeObject:self.owner forKey:MSG_OWNER];
+    [aCoder encodeObject:self.ownerUID forKey:MSG_OWNER];
     [aCoder encodeObject:self.type forKey:MSG_TYPE];
     [aCoder encodeObject:self.timeStamp forKey:MSG_TIME];
     [aCoder encodeObject:self.msg forKey:MSG_MSG];
@@ -37,7 +37,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [super init];
     if (self) {
-        self.owner = [aDecoder decodeObjectForKey:MSG_OWNER];
+        self.ownerUID = [aDecoder decodeObjectForKey:MSG_OWNER];
         self.type = [aDecoder decodeObjectForKey:MSG_TYPE];
         self.timeStamp = [aDecoder decodeObjectForKey:MSG_TIME];
         self.msg = [aDecoder decodeObjectForKey:MSG_MSG];
