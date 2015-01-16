@@ -57,7 +57,7 @@ typedef void(^httpResponseHandler)(NSURLResponse *response, NSData *data, NSErro
         case SIGN_IN:
         {
             httpHandler = handleSignIn;
-            urlStr = [NSString stringWithFormat:@"%@",HTTP_SERVER_ROOT_URL_STR];
+            urlStr = [NSString stringWithFormat:@"%@/user/%@", HTTP_SERVER_ROOT_URL_STR, [RuntimeStatus instance].signAccountUID];
             [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
             [urlRequest setHTTPMethod:@"GET"];
             break;
@@ -173,8 +173,10 @@ httpResponseHandler handleSignIn = ^(NSURLResponse *response, NSData *data, NSEr
     }
     else{
         NSLog(@"handleSignIn connection success");
+        NSLog(@"%@",response);
+        NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
         NSError *err;
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&err];
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&err];
         if(err){
             NSLog(@"err json : %@",err);
         }

@@ -747,39 +747,15 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkcode_goldWord.png" translatesAutoresizingMaskIntoConstraints="NO" id="c7q-Zd-omt">
                                 <rect key="frame" x="34" y="111" width="93" height="18"/>
                             </imageView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FGk-YA-gBx">
-                                <rect key="frame" x="52" y="256" width="192" height="56"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="JNs-KO-0QN"/>
-                                    <constraint firstAttribute="height" constant="30" id="MnU-QW-wjB"/>
-                                    <constraint firstAttribute="width" constant="41" id="X71-Al-CmS"/>
-                                    <constraint firstAttribute="width" constant="80" id="jCv-Wv-a9v"/>
-                                </constraints>
-                                <state key="normal" title="验证" image="checkcode_btnSubmit.png" backgroundImage="checkcode_btnSubmit.png">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="JNs-KO-0QN"/>
-                                        <exclude reference="MnU-QW-wjB"/>
-                                        <exclude reference="X71-Al-CmS"/>
-                                        <exclude reference="jCv-Wv-a9v"/>
-                                    </mask>
-                                </variation>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FGk-YA-gBx">
+                                <rect key="frame" x="34" y="256" width="201" height="55"/>
+                                <state key="normal" image="checkcode_btnSubmit.png"/>
+                                <state key="disabled" image="checkcode_btnSubmit.png"/>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="36" y="163" width="41" height="30"/>
-                                    <mask key="constraints">
-                                        <include reference="MnU-QW-wjB"/>
-                                        <include reference="X71-Al-CmS"/>
-                                    </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
                                     <rect key="frame" x="16" y="219" width="539" height="30"/>
-                                    <mask key="constraints">
-                                        <include reference="JNs-KO-0QN"/>
-                                        <include reference="jCv-Wv-a9v"/>
-                                    </mask>
                                 </variation>
                                 <connections>
                                     <action selector="onCheckMsg:" destination="1VK-JR-O7d" eventType="touchUpInside" id="TU2-F5-xro"/>
@@ -922,6 +898,12 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="1Wz-et-AKM" id="D3f-0F-zFe"/>
                                     <outlet property="delegate" destination="1Wz-et-AKM" id="Ihx-ns-oyn"/>
@@ -1006,6 +988,12 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="A3o-O2-qzx" id="9mx-eu-twr"/>
                                     <outlet property="delegate" destination="A3o-O2-qzx" id="4SH-fA-fZE"/>
@@ -1126,6 +1114,12 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="KkB-Ru-t9F" id="FqM-lN-fKV"/>
                                     <outlet property="delegate" destination="KkB-Ru-t9F" id="cTv-en-HWd"/>
@@ -1211,6 +1205,9 @@
                                     <constraint firstAttribute="width" constant="295" id="BIA-Gs-qtJ"/>
                                     <constraint firstAttribute="height" constant="178" id="Rw1-v8-Ese"/>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="16" y="573" width="295" height="178"/>
+                                </variation>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="head.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4n7-pJ-11U">
                                 <rect key="frame" x="126" y="84" width="75" height="75"/>
@@ -1413,6 +1410,12 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="ImT-sf-p6h" id="Pbt-lA-0pa"/>
                                     <outlet property="delegate" destination="ImT-sf-p6h" id="Z05-at-f68"/>
@@ -1656,6 +1659,6 @@
         <image name="登陆.png" width="500" height="119"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="x7y-XV-pXK"/>
+        <segue reference="BXi-mn-8Gv"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -23,6 +23,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self testcode];
+}
+
+- (void)testcode{
+    self.checkCode = @"1";
 }
 
 -(void) freshRepickBtn{
@@ -44,27 +49,23 @@
     
     ((UIButton *)sender).enabled = false;
     if (self.repickBtnFreshTimer==nil) {
-        self.repickBtnFreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(freshRepickBtn) userInfo:nil repeats:YES];
+        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(freshRepickBtn) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] run];
     }
-    [[NSRunLoop currentRunLoop] addTimer:self.repickBtnFreshTimer forMode:NSDefaultRunLoopMode];
 }
 
 #define SEGUE_TO_MAIN @"segueToMain"
 
 - (IBAction)onCheckMsg:(id)sender {
-    
-    [self performSegueWithIdentifier:SEGUE_TO_MAIN sender:sender];
-    [HTTTClient sendData:nil withProtocol:GET_CHECK_CODE];
-    [[NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_GET_CHECK_CODE object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-        NSLog(@"do something");
-        [RuntimeStatus instance].signAccountUID = @"example";
-    }];
-    
-    
+    if ([self.checkCode compare:@"1"] == NSOrderedSame ) {
+        [self performSegueWithIdentifier:SEGUE_TO_MAIN sender:sender];
+    }
+//    [HTTTClient sendData:nil withProtocol:GET_CHECK_CODE];
+//    [[NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_GET_CHECK_CODE object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+//        NSLog(@"do something");
+//        [RuntimeStatus instance].signAccountUID = @"example";
+//    }];
 }
-
-
-
 
 
 - (void)didReceiveMemoryWarning {

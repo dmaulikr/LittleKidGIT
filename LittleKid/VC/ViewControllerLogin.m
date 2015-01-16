@@ -8,6 +8,7 @@
 
 #import "ViewControllerLogin.h"
 #import "RuntimeStatus.h"
+#import <CommonCrypto/CommonDigest.h>/* fro MD5 */
 
 @interface ViewControllerLogin ()
 
@@ -46,14 +47,19 @@
         [alert show];
         return;
     }
+    //设置run的accoutUID
+    [RuntimeStatus instance].signAccountUID = self.account.text;
     /* 封装数据并发送 */
-    NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:self.account.text, USR_UID, self.password.text, USR_PWD, nil];
+    NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:self.account.text, USR_UID, [self md5WithStr:self.password.text], USR_PWD, nil];
     [HTTTClient sendData:jsonDict withProtocol:SIGN_IN];
     [[NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_SIGN_IN object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {//返回消息的回调
         NSLog(@"I get the login reply");
         //check if right, then
         if ( YES == [self checkSignInInfo:note] ) {
-            [RuntimeStatus instance].signAccountUID = self.account.text;
+            [RuntimeStatus instance].usrSelf.UID = self.account.text;
+            //get info from local
+            [[RuntimeStatus instance] loadLocalInfo];
+            //切入登陆界面
             [self performSegueWithIdentifier:SIGN_IN_SEGUE sender:nil];
         }
     }];
@@ -62,7 +68,25 @@
 - (BOOL)checkSignInInfo:(NSNotification *)note{
     NSDictionary *signInAckDict = note.userInfo;
     NSLog(@"%@",signInAckDict);
-    return YES;
+    NSString *pwdMD5_2FromServer = [signInAckDict objectForKey:USR_PWD];
+    NSString *pwdMD5_2 = [self md5WithStr:[self md5WithStr:self.password.text]];//md5二次加密
+    if ( NSOrderedSame == [pwdMD5_2 compare:pwdMD5_2FromServer] ) {
+        return YES;
+    }
+    return NO;
+}
+
+- (NSString *)md5WithStr:(NSString *)pwd{
+    const char *cStr = [pwd UTF8String];
+    unsigned char result[CC_MD5_DIGEST_LENGTH];
+    CC_MD5( cStr, strlen(cStr), result ); // This is the md5 call
+    return [NSString stringWithFormat:
+            @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+            result[0], result[1], result[2], result[3],
+            result[4], result[5], result[6], result[7],
+            result[8], result[9], result[10], result[11],
+            result[12], result[13], result[14], result[15]
+            ];  
 }
 
 
