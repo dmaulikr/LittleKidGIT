@@ -36,7 +36,7 @@
 @property(nonatomic, strong) NSString *address;
 @property(nonatomic, strong) NSString *birthday;
 @property(nonatomic, strong) NSString *gender;
-@property(nonatomic) NSString* state;/* 0,不在线，1，在线, 2, ... */
+@property(nonatomic, strong) NSString* state;/* 0,不在线，1，在线, 2, ... */
 
 @end
 
@@ -64,14 +64,14 @@
 
 @property(nonatomic, strong)NSString *usrIP;
 @property(nonatomic, strong)NSString *usrPort;
-@property(nonatomic, strong)NSMutableArray *msgs;
+@property(nonatomic, strong)NSMutableArray *msgs;/* 在UserOther被当做最近联系人时才用到 */
 
 - (id)init;
 - (id)initWithPath:(NSString *)path;
 - (BOOL)save;
 - (NSString *)usrDataPath;
-- (void)loadServerData;
 - (NSDictionary *)packetLastChatMsg;
 - (void)procNewChatMsgWithDict:(NSDictionary *)newChatMsgDict;
+- (void)procServerNewChatMsgWithDict:(NSDictionary *)newSercerChatMsgDict;
 
 @end

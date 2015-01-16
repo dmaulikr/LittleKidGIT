@@ -31,10 +31,6 @@
     self.iconImage = [UIImage imageNamed:@"5.png"];
     
     [self waitStatus];
-    //get info from server
-    [HTTTClient sendData:nil withProtocol:SELF_MSG_GET];
-    [HTTTClient sendData:nil withProtocol:RECENT_MSG_GET];
-    [HTTTClient sendData:nil withProtocol:GET_FRIEND_LIST];
 }
 
 - (void)setUI{

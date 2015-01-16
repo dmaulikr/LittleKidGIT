@@ -124,8 +124,8 @@
     //陌生消息处理
     //new msg for new recentUsr
     UserOther *newRecentUser = [[UserOther alloc] init];
-    //对新用户赋值操作
-    newRecentUser.UID = newMsg.ownerUID;
+    //首先对该用户的UID赋值
+    newRecentUser.UID = [NSString stringWithFormat:@"%@",newMsg.ownerUID];
     [newRecentUser procNewChatMsgWithDict:newChatMsgDict];
     //将新用户加入列表
     [self.recentUsrList addObject:newRecentUser];
@@ -133,7 +133,37 @@
 
 
 - (void)loadServerRecentMsg:(NSArray *)serverRecentMsgList{
-    
+    if(serverRecentMsgList == nil){
+        return;
+    }
+    if ([serverRecentMsgList count]==0) {
+        return;
+    }
+    for (NSDictionary *recent1MsgDict in serverRecentMsgList) {
+        //do something
+        NSString *msgOwnerUID = [NSString stringWithFormat:@"%@",[recent1MsgDict objectForKey:CHATMSG_KEY_OWNER_UID]];
+        BOOL msgPorcedFlag = NO;
+        for (UserOther *recent1Usr in self.recentUsrList) {
+            if ([recent1Usr.UID compare:msgOwnerUID]) {
+                //the user do proc the msg
+                [recent1Usr procServerNewChatMsgWithDict:recent1MsgDict];
+                //proc end
+                msgPorcedFlag = YES;
+                break;
+            }
+        }
+        if (msgPorcedFlag == YES) {
+            continue;
+        }
+        //陌生消息处理
+        //new msg for new recentUsr
+        UserOther *newRecentUser = [[UserOther alloc] init];
+        //首先对新用户UID赋值操作
+        newRecentUser.UID = [NSString stringWithFormat:@"%@",[recent1MsgDict objectForKey:CHATMSG_KEY_OWNER_UID]];
+        [newRecentUser procServerNewChatMsgWithDict:recent1MsgDict];
+        //将新用户加入列表
+        [self.recentUsrList addObject:newRecentUser];
+    }
 }
 
 

@@ -13,7 +13,8 @@
 typedef enum NET_PROTOCOL{
     RECENT_MSG_GET = 0X01,/* 向服务器请求消息，不用在P2P中 */
     RECENT_MSG_POST,    /* P2P协议采用POST，ACK也是 */
-    GET_FRIEND_LIST,
+    FRIEND_LIST_GET,
+    FRIEND_LIST_POST,
     SIGN_IN,
     SIGN_UP,
     GET_CHECK_CODE,

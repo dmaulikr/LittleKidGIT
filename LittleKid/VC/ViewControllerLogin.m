@@ -54,19 +54,22 @@
     [HTTTClient sendData:jsonDict withProtocol:SIGN_IN];
     [[NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_SIGN_IN object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {//返回消息的回调
         NSLog(@"I get the login reply");
+        NSDictionary *signInAckDict = note.userInfo;
         //check if right, then
-        if ( YES == [self checkSignInInfo:note] ) {
-            [RuntimeStatus instance].usrSelf.UID = self.account.text;
+        if ( YES == [self checkSignInInfo:signInAckDict] ) {
             //get info from local
             [[RuntimeStatus instance] loadLocalInfo];
+            [[RuntimeStatus instance].usrSelf loadServerSelfInfo:signInAckDict];
+            //get info from server//异步的,在全局量里处理就行了
+//            [HTTTClient sendData:nil withProtocol:RECENT_MSG_GET];
+//            [HTTTClient sendData:nil withProtocol:FRIEND_LIST_GET];
             //切入登陆界面
             [self performSegueWithIdentifier:SIGN_IN_SEGUE sender:nil];
         }
     }];
 }
 
-- (BOOL)checkSignInInfo:(NSNotification *)note{
-    NSDictionary *signInAckDict = note.userInfo;
+- (BOOL)checkSignInInfo:(NSDictionary *)signInAckDict{
     NSLog(@"%@",signInAckDict);
     NSString *pwdMD5_2FromServer = [signInAckDict objectForKey:USR_PWD];
     NSString *pwdMD5_2 = [self md5WithStr:[self md5WithStr:self.password.text]];//md5二次加密

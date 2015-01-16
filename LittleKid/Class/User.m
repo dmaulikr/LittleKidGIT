@@ -105,7 +105,7 @@
 
 - (NSString *)usrDataPathWithUID:(NSString *)UID{
     NSString *str = [NSString stringWithFormat:@"%@/%@/%@.xcui", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], UID, UID];
-    NSLog(@"%@",str);
+    NSLog(@"user directory path: %@",str);
     return str;
 }
 
@@ -128,20 +128,44 @@
     
     return YES;
 }
-
+/* 服务器数据一律用stringwithformat赋值，不要直接等于，因为服务器数据不可控 */
 - (void)loadServerSelfInfo:(NSDictionary *)serverSelfInfoDict{
-    self.nickName = [serverSelfInfoDict objectForKey:USR_NICKNAME];
-    self.birthday = [serverSelfInfoDict objectForKey:USR_BIRTHDAY];
-    self.signature = [serverSelfInfoDict objectForKey:USR_SIGNATURE];
-    self.state = [serverSelfInfoDict objectForKey:USR_STATE];
-    //go on
-    
-    
+    self.nickName = [NSString stringWithFormat:@"%@",[serverSelfInfoDict objectForKey:USR_NICKNAME]];
+    self.birthday = [NSString stringWithFormat:@"%@",[serverSelfInfoDict objectForKey:USR_BIRTHDAY]];
+    self.signature = [NSString stringWithFormat:@"%@",[serverSelfInfoDict objectForKey:USR_SIGNATURE]];
+//    self.state
+    self.gender = [NSString stringWithFormat:@"%@",[serverSelfInfoDict objectForKey:USR_GENDER]];
+//    self.headPicture =
+    self.address = [NSString stringWithFormat:@"%@",[serverSelfInfoDict objectForKey:USR_ADDRESS]];
 }
 
 - (void)loadServerFriendList:(NSArray *)serverFriendList{
     //update friendslist
-    
+    if ( serverFriendList == nil ) {
+        return;
+    }
+    if ([serverFriendList count] == 0) {
+        return;
+    }
+    //正常情况下应该是用服务器好友列表替换掉本地列表，不过现在还是都添加到后面的好
+    if (self.friends == nil) {
+        self.friends = [[NSMutableArray alloc] init];
+    }
+    //    [self.friends removeAllObjects];//先注释掉这段
+    for (NSDictionary *server1FriendDict in serverFriendList) {
+        UserOther *friend = [[UserOther alloc] init];
+        friend.UID = [NSString stringWithFormat:@"%@",[server1FriendDict objectForKey:USR_UID]];
+        friend.nickName = [NSString stringWithFormat:@"%@",[server1FriendDict objectForKey:USR_NICKNAME]];
+        friend.signature = [NSString stringWithFormat:@"%@",[server1FriendDict objectForKey:USR_SIGNATURE]];
+        friend.address = [NSString stringWithFormat:@"%@",[server1FriendDict objectForKey:USR_ADDRESS]];
+        friend.birthday = [NSString stringWithFormat:@"%@",[server1FriendDict objectForKey:USR_BIRTHDAY]];
+        friend.gender = [NSString stringWithFormat:@"%@",[server1FriendDict objectForKey:USR_GENDER]];
+        friend.state = [NSString stringWithFormat:@"%@",[server1FriendDict objectForKey:USR_STATE]];
+//        friend.headPicture
+        friend.usrIP = [NSString stringWithFormat:@"%@",[server1FriendDict objectForKey:USR_IP]];
+        friend.usrPort = [NSString stringWithFormat:@"%@",[server1FriendDict objectForKey:USR_PORT]];
+        [self.friends addObject:friend];
+    }
 }
 
 - (void)addFriend:(NSDictionary *)serverAddFriendAck{
@@ -270,6 +294,7 @@
 /* 收到新消息数组，调用此函数 */
 - (void)procNewChatMsgWithDict:(NSDictionary *)newChatMsgDict{
     ChatMessage *newMsg = [NSKeyedUnarchiver unarchiveObjectWithData:[newChatMsgDict objectForKey:CHATMSG_KEY_CHATMSG]];
+    //处理消息
     NSData *newMsgData = [newChatMsgDict objectForKey:CHATMSG_KEY_DATA];
     [self.msgs addObject:newMsg];
     //保存消息数据
@@ -280,12 +305,15 @@
             NSLog(@"%@",err);
         }
     }
-    //保存该最近联系人所有信息
+    //保存该最近联系人的最新消息
     [self save];
 }
 
-- (void)loadServerData{
+- (void)procServerNewChatMsgWithDict:(NSDictionary *)newSercerChatMsgDict{
+
     
+    
+    //保存该最近联系人的最近消息
 }
 
 @end

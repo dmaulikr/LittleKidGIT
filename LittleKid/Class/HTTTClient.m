@@ -48,8 +48,8 @@ typedef void(^httpResponseHandler)(NSURLResponse *response, NSData *data, NSErro
             [urlRequest setHTTPMethod:@"GET"];
             
             break;
-        case GET_FRIEND_LIST:
-            httpHandler = handleFriendList;
+        case FRIEND_LIST_GET:
+            httpHandler = handleFriendListGet;
             urlStr = [NSString stringWithFormat:@"%@/friend/%@",HTTP_SERVER_ROOT_URL_STR, selfUID];
             [urlRequest setURL:[NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]]];
             [urlRequest setHTTPMethod:@"GET"];
@@ -116,8 +116,6 @@ typedef void(^httpResponseHandler)(NSURLResponse *response, NSData *data, NSErro
             return;
             break;
     }
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
-    NSLog(@"%@",dict);
     [NSURLConnection sendAsynchronousRequest:urlRequest queue:[[NSOperationQueue alloc] init] completionHandler:httpHandler];
 }
 
@@ -151,14 +149,14 @@ httpResponseHandler handleRecentMsg = ^(NSURLResponse *response, NSData *data, N
     }
 };
 
-httpResponseHandler handleFriendList = ^(NSURLResponse *response, NSData *data, NSError *connectionError){
+httpResponseHandler handleFriendListGet = ^(NSURLResponse *response, NSData *data, NSError *connectionError){
     if (connectionError) {
         NSLog(@"http err: %@",connectionError.localizedDescription);
     }
     else{
         NSLog(@"handleFriendList connection success");
         NSError *err;
-        NSArray *friendList = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&err];
+        NSArray *friendList = [[NSArray alloc] initWithArray:[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&err]];
         if(err){
             NSLog(@"err friend list json : %@",err);
         }

@@ -61,6 +61,7 @@
     if ([self checkMsg] == NO) {//本地check是否合法
         return;
     }
+    [RuntimeStatus instance].signAccountUID = self.account.text;
     [[RuntimeStatus instance].usrSelf addSignUpMsgToUsrselfWithUID:self.account.text pwd:[self md5WithStr:self.password.text]];//pwd加密
     NSDictionary *signUpDict = [[RuntimeStatus instance].usrSelf packetSignUpDict];
     [HTTTClient sendData:signUpDict withProtocol:SIGN_UP];

@@ -17,6 +17,7 @@
 #define CHATMSG_KEY_CHATMSG     @"CHATMSG_KEY_CHATMSG"
 #define CHATMSG_KEY_UID         @"CHATMSG_KEY_UID"
 #define CHATMSG_KEY_TIMESTAMP   @"CHATMSG_KEY_TIMESTAMP"
+#define CHATMSG_KEY_OWNER_UID   @"owneruid"
 
 
 @interface ChatMessage : NSObject <NSCoding>
