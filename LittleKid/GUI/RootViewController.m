@@ -51,7 +51,7 @@
 //    _cheseInterface = [[CheseInterface alloc]initWithFrame:CGRectMake(0+self.blackOrRed, chessboardStartPointy, chessboardWidth, chessboardHight)];
     _cheseInterface = [[CheseInterface alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     _cheseInterface.ischessReverse = 1;
-    _cheseInterface.userother.usrIP = @"192.168.1.11";//15//mac 11 iphone
+    _cheseInterface.userother.usrIP = @"192.168.1.12";//14//mac 12 iphone
     _cheseInterface.userother.usrPort = @"20107";
     [_cheseInterface loadCheseInterface];
     _cheseInterface.center = CGPointMake(self.view.bounds.size.width/2.0, self.view.bounds.size.height/2.0);
@@ -174,6 +174,8 @@
             case CHESS_CMD_ACK:
             {
                 NSString *chessack = [dict objectForKey:@"CHESS_CHOOSE"];
+                [self.alertwait dismissWithClickedButtonIndex:0 animated:YES];
+                self.alertwait = nil;
                 switch (self.sendCmd)
                 {
                     case CHESS_CMD_BACKMOVE:
@@ -183,6 +185,7 @@
                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意重新开始" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
                             [alert setTag:25];
                             [alert show];
+                            [self Restart];
                         }
                         else
                         {
@@ -201,6 +204,7 @@
                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意和局" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
                             [alert setTag:27];
                             [alert show];
+                            [self Restart];
                         }
                         else
                         {
@@ -209,11 +213,13 @@
                             [alert show];
                         }
                     }
+                        break;
                     case CHESS_CMD_DEFEAL:
                     {
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意认输" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
                         [alert setTag:29];
                         [alert show];
+                        [self Restart];
                         break;
                     }
                     default:
@@ -240,7 +246,8 @@
     }
     [[RuntimeStatus instance].udpP2P sendData:jsonData toUser:_cheseInterface.userother];
 }
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
     if ([alertView tag] == 22)
     {    // it's the Error alert
         if (buttonIndex == 0)
@@ -271,18 +278,7 @@
         [self sendack:@"可以"];
         [self Restart];
     }
-    if ([alertView tag] ==25)
-    {
-        [self Restart];
-    }
-    if ([alertView tag] ==27)
-    {
-        [self Restart];
-    }
-    if ([alertView tag] ==29)
-    {
-        [self Restart];
-    }
+
     
 }
 //(void)(^callbackMoveChess)(NSNotification *notify) = ^(NSNotification *notify){
@@ -329,6 +325,9 @@
         default:
             break;
     }
+     self.alertwait = [[UIAlertView alloc] initWithTitle:@"对待对方答复" message:nil delegate:self cancelButtonTitle:nil  otherButtonTitles:nil, nil];
+    [self.alertwait setTag:30];
+    [self.alertwait show];
     
 }
 
