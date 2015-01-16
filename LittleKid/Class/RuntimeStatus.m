@@ -43,8 +43,8 @@
     //self.usrSelf.UID = @"0000";
     self.usrSelf.nickName = @"自己";
     self.usrSelf.headPicture = @"head.jpg";
-    //self.usrSelf.signature = @"小钱长老了老钱";
-    //self.usrSelf.address = @"启明704";
+    self.usrSelf.signature = @"小钱长老了老钱";
+    self.usrSelf.address = @"启明704";
     self.usrSelf.birthday = @"20";
     self.usrSelf.gender = @"男";
     self.usrSelf.state = @"1";
@@ -60,10 +60,10 @@
     friend.birthday = @"22";
     friend.gender = @"男";
     friend.state = @"1";
-    friend.usrIP = @"127.0.0.1";
+    friend.usrIP = @"192.168.3.1";
     friend.usrPort = @"20107";
     ChatMessage *msg = [[ChatMessage alloc] init];
-    msg.owner = @"1";
+    msg.ownerUID = @"15926305768";
     msg.type = @"whatever";
     msg.msg = @"do it or not?";
     msg.timeStamp = @"时间先用string类型";
@@ -113,36 +113,57 @@
     }
 }
 
-- (void)procNewChatMsg:(NSData *)newChatMsgData{
-    NSDictionary *dictRcvdMsg = [NSKeyedUnarchiver unarchiveObjectWithData:newChatMsgData];
-    if (dictRcvdMsg == nil) {
-        return;
-    }
-    NSString *chatMsgUID = [dictRcvdMsg objectForKey:CHATMSG_KEY_UID];
-    ChatMessage *newChatMsg = [dictRcvdMsg objectForKey:CHATMSG_KEY_CHATMSG];
-    NSData *msgData = [dictRcvdMsg objectForKey:CHATMSG_KEY_SOUND_DATA];
-    if (chatMsgUID == nil || newChatMsg == nil || msgData == nil) {
-        return;
-    }
+- (void)procNewP2PChatMsg:(NSDictionary *)newChatMsgDict{
+    ChatMessage *newMsg = [NSKeyedUnarchiver unarchiveObjectWithData:[newChatMsgDict objectForKey:CHATMSG_KEY_CHATMSG]];
     for (UserOther *recent1Usr in self.recentUsrList) {
-        if ( [recent1Usr.UID compare:chatMsgUID] == NSOrderedSame ) {
-            [recent1Usr.msgs addObject:newChatMsg];
-            [recent1Usr saveNewMsgData:msgData];
-            [recent1Usr save];
+        if ([recent1Usr.UID compare:newMsg.ownerUID]) {
+            [recent1Usr procNewChatMsgWithDict:newChatMsgDict];
             return;
         }
     }
+    //陌生消息处理
     //new msg for new recentUsr
     UserOther *newRecentUser = [[UserOther alloc] init];
-    newRecentUser.msgs = [[NSMutableArray alloc] initWithObjects:newChatMsg, nil];
-    [newRecentUser saveNewMsgData:msgData];
-    [newRecentUser save];
+    //首先对该用户的UID赋值
+    newRecentUser.UID = [NSString stringWithFormat:@"%@",newMsg.ownerUID];
+    [newRecentUser procNewChatMsgWithDict:newChatMsgDict];
+    //将新用户加入列表
     [self.recentUsrList addObject:newRecentUser];
 }
 
 
-- (void)loadServerRecentMsg:(NSData *)serverJsonData{
-    
+- (void)loadServerRecentMsg:(NSArray *)serverRecentMsgList{
+    if(serverRecentMsgList == nil){
+        return;
+    }
+    if ([serverRecentMsgList count]==0) {
+        return;
+    }
+    for (NSDictionary *recent1MsgDict in serverRecentMsgList) {
+        //do something
+        NSString *msgOwnerUID = [NSString stringWithFormat:@"%@",[recent1MsgDict objectForKey:CHATMSG_KEY_OWNER_UID]];
+        BOOL msgPorcedFlag = NO;
+        for (UserOther *recent1Usr in self.recentUsrList) {
+            if ([recent1Usr.UID compare:msgOwnerUID]) {
+                //the user do proc the msg
+                [recent1Usr procServerNewChatMsgWithDict:recent1MsgDict];
+                //proc end
+                msgPorcedFlag = YES;
+                break;
+            }
+        }
+        if (msgPorcedFlag == YES) {
+            continue;
+        }
+        //陌生消息处理
+        //new msg for new recentUsr
+        UserOther *newRecentUser = [[UserOther alloc] init];
+        //首先对新用户UID赋值操作
+        newRecentUser.UID = [NSString stringWithFormat:@"%@",[recent1MsgDict objectForKey:CHATMSG_KEY_OWNER_UID]];
+        [newRecentUser procServerNewChatMsgWithDict:recent1MsgDict];
+        //将新用户加入列表
+        [self.recentUsrList addObject:newRecentUser];
+    }
 }
 
 

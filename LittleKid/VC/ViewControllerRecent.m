@@ -29,15 +29,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshRecentContacts:) name:NOTIFI_GET_RECENT_MSG object:nil];
     self.headImage = [UIImage imageNamed:@"head.jpg"];
     self.iconImage = [UIImage imageNamed:@"5.png"];
-    //get info from local
-    [[RuntimeStatus instance] loadLocalInfo];
-    //get info from server
-    [HTTTClient sendData:nil withProtocol:GET_RECENT_MSG];
-    [HTTTClient sendData:nil withProtocol:GET_FRIEND_LIST];
-    [HTTTClient sendData:nil withProtocol:GET_SELF_MSG];
     
-    //[self waitStatus];
-    
+    [self waitStatus];
 }
 
 - (void)setUI{

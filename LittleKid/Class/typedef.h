@@ -11,17 +11,21 @@
 
 /* net communication order define */
 typedef enum NET_PROTOCOL{
-    GET_RECENT_MSG = 0X01,
-    GET_FRIEND_LIST,
+    RECENT_MSG_GET = 0X01,/* 向服务器请求消息，不用在P2P中 */
+    RECENT_MSG_POST,    /* P2P协议采用POST，ACK也是 */
+    FRIEND_LIST_GET,
+    FRIEND_LIST_POST,
     SIGN_IN,
     SIGN_UP,
     GET_CHECK_CODE,
     RETRIEVE_PASSWORD,
     ADD_FRIEND,
-    SEND_MSG,
     SERVER_REQUEST,
-    GET_SELF_MSG,
+    SELF_MSG_GET,
+    SELF_MSG_POST,
     HEART_BEAT,
+    P2P_ACK,
+    CHESS,
 }NET_PROTOCOL;
 
 /* notification defination */
@@ -33,16 +37,11 @@ typedef enum NET_PROTOCOL{
 #define NOTIFI_GET_CHECK_CODE       @"NOTIFI_GET_CHECK_CODE"
 #define NOTIFI_RETRIEVE_PASSWORD    @"NOTIFI_RETRIEVE_PASSWORD"
 #define NOTIFI_ADD_FRIEND           @"NOTIFI_ADD_FRIEND"
-#define NOTIFI_SEND_MSG             @"NOTIFI_SEND_MSG"
+#define NOTIFI_MSG_POST             @"NOTIFI_MSG_POST"
 #define NOTIFI_SERVER_REQUEST       @"NOTIFI_SERVER_REQUEST"
 #define NOTIFI_GET_SELF_MSG         @"NOTIFI_GET_SELF_MSG"
 #define NOTIFI_GET_NEW_MSG          @"NOTIFI_GET_NEW_MSG"
 #define NOTIFI_CHESS_MOVE           @"NOTIFI_CHESS_MOVE"
-
-/* dict keys defination */
-#define CHATMSG_KEY_SOUND_DATA  @"CHATMSG_KEY_SOUND_DATA"
-#define CHATMSG_KEY_CHATMSG     @"CHATMSG_KEY_CHATMSG"
-#define CHATMSG_KEY_UID         @"CHATMSG_KEY_UID"
 
 
 #endif

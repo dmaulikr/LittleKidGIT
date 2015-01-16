@@ -61,12 +61,14 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [super encodeWithCoder:aCoder];
+    [aCoder encodeObject:self.pwd forKey:USR_PWD];
     NSArray *fixedFriendsArr = [NSArray arrayWithArray:self.friends];
     [aCoder encodeObject:fixedFriendsArr forKey:USR_FRIENDS];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
     if (self = [super initWithCoder:aDecoder]) {
+        self.pwd = [[NSString alloc] initWithString:[aDecoder decodeObjectForKey:USR_PWD]];
         self.friends = [[NSMutableArray alloc] initWithArray:[aDecoder decodeObjectForKey:USR_FRIENDS]];
     }
     return self;
@@ -75,6 +77,7 @@
 - (id)init{
     self = [super init];
     if (self) {
+        self.pwd = [[NSString alloc] init];
         self.friends = [[NSMutableArray alloc] init];
     }
     return self;
@@ -102,7 +105,7 @@
 
 - (NSString *)usrDataPathWithUID:(NSString *)UID{
     NSString *str = [NSString stringWithFormat:@"%@/%@/%@.xcui", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], UID, UID];
-    NSLog(@"%@",str);
+    NSLog(@"user directory path: %@",str);
     return str;
 }
 
@@ -125,61 +128,59 @@
     
     return YES;
 }
-
-- (void)loadServerSelfInfo:(NSData *)serverJsonData{
-    NSError *err;
-    NSDictionary *selfInfoDict = [NSJSONSerialization JSONObjectWithData:serverJsonData options:NSJSONReadingAllowFragments error:&err];
-    if (err) {
-        NSLog(@"selfinfo err: %@",err);
-        return;
-    }
-    self.nickName = [selfInfoDict objectForKey:USR_NICKNAME];
-    self.birthday = [selfInfoDict objectForKey:USR_BIRTHDAY];
-    self.signature = [selfInfoDict objectForKey:USR_SIGNATURE];
-    self.state = [selfInfoDict objectForKey:USR_STATE];
-    //go on
-    
-    
+/* 服务器数据一律用stringwithformat赋值，不要直接等于，因为服务器数据不可控 */
+- (void)loadServerSelfInfo:(NSDictionary *)serverSelfInfoDict{
+    self.nickName = [NSString stringWithFormat:@"%@",[serverSelfInfoDict objectForKey:USR_NICKNAME]];
+    self.birthday = [NSString stringWithFormat:@"%@",[serverSelfInfoDict objectForKey:USR_BIRTHDAY]];
+    self.signature = [NSString stringWithFormat:@"%@",[serverSelfInfoDict objectForKey:USR_SIGNATURE]];
+//    self.state
+    self.gender = [NSString stringWithFormat:@"%@",[serverSelfInfoDict objectForKey:USR_GENDER]];
+//    self.headPicture =
+    self.address = [NSString stringWithFormat:@"%@",[serverSelfInfoDict objectForKey:USR_ADDRESS]];
 }
 
-- (void)loadServerFriendList:(NSData *)serverJsonData{
-    NSError *err;
-    NSDictionary *friendsDict = [NSJSONSerialization JSONObjectWithData:serverJsonData options:NSJSONReadingAllowFragments error:&err];
-    if (err) {
-        NSLog(@"friendsDict err: %@",err);
-        return;
-    }
-    NSArray *friendlist = [friendsDict objectForKey:@"friendlist"];
-    if (friendlist == nil) {
-        return;
-    }
+- (void)loadServerFriendList:(NSArray *)serverFriendList{
     //update friendslist
-    
-}
-
-- (void)addFriend:(NSData *)serverJsonData{
-    NSError *err;
-    NSDictionary *addFriendDict = [NSJSONSerialization JSONObjectWithData:serverJsonData options:NSJSONReadingAllowFragments error:&err];
-    if (err) {
-        NSLog(@"addfriendinfo err: %@",err);
-    }
-    NSString *ack = [addFriendDict objectForKey:@"ack"];
-    if (ack == nil) {
+    if ( serverFriendList == nil ) {
         return;
     }
-    //go on
-    
+    if ([serverFriendList count] == 0) {
+        return;
+    }
+    //正常情况下应该是用服务器好友列表替换掉本地列表，不过现在还是都添加到后面的好
+    if (self.friends == nil) {
+        self.friends = [[NSMutableArray alloc] init];
+    }
+    //    [self.friends removeAllObjects];//先注释掉这段
+    for (NSDictionary *server1FriendDict in serverFriendList) {
+        UserOther *friend = [[UserOther alloc] init];
+        friend.UID = [NSString stringWithFormat:@"%@",[server1FriendDict objectForKey:USR_UID]];
+        friend.nickName = [NSString stringWithFormat:@"%@",[server1FriendDict objectForKey:USR_NICKNAME]];
+        friend.signature = [NSString stringWithFormat:@"%@",[server1FriendDict objectForKey:USR_SIGNATURE]];
+        friend.address = [NSString stringWithFormat:@"%@",[server1FriendDict objectForKey:USR_ADDRESS]];
+        friend.birthday = [NSString stringWithFormat:@"%@",[server1FriendDict objectForKey:USR_BIRTHDAY]];
+        friend.gender = [NSString stringWithFormat:@"%@",[server1FriendDict objectForKey:USR_GENDER]];
+        friend.state = [NSString stringWithFormat:@"%@",[server1FriendDict objectForKey:USR_STATE]];
+//        friend.headPicture
+        friend.usrIP = [NSString stringWithFormat:@"%@",[server1FriendDict objectForKey:USR_IP]];
+        friend.usrPort = [NSString stringWithFormat:@"%@",[server1FriendDict objectForKey:USR_PORT]];
+        [self.friends addObject:friend];
+    }
+}
+
+- (void)addFriend:(NSDictionary *)serverAddFriendAck{
+
+}
+
+- (void)addSignUpMsgToUsrselfWithUID:(NSString *)uid pwd:(NSString *)pwd{
+    self.UID = uid;
+    self.pwd = pwd;
 }
 
 /* 打包signUp数据, return nil when err */
-- (NSData *)packetSignUpJsonData{
-    NSError *err;
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:self.UID, USR_UID, self.nickName, USR_NICKNAME, self.headPicture, USR_HEAD_PICTURE, self.address, USR_ADDRESS, self.birthday, USR_BIRTHDAY, self.gender, USR_GENDER, self.signature, USR_SIGNATURE, nil];
-    NSData *signUpJsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&err];
-    if (err) {
-        return nil;
-    }
-    return signUpJsonData;
+- (NSDictionary *)packetSignUpDict{
+    NSDictionary *signUpDict = [[NSDictionary alloc] initWithObjectsAndKeys:self.UID, USR_UID, self.pwd, USR_PWD, @"nickname", @"nickname", nil];
+    return signUpDict;
 }
 
 @end
@@ -245,6 +246,7 @@
     return [NSString stringWithFormat:@"%@/%@/recent/%@.xcui", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], [RuntimeStatus instance].usrSelf.UID, self.UID];
 }
 
+/* 该函数只保存chatmsg，而不保存msg对应的音频等数据，这些数据在接收到新消息时由消息自行保存. */
 - (BOOL)save{
     NSData *usrData = [NSKeyedArchiver archivedDataWithRootObject:self];
     NSError *err;
@@ -271,38 +273,47 @@
  字典
  
  */
-- (NSData *)packetLastChatMsg{
+- (NSDictionary *)packetLastChatMsg{
     ChatMessage *lastMsg = [self.msgs lastObject];
+    NSData *data;
     if ( [lastMsg.type compare:MSG_TYPE_SOUND] == NSOrderedSame ) {
-        NSData *soundData = [NSData dataWithContentsOfFile:[self soundPathWithMsg:lastMsg]];
-        NSDictionary *dictToSent = [NSDictionary dictionaryWithObjectsAndKeys:self.UID, CHATMSG_KEY_UID, lastMsg, CHATMSG_KEY_CHATMSG, soundData, CHATMSG_KEY_SOUND_DATA, nil];
-        return [NSKeyedArchiver archivedDataWithRootObject:dictToSent];
+        //sound data转成string才能转json
+        data = [[NSData alloc] initWithContentsOfFile:[self soundPathWithMsg:lastMsg]];
+        if (data == nil) {
+            NSLog(@"data == nil ");
+        }
     }
-    else{
-        return nil;
-    }
-
-
+    NSDictionary *dictToSent = [[NSDictionary alloc] initWithObjectsAndKeys:[NSKeyedArchiver archivedDataWithRootObject:lastMsg], CHATMSG_KEY_CHATMSG, data, CHATMSG_KEY_DATA, nil];
+    return dictToSent;
 }
 
 - (NSString *)soundPathWithMsg:(ChatMessage *)msg{
     return [NSString stringWithFormat:@"%@/%@/recent/%@",[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], [RuntimeStatus instance].usrSelf.UID, msg.msg];
 }
 
-/* must called after the new message has been added to the msgs list */
-- (void)saveNewMsgData:(NSData *)msgData{
-    NSError *err;
-    ChatMessage *newMsg = [self.msgs lastObject];
+/* 收到新消息数组，调用此函数 */
+- (void)procNewChatMsgWithDict:(NSDictionary *)newChatMsgDict{
+    ChatMessage *newMsg = [NSKeyedUnarchiver unarchiveObjectWithData:[newChatMsgDict objectForKey:CHATMSG_KEY_CHATMSG]];
+    //处理消息
+    NSData *newMsgData = [newChatMsgDict objectForKey:CHATMSG_KEY_DATA];
+    [self.msgs addObject:newMsg];
+    //保存消息数据
     if ( NSOrderedSame == [newMsg.type compare:MSG_TYPE_SOUND] ) {
-        [msgData writeToFile:[self soundPathWithMsg:newMsg] options:NSDataWritingAtomic error:&err];
+        NSError *err;
+        [newMsgData writeToFile:[self soundPathWithMsg:newMsg] options:NSDataWritingAtomic error:&err];
         if (err) {
             NSLog(@"%@",err);
         }
     }
+    //保存该最近联系人的最新消息
+    [self save];
 }
 
-- (void)loadServerData{
+- (void)procServerNewChatMsgWithDict:(NSDictionary *)newSercerChatMsgDict{
+
     
+    
+    //保存该最近联系人的最近消息
 }
 
 @end

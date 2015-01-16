@@ -33,8 +33,14 @@
     // Do any additional setup after loading the view.
     [self setUI];
     self.toChatUsr = [[RuntimeStatus instance].recentUsrList objectAtIndex:self.toChatUsrIndex];
+    [self testCode];
     [self prepareRecord];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshChat:) name:NOTIFI_GET_RECENT_MSG object:nil];
+}
+
+- (void)testCode{
+    self.toChatUsr.usrIP = @"127.0.0.1";
+    self.toChatUsr.usrPort = @"20107";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,14 +90,13 @@
 -(BOOL)sendMsg{
     //if p2p is OK, go to p2p, else go to http
     
-    //p2p
-    [[RuntimeStatus instance].udpP2P sendData:[self.toChatUsr packetLastChatMsg] toUser:self.toChatUsr];
+    [[RuntimeStatus instance].udpP2P sendDict:[self.toChatUsr packetLastChatMsg] toUser:self.toChatUsr withProtocol:RECENT_MSG_POST];
     return YES;
 }
-
+/* 保存自己产生的消息。这里的消息更新是会对runtime有刷新效果的。 */
 -(BOOL)updateMsg{
     ChatMessage *newMsg = [[ChatMessage alloc] init];
-    newMsg.owner = MSG_OWNER_SELF;
+    newMsg.ownerUID = [RuntimeStatus instance].usrSelf.UID;
     newMsg.type = MSG_TYPE_SOUND;
     newMsg.timeStamp = self.dateToRecordStr;
     newMsg.msg = [NSString stringWithFormat:@"%@%@.aac", self.toChatUsr.UID, newMsg.timeStamp];
@@ -177,23 +182,23 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ChatMessage *msg = [self.toChatUsr.msgs objectAtIndex:[indexPath row]];
-    if ( NSOrderedSame == [msg.owner compare:@"1"] ) {//other message
-        OtherMsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"otherMsgCell" forIndexPath:indexPath];
-        if (cell == nil) {
-            cell = [[OtherMsgTableViewCell alloc] init];
-        }
-        cell.headImg.image = [UIImage imageNamed:@"5.png"];
-        cell.headImg.layer.cornerRadius = 5.0f;
-        cell.labelMsg.text = msg.msg;
-        
-        return cell;
-    }
-    else {//self message
+    if ( NSOrderedSame == [msg.ownerUID compare:[RuntimeStatus instance].usrSelf.UID] ) {//self message
         SelfMsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"selfMsgCell" forIndexPath:indexPath];
         if (cell == nil) {
             cell = [[SelfMsgTableViewCell alloc] init];
         }
         cell.headImg.image = [UIImage imageNamed:@"head.jpg"];
+        cell.headImg.layer.cornerRadius = 5.0f;
+        cell.labelMsg.text = msg.msg;
+        
+        return cell;
+            }
+    else {//other message
+        OtherMsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"otherMsgCell" forIndexPath:indexPath];
+        if (cell == nil) {
+            cell = [[OtherMsgTableViewCell alloc] init];
+        }
+        cell.headImg.image = [UIImage imageNamed:@"5.png"];
         cell.headImg.layer.cornerRadius = 5.0f;
         cell.labelMsg.text = msg.msg;
         

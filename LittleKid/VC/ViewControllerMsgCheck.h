@@ -10,4 +10,6 @@
 
 @interface ViewControllerMsgCheck : UIViewController
 
+@property(strong, nonatomic) NSString *checkCode;
+
 @end

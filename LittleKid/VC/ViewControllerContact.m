@@ -13,6 +13,17 @@
 #import "ctype.h"
 
 
+
+/* contact class define */
+@interface Contact : NSObject
+
+@property(nonatomic, strong) NSString *firstName;
+@property(nonatomic, strong) NSString *lastName;
+@property(nonatomic, strong) NSString *phoneNumber;
+
+@end
+
+
 @interface ViewControllerContact ()
 //字典序保存联系人信息
 @property(nonatomic,retain)NSMutableDictionary*contactDic;
@@ -33,9 +44,6 @@
     ABAddressBookRef ABRef = [self getABWithGranted];
     if (ABRef) {
         [self getABContactDic:ABRef];
-        [self sortAB];
-        
-        NSLog(@"test");
     }
 }
 
@@ -155,15 +163,7 @@
 
     }
     
-    
     self.initials = [[self.contactDic allKeys] sortedArrayUsingSelector:@selector(compare:)];
-    
-//    if (hasExtra)
-//        [self.initials lastObject] = @"#";
-    
-
-//    NSLog(@"%@", self.contactDic);
-//    NSLog(@"***************%@++++++++++++++++++",self.initials);
 }
 
 #pragma  mark 字母转换大小写--6.0
@@ -174,15 +174,6 @@
     return lowerStr;
     
 }
-
-
-/* AddressBook is already here in the self.contactList */
--(void)sortAB{
-//    NSMutableDictionary*index=[NSMutableDictionary dictionaryWithCapacity:0];
-    
-}
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

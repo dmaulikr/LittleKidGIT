@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ct3-h4-j35">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EqM-qm-1tu">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -263,6 +263,9 @@
                                         <include reference="nzG-AR-32k"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="UPI-Xz-BO6"/>
+                                </connections>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="denglu_0013_animals.png" translatesAutoresizingMaskIntoConstraints="NO" id="Tu2-f5-JWC">
                                 <rect key="frame" x="0.0" y="447" width="320" height="121"/>
@@ -329,6 +332,9 @@
                                         <include reference="jPV-fM-n4B"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="qMs-no-KL3"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.7776003649635036" green="0.13554972627737227" blue="0.039575729927007301" alpha="1" colorSpace="calibratedRGB"/>
@@ -547,30 +553,6 @@
                                     <rect key="frame" x="36" y="278" width="728" height="50"/>
                                 </variation>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="孩子生日" minimumFontSize="17" background="juxing.png" translatesAutoresizingMaskIntoConstraints="NO" id="wHz-MB-GPz">
-                                <rect key="frame" x="44" y="328" width="270" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="36" y="385" width="328" height="50"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="36" y="401" width="728" height="50"/>
-                                </variation>
-                            </textField>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OSN-IS-pCS">
-                                <rect key="frame" x="90" y="386" width="123" height="31"/>
-                                <segments>
-                                    <segment title="男孩"/>
-                                    <segment title="女孩"/>
-                                </segments>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="160" y="456" width="81" height="51"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="353" y="567" width="81" height="51"/>
-                                </variation>
-                            </segmentedControl>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机" minimumFontSize="17" background="juxing.png" translatesAutoresizingMaskIntoConstraints="NO" id="dqy-jc-LZB">
                                 <rect key="frame" x="44" y="190" width="270" height="30"/>
                                 <constraints>
@@ -591,8 +573,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="touxiang.png" translatesAutoresizingMaskIntoConstraints="NO" id="fmk-Vg-5Iz">
                                 <rect key="frame" x="101" y="82" width="100" height="91"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="beijing.png" translatesAutoresizingMaskIntoConstraints="NO" id="FeN-Tw-RRk">
-                                <rect key="frame" x="0.0" y="431" width="301" height="169"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signup_backgroundImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="FeN-Tw-RRk">
+                                <rect key="frame" x="0.0" y="412" width="320" height="188"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码确认" minimumFontSize="17" background="juxing.png" translatesAutoresizingMaskIntoConstraints="NO" id="eKV-EZ-3fe">
                                 <rect key="frame" x="44" y="279" width="270" height="30"/>
@@ -605,29 +587,31 @@
                                     <rect key="frame" x="36" y="336" width="728" height="50"/>
                                 </variation>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UsK-wY-gDj">
+                                <rect key="frame" x="85" y="307" width="162" height="63"/>
+                                <state key="normal" backgroundImage="signup_btnSignUp.png">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onBtnSignUp:" destination="Gme-1v-GV1" eventType="touchUpInside" id="uP6-j3-H9b"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.77760036499999996" green="0.13554972630000001" blue="0.039575729929999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="GKW-fW-2sP" secondAttribute="trailing" constant="20" id="156-kn-NN8"/>
                             <constraint firstAttribute="centerX" secondItem="GKW-fW-2sP" secondAttribute="centerX" id="79J-B0-hBi"/>
-                            <constraint firstItem="wHz-MB-GPz" firstAttribute="leading" secondItem="wgD-6o-zlO" secondAttribute="leadingMargin" constant="20" id="7TJ-2D-5EM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="dqy-jc-LZB" secondAttribute="trailing" constant="20" id="87m-zw-ZLW"/>
                             <constraint firstItem="dwA-Lc-SFy" firstAttribute="leading" secondItem="eKV-EZ-3fe" secondAttribute="trailing" constant="-250" id="937-Pf-zIX"/>
-                            <constraint firstItem="eKV-EZ-3fe" firstAttribute="height" secondItem="OSN-IS-pCS" secondAttribute="height" id="Eez-Cg-DIR"/>
                             <constraint firstItem="dqy-jc-LZB" firstAttribute="top" secondItem="dwA-Lc-SFy" secondAttribute="top" constant="65" id="EtV-Lj-R20"/>
                             <constraint firstItem="eKV-EZ-3fe" firstAttribute="leading" secondItem="wgD-6o-zlO" secondAttribute="leadingMargin" constant="20" id="H1x-al-e8b"/>
                             <constraint firstItem="GKW-fW-2sP" firstAttribute="top" secondItem="dqy-jc-LZB" secondAttribute="bottom" constant="20" id="Nj6-Fa-Vol"/>
-                            <constraint firstAttribute="centerX" secondItem="wHz-MB-GPz" secondAttribute="centerX" id="RRC-3N-AUo"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="wHz-MB-GPz" secondAttribute="trailing" constant="20" id="RoS-DB-he3"/>
-                            <constraint firstItem="wHz-MB-GPz" firstAttribute="top" secondItem="eKV-EZ-3fe" secondAttribute="bottom" constant="20" id="TDn-H5-JFR"/>
                             <constraint firstAttribute="centerX" secondItem="dqy-jc-LZB" secondAttribute="centerX" id="WPI-CP-Suk"/>
-                            <constraint firstItem="OSN-IS-pCS" firstAttribute="top" secondItem="wHz-MB-GPz" secondAttribute="bottom" constant="20" id="YSl-Sb-yy7"/>
-                            <constraint firstItem="wHz-MB-GPz" firstAttribute="height" secondItem="dqy-jc-LZB" secondAttribute="height" id="dmX-6A-Hnq"/>
                             <constraint firstItem="eKV-EZ-3fe" firstAttribute="height" secondItem="dqy-jc-LZB" secondAttribute="height" id="edg-sr-did"/>
                             <constraint firstItem="GKW-fW-2sP" firstAttribute="height" secondItem="dqy-jc-LZB" secondAttribute="height" id="iZK-m6-eNX"/>
                             <constraint firstItem="dwA-Lc-SFy" firstAttribute="leading" secondItem="wgD-6o-zlO" secondAttribute="leadingMargin" constant="5" id="kAI-1n-AtD"/>
                             <constraint firstItem="eKV-EZ-3fe" firstAttribute="top" secondItem="GKW-fW-2sP" secondAttribute="bottom" constant="20" id="nIM-Re-mOW"/>
-                            <constraint firstAttribute="centerX" secondItem="OSN-IS-pCS" secondAttribute="centerX" id="rLJ-ob-QeZ"/>
                             <constraint firstAttribute="centerX" secondItem="eKV-EZ-3fe" secondAttribute="centerX" id="tLg-M9-QBa"/>
                             <constraint firstAttribute="trailingMargin" secondItem="eKV-EZ-3fe" secondAttribute="trailing" constant="20" id="tpR-cb-KD8"/>
                             <constraint firstItem="GKW-fW-2sP" firstAttribute="leading" secondItem="wgD-6o-zlO" secondAttribute="leadingMargin" constant="20" id="uSl-Za-gDm"/>
@@ -642,33 +626,19 @@
                                 <include reference="Nj6-Fa-Vol"/>
                                 <include reference="iZK-m6-eNX"/>
                                 <include reference="uSl-Za-gDm"/>
-                                <include reference="Eez-Cg-DIR"/>
                                 <include reference="H1x-al-e8b"/>
                                 <include reference="edg-sr-did"/>
                                 <include reference="nIM-Re-mOW"/>
                                 <include reference="tLg-M9-QBa"/>
                                 <include reference="tpR-cb-KD8"/>
-                                <include reference="7TJ-2D-5EM"/>
-                                <include reference="RRC-3N-AUo"/>
-                                <include reference="RoS-DB-he3"/>
-                                <include reference="TDn-H5-JFR"/>
-                                <include reference="dmX-6A-Hnq"/>
-                                <include reference="YSl-Sb-yy7"/>
-                                <include reference="rLJ-ob-QeZ"/>
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="基本信息" id="nhT-Wg-HKa">
-                        <barButtonItem key="rightBarButtonItem" title="下一步" id="I4x-Po-DrG">
-                            <connections>
-                                <action selector="onNextToCheckInfo:" destination="Gme-1v-GV1" id="M0q-sU-3lP"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="基本信息" id="nhT-Wg-HKa"/>
                     <connections>
                         <outlet property="account" destination="dqy-jc-LZB" id="cJx-1E-Goc"/>
-                        <outlet property="email" destination="eKV-EZ-3fe" id="c2q-0a-pdZ"/>
                         <outlet property="password" destination="GKW-fW-2sP" id="Wxn-yN-NTf"/>
+                        <outlet property="passwordCheck" destination="eKV-EZ-3fe" id="g3S-bP-d3x"/>
                         <segue destination="1VK-JR-O7d" kind="show" identifier="segueFromInfo" id="uXr-Xe-jwf"/>
                     </connections>
                 </viewController>
@@ -688,8 +658,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入短信验证码" minimumFontSize="17" background="juxing.png" translatesAutoresizingMaskIntoConstraints="NO" id="qMU-Dn-4r2">
-                                <rect key="frame" x="30" y="168" width="152" height="30"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkcode_backgroundRed.png" translatesAutoresizingMaskIntoConstraints="NO" id="jXx-SI-E4W">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkcode_backgroundImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="48P-DV-Cy6">
+                                <rect key="frame" x="0.0" y="347" width="320" height="221"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入短信验证码" minimumFontSize="17" background="checkcode_blueRect.png" translatesAutoresizingMaskIntoConstraints="NO" id="qMU-Dn-4r2">
+                                <rect key="frame" x="34" y="166" width="210" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="JDv-A8-oVb"/>
                                     <constraint firstAttribute="width" constant="300" id="Vb6-Ao-I0h"/>
@@ -720,45 +696,8 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FGk-YA-gBx">
-                                <rect key="frame" x="86" y="206" width="41" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="JNs-KO-0QN"/>
-                                    <constraint firstAttribute="height" constant="30" id="MnU-QW-wjB"/>
-                                    <constraint firstAttribute="width" constant="41" id="X71-Al-CmS"/>
-                                    <constraint firstAttribute="width" constant="80" id="jCv-Wv-a9v"/>
-                                </constraints>
-                                <state key="normal" title="验证">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="JNs-KO-0QN"/>
-                                        <exclude reference="MnU-QW-wjB"/>
-                                        <exclude reference="X71-Al-CmS"/>
-                                        <exclude reference="jCv-Wv-a9v"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="36" y="163" width="41" height="30"/>
-                                    <mask key="constraints">
-                                        <include reference="MnU-QW-wjB"/>
-                                        <include reference="X71-Al-CmS"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="16" y="219" width="539" height="30"/>
-                                    <mask key="constraints">
-                                        <include reference="JNs-KO-0QN"/>
-                                        <include reference="jCv-Wv-a9v"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="onCheckMsg:" destination="1VK-JR-O7d" eventType="touchUpInside" id="TU2-F5-xro"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Drh-RY-vHY">
-                                <rect key="frame" x="211" y="168" width="94" height="30"/>
+                                <rect key="frame" x="177" y="232" width="94" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="NYe-gE-bmg"/>
                                     <constraint firstAttribute="width" constant="94" id="Tva-Yd-jJS"/>
@@ -793,14 +732,36 @@
                                     <action selector="onRepickCode:" destination="1VK-JR-O7d" eventType="touchUpInside" id="wQM-xG-ENE"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="你的手机号：13422222" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SvC-Re-afS">
-                                <rect key="frame" x="30" y="131" width="264" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="13164696487" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SvC-Re-afS">
+                                <rect key="frame" x="77" y="137" width="143" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="已发送至手机" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mqt-v2-fq9">
+                                <rect key="frame" x="141" y="109" width="114" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkcode_goldWord.png" translatesAutoresizingMaskIntoConstraints="NO" id="c7q-Zd-omt">
+                                <rect key="frame" x="34" y="111" width="93" height="18"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FGk-YA-gBx">
+                                <rect key="frame" x="34" y="256" width="201" height="55"/>
+                                <state key="normal" image="checkcode_btnSubmit.png"/>
+                                <state key="disabled" image="checkcode_btnSubmit.png"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="36" y="163" width="41" height="30"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="16" y="219" width="539" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="onCheckMsg:" destination="1VK-JR-O7d" eventType="touchUpInside" id="TU2-F5-xro"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.77760036499999996" green="0.13554972630000001" blue="0.039575729929999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="FGk-YA-gBx" firstAttribute="leading" secondItem="ydZ-Qg-HJ9" secondAttribute="leadingMargin" constant="11" id="3fr-ZP-gYs">
                                 <variation key="heightClass=regular-widthClass=compact" constant="20"/>
@@ -897,12 +858,6 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bNw-iu-Qxu" id="9ZF-xA-a0l">
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="吃饺子吧" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GsI-Rd-Ec7">
-                                                    <rect key="frame" x="147" y="52" width="78" height="25"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="5.png" translatesAutoresizingMaskIntoConstraints="NO" id="MNM-X0-fcG">
                                                     <rect key="frame" x="109" y="52" width="23" height="25"/>
                                                 </imageView>
@@ -919,7 +874,13 @@
                                                     <rect key="frame" x="240" y="22" width="50" height="47"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="动态" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6SV-Oh-KyG">
-                                                    <rect key="frame" x="182" y="28" width="43" height="25"/>
+                                                    <rect key="frame" x="174" y="22" width="43" height="25"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="吃饺子吧" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GsI-Rd-Ec7">
+                                                    <rect key="frame" x="154" y="51" width="78" height="25"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -937,6 +898,12 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="1Wz-et-AKM" id="D3f-0F-zFe"/>
                                     <outlet property="delegate" destination="1Wz-et-AKM" id="Ihx-ns-oyn"/>
@@ -1021,6 +988,12 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="A3o-O2-qzx" id="9mx-eu-twr"/>
                                     <outlet property="delegate" destination="A3o-O2-qzx" id="4SH-fA-fZE"/>
@@ -1141,6 +1114,12 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="KkB-Ru-t9F" id="FqM-lN-fKV"/>
                                     <outlet property="delegate" destination="KkB-Ru-t9F" id="cTv-en-HWd"/>
@@ -1226,6 +1205,9 @@
                                     <constraint firstAttribute="width" constant="295" id="BIA-Gs-qtJ"/>
                                     <constraint firstAttribute="height" constant="178" id="Rw1-v8-Ese"/>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="16" y="573" width="295" height="178"/>
+                                </variation>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="head.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4n7-pJ-11U">
                                 <rect key="frame" x="126" y="84" width="75" height="75"/>
@@ -1428,6 +1410,12 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
+                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="ImT-sf-p6h" id="Pbt-lA-0pa"/>
                                     <outlet property="delegate" destination="ImT-sf-p6h" id="Z05-at-f68"/>
@@ -1628,7 +1616,11 @@
     </scenes>
     <resources>
         <image name="5.png" width="56" height="55"/>
-        <image name="beijing.png" width="640" height="375"/>
+        <image name="checkcode_backgroundImage.png" width="640" height="442"/>
+        <image name="checkcode_backgroundRed.png" width="640" height="1136"/>
+        <image name="checkcode_blueRect.png" width="420" height="128"/>
+        <image name="checkcode_btnSubmit.png" width="383" height="111"/>
+        <image name="checkcode_goldWord.png" width="186" height="36"/>
         <image name="denglu_0007_rainbow.png" width="192" height="173"/>
         <image name="denglu_0013_animals.png" width="640" height="275"/>
         <image name="head.jpg" width="200" height="200"/>
@@ -1647,6 +1639,8 @@
         <image name="liaotian_chess.png" width="207" height="207"/>
         <image name="liaotian_microphone.png" width="205" height="205"/>
         <image name="reg_bg_blue.png" width="504" height="568"/>
+        <image name="signup_backgroundImage.png" width="640" height="375"/>
+        <image name="signup_btnSignUp.png" width="224" height="85"/>
         <image name="touxiang.png" width="153" height="153"/>
         <image name="wo_0012_scan.png" width="74" height="24"/>
         <image name="wo_0013_erweima.png" width="127" height="127"/>
@@ -1665,6 +1659,6 @@
         <image name="登陆.png" width="500" height="119"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="x7y-XV-pXK"/>
+        <segue reference="BXi-mn-8Gv"/>
     </inferredMetricsTieBreakers>
 </document>

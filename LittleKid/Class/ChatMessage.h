@@ -8,15 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-#define MSG_OWNER_SELF      @"0"
-#define MSG_OWNER_OTHER     @"1"
 #define MSG_TYPE_TXT        @"0"
 #define MSG_TYPE_SOUND      @"1"
 #define MSG_TYPE_IMG        @"2"
 
+/* dict keys defination */
+#define CHATMSG_KEY_DATA  @"CHATMSG_KEY_DATA"
+#define CHATMSG_KEY_CHATMSG     @"CHATMSG_KEY_CHATMSG"
+#define CHATMSG_KEY_UID         @"CHATMSG_KEY_UID"
+#define CHATMSG_KEY_TIMESTAMP   @"CHATMSG_KEY_TIMESTAMP"
+#define CHATMSG_KEY_OWNER_UID   @"owneruid"
+
+
 @interface ChatMessage : NSObject <NSCoding>
 
-@property(nonatomic, strong)NSString *owner;//0,self;1,other
+@property(nonatomic, strong)NSString *ownerUID;//0,self;1,other
 @property(nonatomic, strong)NSString *type;//0,text;1,sound;2,image
 @property(nonatomic, strong)NSString *timeStamp;
 @property(nonatomic, strong)NSString *msg;

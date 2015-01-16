@@ -12,6 +12,7 @@
 @class RuntimeStatus;
 
 #define USR_UID @"uid"
+#define USR_PWD @"password"
 #define USR_NICKNAME @"nickname"
 #define USR_HEAD_PICTURE @"headpicture"
 #define USR_SIGNATURE @"signature"
@@ -35,23 +36,25 @@
 @property(nonatomic, strong) NSString *address;
 @property(nonatomic, strong) NSString *birthday;
 @property(nonatomic, strong) NSString *gender;
-@property(nonatomic) NSString* state;/* 0,不在线，1，在线 */
+@property(nonatomic, strong) NSString* state;/* 0,不在线，1，在线, 2, ... */
 
 @end
 
 #pragma mark - UserSelf Class
 @interface UserSelf : User <NSCoding>
 
+@property(strong, nonatomic)NSString *pwd;
 @property(strong, nonatomic)NSMutableArray *friends;
 
 - (id)init;
 - (id)initWithUID:(NSString *)UID;
 - (BOOL)save;
 - (NSString *)usrDataPathWithUID:(NSString *)UID;
-- (void)loadServerSelfInfo:(NSData *)serverJsonData;
-- (void)loadServerFriendList:(NSData *)serverJsonData;
-- (NSData *)packetSignUpJsonData;
-- (void)addFriend:(NSData *)serverJsonData;
+- (void)loadServerSelfInfo:(NSDictionary *)serverSelfInfoDict;
+- (void)loadServerFriendList:(NSArray *)serverFriendList;
+- (void)addSignUpMsgToUsrselfWithUID:(NSString *)uid pwd:(NSString *)pwd;
+- (NSDictionary *)packetSignUpDict;
+- (void)addFriend:(NSDictionary *)serverAddFriendAck;
 
 @end
 
@@ -61,14 +64,14 @@
 
 @property(nonatomic, strong)NSString *usrIP;
 @property(nonatomic, strong)NSString *usrPort;
-@property(nonatomic, strong)NSMutableArray *msgs;
+@property(nonatomic, strong)NSMutableArray *msgs;/* 在UserOther被当做最近联系人时才用到 */
 
 - (id)init;
 - (id)initWithPath:(NSString *)path;
 - (BOOL)save;
 - (NSString *)usrDataPath;
-- (void)loadServerData;
-- (NSData *)packetLastChatMsg;
-- (void)saveNewMsgData:(NSData *)msgData;
+- (NSDictionary *)packetLastChatMsg;
+- (void)procNewChatMsgWithDict:(NSDictionary *)newChatMsgDict;
+- (void)procServerNewChatMsgWithDict:(NSDictionary *)newSercerChatMsgDict;
 
 @end

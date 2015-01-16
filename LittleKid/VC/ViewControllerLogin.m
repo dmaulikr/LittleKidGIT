@@ -8,6 +8,7 @@
 
 #import "ViewControllerLogin.h"
 #import "RuntimeStatus.h"
+#import <CommonCrypto/CommonDigest.h>/* fro MD5 */
 
 @interface ViewControllerLogin ()
 
@@ -25,8 +26,18 @@
     self.profileImageview.layer.cornerRadius = self.profileImageview.frame.size.width / 2;
     self.profileImageview.clipsToBounds = YES;
     // Do any additional setup after loading the view.
+    self.account.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wo_button_hand"]];
+    self.account.leftViewMode = UITextFieldViewModeAlways;
+    
+    UITapGestureRecognizer *gestureTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeKeyBoard)];
+    gestureTap.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer:gestureTap];
 }
 
+- (void)removeKeyBoard{
+    [self.account resignFirstResponder];
+    [self.password resignFirstResponder];
+}
 
 #define SIGN_IN_SEGUE   @"signInSegue"
 
@@ -36,28 +47,49 @@
         [alert show];
         return;
     }
-    NSError *err;
-    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:self.account.text, @"uid", self.password.text, @"pwd", nil];
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject: dict options:NSJSONWritingPrettyPrinted error:&err];
-    if (err) {
-        NSLog(@"%@",err);
-        return;
-    }
-    [HTTTClient sendData:jsonData withProtocol:SIGN_IN];
-    [[NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_SIGN_IN object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+    //设置run的accoutUID
+    [RuntimeStatus instance].signAccountUID = self.account.text;
+    /* 封装数据并发送 */
+    NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:self.account.text, USR_UID, [self md5WithStr:self.password.text], USR_PWD, nil];
+    [HTTTClient sendData:jsonDict withProtocol:SIGN_IN];
+    [[NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_SIGN_IN object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {//返回消息的回调
         NSLog(@"I get the login reply");
+        NSDictionary *signInAckDict = note.userInfo;
         //check if right, then
-        if ( YES == [self checkSignInInfo:note] ) {
-            [RuntimeStatus instance].signAccountUID = self.account.text;
+        if ( YES == [self checkSignInInfo:signInAckDict] ) {
+            //get info from local
+            [[RuntimeStatus instance] loadLocalInfo];
+            [[RuntimeStatus instance].usrSelf loadServerSelfInfo:signInAckDict];
+            //get info from server//异步的,在全局量里处理就行了
+//            [HTTTClient sendData:nil withProtocol:RECENT_MSG_GET];
+//            [HTTTClient sendData:nil withProtocol:FRIEND_LIST_GET];
+            //切入登陆界面
             [self performSegueWithIdentifier:SIGN_IN_SEGUE sender:nil];
         }
     }];
 }
 
-- (BOOL)checkSignInInfo:(NSNotification *)note{
-    
-    
-    return YES;
+- (BOOL)checkSignInInfo:(NSDictionary *)signInAckDict{
+    NSLog(@"%@",signInAckDict);
+    NSString *pwdMD5_2FromServer = [signInAckDict objectForKey:USR_PWD];
+    NSString *pwdMD5_2 = [self md5WithStr:[self md5WithStr:self.password.text]];//md5二次加密
+    if ( NSOrderedSame == [pwdMD5_2 compare:pwdMD5_2FromServer] ) {
+        return YES;
+    }
+    return NO;
+}
+
+- (NSString *)md5WithStr:(NSString *)pwd{
+    const char *cStr = [pwd UTF8String];
+    unsigned char result[CC_MD5_DIGEST_LENGTH];
+    CC_MD5( cStr, strlen(cStr), result ); // This is the md5 call
+    return [NSString stringWithFormat:
+            @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
+            result[0], result[1], result[2], result[3],
+            result[4], result[5], result[6], result[7],
+            result[8], result[9], result[10], result[11],
+            result[12], result[13], result[14], result[15]
+            ];  
 }
 
 

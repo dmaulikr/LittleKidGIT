@@ -50,7 +50,7 @@
 //    ischessReverse = self.blackOrRed;
 //    _cheseInterface = [[CheseInterface alloc]initWithFrame:CGRectMake(0+self.blackOrRed, chessboardStartPointy, chessboardWidth, chessboardHight)];
     _cheseInterface = [[CheseInterface alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-    _cheseInterface.ischessReverse = 1;
+    _cheseInterface.ischessReverse = 0;
     _cheseInterface.userother.usrIP = @"192.168.1.12";//14//mac 12 iphone
     _cheseInterface.userother.usrPort = @"20107";
     [_cheseInterface loadCheseInterface];
@@ -238,13 +238,7 @@
 {
     NSString *str_cmd = [[NSString alloc]initWithFormat:@"%d",CHESS_CMD_ACK];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:str_cmd,@"CHESS_CMD",string,@"CHESS_CHOOSE", nil];
-    NSError *err;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&err];
-    if (err) {
-        NSLog(@"chess move data error: %@",err);
-        return;
-    }
-    [[RuntimeStatus instance].udpP2P sendData:jsonData toUser:_cheseInterface.userother];
+    [[RuntimeStatus instance].udpP2P sendDict:dict toUser:self.cheseInterface.userother withProtocol:CHESS];
 }
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
@@ -287,15 +281,9 @@
 
 - (void)sendchessRequest :(NSInteger)index
 {
-    NSString *chesscmdtype = [[NSString alloc]initWithFormat:@"%d", index+2];
+    NSString *chesscmdtype = [[NSString alloc]initWithFormat:@"%d", (int)index+2];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:chesscmdtype,@"CHESS_CMD", nil];
-    NSError *err;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&err];
-    if (err) {
-        NSLog(@"chess move data error: %@",err);
-        return;
-    }
-    [[RuntimeStatus instance].udpP2P sendData:jsonData toUser:_cheseInterface.userother];
+    [[RuntimeStatus instance].udpP2P sendDict:dict toUser:self.cheseInterface.userother withProtocol:CHESS];
 }
 
 

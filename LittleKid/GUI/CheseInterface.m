@@ -304,16 +304,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
                 NSString *str_tag = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",(int)_optionButton.tag]];
                 NSString *str_newtag = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",(int)chesePieces.tag]];
                 NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:str_cmd,@"CHESS_CMD",str_tag,@"CHESS_TAG",str_newtag, @"NEW_CHESS_TAG", nil];
-                NSError *err;
-                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&err];
-                if (err) {
-                    NSLog(@"chess move data error: %@",err);
-                    return;
-                }
-                [[RuntimeStatus instance].udpP2P sendData:jsonData toUser:self.userother];
-              //  [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.10.105" port:20108 withTimeout:30 tag:11];
-            
-              //  [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.10.106" port:20107 withTimeout:30 tag:11];
+                [[RuntimeStatus instance].udpP2P sendDict:dict toUser:self.userother withProtocol:CHESS];
                 
          
             
@@ -448,16 +439,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
             NSString *str_x = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",(int)_pointLocation.x]];
             NSString *str_y = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",(int)_pointLocation.y]];
             NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:str_cmd,@"CHESS_CMD", str_tag,@"CHESS_TAG",str_x, @"CHESS_X", str_y, @"CHESS_Y", nil];
-            NSError *err;
-            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&err];
-            if (err) {
-                NSLog(@"chess move data error: %@",err);
-                return;
-            }
-        [[RuntimeStatus instance].udpP2P sendData:jsonData toUser:self.userother];
-       //     [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.10.105" port:20108 withTimeout:30 tag:11];
-       //     [[RuntimeStatus instance].udpP2P sendData:jsonData toHost:@"192.168.10.106" port:20107 withTimeout:30 tag:11];
-            
+            [[RuntimeStatus instance].udpP2P sendDict:dict toUser:self.userother withProtocol:CHESS];
         
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
 
