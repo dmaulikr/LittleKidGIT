@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIViewControllerBase.h"
 
-@interface ViewControllerLogin : UIViewController
+@interface ViewControllerLogin : UIViewControllerBase//UIViewController
 
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageview;
 

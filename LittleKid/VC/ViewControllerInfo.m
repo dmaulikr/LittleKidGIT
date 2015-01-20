@@ -28,6 +28,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.checkCode = [[NSString alloc] init];
+    //add-7
+    self.account.delegate = self;
+    self.password.delegate = self;
+    self.passwordCheck.delegate = self;
+    
+    self.password.returnKeyType = UIReturnKeyNext;
+    self.passwordCheck.returnKeyType = UIReturnKeyGo;
+    
+    self.password.secureTextEntry = YES;
+    self.passwordCheck.secureTextEntry = YES;
+    
+    //add
+    UITapGestureRecognizer *gestureTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeKeyBoard)];
+    gestureTap.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer:gestureTap];
+    
     
     [[NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_SIGN_UP object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
         //code here to decide if segue to next
@@ -40,11 +56,48 @@
         }
     }];
 }
+///add
+- (void)removeKeyBoard{
+    [self.account resignFirstResponder];
+    [self.password resignFirstResponder];
+    [self.passwordCheck resignFirstResponder];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+///add
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.password) {
+        [self.passwordCheck becomeFirstResponder];
+    } else {
+        [self onBtnSignUp:nil];
+    }
+    return YES;
+}
+///add
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    //监听键盘高度
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
+    
+}
+
+- (void)keyboardWasChange:(NSNotification *)aNotification
+{
+    NSDictionary *userInfo = [aNotification userInfo];
+    CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    
+    self.keyboardHeight = kbSize.height;
+    NSLog(@"height--:%f",kbSize.height);
+    
+}
+///
+
 
 #define RET_CODE    @"retcode"
 - (BOOL)checkAck:(NSDictionary *)ackDict{
