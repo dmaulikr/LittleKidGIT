@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIViewControllerBase.h"
 
-@interface ViewControllerMsgCheck : UIViewController
+@interface ViewControllerMsgCheck : UIViewControllerBase
 
 @property(strong, nonatomic) NSString *checkCode;
 

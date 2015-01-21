@@ -104,6 +104,8 @@
 		57228C3C1A6E087C005236B8 /* libaudio_processing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57228C391A6E087C005236B8 /* libaudio_processing.a */; };
 		57228C3D1A6E087C005236B8 /* libsignal_processing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57228C3A1A6E087C005236B8 /* libsignal_processing.a */; };
 		57228C3E1A6E087C005236B8 /* libsystem_wrappers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57228C3B1A6E087C005236B8 /* libsystem_wrappers.a */; };
+		572C83811A6F585E0033254E /* denglu_bg_mima.png in Resources */ = {isa = PBXBuildFile; fileRef = 572C837F1A6F585E0033254E /* denglu_bg_mima.png */; };
+		572C83821A6F585E0033254E /* denglu_bg_user.png in Resources */ = {isa = PBXBuildFile; fileRef = 572C83801A6F585E0033254E /* denglu_bg_user.png */; };
 		572E3F5C1A63BA1300323683 /* beijing.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F471A63BA1300323683 /* beijing.png */; };
 		572E3F5D1A63BA1300323683 /* chatu.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F481A63BA1300323683 /* chatu.png */; };
 		572E3F5E1A63BA1300323683 /* fanhuijian.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F491A63BA1300323683 /* fanhuijian.png */; };
@@ -183,7 +185,6 @@
 		E422F8AF1A43FE0300CF2F9C /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = E422F8AD1A43FE0300CF2F9C /* 5.png */; };
 		E422F8B01A43FE0300CF2F9C /* head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E422F8AE1A43FE0300CF2F9C /* head.jpg */; };
 		E422F8E51A4459C200CF2F9C /* RuntimeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = E422F8E41A4459C200CF2F9C /* RuntimeStatus.m */; };
-		E422F8E81A445CC400CF2F9C /* ViewControllerRealTalk.m in Sources */ = {isa = PBXBuildFile; fileRef = E422F8E71A445CC400CF2F9C /* ViewControllerRealTalk.m */; };
 		E43ED2D61A5E24A900A8D90D /* zuijin_star.png in Resources */ = {isa = PBXBuildFile; fileRef = E43ED2C01A5E24A900A8D90D /* zuijin_star.png */; };
 		E43ED2D91A5E24A900A8D90D /* zuijin_roundCornerRect.png in Resources */ = {isa = PBXBuildFile; fileRef = E43ED2C31A5E24A900A8D90D /* zuijin_roundCornerRect.png */; };
 		E43ED2E11A5E24A900A8D90D /* zuijin_background.png in Resources */ = {isa = PBXBuildFile; fileRef = E43ED2CB1A5E24A900A8D90D /* zuijin_background.png */; };
@@ -337,6 +338,8 @@
 		57228C391A6E087C005236B8 /* libaudio_processing.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libaudio_processing.a; sourceTree = "<group>"; };
 		57228C3A1A6E087C005236B8 /* libsignal_processing.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsignal_processing.a; sourceTree = "<group>"; };
 		57228C3B1A6E087C005236B8 /* libsystem_wrappers.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsystem_wrappers.a; sourceTree = "<group>"; };
+		572C837F1A6F585E0033254E /* denglu_bg_mima.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = denglu_bg_mima.png; sourceTree = "<group>"; };
+		572C83801A6F585E0033254E /* denglu_bg_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = denglu_bg_user.png; sourceTree = "<group>"; };
 		572E3F471A63BA1300323683 /* beijing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beijing.png; sourceTree = "<group>"; };
 		572E3F481A63BA1300323683 /* chatu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatu.png; sourceTree = "<group>"; };
 		572E3F491A63BA1300323683 /* fanhuijian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fanhuijian.png; sourceTree = "<group>"; };
@@ -433,8 +436,6 @@
 		E422F8AE1A43FE0300CF2F9C /* head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = head.jpg; sourceTree = "<group>"; };
 		E422F8E31A4459C200CF2F9C /* RuntimeStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuntimeStatus.h; sourceTree = "<group>"; };
 		E422F8E41A4459C200CF2F9C /* RuntimeStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuntimeStatus.m; sourceTree = "<group>"; };
-		E422F8E61A445CC400CF2F9C /* ViewControllerRealTalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerRealTalk.h; sourceTree = "<group>"; };
-		E422F8E71A445CC400CF2F9C /* ViewControllerRealTalk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerRealTalk.m; sourceTree = "<group>"; };
 		E43ED2C01A5E24A900A8D90D /* zuijin_star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zuijin_star.png; sourceTree = "<group>"; };
 		E43ED2C31A5E24A900A8D90D /* zuijin_roundCornerRect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zuijin_roundCornerRect.png; sourceTree = "<group>"; };
 		E43ED2CB1A5E24A900A8D90D /* zuijin_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zuijin_background.png; sourceTree = "<group>"; };
@@ -888,8 +889,6 @@
 				E4A538541A5FF864002456A4 /* ViewControllerImpInfo.m */,
 				E422F89C1A43FDE800CF2F9C /* ViewControllerChat.h */,
 				E422F89D1A43FDE800CF2F9C /* ViewControllerChat.m */,
-				E422F8E61A445CC400CF2F9C /* ViewControllerRealTalk.h */,
-				E422F8E71A445CC400CF2F9C /* ViewControllerRealTalk.m */,
 				E4A538561A5FFC99002456A4 /* ViewControllerFriend.h */,
 				E4A538571A5FFC99002456A4 /* ViewControllerFriend.m */,
 				E4B101781A4CF01B004E1224 /* RecentTableViewCell.h */,
@@ -911,6 +910,8 @@
 		E422F8AC1A43FE0300CF2F9C /* image */ = {
 			isa = PBXGroup;
 			children = (
+				572C837F1A6F585E0033254E /* denglu_bg_mima.png */,
+				572C83801A6F585E0033254E /* denglu_bg_user.png */,
 				572E3F461A63BA1300323683 /* verificationCode */,
 				57B6514B1A60E841002A78F9 /* registor */,
 				E48D20EE1A650A620099537F /* ViewControllerInfo */,
@@ -1085,6 +1086,7 @@
 				57B6515E1A6120D1002A78F9 /* impinfo_bg_up.png in Resources */,
 				5716444E1A62B53A00021BE9 /* 象棋主界面.png in Resources */,
 				571644101A62B53A00021BE9 /* GameBG04.png in Resources */,
+				572C83811A6F585E0033254E /* denglu_bg_mima.png in Resources */,
 				5716443E1A62B53A00021BE9 /* 2.png in Resources */,
 				E48D20EA1A65060A0099537F /* checkcode_btnSubmit.png in Resources */,
 				57B651641A6120D1002A78F9 /* impinfo_sex.png in Resources */,
@@ -1149,6 +1151,7 @@
 				572E3F5D1A63BA1300323683 /* chatu.png in Resources */,
 				571644361A62B53A00021BE9 /* 114.png in Resources */,
 				572E3F5E1A63BA1300323683 /* fanhuijian.png in Resources */,
+				572C83821A6F585E0033254E /* denglu_bg_user.png in Resources */,
 				E43ED2D61A5E24A900A8D90D /* zuijin_star.png in Resources */,
 				E43ED3311A5E9BA000A8D90D /* liaotian_microphone.png in Resources */,
 				E48D20FB1A650A620099537F /* reg_bg_blue.png in Resources */,
@@ -1264,7 +1267,6 @@
 				E4A538551A5FF864002456A4 /* ViewControllerImpInfo.m in Sources */,
 				571644071A62B53A00021BE9 /* RootViewController.m in Sources */,
 				E422F8AA1A43FDE800CF2F9C /* ViewControllerSelf.m in Sources */,
-				E422F8E81A445CC400CF2F9C /* ViewControllerRealTalk.m in Sources */,
 				E4E729AE1A4BB6FD000FA552 /* ChatMessage.m in Sources */,
 				E4B101801A4D2A0A004E1224 /* GCDAsyncUdpSocket.m in Sources */,
 				E4E729A51A4BADC2000FA552 /* User.m in Sources */,
@@ -1407,7 +1409,8 @@
 		E40DA0B81A416F6000CA1431 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = LittleKid/Info.plist;
@@ -1422,16 +1425,19 @@
 					/Users/liyunkai/Desktop/Android_IOS/anyChatSDK/libs/audioprocess,
 					/Users/liyunkai/Desktop/Android_IOS/anyChatSDK/libs,
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
 		E40DA0B91A416F6000CA1431 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = LittleKid/Info.plist;
@@ -1446,9 +1452,11 @@
 					/Users/liyunkai/Desktop/Android_IOS/anyChatSDK/libs/audioprocess,
 					/Users/liyunkai/Desktop/Android_IOS/anyChatSDK/libs,
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};

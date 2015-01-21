@@ -26,8 +26,15 @@
     self.profileImageview.layer.cornerRadius = self.profileImageview.frame.size.width / 2;
     self.profileImageview.clipsToBounds = YES;
     // Do any additional setup after loading the view.
-    self.account.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wo_button_hand"]];
+    UIImageView *userImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"denglu_bg_user"]];
+    userImage.frame = CGRectMake(10, 0, 40, 40);
+    self.account.leftView = userImage;
     self.account.leftViewMode = UITextFieldViewModeAlways;
+    
+    UIImageView *mimaImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"denglu_bg_mima"]];
+    mimaImage.frame = CGRectMake(10, 0, 40, 40);
+    self.password.leftView = mimaImage;
+    self.password.leftViewMode = UITextFieldViewModeAlways;
     //add-3
     self.account.delegate = self;
     self.password.delegate = self;
@@ -41,6 +48,7 @@
     gestureTap.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:gestureTap];
 }
+
 
 - (void)removeKeyBoard{
     [self.account resignFirstResponder];
