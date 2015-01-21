@@ -167,7 +167,64 @@ static BOOL initialized = NO;
     }];
 }
 
-- (void)sendMessage:(NSDictionary *)message toPeerId:(NSString *)peerId {
+- (void)sendAddFriendRequest:(NSString *)peerId
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:ADD_FRIEND_CMD forKey:@"cmd_type"];
+    [self sendCmd:dict toPeerId:peerId];
+}
+- (void)invitePlayChess:(NSString *)peerId
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:INVITE_PLAY_CHESS_CMD  forKey:@"cmd_type"];
+    [self sendCmd:dict toPeerId:peerId];
+}
+- (void) sendPlayChess:(NSDictionary *) chessCmd toPeerId:(NSString *) peerId
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:PLAY_CHESS_CMD  forKey:@"cmd_type"];
+    [dict addEntriesFromDictionary:chessCmd];
+    [self sendCmd:dict toPeerId:peerId];
+    
+}
+- (void) sendAddFriendRequestAck:(NSString *)ack toPeerId:(NSString *)peerId
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:ADD_FRIEND_CMD_ACK  forKey:@"cmd_type"];
+    [dict setObject:ack forKey:@"ack_value"];
+    [self sendCmd:dict toPeerId:peerId];
+}
+- (void) invitePlayChessAck:(NSString *)ack toPeerId:(NSString *)peerId
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:INVITE_PLAY_CHESS_CMD_ACK  forKey:@"cmd_type"];
+    [dict setObject:ack forKey:@"ack_value"];
+    [self sendCmd:dict toPeerId:peerId];
+}
+- (void)sendCmd:(NSDictionary *)cmd toPeerId:(NSString *)peerId {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:_session.peerId forKey:@"dn"];
+    [dict setObject:@"cmd" forKey:@"type"];
+    [dict setObject:cmd forKey:@"cmd"];
+    NSError *error = nil;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
+    NSString *payload = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    AVMessage *messageObject = [AVMessage messageForPeerWithSession:_session toPeerId:peerId payload:payload];
+    [_session sendMessage:messageObject];
+    
+    dict = [NSMutableDictionary dictionary];
+    [dict setObject:_session.peerId forKey:@"fromid"];
+    [dict setObject:peerId forKey:@"toid"];
+    [dict setObject:@"cmd" forKey:@"type"];
+    [dict setObject:cmd forKey:@"cmd"];
+    [dict setObject:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:@"time"];
+    [_database executeUpdate:@"insert into \"cmd\" (\"fromid\", \"toid\", \"type\", \"cmd\", \"time\") values (:fromid, :toid, :type, :cmd, :time)" withParameterDictionary:dict];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MESSAGE_UPDATED object:nil userInfo:dict];
+    
+}
+
+
+- (void)sendMessage:(NSString *)message toPeerId:(NSString *)peerId {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:_session.peerId forKey:@"dn"];
     [dict setObject:@"text" forKey:@"type"];
@@ -216,28 +273,6 @@ static BOOL initialized = NO;
     
 }
 
-- (void)sendMessage:(NSString *)message toGroup:(NSString *)groupId {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setObject:_session.peerId forKey:@"dn"];
-    [dict setObject:@"text" forKey:@"type"];
-    [dict setObject:message forKey:@"msg"];
-    NSError *error = nil;
-    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
-    NSString *payload = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    AVGroup *group = [AVGroup getGroupWithGroupId:groupId session:_session];
-    AVMessage *messageObject = [AVMessage messageForGroup:group payload:payload];
-    [group sendMessage:messageObject];
-    
-    dict = [NSMutableDictionary dictionary];
-    [dict setObject:_session.peerId forKey:@"fromid"];
-    [dict setObject:groupId forKey:@"toid"];
-    [dict setObject:@"text" forKey:@"type"];
-    [dict setObject:message forKey:@"message"];
-    [dict setObject:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:@"time"];
-    [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"message\", \"time\") values (:fromid, :toid, :type, :message, :time)" withParameterDictionary:dict];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MESSAGE_UPDATED object:nil userInfo:dict];
-    
-}
 
 - (void)sendAttachment:(AVObject *)object toGroup:(NSString *)groupId {
     NSString *type = [object objectForKey:@"type"];
@@ -352,10 +387,48 @@ static BOOL initialized = NO;
     [dict setObject:session.peerId forKey:@"toid"];
     [dict setObject:@(message.timestamp/1000) forKey:@"time"];
     [dict setObject:type forKey:@"type"];
-    if ([type isEqualToString:@"text"]) {
+    if ([type isEqualToString:@"text"])
+    {
         [dict setObject:msg forKey:@"message"];
         [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"message\", \"time\") values (:fromid, :toid, :type, :message, :time)" withParameterDictionary:dict];
-    } else {
+    }
+    else if([type isEqualToString:ADD_FRIEND_CMD])
+    {
+        NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
+        [dict setObject:cmdDict forKey:@"cmd"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ADD_FRIEND_UPDATED object:session userInfo:dict];
+        return;
+    }
+    else if ([type isEqualToString:INVITE_PLAY_CHESS_CMD])
+    {
+        NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
+        [dict setObject:cmdDict forKey:@"cmd"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_INVITE_PLAY_CHESS_UPDATED object:session userInfo:dict];
+        return;
+    }
+    else if ([type isEqualToString:PLAY_CHESS_CMD])
+    {
+        NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
+        [dict setObject:cmdDict forKey:@"cmd"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PLAY_CHESS_UPDATED object:session userInfo:dict];
+        return;
+    }
+    else if ([type isEqualToString:ADD_FRIEND_CMD_ACK])
+    {
+        NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
+        [dict setObject:cmdDict forKey:@"cmd"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ADD_FRIEND_ACK_UPDATED object:session userInfo:dict];
+        return;
+    }
+    else if ([type isEqualToString:INVITE_PLAY_CHESS_CMD_ACK])
+    {
+        NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
+        [dict setObject:cmdDict forKey:@"cmd"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_INVITE_PLAY_CHESS_ACK_UPDATED object:session userInfo:dict];
+        return;
+    }
+    else
+    {
         [dict setObject:object forKey:@"object"];
         [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"object\", \"time\") values (:fromid, :toid, :type, :object, :time)" withParameterDictionary:dict];
     }
