@@ -27,18 +27,45 @@
     self.profileImageview.layer.cornerRadius = self.profileImageview.frame.size.width / 2;
     self.profileImageview.clipsToBounds = YES;
     // Do any additional setup after loading the view.
-    self.account.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wo_button_hand"]];
+    UIImageView *userImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"denglu_bg_user"]];
+    userImage.frame = CGRectMake(10, 0, 40, 40);
+    self.account.leftView = userImage;
     self.account.leftViewMode = UITextFieldViewModeAlways;
+    
+    UIImageView *mimaImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"denglu_bg_mima"]];
+    mimaImage.frame = CGRectMake(10, 0, 40, 40);
+    self.password.leftView = mimaImage;
+    self.password.leftViewMode = UITextFieldViewModeAlways;
+    //add-3
+    self.account.delegate = self;
+    self.password.delegate = self;
+    self.password.secureTextEntry = YES;
+    //add-2
+    self.account.returnKeyType = UIReturnKeyNext;
+    self.password.returnKeyType = UIReturnKeyGo;
+    
     
     UITapGestureRecognizer *gestureTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeKeyBoard)];
     gestureTap.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:gestureTap];
 }
 
+
 - (void)removeKeyBoard{
     [self.account resignFirstResponder];
     [self.password resignFirstResponder];
 }
+///add
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.account) {
+        [self.password becomeFirstResponder];
+    } else {
+        [self onLogin:nil];
+    }
+    return YES;
+}
+
 
 #define SIGN_IN_SEGUE   @"signInSegue"
 
@@ -121,4 +148,22 @@
 }
 */
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    //监听键盘高度
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
+    
+}
+
+- (void)keyboardWasChange:(NSNotification *)aNotification
+{
+    NSDictionary *userInfo = [aNotification userInfo];
+    CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    
+    self.keyboardHeight = kbSize.height;
+    NSLog(@"height--:%f",kbSize.height);
+    
+}
 @end

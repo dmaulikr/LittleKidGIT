@@ -533,11 +533,11 @@
 		5732306B1A6F70CE004E187F /* chinese chess */ = {
 			isa = PBXGroup;
 			children = (
+				573230701A6F70CE004E187F /* ChessRes */,
 				5732306C1A6F70CE004E187F /* CheseInterface.h */,
 				5732306D1A6F70CE004E187F /* CheseInterface.m */,
 				5732306E1A6F70CE004E187F /* CheseTools.h */,
 				5732306F1A6F70CE004E187F /* CheseTools.m */,
-				573230701A6F70CE004E187F /* ChessRes */,
 				573230991A6F70CE004E187F /* RNGridMenu.h */,
 				5732309A1A6F70CE004E187F /* RNGridMenu.m */,
 				5732309B1A6F70CE004E187F /* RootViewController.h */,

@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnRepickCode;
 @property(weak, nonatomic) NSTimer *repickBtnFreshTimer;
 
+@property (strong, nonatomic) IBOutlet UITextField *verificationCode;
 
 @end
 
@@ -23,7 +24,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.verificationCode.delegate = self;
     [self testcode];
+    
+    UITapGestureRecognizer *gestureTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeKeyBoard)];
+    gestureTap.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer:gestureTap];
+}
+
+
+- (void)removeKeyBoard{
+    [self.verificationCode resignFirstResponder];
 }
 
 - (void)testcode{
