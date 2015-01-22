@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import <AVOSCloud/AVOSCloud.h>
+#import "CDCommon.h"
+
 
 @interface AppDelegate ()
 
@@ -23,9 +24,18 @@
 //        [clloc requestAlwaysAuthorization];
 //    }
     //For leancloud initilization
-    [AVOSCloud setApplicationId:@"jx7uv3fce7ybj46y6hgfer7jxzg5ipomnk2wo1higwj36nyv" clientKey:@"ttho9m3rmlvutssh540pqbuor3tly1tajapwm391d7lu0owm"];
+    [AVOSCloud setApplicationId:AVOSAppID clientKey:AVOSAppKey];
     
     [RuntimeStatus instance];
+    
+    //TODO: if already sign up, just login directly
+//    UIViewController* nextController;
+//    if ([AVUser currentUser]) {
+    
+//    } else {
+    
+//    }
+//
     [self registerNotifications: application];
     //后台时有服务器推送，进入程序即调用下方法(可能)，此时可判断推送调用方法。remote推送是会自动调用的。
     [self procLaunchOptios:launchOptions];

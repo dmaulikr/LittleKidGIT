@@ -110,6 +110,7 @@
 		57B651641A6120D1002A78F9 /* impinfo_sex.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B651591A6120D1002A78F9 /* impinfo_sex.png */; };
 		57B651651A6120D1002A78F9 /* impinfo_star.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B6515A1A6120D1002A78F9 /* impinfo_star.png */; };
 		57B651671A61236E002A78F9 /* impinfo_bg_arc_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B651661A61236E002A78F9 /* impinfo_bg_arc_blue.png */; };
+		9654745F1A709B0A00C29287 /* UIViewControllerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 9654745E1A709B0A00C29287 /* UIViewControllerBase.m */; };
 		96AB5DC71A6F58B70086818E /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96AB5DC61A6F58B60086818E /* AVOSCloud.framework */; };
 		96AB5DCA1A6F59760086818E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96AB5DC91A6F59760086818E /* SystemConfiguration.framework */; };
 		96AB5DCC1A6F59810086818E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96AB5DCB1A6F59810086818E /* MobileCoreServices.framework */; };
@@ -324,6 +325,8 @@
 		57B651591A6120D1002A78F9 /* impinfo_sex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_sex.png; sourceTree = "<group>"; };
 		57B6515A1A6120D1002A78F9 /* impinfo_star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_star.png; sourceTree = "<group>"; };
 		57B651661A61236E002A78F9 /* impinfo_bg_arc_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_bg_arc_blue.png; sourceTree = "<group>"; };
+		9654745D1A709B0A00C29287 /* UIViewControllerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewControllerBase.h; sourceTree = "<group>"; };
+		9654745E1A709B0A00C29287 /* UIViewControllerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewControllerBase.m; sourceTree = "<group>"; };
 		96AB5DC61A6F58B60086818E /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
 		96AB5DC91A6F59760086818E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		96AB5DCB1A6F59810086818E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -753,6 +756,8 @@
 		E422F88D1A43FDE800CF2F9C /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				9654745D1A709B0A00C29287 /* UIViewControllerBase.h */,
+				9654745E1A709B0A00C29287 /* UIViewControllerBase.m */,
 				E422F88E1A43FDE800CF2F9C /* ViewControllerContact.h */,
 				E422F88F1A43FDE800CF2F9C /* ViewControllerContact.m */,
 				E422F8901A43FDE800CF2F9C /* ViewControllerInfo.h */,
@@ -1160,6 +1165,7 @@
 				E4A538551A5FF864002456A4 /* ViewControllerImpInfo.m in Sources */,
 				5732309E1A6F70CE004E187F /* CheseTools.m in Sources */,
 				E422F8AA1A43FDE800CF2F9C /* ViewControllerSelf.m in Sources */,
+				9654745F1A709B0A00C29287 /* UIViewControllerBase.m in Sources */,
 				E422F8E81A445CC400CF2F9C /* ViewControllerRealTalk.m in Sources */,
 				E4E729AE1A4BB6FD000FA552 /* ChatMessage.m in Sources */,
 				E4B101801A4D2A0A004E1224 /* GCDAsyncUdpSocket.m in Sources */,

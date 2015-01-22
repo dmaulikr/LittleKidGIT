@@ -10,6 +10,7 @@
 #import "RuntimeStatus.h"
 #import <CommonCrypto/CommonDigest.h>/* fro MD5 */
 #import "ViewControllerMsgCheck.h"
+#import "CDCommon.h"
 
 @interface ViewControllerInfo ()
 
@@ -116,8 +117,29 @@
     }
     [RuntimeStatus instance].signAccountUID = self.account.text;
     [[RuntimeStatus instance].usrSelf addSignUpMsgToUsrselfWithUID:self.account.text pwd:[self md5WithStr:self.password.text]];//pwd加密
-    NSDictionary *signUpDict = [[RuntimeStatus instance].usrSelf packetSignUpDict];
-    [HTTTClient sendData:signUpDict withProtocol:SIGN_UP];
+    AVUser * user = [AVUser user];
+    user.username = self.account.text;
+    user.password =  self.password.text;
+    
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"Register success");
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:KEY_ISLOGINED];
+            [[NSUserDefaults standardUserDefaults] setObject:self.account.text forKey:KEY_USERNAME];
+            [self dismissViewControllerAnimated:NO completion:^{
+                
+            }];
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+        } else {
+            NSString *errorString = [[error userInfo] objectForKey:@"error"];
+            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [errorAlertView show];
+        }
+    }];
+//    NSDictionary *signUpDict = [[RuntimeStatus instance].usrSelf packetSignUpDict];
+//    [HTTTClient sendData:signUpDict withProtocol:SIGN_UP];
     [self waitStatus];
 }
 
