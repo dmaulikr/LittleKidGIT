@@ -11,7 +11,7 @@
 #import "SelfMsgTableViewCell.h"
 #import "OtherMsgTableViewCell.h"
 #import "RuntimeStatus.h"
-
+#import "CDSessionManager.h"
 @interface ViewControllerChat ()
 
 @property (weak, nonatomic) IBOutlet UITableView *msgTableView;
@@ -32,8 +32,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setUI];
-    self.toChatUsr = [[RuntimeStatus instance].recentUsrList objectAtIndex:self.toChatUsrIndex];
-    [self testCode];
+    self.toChatUsr = [[UserOther alloc]init];
+    self.toChatUsr.UID = self.othreId;
+//   self.toChatUsr = [[RuntimeStatus instance].recentUsrList objectAtIndex:self.toChatUsrIndex];
+//    [self testCode];
     [self prepareRecord];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshChat:) name:NOTIFI_GET_RECENT_MSG object:nil];
 }
@@ -61,13 +63,18 @@
 
 - (IBAction)touchDownRecord:(id)sender {
     NSError *error = nil;
-    self.recorder = [[AVAudioRecorder alloc] initWithURL:[NSURL URLWithString:[self msgDataSavePath]] settings:self.recorderSettingsDict error:&error];
+    NSString * file = [self msgDataSavePath];
+    NSURL *url = [NSURL fileURLWithPath:file];
+    self.recorder = [[AVAudioRecorder alloc] initWithURL:url settings:self.recorderSettingsDict error:&error];
     if (error) {
         NSLog(@"recorder error: %@",error);
     }
     if (self.recorder) {
         self.recorder.meteringEnabled = YES;
-        [self.recorder prepareToRecord];
+        if([self.recorder prepareToRecord])
+         {
+            NSLog(@"Prepare successful");
+        }
         [self.recorder record];
         //启动定时器
 //        timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(levelTimer:) userInfo:nil repeats:YES];
@@ -80,8 +87,10 @@
     [self.recorder stop];
     //send the record
     [self updateMsg];
-    [self sendMsg];
+//    [self sendMsg];
     self.recorder = nil;
+    [self.toChatUsr packetLastChatMsg];
+    [self.msgTableView reloadData];
     //结束定时器
     //[timer invalidate];
     //timer = nil;
@@ -155,11 +164,11 @@
     NSDateFormatter *fmDate = [[NSDateFormatter alloc] init];
     [fmDate setDateFormat:@"YYYY-MM-DD-HH-MM-SS"];
     self.dateToRecordStr = [fmDate stringFromDate:dateToRecord];
-    savePath = [NSString stringWithFormat:@"%@/%@/recent/%@%@.aac", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], [RuntimeStatus instance].usrSelf.UID, self.toChatUsr.UID, self.dateToRecordStr];
+    savePath = [NSString stringWithFormat:@"%@/%@/recent/%@%@.aac", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], [AVUser currentUser].username, self.toChatUsr.UID, self.dateToRecordStr];
+    savePath = [NSString stringWithFormat:@"%@/%@%@.acc", [[NSBundle mainBundle] resourcePath],self.toChatUsr.UID, self.dateToRecordStr];
     NSError *err;
     NSFileManager *fm = [NSFileManager defaultManager];
-    [fm createDirectoryAtPath:[savePath stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:&err];
-    if(err){
+    if(![fm createDirectoryAtPath:[savePath stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:&err]){
         NSLog(@"recordSavePath dir create err: %@",err);
     }
     return savePath;
@@ -176,7 +185,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [self.toChatUsr.msgs count];
+    NSInteger i = [self.toChatUsr.msgs count];
+    return i;
 }
 
 
@@ -216,10 +226,23 @@
     if ( NSOrderedSame == [msg.type compare:MSG_TYPE_SOUND]) {
         NSError *playerError;
         self.player = nil;
-        self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL URLWithString:[self msgDataReadPath:msg]] error:&playerError];
+        NSString *file = [self msgDataReadPath:msg];
+  //      NSURL *url = [NSURL fileURLWithPath:file];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        
+        
+        NSURL *url = [[NSURL alloc]initFileURLWithPath:file];
+        
+        
+        if(![fileManager fileExistsAtPath:file]) //如果不存在
+        {
+            NSLog(@"file no" );
+        }
+        self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&playerError];
+
         if (self.player == nil)
         {
-            NSLog(@"ERror creating player: %@", [playerError description]);
+            NSLog(@"ERror creating player: %@", [playerError userInfo]);
         }else{
             [self.player play];
         }
@@ -227,7 +250,7 @@
 }
                        
 - (NSString *)msgDataReadPath:(ChatMessage *)msg{
-    return [NSString stringWithFormat:@"%@/%@/recent/%@",[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], [RuntimeStatus instance].usrSelf.UID, msg.msg];
+    return [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], msg.msg];
 }
 
 // Override to support conditional editing of the table view.
