@@ -201,6 +201,11 @@ static BOOL initialized = NO;
     [dict setObject:ack forKey:@"ack_value"];
     [self sendCmd:dict toPeerId:peerId];
 }
+/*
+ *  发送命令@“dn”  @"type" @"cmd"  cmd的object 为dictionary  cmd_dictionary @"cmd_type" @""ack_value"
+ *  @param ack @“同意” @“不同意”
+ *  @param peerId 对方的peer id
+ */
 - (void)sendCmd:(NSDictionary *)cmd toPeerId:(NSString *)peerId {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:_session.peerId forKey:@"dn"];
