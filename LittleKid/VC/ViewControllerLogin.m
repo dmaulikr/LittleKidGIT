@@ -9,6 +9,7 @@
 #import "ViewControllerLogin.h"
 #import "RuntimeStatus.h"
 #import <CommonCrypto/CommonDigest.h>/* fro MD5 */
+#include <AVOSCloud/AVOSCloud.h>
 
 @interface ViewControllerLogin ()
 
@@ -74,6 +75,18 @@
         [alert show];
         return;
     }
+    
+    [AVUser logInWithUsernameInBackground:self.account.text password:self.password.text block:^(AVUser *user, NSError *error) {
+        if (user != nil) {
+            [self performSegueWithIdentifier:SIGN_IN_SEGUE sender:nil];
+            return;
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"User not exist!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+            return;
+        }
+    }];
+    
     //设置run的accoutUID
     [RuntimeStatus instance].signAccountUID = self.account.text;
     /* 封装数据并发送 */
