@@ -75,25 +75,25 @@
         return;
     }
     //设置run的accoutUID
- ///   [RuntimeStatus instance].signAccountUID = self.account.text;
+    [RuntimeStatus instance].signAccountUID = self.account.text;
     /* 封装数据并发送 */
- ///   NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:self.account.text, USR_UID, [self md5WithStr:self.password.text], USR_PWD, nil];
-///    [HTTTClient sendData:jsonDict withProtocol:SIGN_IN];
- ///   [[NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_SIGN_IN object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {//返回消息的回调
-///        NSLog(@"I get the login reply");
-///        NSDictionary *signInAckDict = note.userInfo;
+    NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:self.account.text, USR_UID, [self md5WithStr:self.password.text], USR_PWD, nil];
+    [HTTTClient sendData:jsonDict withProtocol:SIGN_IN];
+    [[NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_SIGN_IN object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {//返回消息的回调
+        NSLog(@"I get the login reply");
+        NSDictionary *signInAckDict = note.userInfo;
         //check if right, then
-///        if ( YES == [self checkSignInInfo:signInAckDict] ) {
+        if ( YES == [self checkSignInInfo:signInAckDict] ) {
             //get info from local
- ///           [[RuntimeStatus instance] loadLocalInfo];
- ///           [[RuntimeStatus instance].usrSelf loadServerSelfInfo:signInAckDict];
+            [[RuntimeStatus instance] loadLocalInfo];
+            [[RuntimeStatus instance].usrSelf loadServerSelfInfo:signInAckDict];
             //get info from server//异步的,在全局量里处理就行了
 //            [HTTTClient sendData:nil withProtocol:RECENT_MSG_GET];
 //            [HTTTClient sendData:nil withProtocol:FRIEND_LIST_GET];
             //切入登陆界面
            [self performSegueWithIdentifier:SIGN_IN_SEGUE sender:nil];
- ///       }
-  ///  }];
+        }
+    }];
 }
 
 - (BOOL)checkSignInInfo:(NSDictionary *)signInAckDict{

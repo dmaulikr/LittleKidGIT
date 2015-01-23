@@ -526,7 +526,7 @@
                                     <rect key="frame" x="0.0" y="462" width="800" height="338"/>
                                 </variation>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UsK-wY-gDj">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UsK-wY-gDj">
                                 <rect key="frame" x="85" y="307" width="162" height="63"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="224" id="2xF-GW-BUi">
@@ -643,6 +643,7 @@
                         <variation key="heightClass=regular-widthClass=regular">
                             <mask key="constraints">
                                 <include reference="hCt-9a-gy8"/>
+                                <include reference="df2-j8-ICl"/>
                                 <include reference="87m-zw-ZLW"/>
                                 <include reference="WPI-CP-Suk"/>
                                 <include reference="156-kn-NN8"/>
@@ -655,7 +656,6 @@
                                 <include reference="nIM-Re-mOW"/>
                                 <include reference="tLg-M9-QBa"/>
                                 <include reference="tpR-cb-KD8"/>
-                                <include reference="df2-j8-ICl"/>
                             </mask>
                         </variation>
                     </view>
@@ -772,7 +772,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkcode_goldWord.png" translatesAutoresizingMaskIntoConstraints="NO" id="c7q-Zd-omt">
                                 <rect key="frame" x="34" y="111" width="93" height="18"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FGk-YA-gBx">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FGk-YA-gBx">
                                 <rect key="frame" x="34" y="256" width="201" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="HtY-el-0ZV">
@@ -840,8 +840,8 @@
                         <variation key="heightClass=regular-widthClass=regular">
                             <mask key="constraints">
                                 <include reference="JQh-tn-Ymg"/>
-                                <include reference="D6G-ob-Hha"/>
                                 <include reference="zub-nN-LPy"/>
+                                <include reference="D6G-ob-Hha"/>
                             </mask>
                         </variation>
                     </view>
@@ -1220,7 +1220,7 @@
                                     <constraint firstAttribute="width" constant="237" id="ptC-7z-IpB"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqY-Ww-oox">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqY-Ww-oox">
                                 <rect key="frame" x="125" y="373" width="65" height="53"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="cMS-eC-OWk"/>

@@ -32,9 +32,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setUI];
-  //  self.toChatUsr = [[RuntimeStatus instance].recentUsrList objectAtIndex:self.toChatUsrIndex];
- //   [self testCode];
-  //  [self prepareRecord];
+    self.toChatUsr = [[RuntimeStatus instance].recentUsrList objectAtIndex:self.toChatUsrIndex];
+    [self testCode];
+    [self prepareRecord];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshChat:) name:NOTIFI_GET_RECENT_MSG object:nil];
 }
 
