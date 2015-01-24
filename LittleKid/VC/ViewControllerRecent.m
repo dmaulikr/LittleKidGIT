@@ -9,6 +9,7 @@
 #import "ViewControllerRecent.h"
 #import "RecentTableViewCell.h"
 #import "ViewControllerChat.h"
+#import "CDSessionManager.h"
 
 @interface ViewControllerRecent ()
 
@@ -29,13 +30,34 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshRecentContacts:) name:NOTIFI_GET_RECENT_MSG object:nil];
     self.headImage = [UIImage imageNamed:@"head.jpg"];
     self.iconImage = [UIImage imageNamed:@"5.png"];
-    
+    [self startFetchUserList];
     [self waitStatus];
 }
 
 - (void)setUI{
-    self.recentTableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"zuijin_background.png"]];
+    self.recentTableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"zuijin_roundCornerRect.png"]];
 }
+
+- (void)startFetchUserList {
+    AVQuery * query = [AVUser query];
+    query.cachePolicy = kAVCachePolicyIgnoreCache;
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (objects) {
+            NSMutableArray *users = [NSMutableArray array];
+            for (AVUser *user in objects) {
+                if (![user isEqual:[AVUser currentUser]]) {
+                    [users addObject:user];
+                    [[CDSessionManager sharedInstance] addChatWithPeerId:user.username];
+                }
+            }
+            
+        } else {
+            NSLog(@"error:%@", error);
+        }
+    }];
+}
+
 
 /* display a waiting indictor */
 - (void)waitStatus{
@@ -67,7 +89,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [[RuntimeStatus instance].recentUsrList count];
+//    return [[RuntimeStatus instance].recentUsrList count];
+    NSInteger i = [[[CDSessionManager sharedInstance] chatRooms] count];
+    return i;
 }
 
 
@@ -78,20 +102,35 @@
     if (cell == nil) {
         cell = [[RecentTableViewCell alloc] init];
     }
-    UserOther *recent1Usr = [[RuntimeStatus instance].recentUsrList objectAtIndex:[indexPath row]];
-    if (recent1Usr == nil) {
+    NSDictionary *chatRoom = [[[CDSessionManager sharedInstance] chatRooms] objectAtIndex:indexPath.row];
+    if (chatRoom == nil) {
         return cell;
     }
-    cell.nickName.text = recent1Usr.nickName;
-    cell.headPicture.image = self.headImage;
-    cell.msgIcon.image = self.iconImage;
-    cell.share.text = @"empty";
-    ChatMessage *lastMsg = [recent1Usr.msgs lastObject];
-    if (lastMsg == nil) {
-        return cell;
+    CDChatRoomType type = [[chatRoom objectForKey:@"type"] integerValue];
+    NSString *otherid = [chatRoom objectForKey:@"otherid"];
+    NSMutableString *nameString = [[NSMutableString alloc] init];
+    if (type == CDChatRoomTypeGroup) {
+        [nameString appendFormat:@"group:%@", otherid];
+    } else {
+        [nameString appendFormat:@"%@", otherid];
     }
+    
+    
+//    UserOther *recent1Usr = [[RuntimeStatus instance].recentUsrList objectAtIndex:[indexPath row]];
+//    if (recent1Usr == nil) {
+//        return cell;
+//    }
+    cell.nickName.text = otherid;
+//    cell.headPicture.image = self.headImage;
+//    cell.msgIcon.image = self.iconImage;
+//    cell.share.text = @"empty";
+//    ChatMessage *lastMsg = [recent1Usr.msgs lastObject];
+//    if (lastMsg == nil) {
+//        return cell;
+//    }
     /* 根据不同类型消息显示不同 */
-    cell.lastMsg.text = lastMsg.msg;
+    NSString *msg = [chatRoom objectForKey:@"msg"];
+    cell.lastMsg.text = msg;
     
 
     
@@ -150,8 +189,14 @@
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
      ViewControllerChat *desVC = segue.destinationViewController;
-     [desVC setHidesBottomBarWhenPushed:YES];
+     
      desVC.toChatUsrIndex = self.toChatUsrIndex;
+     
+     NSDictionary *chatRoom = [[[CDSessionManager sharedInstance] chatRooms] objectAtIndex:self.toChatUsrIndex];
+     NSString *otherid = [chatRoom objectForKey:@"otherid"];
+    
+    desVC.othreId = otherid;
+     [desVC setHidesBottomBarWhenPushed:YES];
  }
 
 
