@@ -165,7 +165,6 @@
     [fmDate setDateFormat:@"YYYY-MM-DD-HH-MM-SS"];
     self.dateToRecordStr = [fmDate stringFromDate:dateToRecord];
     savePath = [NSString stringWithFormat:@"%@/%@/recent/%@%@.aac", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], [AVUser currentUser].username, self.toChatUsr.UID, self.dateToRecordStr];
-    savePath = [NSString stringWithFormat:@"%@/%@%@.acc", [[NSBundle mainBundle] resourcePath],self.toChatUsr.UID, self.dateToRecordStr];
     NSError *err;
     NSFileManager *fm = [NSFileManager defaultManager];
     if(![fm createDirectoryAtPath:[savePath stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:&err]){
@@ -239,10 +238,10 @@
             NSLog(@"file no" );
         }
         self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&playerError];
-
+        self.player.numberOfLoops = 0;
         if (self.player == nil)
         {
-            NSLog(@"ERror creating player: %@", [playerError userInfo]);
+            NSLog(@"ERror creating player: %@", playerError);
         }else{
             [self.player play];
         }
@@ -250,7 +249,7 @@
 }
                        
 - (NSString *)msgDataReadPath:(ChatMessage *)msg{
-    return [NSString stringWithFormat:@"%@/%@", [[NSBundle mainBundle] resourcePath], msg.msg];
+    return [NSString stringWithFormat:@"%@/%@/recent/%@", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], [AVUser currentUser].username,msg.msg];
 }
 
 // Override to support conditional editing of the table view.
