@@ -25,57 +25,93 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.verificationCode.delegate = self;
-    [self testcode];
     
     UITapGestureRecognizer *gestureTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeKeyBoard)];
     gestureTap.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:gestureTap];
+    
 }
 
+///add
 
 - (void)removeKeyBoard{
     [self.verificationCode resignFirstResponder];
 }
 
-- (void)testcode{
-    self.checkCode = @"1";
-}
 
--(void) freshRepickBtn{
-    [self performSelector:@selector(changeString) withObject:self afterDelay:0];
-    [self.btnRepickCode.titleLabel setText:@"重新获取验证码"];
-}
+#pragma mark --定时器
 
--(void) changeString{
-    static int a = 60;
-    [self.btnRepickCode.titleLabel setText:[NSString stringWithFormat:@"重新获取验证码，%d",a--]];
-    if (a==0) {
-        [self.repickBtnFreshTimer invalidate];
-        self.btnRepickCode.enabled = YES;
+static int seconds = 60;
+//注册成功则停止计时
+-(void)releaseTimer{
+    if (self.repickBtnFreshTimer) {
+        if ([self.repickBtnFreshTimer respondsToSelector:@selector(isValid)]) {
+            if ([self.repickBtnFreshTimer isValid]) {
+                [self.repickBtnFreshTimer invalidate];
+                seconds = 60;
+            }
+        }
     }
 }
 
+
+-(void)timerFireMethod:(NSTimer *)theTimer {
+    if (seconds == 0) {
+        [theTimer invalidate];
+        seconds = 60;
+        [self.btnRepickCode setTitle:@"获取验证码" forState: UIControlStateNormal];
+        [self.btnRepickCode setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.btnRepickCode setEnabled:YES];
+    }else{
+        seconds--;
+        NSString *title = [NSString stringWithFormat:@"重新获取验证码 %d",seconds];
+        [self.btnRepickCode setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [self.btnRepickCode setEnabled:NO];
+        [self.btnRepickCode setTitle:title forState:UIControlStateNormal];
+    }
+}
 
 - (IBAction)onRepickCode:(id)sender {
+
+    [AVOSCloud requestSmsCodeWithPhoneNumber:self.kiduser.username appName:@"应用" operation:@"注册验证" timeToLive:10  callback:^(BOOL succeeded, NSError *error) {
+        NSLog(@"bool:%c,error:xxxxxx--%@--xxxxxx",succeeded,error);
+    }];
     
-    ((UIButton *)sender).enabled = false;
-    if (self.repickBtnFreshTimer==nil) {
-        [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(freshRepickBtn) userInfo:nil repeats:YES];
-        [[NSRunLoop currentRunLoop] run];
-    }
+    self.repickBtnFreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+    
 }
 
 #define SEGUE_TO_MAIN @"segueToMain"
 
 - (IBAction)onCheckMsg:(id)sender {
-    if ([self.checkCode compare:@"1"] == NSOrderedSame ) {
-        [self performSegueWithIdentifier:SEGUE_TO_MAIN sender:sender];
-    }
-//    [HTTTClient sendData:nil withProtocol:GET_CHECK_CODE];
-//    [[NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_GET_CHECK_CODE object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-//        NSLog(@"do something");
-//        [RuntimeStatus instance].signAccountUID = @"example";
-//    }];
+
+    [AVOSCloud verifySmsCode:self.verificationCode.text callback:^(BOOL succeeded, NSError *error) {
+        //code
+        if (succeeded) {
+            
+        // 注册
+            [self.kiduser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    //self.currentUser = [AVUser currentUser];
+                    
+                    //跳转主界面
+                    [self performSegueWithIdentifier:SEGUE_TO_MAIN sender:sender];
+
+                } else {
+                    NSString *errorString = [[error userInfo] objectForKey:@"error"];
+                    UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                             message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+                    [errorAlertView show];
+                    
+                }
+            }];
+     
+        } else {
+            //statements
+        }
+        
+    }];
+ 
 }
 
 
@@ -93,5 +129,24 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    //监听键盘高度
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
+    
+}
+
+- (void)keyboardWasChange:(NSNotification *)aNotification
+{
+    NSDictionary *userInfo = [aNotification userInfo];
+    CGSize kbSize = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    
+    self.keyboardHeight = kbSize.height;
+    NSLog(@"height--:%f",kbSize.height);
+    
+}
 
 @end

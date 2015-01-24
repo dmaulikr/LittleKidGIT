@@ -44,7 +44,7 @@
     self.account.returnKeyType = UIReturnKeyNext;
     self.password.returnKeyType = UIReturnKeyGo;
     
-    
+    //按下背景退出输入法
     UITapGestureRecognizer *gestureTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeKeyBoard)];
     gestureTap.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:gestureTap];

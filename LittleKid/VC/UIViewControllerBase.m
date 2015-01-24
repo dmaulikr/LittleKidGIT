@@ -12,6 +12,8 @@
 
 @implementation UIViewControllerBase
 
+
+
 //开始编辑输入框时，软键盘出现，执行此事件
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -41,6 +43,7 @@
 //    }
 //    return YES;
 //}
+
 
 //输入框编辑完成以后，将视图恢复到原始状态
 - (void)textFieldDidEndEditing:(UITextField *)textField

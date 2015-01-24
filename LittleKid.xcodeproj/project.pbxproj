@@ -20,6 +20,7 @@
 		570876111A5D161700892B53 /* wo_0012_scan.png in Resources */ = {isa = PBXBuildFile; fileRef = 570876101A5D161700892B53 /* wo_0012_scan.png */; };
 		5708761C1A5D5FD400892B53 /* denglu_0007_rainbow.png in Resources */ = {isa = PBXBuildFile; fileRef = 5708761A1A5D5FD400892B53 /* denglu_0007_rainbow.png */; };
 		5708761D1A5D5FD400892B53 /* denglu_0013_animals.png in Resources */ = {isa = PBXBuildFile; fileRef = 5708761B1A5D5FD400892B53 /* denglu_0013_animals.png */; };
+		572DF9D91A73D369000A1DB6 /* ViewControllerRealTalk.m in Sources */ = {isa = PBXBuildFile; fileRef = 572DF9D81A73D369000A1DB6 /* ViewControllerRealTalk.m */; };
 		572E3F5C1A63BA1300323683 /* beijing.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F471A63BA1300323683 /* beijing.png */; };
 		572E3F5D1A63BA1300323683 /* chatu.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F481A63BA1300323683 /* chatu.png */; };
 		572E3F5E1A63BA1300323683 /* fanhuijian.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F491A63BA1300323683 /* fanhuijian.png */; };
@@ -228,7 +229,6 @@
 		E422F8AB1A43FDE800CF2F9C /* ViewControllerChat.m in Sources */ = {isa = PBXBuildFile; fileRef = E422F89D1A43FDE800CF2F9C /* ViewControllerChat.m */; };
 		E422F8B01A43FE0300CF2F9C /* head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E422F8AE1A43FE0300CF2F9C /* head.jpg */; };
 		E422F8E51A4459C200CF2F9C /* RuntimeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = E422F8E41A4459C200CF2F9C /* RuntimeStatus.m */; };
-		E422F8E81A445CC400CF2F9C /* ViewControllerRealTalk.m in Sources */ = {isa = PBXBuildFile; fileRef = E422F8E71A445CC400CF2F9C /* ViewControllerRealTalk.m */; };
 		E43ED2D61A5E24A900A8D90D /* zuijin_star.png in Resources */ = {isa = PBXBuildFile; fileRef = E43ED2C01A5E24A900A8D90D /* zuijin_star.png */; };
 		E43ED2D91A5E24A900A8D90D /* zuijin_roundCornerRect.png in Resources */ = {isa = PBXBuildFile; fileRef = E43ED2C31A5E24A900A8D90D /* zuijin_roundCornerRect.png */; };
 		E43ED2E11A5E24A900A8D90D /* zuijin_background.png in Resources */ = {isa = PBXBuildFile; fileRef = E43ED2CB1A5E24A900A8D90D /* zuijin_background.png */; };
@@ -314,6 +314,8 @@
 		57211CBA1A53F7D6001A1A47 /* AnyChatDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatDefine.h; path = anyChatSDK/include/AnyChatDefine.h; sourceTree = SOURCE_ROOT; };
 		57211CBB1A53F7D6001A1A47 /* AnyChatErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatErrorCode.h; path = anyChatSDK/include/AnyChatErrorCode.h; sourceTree = SOURCE_ROOT; };
 		57211CBC1A53F7D6001A1A47 /* AnyChatPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatPlatform.h; path = anyChatSDK/include/AnyChatPlatform.h; sourceTree = SOURCE_ROOT; };
+		572DF9D71A73D369000A1DB6 /* ViewControllerRealTalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerRealTalk.h; sourceTree = "<group>"; };
+		572DF9D81A73D369000A1DB6 /* ViewControllerRealTalk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerRealTalk.m; sourceTree = "<group>"; };
 		572E3F471A63BA1300323683 /* beijing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beijing.png; sourceTree = "<group>"; };
 		572E3F481A63BA1300323683 /* chatu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatu.png; sourceTree = "<group>"; };
 		572E3F491A63BA1300323683 /* fanhuijian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fanhuijian.png; sourceTree = "<group>"; };
@@ -642,8 +644,6 @@
 		E422F8AE1A43FE0300CF2F9C /* head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = head.jpg; sourceTree = "<group>"; };
 		E422F8E31A4459C200CF2F9C /* RuntimeStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuntimeStatus.h; sourceTree = "<group>"; };
 		E422F8E41A4459C200CF2F9C /* RuntimeStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuntimeStatus.m; sourceTree = "<group>"; };
-		E422F8E61A445CC400CF2F9C /* ViewControllerRealTalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerRealTalk.h; sourceTree = "<group>"; };
-		E422F8E71A445CC400CF2F9C /* ViewControllerRealTalk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerRealTalk.m; sourceTree = "<group>"; };
 		E43ED2C01A5E24A900A8D90D /* zuijin_star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zuijin_star.png; sourceTree = "<group>"; };
 		E43ED2C31A5E24A900A8D90D /* zuijin_roundCornerRect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zuijin_roundCornerRect.png; sourceTree = "<group>"; };
 		E43ED2CB1A5E24A900A8D90D /* zuijin_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zuijin_background.png; sourceTree = "<group>"; };
@@ -1359,6 +1359,8 @@
 		E422F88D1A43FDE800CF2F9C /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				572DF9D71A73D369000A1DB6 /* ViewControllerRealTalk.h */,
+				572DF9D81A73D369000A1DB6 /* ViewControllerRealTalk.m */,
 				9654745D1A709B0A00C29287 /* UIViewControllerBase.h */,
 				9654745E1A709B0A00C29287 /* UIViewControllerBase.m */,
 				E422F88E1A43FDE800CF2F9C /* ViewControllerContact.h */,
@@ -1377,8 +1379,6 @@
 				E4A538541A5FF864002456A4 /* ViewControllerImpInfo.m */,
 				E422F89C1A43FDE800CF2F9C /* ViewControllerChat.h */,
 				E422F89D1A43FDE800CF2F9C /* ViewControllerChat.m */,
-				E422F8E61A445CC400CF2F9C /* ViewControllerRealTalk.h */,
-				E422F8E71A445CC400CF2F9C /* ViewControllerRealTalk.m */,
 				E4A538561A5FFC99002456A4 /* ViewControllerFriend.h */,
 				E4A538571A5FFC99002456A4 /* ViewControllerFriend.m */,
 				E4B101781A4CF01B004E1224 /* RecentTableViewCell.h */,
@@ -1831,8 +1831,8 @@
 				57AC910B1A71FEC6008F0892 /* QBAssetsCollectionFooterView.m in Sources */,
 				E422F8AA1A43FDE800CF2F9C /* ViewControllerSelf.m in Sources */,
 				57AC91051A71FEC6008F0892 /* UIButton+JSMessagesView.m in Sources */,
+				572DF9D91A73D369000A1DB6 /* ViewControllerRealTalk.m in Sources */,
 				9654745F1A709B0A00C29287 /* UIViewControllerBase.m in Sources */,
-				E422F8E81A445CC400CF2F9C /* ViewControllerRealTalk.m in Sources */,
 				E4E729AE1A4BB6FD000FA552 /* ChatMessage.m in Sources */,
 				57AC91121A71FEC6008F0892 /* QBImagePickerGroupCell.m in Sources */,
 				57AC90D61A71FEC6008F0892 /* NSString+JSMessagesView.m in Sources */,
