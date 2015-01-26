@@ -12,10 +12,5 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *headPicture;
 @property (weak, nonatomic) IBOutlet UILabel *nickName;
-@property (weak, nonatomic) IBOutlet UILabel *share;
 @property (weak, nonatomic) IBOutlet UILabel *lastMsg;
-@property (weak, nonatomic) IBOutlet UIImageView *msgIcon;
-
-
-
 @end

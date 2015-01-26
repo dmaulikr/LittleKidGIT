@@ -890,53 +890,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="H6J-kN-a3q">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="89" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="H6J-kN-a3q">
+                                <rect key="frame" x="46" y="98" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell alpha="0.20000000000000001" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellRecentMsg" rowHeight="92" id="bNw-iu-Qxu" customClass="RecentTableViewCell">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bNw-iu-Qxu" id="9ZF-xA-a0l">
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    <tableViewCell alpha="0.20000000000000001" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellRecentMsg" id="klr-VJ-Usk" customClass="RecentTableViewCell">
+                                        <rect key="frame" x="46" y="165" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="klr-VJ-Usk" id="Y9x-P7-z0U">
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="5.png" translatesAutoresizingMaskIntoConstraints="NO" id="MNM-X0-fcG">
-                                                    <rect key="frame" x="109" y="52" width="23" height="25"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="老钱" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bac-YD-Oa2">
-                                                    <rect key="frame" x="109" y="22" width="67" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzC-q2-cc7">
+                                                    <rect key="frame" x="106" y="8" width="179" height="36"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="head.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="tFd-qG-uoD">
-                                                    <rect key="frame" x="8" y="13" width="77" height="71"/>
-                                                </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="zuijin_star.png" translatesAutoresizingMaskIntoConstraints="NO" id="hGM-Pe-ffu" userLabel="星星">
-                                                    <rect key="frame" x="240" y="22" width="50" height="47"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="动态" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6SV-Oh-KyG">
-                                                    <rect key="frame" x="174" y="22" width="43" height="25"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0th-Nx-9Pu">
+                                                    <rect key="frame" x="106" y="52" width="179" height="29"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="吃饺子吧" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GsI-Rd-Ec7">
-                                                    <rect key="frame" x="154" y="51" width="78" height="25"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="head.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="BNR-hG-zcL">
+                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="89"/>
+                                                </imageView>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="headPicture" destination="tFd-qG-uoD" id="WrL-sC-1Ag"/>
-                                            <outlet property="lastMsg" destination="GsI-Rd-Ec7" id="x3k-z8-KLU"/>
-                                            <outlet property="msgIcon" destination="MNM-X0-fcG" id="Wfb-LA-qJx"/>
-                                            <outlet property="nickName" destination="bac-YD-Oa2" id="BMn-an-hRY"/>
-                                            <outlet property="share" destination="GsI-Rd-Ec7" id="jje-6z-cDJ"/>
-                                            <segue destination="A3o-O2-qzx" kind="show" id="XrW-Hh-18j"/>
+                                            <outlet property="headPicture" destination="BNR-hG-zcL" id="sMR-h7-Fvi"/>
+                                            <outlet property="lastMsg" destination="0th-Nx-9Pu" id="kKr-3R-V7W"/>
+                                            <outlet property="nickName" destination="uzC-q2-cc7" id="bFM-RO-t3T"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -965,12 +951,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ped-Hh-4Bz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="313.125" y="2256.3380281690138"/>
+            <point key="canvasLocation" x="313" y="2256"/>
         </scene>
-        <!--View Controller Chat-->
+        <!--Chat Room Controller-->
         <scene sceneID="MCy-FR-c20">
             <objects>
-                <viewController id="A3o-O2-qzx" customClass="ViewControllerChat" sceneMemberID="viewController">
+                <viewController id="A3o-O2-qzx" customClass="CDChatRoomController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Qt-hk-F7Y"/>
                         <viewControllerLayoutGuide type="bottom" id="62z-X7-ll3"/>
@@ -1761,9 +1747,6 @@
                                 <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="372" y="689" width="46" height="26"/>
                                 </variation>
-                                <connections>
-                                    <segue destination="A3o-O2-qzx" kind="show" id="JLT-YZ-PCJ"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="昵称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4TZ-mi-5pu">
                                 <rect key="frame" x="121" y="281" width="100" height="26"/>
@@ -2035,20 +2018,20 @@
                                 <exclude reference="JSO-LD-C69"/>
                                 <exclude reference="osR-PW-F4l"/>
                                 <exclude reference="4xe-dP-41L"/>
-                                <exclude reference="12i-Ap-wPj"/>
-                                <exclude reference="LxH-QL-fYf"/>
                                 <exclude reference="SUn-BO-3VK"/>
                                 <exclude reference="xZr-xO-URh"/>
+                                <exclude reference="12i-Ap-wPj"/>
+                                <exclude reference="LxH-QL-fYf"/>
                                 <exclude reference="B7f-1v-CTC"/>
                                 <exclude reference="VeE-6Q-koh"/>
                                 <exclude reference="nz3-Pj-eon"/>
-                                <exclude reference="P5f-D2-B3g"/>
-                                <exclude reference="prp-24-8lV"/>
                                 <exclude reference="KqY-bk-xOJ"/>
                                 <exclude reference="Nwn-uH-9gS"/>
                                 <exclude reference="lvW-mJ-rzN"/>
                                 <exclude reference="MK4-rS-2Lc"/>
                                 <exclude reference="jyZ-DY-BME"/>
+                                <exclude reference="P5f-D2-B3g"/>
+                                <exclude reference="prp-24-8lV"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2059,15 +2042,15 @@
                                 <include reference="61T-jf-nWW"/>
                                 <include reference="osR-PW-F4l"/>
                                 <include reference="4xe-dP-41L"/>
-                                <include reference="12i-Ap-wPj"/>
                                 <include reference="SUn-BO-3VK"/>
+                                <include reference="12i-Ap-wPj"/>
                                 <include reference="B7f-1v-CTC"/>
                                 <include reference="VeE-6Q-koh"/>
-                                <include reference="P5f-D2-B3g"/>
                                 <include reference="Nwn-uH-9gS"/>
                                 <include reference="lvW-mJ-rzN"/>
                                 <include reference="MK4-rS-2Lc"/>
                                 <include reference="jyZ-DY-BME"/>
+                                <include reference="P5f-D2-B3g"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -2078,11 +2061,11 @@
                                 <include reference="NWR-fd-kUd"/>
                                 <include reference="lqX-Nh-DOC"/>
                                 <include reference="JSO-LD-C69"/>
-                                <include reference="LxH-QL-fYf"/>
                                 <include reference="xZr-xO-URh"/>
+                                <include reference="LxH-QL-fYf"/>
                                 <include reference="nz3-Pj-eon"/>
-                                <include reference="prp-24-8lV"/>
                                 <include reference="KqY-bk-xOJ"/>
+                                <include reference="prp-24-8lV"/>
                             </mask>
                         </variation>
                     </view>
@@ -2214,6 +2197,5 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="x7y-XV-pXK"/>
-        <segue reference="JLT-YZ-PCJ"/>
     </inferredMetricsTieBreakers>
 </document>

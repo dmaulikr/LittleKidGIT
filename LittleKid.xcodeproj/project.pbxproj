@@ -41,6 +41,7 @@
 		572E3F6E1A63BA1300323683 /* yanzhengma_08.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F591A63BA1300323683 /* yanzhengma_08.png */; };
 		572E3F6F1A63BA1300323683 /* yanzhengmaduanxin.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F5A1A63BA1300323683 /* yanzhengmaduanxin.png */; };
 		572E3F701A63BA1300323683 /* zhengtituceng.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F5B1A63BA1300323683 /* zhengtituceng.png */; };
+		572EA3501A737A650018C678 /* xinxi_0002_椭圆-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 572EA34F1A737A650018C678 /* xinxi_0002_椭圆-2.png */; };
 		5732309D1A6F70CE004E187F /* CheseInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 5732306D1A6F70CE004E187F /* CheseInterface.m */; };
 		5732309E1A6F70CE004E187F /* CheseTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 5732306F1A6F70CE004E187F /* CheseTools.m */; };
 		5732309F1A6F70CE004E187F /* 0.png in Resources */ = {isa = PBXBuildFile; fileRef = 573230711A6F70CE004E187F /* 0.png */; };
@@ -335,6 +336,7 @@
 		572E3F591A63BA1300323683 /* yanzhengma_08.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yanzhengma_08.png; sourceTree = "<group>"; };
 		572E3F5A1A63BA1300323683 /* yanzhengmaduanxin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yanzhengmaduanxin.png; sourceTree = "<group>"; };
 		572E3F5B1A63BA1300323683 /* zhengtituceng.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zhengtituceng.png; sourceTree = "<group>"; };
+		572EA34F1A737A650018C678 /* xinxi_0002_椭圆-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xinxi_0002_椭圆-2.png"; sourceTree = "<group>"; };
 		5732306C1A6F70CE004E187F /* CheseInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheseInterface.h; sourceTree = "<group>"; };
 		5732306D1A6F70CE004E187F /* CheseInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheseInterface.m; sourceTree = "<group>"; };
 		5732306E1A6F70CE004E187F /* CheseTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheseTools.h; sourceTree = "<group>"; };
@@ -1398,6 +1400,7 @@
 		E422F8AC1A43FE0300CF2F9C /* image */ = {
 			isa = PBXGroup;
 			children = (
+				572EA34F1A737A650018C678 /* xinxi_0002_椭圆-2.png */,
 				572E3F461A63BA1300323683 /* verificationCode */,
 				57B6514B1A60E841002A78F9 /* registor */,
 				E48D20EE1A650A620099537F /* ViewControllerInfo */,
@@ -1695,6 +1698,7 @@
 				573230C41A6F70CE004E187F /* 象棋界面（人头男）.png in Resources */,
 				573230A81A6F70CE004E187F /* 106.png in Resources */,
 				573230AE1A6F70CE004E187F /* 114.png in Resources */,
+				572EA3501A737A650018C678 /* xinxi_0002_椭圆-2.png in Resources */,
 				57AC90E51A71FEC6008F0892 /* bubble-flat-incoming.png in Resources */,
 				573230A41A6F70CE004E187F /* 102.png in Resources */,
 				57AC90F11A71FEC6008F0892 /* bubble-square-outgoing-selected.png in Resources */,
