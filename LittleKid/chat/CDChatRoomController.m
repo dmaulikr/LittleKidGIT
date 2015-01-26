@@ -46,7 +46,9 @@
         self.title = self.otherId;
     }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showDetail:)];
-    
+    UIImageView *imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liaotian_background.png"]];
+    [self.tableView setBackgroundView:imgView];
+    [self setBackgroundColor:[UIColor clearColor]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageUpdated:) name:NOTIFICATION_MESSAGE_UPDATED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sessionUpdated:) name:NOTIFICATION_SESSION_UPDATED object:nil];
     
