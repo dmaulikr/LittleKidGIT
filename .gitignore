@@ -211,3 +211,4 @@ xcuserdata
 #custom library
 anyChatSDK/libs
 AVOSCloud.framework
+libZXingWidget.a
