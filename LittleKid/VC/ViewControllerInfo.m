@@ -57,16 +57,6 @@
                        action:@selector(textFieldDidChange:)
              forControlEvents:UIControlEventEditingChanged];
     
-//    [[NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_SIGN_UP object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-//        //code here to decide if segue to next
-//        NSLog(@"get notify");
-//        NSDictionary *signUpRcvdDict = note.userInfo;
-//        NSLog(@"%@",signUpRcvdDict);
-//        //检查ack，成功则继续提取短信验证码，失败则提示问题
-//        if ( YES == [self checkAck:signUpRcvdDict] ) {
-//            [self performSegueWithIdentifier:@"segueFromInfo" sender:self];
-//        }
-//    }];
 }
 ///add
 - (void)removeKeyBoard{
@@ -111,16 +101,6 @@
 ///
 
 
-#define RET_CODE    @"retcode"
-- (BOOL)checkAck:(AVUser *)user{
-//    NSString *retCode = [ackDict objectForKey:RET_CODE];
-    if ( user.mobilePhoneVerified ) {
-        [[[UIAlertView alloc] initWithTitle:@"手机号已被注册" message:@"请更换手机号码或直接登陆" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil] show];
-        return NO;
-    }
-//    self.checkCode = retCode;
-    return YES;
-}
 
 #pragma mark --动态监听输入长度
 
@@ -215,13 +195,6 @@
     self.user.username = self.account.text;
     self.user.password =  self.password.text;
  
-    
-    NSLog(@"333333333333333%@222222222222222",self.account.text);
-    NSLog(@"3333333333333333%@222222222222222",self.password.text);
-    
-    NSLog(@"333333333333333%@333333333333333",self.user.username);
-    NSLog(@"3333333333333333%@33333333333333",self.user.password);
-    
     
 //    NSDictionary *signUpDict = [[RuntimeStatus instance].usrSelf packetSignUpDict];
 //    [HTTTClient sendData:signUpDict withProtocol:SIGN_UP];

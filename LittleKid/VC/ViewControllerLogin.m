@@ -21,6 +21,9 @@
 
 @implementation ViewControllerLogin
 
+
+#define SIGN_IN_SEGUE   @"signInSegue"
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -48,6 +51,7 @@
     UITapGestureRecognizer *gestureTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeKeyBoard)];
     gestureTap.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:gestureTap];
+    
 }
 
 
@@ -67,8 +71,6 @@
 }
 
 
-#define SIGN_IN_SEGUE   @"signInSegue"
-
 - (IBAction)onLogin:(id)sender {
     if ( [self.account.text length]==0 || [self.password.text length]==0 ) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"用户名或密码不能为空" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
@@ -76,6 +78,8 @@
         return;
     }
     
+    
+    //登录功能
     [AVUser logInWithUsernameInBackground:self.account.text password:self.password.text block:^(AVUser *user, NSError *error) {
         if (user != nil) {
             [self performSegueWithIdentifier:SIGN_IN_SEGUE sender:nil];
@@ -155,6 +159,7 @@
     //监听键盘高度
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasChange:) name:UIKeyboardDidChangeFrameNotification object:nil];
     
+    
 }
 
 - (void)keyboardWasChange:(NSNotification *)aNotification
@@ -166,4 +171,5 @@
     NSLog(@"height--:%f",kbSize.height);
     
 }
+
 @end
