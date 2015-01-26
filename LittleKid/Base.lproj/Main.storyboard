@@ -911,11 +911,11 @@
                                 <exclude reference="JQh-tn-Ymg"/>
                                 <exclude reference="aAQ-Vl-Myz"/>
                                 <exclude reference="kMJ-2W-0s8"/>
+                                <exclude reference="6cr-uQ-1Uv"/>
+                                <exclude reference="l0M-H4-MGi"/>
                                 <exclude reference="UW4-SO-BZc"/>
                                 <exclude reference="j5n-hu-yHH"/>
                                 <exclude reference="vp2-m0-fUK"/>
-                                <exclude reference="6cr-uQ-1Uv"/>
-                                <exclude reference="l0M-H4-MGi"/>
                                 <exclude reference="Ahx-yj-YJk"/>
                                 <exclude reference="W4K-Vg-Q8h"/>
                             </mask>
@@ -925,9 +925,9 @@
                                 <include reference="za4-ya-mIb"/>
                                 <include reference="8DL-Kn-f3D"/>
                                 <include reference="kMJ-2W-0s8"/>
+                                <include reference="l0M-H4-MGi"/>
                                 <include reference="j5n-hu-yHH"/>
                                 <include reference="vp2-m0-fUK"/>
-                                <include reference="l0M-H4-MGi"/>
                                 <include reference="W4K-Vg-Q8h"/>
                             </mask>
                         </variation>
@@ -936,8 +936,8 @@
                                 <include reference="RiJ-gR-Cev"/>
                                 <include reference="JQh-tn-Ymg"/>
                                 <include reference="aAQ-Vl-Myz"/>
-                                <include reference="UW4-SO-BZc"/>
                                 <include reference="6cr-uQ-1Uv"/>
+                                <include reference="UW4-SO-BZc"/>
                                 <include reference="Ahx-yj-YJk"/>
                             </mask>
                         </variation>
@@ -958,7 +958,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="6Kl-nd-dTx">
             <objects>
-                <tabBarController storyboardIdentifier="tabViewController" id="kLd-Ux-55A" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="mainTabViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kLd-Ux-55A" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Zyo-3c-4kH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -2309,7 +2309,7 @@
         <image name="云登陆.png" width="160" height="116"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="BXi-mn-8Gv"/>
+        <segue reference="x7y-XV-pXK"/>
         <segue reference="JLT-YZ-PCJ"/>
     </inferredMetricsTieBreakers>
 </document>
