@@ -206,6 +206,7 @@
 		57B651651A6120D1002A78F9 /* impinfo_star.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B6515A1A6120D1002A78F9 /* impinfo_star.png */; };
 		57B651671A61236E002A78F9 /* impinfo_bg_arc_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B651661A61236E002A78F9 /* impinfo_bg_arc_blue.png */; };
 		57E8F9AF1A7242A300C6FAA3 /* juxing_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 57E8F9AE1A7242A300C6FAA3 /* juxing_0.png */; };
+		57FE76071A75E8BB002D8292 /* liaotian_0011_圆角矩形-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 57FE76061A75E8BB002D8292 /* liaotian_0011_圆角矩形-1.png */; };
 		9654745F1A709B0A00C29287 /* UIViewControllerBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 9654745E1A709B0A00C29287 /* UIViewControllerBase.m */; };
 		96AB5DC71A6F58B70086818E /* AVOSCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96AB5DC61A6F58B60086818E /* AVOSCloud.framework */; };
 		96AB5DCA1A6F59760086818E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96AB5DC91A6F59760086818E /* SystemConfiguration.framework */; };
@@ -608,6 +609,7 @@
 		57B6515A1A6120D1002A78F9 /* impinfo_star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_star.png; sourceTree = "<group>"; };
 		57B651661A61236E002A78F9 /* impinfo_bg_arc_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_bg_arc_blue.png; sourceTree = "<group>"; };
 		57E8F9AE1A7242A300C6FAA3 /* juxing_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = juxing_0.png; sourceTree = "<group>"; };
+		57FE76061A75E8BB002D8292 /* liaotian_0011_圆角矩形-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liaotian_0011_圆角矩形-1.png"; sourceTree = "<group>"; };
 		9654745D1A709B0A00C29287 /* UIViewControllerBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewControllerBase.h; sourceTree = "<group>"; };
 		9654745E1A709B0A00C29287 /* UIViewControllerBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewControllerBase.m; sourceTree = "<group>"; };
 		96AB5DC61A6F58B60086818E /* AVOSCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AVOSCloud.framework; sourceTree = "<group>"; };
@@ -1445,6 +1447,7 @@
 		E43ED30D1A5E9BA000A8D90D /* ViewControllerChat */ = {
 			isa = PBXGroup;
 			children = (
+				57FE76061A75E8BB002D8292 /* liaotian_0011_圆角矩形-1.png */,
 				E43ED31A1A5E9BA000A8D90D /* liaotian_background.png */,
 				E43ED31B1A5E9BA000A8D90D /* liaotian_bubble1.png */,
 				E43ED31C1A5E9BA000A8D90D /* liaotian_bubble2.png */,
@@ -1775,6 +1778,7 @@
 				57AC90DC1A71FEC6008F0892 /* bubble-default-incoming@2x.png in Resources */,
 				572E3F6B1A63BA1300323683 /* yanzhengma_01.png in Resources */,
 				57AC90F91A71FEC6008F0892 /* input-bar.png in Resources */,
+				57FE76071A75E8BB002D8292 /* liaotian_0011_圆角矩形-1.png in Resources */,
 				E422F8A01A43FDE800CF2F9C /* Main.storyboard in Resources */,
 				573230A51A6F70CE004E187F /* 103.png in Resources */,
 				572E3F621A63BA1300323683 /* tijiao.png in Resources */,
