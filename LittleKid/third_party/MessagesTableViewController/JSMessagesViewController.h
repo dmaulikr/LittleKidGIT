@@ -64,6 +64,8 @@ typedef enum {
 @required
 - (void)sendPressed:(UIButton *)sender withText:(NSString *)text;
 - (void)cameraPressed:(id)sender;
+- (void)soundTouchDoun:(id)sender;
+- (void)soundTouchUp:(id)sender;
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (JSBubbleMediaType)messageMediaTypeForRowAtIndexPath:(NSIndexPath *)indexPath;
