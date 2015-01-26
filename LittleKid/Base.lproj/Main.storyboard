@@ -911,11 +911,11 @@
                                 <exclude reference="JQh-tn-Ymg"/>
                                 <exclude reference="aAQ-Vl-Myz"/>
                                 <exclude reference="kMJ-2W-0s8"/>
+                                <exclude reference="6cr-uQ-1Uv"/>
+                                <exclude reference="l0M-H4-MGi"/>
                                 <exclude reference="UW4-SO-BZc"/>
                                 <exclude reference="j5n-hu-yHH"/>
                                 <exclude reference="vp2-m0-fUK"/>
-                                <exclude reference="6cr-uQ-1Uv"/>
-                                <exclude reference="l0M-H4-MGi"/>
                                 <exclude reference="Ahx-yj-YJk"/>
                                 <exclude reference="W4K-Vg-Q8h"/>
                             </mask>
@@ -925,9 +925,9 @@
                                 <include reference="za4-ya-mIb"/>
                                 <include reference="8DL-Kn-f3D"/>
                                 <include reference="kMJ-2W-0s8"/>
+                                <include reference="l0M-H4-MGi"/>
                                 <include reference="j5n-hu-yHH"/>
                                 <include reference="vp2-m0-fUK"/>
-                                <include reference="l0M-H4-MGi"/>
                                 <include reference="W4K-Vg-Q8h"/>
                             </mask>
                         </variation>
@@ -936,8 +936,8 @@
                                 <include reference="RiJ-gR-Cev"/>
                                 <include reference="JQh-tn-Ymg"/>
                                 <include reference="aAQ-Vl-Myz"/>
-                                <include reference="UW4-SO-BZc"/>
                                 <include reference="6cr-uQ-1Uv"/>
+                                <include reference="UW4-SO-BZc"/>
                                 <include reference="Ahx-yj-YJk"/>
                             </mask>
                         </variation>
@@ -997,9 +997,6 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bNw-iu-Qxu" id="9ZF-xA-a0l">
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="5.png" translatesAutoresizingMaskIntoConstraints="NO" id="MNM-X0-fcG">
-                                                    <rect key="frame" x="109" y="52" width="23" height="25"/>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="老钱" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bac-YD-Oa2">
                                                     <rect key="frame" x="109" y="22" width="67" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1012,14 +1009,8 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="zuijin_star.png" translatesAutoresizingMaskIntoConstraints="NO" id="hGM-Pe-ffu" userLabel="星星">
                                                     <rect key="frame" x="240" y="22" width="50" height="47"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="动态" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6SV-Oh-KyG">
-                                                    <rect key="frame" x="174" y="22" width="43" height="25"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="吃饺子吧" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GsI-Rd-Ec7">
-                                                    <rect key="frame" x="154" y="51" width="78" height="25"/>
+                                                    <rect key="frame" x="109" y="51" width="78" height="25"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1030,10 +1021,7 @@
                                         <connections>
                                             <outlet property="headPicture" destination="tFd-qG-uoD" id="WrL-sC-1Ag"/>
                                             <outlet property="lastMsg" destination="GsI-Rd-Ec7" id="x3k-z8-KLU"/>
-                                            <outlet property="msgIcon" destination="MNM-X0-fcG" id="Wfb-LA-qJx"/>
                                             <outlet property="nickName" destination="bac-YD-Oa2" id="BMn-an-hRY"/>
-                                            <outlet property="share" destination="GsI-Rd-Ec7" id="jje-6z-cDJ"/>
-                                            <segue destination="A3o-O2-qzx" kind="show" id="XrW-Hh-18j"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1858,9 +1846,6 @@
                                 <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="372" y="689" width="46" height="26"/>
                                 </variation>
-                                <connections>
-                                    <segue destination="A3o-O2-qzx" kind="show" id="JLT-YZ-PCJ"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="昵称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4TZ-mi-5pu">
                                 <rect key="frame" x="121" y="281" width="100" height="26"/>
@@ -2310,6 +2295,5 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="BXi-mn-8Gv"/>
-        <segue reference="JLT-YZ-PCJ"/>
     </inferredMetricsTieBreakers>
 </document>
