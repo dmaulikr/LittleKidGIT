@@ -41,7 +41,7 @@
 
 #define OSVersionIsAtLeastiOS7  ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 
-#define INPUT_HEIGHT 46.0f
+#define INPUT_HEIGHT 96.0f
 
 @interface JSMessagesViewController () <JSDismissiveTextViewDelegate>
 
@@ -61,7 +61,7 @@
 {
     CGRect frame = [UIScreen mainScreen].bounds;
     if (OSVersionIsAtLeastiOS7 == YES) {
-        float v = NSFoundationVersionNumber;
+//        float v = NSFoundationVersionNumber;
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }else{
         frame.size.height -= 20 + 44;
@@ -93,8 +93,8 @@
 	if (kAllowsMedia)
 	{
 		// set up the image and button frame
-		UIImage* image = [UIImage imageNamed:@"PhotoIcon"];
-		CGRect frame = CGRectMake(4, 0, image.size.width, image.size.height);
+		UIImage* image = [UIImage imageNamed:@"liaotian_microphone.png"];
+		CGRect frame = CGRectMake(4, 0, image.size.width/2, image.size.height/2);
 		CGFloat yHeight = (INPUT_HEIGHT - frame.size.height) / 2.0f;
 		frame.origin.y = yHeight;
 		
@@ -103,7 +103,10 @@
 		[mediaButton setBackgroundImage:image forState:UIControlStateNormal];
 		
 		// button action
-		[mediaButton addTarget:self action:@selector(cameraAction:) forControlEvents:UIControlEventTouchUpInside];
+//		[mediaButton addTarget:self action:@selector(cameraAction:) forControlEvents:UIControlEventTouchUpInside];
+        [mediaButton addTarget:self action:@selector(soundTouchdownAction:) forControlEvents:UIControlEventTouchDown];
+        [mediaButton addTarget:self action:@selector(soundTouchupAction:) forControlEvents:UIControlEventTouchUpInside];
+        
 	}
 	
     CGRect inputFrame = CGRectMake(0.0f, size.height - INPUT_HEIGHT, size.width, INPUT_HEIGHT);
@@ -117,13 +120,19 @@
     
     UIButton *sendButton = [self sendButton];
     sendButton.enabled = NO;
+    
     sendButton.frame = CGRectMake(self.inputToolBarView.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
     [sendButton addTarget:self
                    action:@selector(sendPressed:)
          forControlEvents:UIControlEventTouchUpInside];
     [self.inputToolBarView setSendButton:sendButton];
     [self.view addSubview:self.inputToolBarView];
+    [self.inputToolBarView.textView removeFromSuperview];
+    UIImage *imgView = [UIImage imageNamed:@"liaotian_0011_圆角矩形-1"];//liaotian_chess
     
+    self.inputToolBarView.image = imgView;
+    imgView = [UIImage imageNamed:@"liaotian_chess"];
+    [self.inputToolBarView.sendButton setBackgroundImage:imgView forState:UIControlStateNormal];
 	if (kAllowsMedia)
 	{
 		// adjust the size of the send button to balance out more with the camera button on the other side.
@@ -141,6 +150,12 @@
 		frame.size.width -= mediaButton.frame.size.width + mediaButton.frame.origin.x;
 		frame.size.width += 16;		// from the send button adjustment above
 		self.inputToolBarView.textView.frame = frame;
+        frame = mediaButton.frame;
+        frame.origin.x = self.inputToolBarView.frame.size.width/4 -frame.size.width/2;
+        mediaButton.frame = frame;
+        frame.origin.x = frame.origin.x + self.inputToolBarView.frame.size.width/2;
+        self.inputToolBarView.sendButton.frame = frame;
+        
 	}
 	
     
@@ -233,6 +248,20 @@
 {
     if(self.delegate && [self.delegate respondsToSelector:@selector(cameraPressed:)]){
         [self.delegate cameraPressed:sender];
+    }
+}
+
+- (void)soundTouchdownAction:(id)sender
+{
+    if(self.delegate && [self.delegate respondsToSelector:@selector(soundTouchDoun:)]){
+        [self.delegate soundTouchDoun:sender];
+    }
+}
+
+- (void)soundTouchupAction:(id)sender
+{
+    if(self.delegate && [self.delegate respondsToSelector:@selector(soundTouchUp:)]){
+        [self.delegate soundTouchUp:sender];
     }
 }
 
