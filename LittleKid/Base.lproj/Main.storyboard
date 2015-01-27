@@ -20,21 +20,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G5E-Fg-wmS">
-                                <rect key="frame" x="183" y="381" width="75" height="45"/>
-                                <state key="normal" backgroundImage="云注册.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="231" y="383" width="75" height="45"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="231" y="593" width="75" height="45"/>
-                                </variation>
-                                <connections>
-                                    <segue destination="Gme-1v-GV1" kind="show" id="1au-Lt-hwI"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="denglu_0007_rainbow.png" translatesAutoresizingMaskIntoConstraints="NO" id="QXM-2V-fLI">
                                 <rect key="frame" x="232" y="93" width="81" height="83"/>
                                 <constraints>
@@ -281,6 +266,21 @@
                                     </mask>
                                 </variation>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G5E-Fg-wmS">
+                                <rect key="frame" x="183" y="381" width="75" height="45"/>
+                                <state key="normal" backgroundImage="云注册.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="231" y="383" width="75" height="45"/>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="231" y="593" width="75" height="45"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="Gme-1v-GV1" kind="show" id="1au-Lt-hwI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.7776003649635036" green="0.13554972627737227" blue="0.039575729927007301" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -958,7 +958,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="6Kl-nd-dTx">
             <objects>
-                <tabBarController storyboardIdentifier="tabViewController" id="kLd-Ux-55A" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="mainTabViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kLd-Ux-55A" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Zyo-3c-4kH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>

@@ -73,7 +73,7 @@ static int seconds = 60;
 
 - (IBAction)onRepickCode:(id)sender {
 
-    [AVOSCloud requestSmsCodeWithPhoneNumber:self.kiduser.username appName:@"应用" operation:@"注册验证" timeToLive:10  callback:^(BOOL succeeded, NSError *error) {
+    [AVOSCloud requestSmsCodeWithPhoneNumber:self.kiduser.username appName:@"LittleKid" operation:@"注册验证" timeToLive:10  callback:^(BOOL succeeded, NSError *error) {
         NSLog(@"bool:%c,error:xxxxxx--%@--xxxxxx",succeeded,error);
     }];
     

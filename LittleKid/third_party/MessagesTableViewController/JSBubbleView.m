@@ -386,7 +386,7 @@ CGFloat const kJSAvatarSize = 50.0f;
 
 + (CGSize)imageSizeForImage:(UIImage *)image{
     CGFloat width = [UIScreen mainScreen].applicationFrame.size.width * 0.75f;
-    CGFloat height = 130.f;
+    CGFloat height = 40.f;
     
     return CGSizeMake(width - kJSAvatarSize, height + kJSAvatarSize);
 

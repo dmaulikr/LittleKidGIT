@@ -11,6 +11,8 @@
 #import "CDChatDetailController.h"
 #import "QBImagePickerController.h"
 #import "UIImage+Resize.h"
+#import "User.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface CDChatRoomController () <JSMessagesViewDelegate, JSMessagesViewDataSource, QBImagePickerControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate> {
     NSMutableArray *_timestampArray;
@@ -18,6 +20,12 @@
     NSMutableDictionary *_loadedData;
 }
 @property (nonatomic, strong) NSArray *messages;
+@property(strong, atomic) AVAudioRecorder *recorder;
+@property(strong, atomic) AVAudioPlayer *player;
+@property(strong, atomic) NSDictionary *recorderSettingsDict;
+@property (strong, nonatomic) NSString *dateToRecordStr;
+@property(strong, nonatomic) UserOther *toChatUsr;/* @property设置 */
+@property(strong, nonatomic)AVAudioSession *session;
 @end
 
 @implementation CDChatRoomController
@@ -36,6 +44,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _session = [AVAudioSession sharedInstance];
+   
+    self.toChatUsr = [[UserOther alloc]init];
+    self.toChatUsr.UID = self.otherId;
+    //   self.toChatUsr = [[RuntimeStatus instance].recentUsrList objectAtIndex:self.toChatUsrIndex];
+    //    [self testCode];
+    [self prepareRecord];
     if (self.type == CDChatRoomTypeGroup) {
         NSString *title = @"group";
         if (self.group.groupId) {
@@ -138,6 +153,59 @@
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
     [actionSheet showInView:self.view];
 }
+- (void)soundTouchDoun:(id)sender
+{
+    NSError *error = nil;
+    NSString * file = [self msgDataSavePath];
+    NSURL *url = [NSURL fileURLWithPath:file];
+    [self.session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    self.recorder = [[AVAudioRecorder alloc] initWithURL:url settings:self.recorderSettingsDict error:&error];
+    if (error) {
+        NSLog(@"recorder error: %@",error);
+    }
+    if (self.recorder) {
+        self.recorder.meteringEnabled = YES;
+        if([self.recorder prepareToRecord])
+        {
+            NSLog(@"Prepare successful");
+        }
+        [self.recorder record];
+        //启动定时器
+        //        timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(levelTimer:) userInfo:nil repeats:YES];
+    } else{
+        NSLog(@"%@", error);
+    }
+}
+- (void)soundTouchUp:(id)sender
+{
+    [self.session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [self.recorder stop];
+    //send the record
+    [self updateMsg];
+    //    [self sendMsg];
+    self.recorder = nil;
+//    [self.toChatUsr packetLastChatMsg];
+    ;
+    ChatMessage *msg = [self.toChatUsr.msgs lastObject];
+    NSString *file = [self msgDataReadPath:msg];
+    NSData *imageData = [NSData dataWithContentsOfFile:file];
+    NSLog(@"image size %lu", (unsigned long)[imageData length]);
+    AVFile *imageFile = [AVFile fileWithName:@"image.png" data:imageData];
+    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            AVObject *object = [AVObject objectWithClassName:@"Attachments"];
+            [object setObject:@"image" forKey:@"type"];
+            [object setObject:imageFile forKey:@"image"];
+            [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    [self sendAttachment:object];
+                }
+            }];
+        }
+    }];
+    [self refreshTimestampArray];
+    [self finishSend];
+}
 
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *fromid = [[self.messages objectAtIndex:indexPath.row] objectForKey:@"fromid"];
@@ -156,6 +224,10 @@
         return JSBubbleMediaTypeText;
     } else if ([type isEqualToString:@"image"]) {
         return JSBubbleMediaTypeImage;
+    }
+    else if ([type isEqualToString:@"sound"])
+    {
+        return JSBubbleMediaTypeText;
     }
     return JSBubbleMediaTypeText;
 
@@ -271,7 +343,24 @@
 {
     return [UIImage imageNamed:@"demo-avatar-woz"];
 }
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSNumber *i = @(indexPath.row);
+    AVFile *file = [_loadedData objectForKey:i];
+    if (file) {
+        NSData *data = [file getData];
+        NSError *playerError;
+        self.player = nil;
+        self.player = [[AVAudioPlayer alloc] initWithData:data error:&playerError];
+        self.player.numberOfLoops = 0;
+        if (self.player == nil)
+        {
+            NSLog(@"ERror creating player: %@", playerError);
+        }else{
+            [self.player play];
+        }
+    }
+  
+}
 - (id)dataForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSNumber *r = @(indexPath.row);
     AVFile *file = [_loadedData objectForKey:r];
@@ -442,4 +531,77 @@
     }
     [self dismissImagePickerController];
 }
+
+#pragma mark copy from viewcontrollchat
+
+-(BOOL) prepareRecord{
+    __block BOOL bCanRecord = YES;
+    if ([[UIDevice currentDevice] systemVersion].floatValue >= 6.0 )
+    {
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        [audioSession requestRecordPermission:^(BOOL granted) {
+            if (granted) {
+                bCanRecord = YES;
+            }
+            else {
+                bCanRecord = NO;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[[UIAlertView alloc] initWithTitle:nil
+                                                message:@"app需要访问您的麦克风。\n请启用麦克风-设置/隐私/麦克风"
+                                               delegate:nil
+                                      cancelButtonTitle:@"关闭"
+                                      otherButtonTitles:nil] show];
+                });
+            }
+            dispatch_semaphore_signal(sema);
+        }];
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+    }
+    self.recorderSettingsDict =[[NSDictionary alloc] initWithObjectsAndKeys:
+                                [NSNumber numberWithInt:kAudioFormatMPEG4AAC],AVFormatIDKey,
+                                [NSNumber numberWithInt:1000.0],AVSampleRateKey,
+                                [NSNumber numberWithInt:2],AVNumberOfChannelsKey,
+                                [NSNumber numberWithInt:8],AVLinearPCMBitDepthKey,
+                                [NSNumber numberWithBool:NO],AVLinearPCMIsBigEndianKey,
+                                [NSNumber numberWithBool:NO],AVLinearPCMIsFloatKey,
+                                nil];
+    return bCanRecord;
+}
+
+/* 存储时使用这个path，读取信息时字节用msg.msg做path */
+-(NSString *)msgDataSavePath{
+    NSString *savePath;
+    NSDate *dateToRecord = [NSDate date];
+    NSDateFormatter *fmDate = [[NSDateFormatter alloc] init];
+    [fmDate setDateFormat:@"YYYY-MM-DD-HH-MM-SS"];
+    self.dateToRecordStr = [fmDate stringFromDate:dateToRecord];
+    savePath = [NSString stringWithFormat:@"%@/%@/recent/%@%@.aac", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], [AVUser currentUser].username, self.toChatUsr.UID, self.dateToRecordStr];
+    NSError *err;
+    NSFileManager *fm = [NSFileManager defaultManager];
+    if(![fm createDirectoryAtPath:[savePath stringByDeletingLastPathComponent] withIntermediateDirectories:YES attributes:nil error:&err]){
+        NSLog(@"recordSavePath dir create err: %@",err);
+    }
+    return savePath;
+}
+- (NSString *)msgDataReadPath:(ChatMessage *)msg{
+    return [NSString stringWithFormat:@"%@/%@/recent/%@", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0], [AVUser currentUser].username,msg.msg];
+}
+-(BOOL)sendMsg{
+    //if p2p is OK, go to p2p, else go to http
+    
+//    [[RuntimeStatus instance].udpP2P sendDict:[self.toChatUsr packetLastChatMsg] toUser:self.toChatUsr withProtocol:RECENT_MSG_POST];
+    return YES;
+}
+/* 保存自己产生的消息。这里的消息更新是会对runtime有刷新效果的。 */
+-(BOOL)updateMsg{
+    ChatMessage *newMsg = [[ChatMessage alloc] init];
+//    newMsg.ownerUID = [RuntimeStatus instance].usrSelf.UID;
+    newMsg.type = MSG_TYPE_SOUND;
+    newMsg.timeStamp = self.dateToRecordStr;
+    newMsg.msg = [NSString stringWithFormat:@"%@%@.aac", self.toChatUsr.UID, newMsg.timeStamp];
+    [self.toChatUsr.msgs addObject:newMsg];
+    return YES;
+}
+
 @end
