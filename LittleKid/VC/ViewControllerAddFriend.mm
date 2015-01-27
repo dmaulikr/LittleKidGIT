@@ -77,8 +77,11 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ( indexPath.row == 1 ) {//点击扫一扫cell
+    if ( indexPath.row == 2 ) {//点击扫一扫cell
         [self addScan];
+    }
+    if (indexPath.row == 1) {//通讯录，mainstoryboard已处理跳转，直接返回
+        return;
     }
 }
 
@@ -120,8 +123,11 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    TableViewControllerFriendConfirm *destVC = segue.destinationViewController;
-    destVC.toAddFriendInfoDict = [[NSDictionary alloc] initWithDictionary:self.toAddFriendInfoDict];
+    if ([segue.identifier compare:@"segueToFriendConfirm"] == NSOrderedSame ) {
+        TableViewControllerFriendConfirm *destVC = segue.destinationViewController;
+        destVC.toAddFriendInfoDict = [[NSDictionary alloc] initWithDictionary:self.toAddFriendInfoDict];
+    }
+
 }
 
 @end

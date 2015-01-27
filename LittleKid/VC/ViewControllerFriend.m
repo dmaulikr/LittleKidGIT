@@ -49,35 +49,38 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 1+[[RuntimeStatus instance].usrSelf.friends count];
+    return 1+3;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if ( indexPath.row == 0 ) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellToAddressBook" forIndexPath:indexPath];
+    if ( indexPath.row == 0 ) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellToAddFriend" forIndexPath:indexPath];
         return cell;
-//    }
-//    else{// 一个BUG，加载friendCell老是挂掉，还没找到原因
-//        UserOther *friend = [[RuntimeStatus instance].usrSelf.friends objectAtIndex:indexPath.row-1];//you must minus 1 as cell number is 1 more than array count
-//        FriendTableViewCell *cell;
-//        cell = [tableView dequeueReusableCellWithIdentifier:@"cellFriend" forIndexPath:indexPath];
-//        if (cell == nil) {
-//            cell = [[FriendTableViewCell alloc] init];
-//        }
-//        cell.nickName.text = friend.nickName;
-//        cell.state.text = friend.state;
-//        cell.starNumber.text = @"5";
-//        cell.signature.text = friend.signature;
-//        return  cell;
-//    }
+    }
+    else{// 一个BUG，加载friendCell老是挂掉，还没找到原因
+        //you must minus 1 as cell number is 1 more than array count
+        FriendTableViewCell *cell;
+        cell = [tableView dequeueReusableCellWithIdentifier:@"cellFriend" forIndexPath:indexPath];
+        if (cell == nil) {
+            cell = [[FriendTableViewCell alloc] init];
+        }
+        cell.nickName.text = @"nickname";
+        cell.state.text = @"state";
+        cell.starNumber.text = @"5";
+        cell.signature.text = @"signature";
+        return  cell;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {
-        [self performSegueWithIdentifier:@"segueToAB" sender:self];
+    if (indexPath.row == 0) {//这个segue在mainstoryboard中完成了，此处直接退出即可
+        return;
     }
-   }
+    //根据indexPath加载响应好友信息
+    
+    
+}
 
 
 // Override to support conditional editing of the table view.
