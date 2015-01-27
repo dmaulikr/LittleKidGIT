@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *password;
 @property (weak, nonatomic) IBOutlet UITextField *passwordCheck;
 @property (strong, nonatomic) NSString *checkCode;
+@property (strong, nonatomic) AVUser *user;
+@property (strong, nonatomic) AVQuery * query;
 
 
 
@@ -45,17 +47,16 @@
     gestureTap.numberOfTapsRequired = 1;
     [self.view addGestureRecognizer:gestureTap];
     
+    //初始化本地用户
+     self.user = [AVUser user];
+    //初始化查询
+     self.query = [AVUser query];
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_SIGN_UP object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-        //code here to decide if segue to next
-        NSLog(@"get notify");
-        NSDictionary *signUpRcvdDict = note.userInfo;
-        NSLog(@"%@",signUpRcvdDict);
-        //检查ack，成功则继续提取短信验证码，失败则提示问题
-        if ( YES == [self checkAck:signUpRcvdDict] ) {
-            [self performSegueWithIdentifier:@"segueFromInfo" sender:self];
-        }
-    }];
+    ///add--监听电话号码长度
+    [self.account addTarget:self
+                       action:@selector(textFieldDidChange:)
+             forControlEvents:UIControlEventEditingChanged];
+    
 }
 ///add
 - (void)removeKeyBoard{
@@ -100,46 +101,104 @@
 ///
 
 
-#define RET_CODE    @"retcode"
-- (BOOL)checkAck:(NSDictionary *)ackDict{
-    NSString *retCode = [ackDict objectForKey:RET_CODE];
-    if ( [retCode intValue]<0 ) {
-        [[[UIAlertView alloc] initWithTitle:@"手机号已被注册" message:@"请更换手机号码或直接登陆" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil] show];
-        return NO;
+
+#pragma mark --动态监听输入长度
+
+
+-(IBAction)textFieldDidChange:(UITextField *)sender
+{
+    bool isChinese;//判断当前输入法是否是中文
+    if ([[[UITextInputMode currentInputMode] primaryLanguage] isEqualToString: @"en-US"]) {
+        isChinese = false;
     }
-    self.checkCode = retCode;
-    return YES;
+    else
+    {
+        isChinese = true;
+    }
+    
+    // 11位
+    NSString *str = [[sender text] stringByReplacingOccurrencesOfString:@"?" withString:@""];
+   
+    if (isChinese) { //中文输入法下
+        UITextRange *selectedRange = [sender markedTextRange];
+        //获取高亮部分
+        UITextPosition *position = [sender positionFromPosition:selectedRange.start offset:0];
+        // 没有高亮选择的字，则对已输入的文字进行字数统计和限制
+        if (!position) {
+            NSLog(@"汉字");
+            if ( str.length == 11) {
+                NSLog(@"%@",@"#######################################0");
+                
+               
+                [self.query whereKey:@"username" equalTo:self.account.text];
+                [self.query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    NSLog(@"objects:%@",objects);
+                    if (error == nil) {
+                        
+                        if ( [objects  count] == 0 ) {
+                             NSLog(@"mnmnmnmnmnmnmnmnmnmnmnmnnmnmnmnmnmn00");
+                        }
+                        else {
+                            
+                             [[[UIAlertView alloc] initWithTitle:@"手机号已被注册" message:@"请更换手机号码或直接登陆" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil] show];
+                        }
+                        
+                    } else {
+                        
+                    }
+                }];
+                
+            }
+        }
+        else
+        {
+            NSLog(@"输入的英文还没有转化为汉字的状态");
+            
+        }
+    }else{
+        NSLog(@"str=%@; 本次长度=%d",str,[str length]);
+        if ([str length] == 11) {
+             NSLog(@"%@",@"#######################################1");
+            
+
+            [self.query whereKey:@"username" equalTo:self.account.text];
+            [self.query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                NSLog(@"objects:%@",objects);
+                if (error == nil) {
+                    if ( [objects  count] == 0 ) {
+                        NSLog(@"mnmnmnmnmnmnmnmnmnmnmnmnnmnmnmnmnmn00");
+                    }
+                    else {
+                        [[[UIAlertView alloc] initWithTitle:@"手机号已被注册" message:@"请更换手机号码或直接登陆" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil] show];
+                    }
+
+ 
+                } else {
+                   
+                }
+            }];
+
+        }
+    }
+
 }
+
+
+#define SIGN_UP_SEGUE   @"segueFromInfo"
 
 - (IBAction)onBtnSignUp:(id)sender {
     if ([self checkMsg] == NO) {//本地check是否合法
         return;
     }
-    [RuntimeStatus instance].signAccountUID = self.account.text;
-    [[RuntimeStatus instance].usrSelf addSignUpMsgToUsrselfWithUID:self.account.text pwd:[self md5WithStr:self.password.text]];//pwd加密
-    AVUser * user = [AVUser user];
-    user.username = self.account.text;
-    user.password =  self.password.text;
+
+   
+    self.user.username = self.account.text;
+    self.user.password =  self.password.text;
+ 
     
-    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"Register success");
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:KEY_ISLOGINED];
-            [[NSUserDefaults standardUserDefaults] setObject:self.account.text forKey:KEY_USERNAME];
-            [self dismissViewControllerAnimated:NO completion:^{
-                
-            }];
-            
-            [self.navigationController popToRootViewControllerAnimated:YES];
-            
-        } else {
-            NSString *errorString = [[error userInfo] objectForKey:@"error"];
-            UIAlertView *errorAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [errorAlertView show];
-        }
-    }];
 //    NSDictionary *signUpDict = [[RuntimeStatus instance].usrSelf packetSignUpDict];
 //    [HTTTClient sendData:signUpDict withProtocol:SIGN_UP];
+    [self performSegueWithIdentifier:SIGN_UP_SEGUE sender:nil];
     [self waitStatus];
 }
 
@@ -183,14 +242,14 @@
     return YES;
 }
 
-#pragma mark - Navigation
+#pragma mark - Navigation--通过次在两个controller中传递数据
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     ViewControllerMsgCheck *desVC = segue.destinationViewController;
-    desVC.checkCode = self.checkCode;
+    desVC.kiduser = self.user;
 }
 
 @end

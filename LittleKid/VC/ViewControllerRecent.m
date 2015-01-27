@@ -10,10 +10,11 @@
 #import "RecentTableViewCell.h"
 #import "ViewControllerChat.h"
 #import "CDSessionManager.h"
+#import "CDChatRoomController.h"
 
 @interface ViewControllerRecent ()
 
-@property (weak, nonatomic) IBOutlet UITableView *recentTableView;
+@property (strong, nonatomic) UITableView *recentTableView;
 @property (strong, nonatomic) UIImage *headImage;
 @property( strong, nonatomic) UIImage *iconImage;
 @property(strong, nonatomic) NSString *str;
@@ -26,22 +27,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUI];
+    
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshRecentContacts:) name:NOTIFI_GET_RECENT_MSG object:nil];
     self.headImage = [UIImage imageNamed:@"head.jpg"];
     self.iconImage = [UIImage imageNamed:@"5.png"];
-    [self startFetchUserList];
+//    [self startFetchUserList];
     [self waitStatus];
+    UIImageView *imageview = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    [imageview setImage:[UIImage imageNamed:@"zuijin_background"]];
+    _recentTableView.backgroundView = imageview;
 }
 
 - (void)setUI{
-    self.recentTableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"zuijin_roundCornerRect.png"]];
+    
 }
 
 - (void)startFetchUserList {
     AVQuery * query = [AVUser query];
     query.cachePolicy = kAVCachePolicyIgnoreCache;
-    
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (objects) {
             NSMutableArray *users = [NSMutableArray array];
@@ -149,6 +153,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //hit the index of the row to get the recentMsg in runtimestatus
     self.toChatUsrIndex = [indexPath row];
+    NSDictionary *chatRoom = [[[CDSessionManager sharedInstance] chatRooms] objectAtIndex:indexPath.row];
+    CDChatRoomType type = [[chatRoom objectForKey:@"type"] integerValue];
+    NSString *otherid = [chatRoom objectForKey:@"otherid"];
+    CDChatRoomController *controller = [[CDChatRoomController alloc] init];
+    controller.type = type;
+    if (type == CDChatRoomTypeGroup) {
+        AVGroup *group = [[CDSessionManager sharedInstance] joinGroup:otherid];
+        controller.group = group;
+        controller.otherId = otherid;
+    } else {
+        controller.otherId = otherid;
+    }
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 // Override to support conditional editing of the table view.
@@ -188,15 +205,17 @@
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
-     ViewControllerChat *desVC = segue.destinationViewController;
+//     ViewControllerChat *desVC = segue.destinationViewController;
+//     
+//     desVC.toChatUsrIndex = self.toChatUsrIndex;
+//     
+//     NSDictionary *chatRoom = [[[CDSessionManager sharedInstance] chatRooms] objectAtIndex:self.toChatUsrIndex];
+//     NSString *otherid = [chatRoom objectForKey:@"otherid"];
+//    
+//    desVC.othreId = otherid;
+//     [desVC setHidesBottomBarWhenPushed:YES];
      
-     desVC.toChatUsrIndex = self.toChatUsrIndex;
-     
-     NSDictionary *chatRoom = [[[CDSessionManager sharedInstance] chatRooms] objectAtIndex:self.toChatUsrIndex];
-     NSString *otherid = [chatRoom objectForKey:@"otherid"];
-    
-    desVC.othreId = otherid;
-     [desVC setHidesBottomBarWhenPushed:YES];
+
  }
 
 

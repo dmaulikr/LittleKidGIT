@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVOSCloud/AVOSCloud.h>
 
 @interface UIViewControllerBase : UIViewController <UITextFieldDelegate>
 
 @property (assign) CGFloat keyboardHeight;
+@property (strong, nonatomic)  AVUser *kiduser;
+
 @end
