@@ -15,10 +15,10 @@
     self.headPicture.layer.cornerRadius = (self.headPicture.layer.frame.size.height/2);
 //    self.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"zuijin_roundCornerRect"]];
     self.backgroundView.layer.cornerRadius = 10;
-    self.backgroundView.backgroundColor = [UIColor clearColor];
+    self.backgroundView.backgroundColor = [UIColor whiteColor];
     UIImageView *imageview = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liaotiankuang"]];
     self.backgroundView = imageview;
-    self.backgroundView.layer.opacity = 0.4;
+    self.backgroundView.alpha = 0.2;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
