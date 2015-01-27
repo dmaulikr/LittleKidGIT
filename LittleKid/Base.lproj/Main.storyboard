@@ -1021,6 +1021,7 @@
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="headPicture" destination="kB9-ph-2Gl" id="Tzg-ic-hLL"/>
                                             <outlet property="lastMsg" destination="e3c-Cp-WSH" id="sjD-E0-zFr"/>

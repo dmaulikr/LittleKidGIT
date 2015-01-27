@@ -18,6 +18,8 @@
 @property (strong, nonatomic) UIImage *headImage;
 @property( strong, nonatomic) UIImage *iconImage;
 @property(strong, nonatomic) NSString *str;
+@property (strong, nonatomic) NSMutableArray *recentUsrList;
+@property (nonatomic, strong) NSArray *messages;
 @property NSInteger toChatUsrIndex;
 
 @end
@@ -27,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUI];
-    
+    self.recentUsrList = [[NSMutableArray alloc]init];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshRecentContacts:) name:NOTIFI_GET_RECENT_MSG object:nil];
     self.headImage = [UIImage imageNamed:@"head.jpg"];
@@ -37,12 +39,66 @@
     UIImageView *imageview = [[UIImageView alloc] initWithFrame:self.view.bounds];
     [imageview setImage:[UIImage imageNamed:@"zuijin_background"]];
     _recentTableView.backgroundView = imageview;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageUpdated:) name:NOTIFICATION_MESSAGE_UPDATED object:nil];
+    [self loadList];
 }
 
 - (void)setUI{
     
 }
-
+- (void)loadList
+{
+    
+    for(NSMutableDictionary *chatRoom in [[CDSessionManager sharedInstance] chatRooms])
+    {
+        if (chatRoom == nil) {
+            return ;
+        }
+        NSMutableDictionary * dict = [[NSMutableDictionary alloc]init];
+        CDChatRoomType type = [[chatRoom objectForKey:@"type"] integerValue];
+        NSString *otherid = [chatRoom objectForKey:@"otherid"];
+        NSMutableString *nameString = [[NSMutableString alloc] init];
+        if (type == CDChatRoomTypeGroup) {
+            [nameString appendFormat:@"group:%@", otherid];
+        } else {
+            [nameString appendFormat:@"%@", otherid];
+        }
+        [dict setObject:otherid forKey:@"otherid"];
+        [dict setObject:@"0" forKey:@"unreadmsg"];
+        NSArray *messages = nil;
+        messages = [[CDSessionManager sharedInstance] getMessagesForPeerId:otherid];
+        self.messages = messages;
+        NSString *lastmsgtype = [[self.messages lastObject] objectForKey:@"type"];
+        NSString *lasttime = [[self.messages lastObject] objectForKey:@"time"];
+        if (lastmsgtype) {
+            [dict setObject:lastmsgtype forKey:@"type"];
+        }
+        if (lasttime) {
+            [dict setObject:lasttime forKey:@"time"];
+        }
+        [self.recentUsrList addObject:dict];
+    }
+}
+- (void)messageUpdated:(NSNotification *)notification {
+    NSDictionary *dict = notification.userInfo;
+    NSString *fromid = [dict objectForKey:@"fromid"];
+    int i=0;
+    for(NSMutableDictionary *dict in self.recentUsrList)
+    {
+        if ([[dict objectForKey:@"otherid"] isEqualToString:fromid]) {
+            NSInteger unread = [[dict objectForKey:@"unreadmsg"]integerValue];
+            unread++;
+            NSString *str = [[NSString alloc]initWithFormat:@"%d",unread];
+            [dict setObject:str forKey:@"unreadmsg"];
+            [self.recentTableView reloadData];
+            return;
+//            [self.recentUsrList replaceObjectAtIndex:i withObject:dict];
+        }
+        i++;
+    }
+    
+    
+}
 - (void)startFetchUserList {
     AVQuery * query = [AVUser query];
     query.cachePolicy = kAVCachePolicyIgnoreCache;
@@ -106,36 +162,14 @@
     if (cell == nil) {
         cell = [[RecentTableViewCell alloc] init];
     }
-    NSDictionary *chatRoom = [[[CDSessionManager sharedInstance] chatRooms] objectAtIndex:indexPath.row];
-    if (chatRoom == nil) {
-        return cell;
-    }
-    CDChatRoomType type = [[chatRoom objectForKey:@"type"] integerValue];
-    NSString *otherid = [chatRoom objectForKey:@"otherid"];
-    NSMutableString *nameString = [[NSMutableString alloc] init];
-    if (type == CDChatRoomTypeGroup) {
-        [nameString appendFormat:@"group:%@", otherid];
-    } else {
-        [nameString appendFormat:@"%@", otherid];
-    }
     
-    
-//    UserOther *recent1Usr = [[RuntimeStatus instance].recentUsrList objectAtIndex:[indexPath row]];
-//    if (recent1Usr == nil) {
-//        return cell;
-//    }
-    cell.nickName.text = otherid;
-//    cell.headPicture.image = self.headImage;
-//    cell.msgIcon.image = self.iconImage;
-//    cell.share.text = @"empty";
-//    ChatMessage *lastMsg = [recent1Usr.msgs lastObject];
-//    if (lastMsg == nil) {
-//        return cell;
-//    }
-    /* 根据不同类型消息显示不同 */
-    NSString *msg = [chatRoom objectForKey:@"msg"];
-    cell.lastMsg.text = msg;
-    
+    NSMutableDictionary *chatroom = [self.recentUsrList objectAtIndex:indexPath.row];
+    NSString *str = [chatroom objectForKey:@"otherid"];
+    cell.nickName.text = str;
+    str = [chatroom objectForKey:@"type"];
+    cell.lastMsg.text = str;
+    str = [chatroom objectForKey:@"unreadmsg"];
+    [cell.unreadmsg setTitle:str forState:UIControlStateNormal];
 
     
     
