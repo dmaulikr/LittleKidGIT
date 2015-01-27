@@ -14,7 +14,7 @@
 
 @interface ViewControllerRecent ()
 
-@property (weak, nonatomic) IBOutlet UITableView *recentTableView;
+@property (strong, nonatomic) UITableView *recentTableView;
 @property (strong, nonatomic) UIImage *headImage;
 @property( strong, nonatomic) UIImage *iconImage;
 @property(strong, nonatomic) NSString *str;
@@ -27,16 +27,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setUI];
+    
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshRecentContacts:) name:NOTIFI_GET_RECENT_MSG object:nil];
     self.headImage = [UIImage imageNamed:@"head.jpg"];
     self.iconImage = [UIImage imageNamed:@"5.png"];
 //    [self startFetchUserList];
     [self waitStatus];
+    UIImageView *imageview = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    [imageview setImage:[UIImage imageNamed:@"zuijin_background"]];
+    _recentTableView.backgroundView = imageview;
 }
 
 - (void)setUI{
-    self.recentTableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"zuijin_roundCornerRect.png"]];
+    
 }
 
 - (void)startFetchUserList {
