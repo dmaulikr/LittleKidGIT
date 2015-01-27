@@ -259,6 +259,8 @@
 		E4A5DCB21A63AF59001531AB /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = E4A5DCB01A63AF59001531AB /* pinyin.c */; };
 		E4A85E2C1A5A780100C0A222 /* OtherMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A85E2B1A5A780100C0A222 /* OtherMsgTableViewCell.m */; };
 		E4A85E2F1A5A781400C0A222 /* SelfMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A85E2E1A5A781400C0A222 /* SelfMsgTableViewCell.m */; };
+		E4AA3B471A772EC5006D16B3 /* TableViewControllerFriendConfirm.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AA3B461A772EC5006D16B3 /* TableViewControllerFriendConfirm.m */; };
+		E4AD93341A738C1300C10EB8 /* ViewControllerAddFriend.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4AD93331A738C1300C10EB8 /* ViewControllerAddFriend.mm */; };
 		E4B1017A1A4CF01B004E1224 /* RecentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B101791A4CF01B004E1224 /* RecentTableViewCell.m */; };
 		E4B101801A4D2A0A004E1224 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1017F1A4D2A0A004E1224 /* GCDAsyncUdpSocket.m */; };
 		E4B1019E1A4E9002004E1224 /* HTTTClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E4B1019D1A4E9002004E1224 /* HTTTClient.m */; };
@@ -681,6 +683,10 @@
 		E4A85E2B1A5A780100C0A222 /* OtherMsgTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherMsgTableViewCell.m; sourceTree = "<group>"; };
 		E4A85E2D1A5A781400C0A222 /* SelfMsgTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfMsgTableViewCell.h; sourceTree = "<group>"; };
 		E4A85E2E1A5A781400C0A222 /* SelfMsgTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfMsgTableViewCell.m; sourceTree = "<group>"; };
+		E4AA3B451A772EC5006D16B3 /* TableViewControllerFriendConfirm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewControllerFriendConfirm.h; sourceTree = "<group>"; };
+		E4AA3B461A772EC5006D16B3 /* TableViewControllerFriendConfirm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewControllerFriendConfirm.m; sourceTree = "<group>"; };
+		E4AD93321A738C1300C10EB8 /* ViewControllerAddFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerAddFriend.h; sourceTree = "<group>"; };
+		E4AD93331A738C1300C10EB8 /* ViewControllerAddFriend.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewControllerAddFriend.mm; sourceTree = "<group>"; };
 		E4B101781A4CF01B004E1224 /* RecentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentTableViewCell.h; sourceTree = "<group>"; };
 		E4B101791A4CF01B004E1224 /* RecentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentTableViewCell.m; sourceTree = "<group>"; };
 		E4B1017E1A4D2A0A004E1224 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
@@ -1391,6 +1397,10 @@
 				E4B101A31A4EA2D7004E1224 /* ContactTableViewCell.m */,
 				E4A5385C1A5FFCFB002456A4 /* FriendTableViewCell.h */,
 				E4A5385D1A5FFCFB002456A4 /* FriendTableViewCell.m */,
+				E4AD93321A738C1300C10EB8 /* ViewControllerAddFriend.h */,
+				E4AD93331A738C1300C10EB8 /* ViewControllerAddFriend.mm */,
+				E4AA3B451A772EC5006D16B3 /* TableViewControllerFriendConfirm.h */,
+				E4AA3B461A772EC5006D16B3 /* TableViewControllerFriendConfirm.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1809,6 +1819,7 @@
 				57AC91171A71FEC6008F0892 /* UIImage+Resize.m in Sources */,
 				E422F8E51A4459C200CF2F9C /* RuntimeStatus.m in Sources */,
 				E422F8A71A43FDE800CF2F9C /* ViewControllerLogin.m in Sources */,
+				E4AD93341A738C1300C10EB8 /* ViewControllerAddFriend.mm in Sources */,
 				573230CB1A6F7219004E187F /* CDSessionManager.m in Sources */,
 				E4A5385E1A5FFCFB002456A4 /* FriendTableViewCell.m in Sources */,
 				57AC91141A71FEC6008F0892 /* DataMatrix.mm in Sources */,
@@ -1848,6 +1859,7 @@
 				57AC91131A71FEC6008F0892 /* QBImagePickerThumbnailView.m in Sources */,
 				E4B101801A4D2A0A004E1224 /* GCDAsyncUdpSocket.m in Sources */,
 				573230C61A6F70CE004E187F /* RNGridMenu.m in Sources */,
+				E4AA3B471A772EC5006D16B3 /* TableViewControllerFriendConfirm.m in Sources */,
 				E4E729A51A4BADC2000FA552 /* User.m in Sources */,
 				57AC90D01A71FEC6008F0892 /* JSBubbleView.m in Sources */,
 				E48D20B61A64E3D80099537F /* UDPP2P.m in Sources */,
