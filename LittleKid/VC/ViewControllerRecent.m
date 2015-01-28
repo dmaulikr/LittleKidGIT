@@ -34,7 +34,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshRecentContacts:) name:NOTIFI_GET_RECENT_MSG object:nil];
     self.headImage = [UIImage imageNamed:@"head.jpg"];
     self.iconImage = [UIImage imageNamed:@"5.png"];
-//    [self startFetchUserList];
+    [self startFetchUserList];
 //    [[CDSessionManager sharedInstance] clearData];
 //    [[CDSessionManager sharedInstance] addChatWithPeerId:@"15926305768"];
 //    [[CDSessionManager sharedInstance] addChatWithPeerId:@"13437251599"];

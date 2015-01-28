@@ -65,7 +65,9 @@ static BOOL initialized = NO;
 
 - (void)commonInit {
     if (![_database tableExists:@"messages"]) {
-        [_database executeUpdate:@"create table \"messages\" (\"fromid\" text, \"toid\" text, \"type\" text, \"message\" text, \"object\" text, \"time\" integer, \"avfile\" object)"];
+        if ([_database executeUpdate:@"create table \"messages\" (\"fromid\" text, \"toid\" text, \"type\" text, \"message\" text, \"object\" text, \"time\" integer, \"avfile\" blob)"]) {
+            NSLog(@"creat success");
+        }
     }
     if (![_database tableExists:@"sessions"]) {
         [_database executeUpdate:@"create table \"sessions\" (\"type\" integer, \"otherid\" text)"];
@@ -325,8 +327,10 @@ static BOOL initialized = NO;
     [dict setObject:peerId forKey:@"toid"];
     [dict setObject:type forKey:@"type"];
     [dict setObject:object.objectId forKey:@"object"];
+    NSData *filedata = [file getData];
+    [dict setObject:filedata forKey:@"filedata"];
     [dict setObject:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:@"time"];
-    if ([_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"object\", \"time\", \"avfile\") values (:fromid, :toid, :type, :object, :time, :file)" withParameterDictionary:dict]) {
+    if ([_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"object\", \"time\", \"avfile\") values (:fromid, :toid, :type, :object, :time, :filedata)" withParameterDictionary:dict]) {
         NSLog(@"database insert sucess");
     }
     
@@ -352,7 +356,7 @@ static BOOL initialized = NO;
     [dict setObject:type forKey:@"type"];
     [dict setObject:object.objectId forKey:@"object"];
     [dict setObject:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:@"time"];
-    if ([_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"object\", \"time\", \"avfile\") values (:fromid, :toid, :type, :object, :time, :file)" withParameterDictionary:dict]) {
+    if ([_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"object\", \"time\", \"avfile\") values (:fromid, :toid, :type, :object, :time, :filedata)" withParameterDictionary:dict]) {
         NSLog(@"database insert sucess");
     }
     
@@ -393,7 +397,8 @@ static BOOL initialized = NO;
         double time = [rs doubleForColumn:@"time"];
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
         NSString *type = [rs stringForColumn:@"type"];
-        AVFile *file = [rs objectForColumnName:@"avfile"];
+        NSData *data = [rs dataForColumn:@"avfile"];
+        AVFile *file = [AVFile fileWithData:data];
         if ([type isEqualToString:@"text"]) {
             NSString *message = [rs stringForColumn:@"message"];
             NSDictionary *dict = @{@"fromid":fromid, @"toid":toid, @"type":type, @"message":message, @"time":date};
@@ -521,7 +526,12 @@ static BOOL initialized = NO;
         [avobject fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
             AVFile *avfile = [object objectForKey:type];
             [avfile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                
+                NSData *filedata = [avfile getData];
+                [dict setObject:filedata forKey:@"avfile"];
                 [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"object\", \"time\", \"avfile\") values (:fromid, :toid, :type, :object, :time, :avfile)" withParameterDictionary:dict];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MESSAGE_UPDATED object:session userInfo:dict];
+                return ;
             }];
         }];
 
