@@ -46,7 +46,7 @@
     //add-2
     self.account.returnKeyType = UIReturnKeyNext;
     self.password.returnKeyType = UIReturnKeyGo;
-    self.account.text = @"jiangtao";
+    self.account.text = @"13437251599";
     self.password.text = @"123456";
     [self onLogin:nil];
     //按下背景退出输入法

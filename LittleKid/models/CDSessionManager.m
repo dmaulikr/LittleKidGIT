@@ -92,7 +92,10 @@ static BOOL initialized = NO;
         }
         [_chatRooms addObject:dict];
     }
+    
     [_session watchPeerIds:peerIds];
+   
+    
     initialized = YES;
 }
 
@@ -243,6 +246,29 @@ static BOOL initialized = NO;
     dict = [NSMutableDictionary dictionary];
     [dict setObject:_session.peerId forKey:@"fromid"];
     [dict setObject:peerId forKey:@"toid"];
+    [dict setObject:@"text" forKey:@"type"];
+    [dict setObject:message forKey:@"message"];
+    [dict setObject:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:@"time"];
+    [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"message\", \"time\") values (:fromid, :toid, :type, :message, :time)" withParameterDictionary:dict];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MESSAGE_UPDATED object:nil userInfo:dict];
+    
+}
+
+- (void)sendMessage:(NSString *)message toGroup:(NSString *)groupId {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:_session.peerId forKey:@"dn"];
+    [dict setObject:@"text" forKey:@"type"];
+    [dict setObject:message forKey:@"msg"];
+    NSError *error = nil;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
+    NSString *payload = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    AVGroup *group = [AVGroup getGroupWithGroupId:groupId session:_session];
+    AVMessage *messageObject = [AVMessage messageForGroup:group payload:payload];
+    [group sendMessage:messageObject];
+    
+    dict = [NSMutableDictionary dictionary];
+    [dict setObject:_session.peerId forKey:@"fromid"];
+    [dict setObject:groupId forKey:@"toid"];
     [dict setObject:@"text" forKey:@"type"];
     [dict setObject:message forKey:@"message"];
     [dict setObject:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:@"time"];

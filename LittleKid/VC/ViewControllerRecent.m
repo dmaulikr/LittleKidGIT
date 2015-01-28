@@ -35,16 +35,27 @@
     self.headImage = [UIImage imageNamed:@"head.jpg"];
     self.iconImage = [UIImage imageNamed:@"5.png"];
 //    [self startFetchUserList];
+    [[CDSessionManager sharedInstance] addChatWithPeerId:@"15926305768"];
+    [[CDSessionManager sharedInstance] addChatWithPeerId:@"13437251599"];
     [self waitStatus];
     UIImageView *imageview = [[UIImageView alloc] initWithFrame:self.view.bounds];
     [imageview setImage:[UIImage imageNamed:@"zuijin_background"]];
     _recentTableView.backgroundView = imageview;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageUpdated:) name:NOTIFICATION_MESSAGE_UPDATED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetunread:) name:NOTIFICATION_RESET_UNREADMSG object:nil];
     [self loadList];
 }
 
 - (void)setUI{
     
+}
+- (void)resetunread:(NSNotification *)notification
+{
+    NSMutableDictionary *dict = [self.recentUsrList objectAtIndex:self.toChatUsrIndex];
+    NSInteger unread = [[dict objectForKey:@"unreadmsg"]integerValue];
+    unread++;
+    [dict setObject:@"0" forKey:@"unreadmsg"];
+    [self.recentTableView reloadData];
 }
 - (void)loadList
 {
@@ -192,6 +203,7 @@
     NSString *otherid = [chatRoom objectForKey:@"otherid"];
     CDChatRoomController *controller = [[CDChatRoomController alloc] init];
     controller.type = type;
+    controller.cellindex = self.toChatUsrIndex;
     if (type == CDChatRoomTypeGroup) {
         AVGroup *group = [[CDSessionManager sharedInstance] joinGroup:otherid];
         controller.group = group;
@@ -199,6 +211,9 @@
     } else {
         controller.otherId = otherid;
     }
+    NSMutableDictionary *dict = [self.recentUsrList objectAtIndex:self.toChatUsrIndex];
+    [dict setObject:@"0" forKey:@"unreadmsg"];
+    [self.recentTableView reloadData];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
