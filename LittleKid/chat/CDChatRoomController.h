@@ -11,8 +11,10 @@
 #import "JSMessagesViewController.h"
 #import "CDSessionManager.h"
 
+
 @interface CDChatRoomController : JSMessagesViewController
 @property (nonatomic, strong) NSString *otherId;
 @property (nonatomic) CDChatRoomType type;
 @property (nonatomic, strong) AVGroup *group;
+@property (nonatomic) NSInteger cellindex;
 @end

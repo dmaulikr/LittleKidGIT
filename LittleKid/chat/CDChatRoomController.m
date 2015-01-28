@@ -26,6 +26,7 @@
 @property (strong, nonatomic) NSString *dateToRecordStr;
 @property(strong, nonatomic) UserOther *toChatUsr;/* @property设置 */
 @property(strong, nonatomic)AVAudioSession *session;
+@property NSInteger cellcount;
 @end
 
 @implementation CDChatRoomController
@@ -45,7 +46,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _session = [AVAudioSession sharedInstance];
-   
     self.toChatUsr = [[UserOther alloc]init];
     self.toChatUsr.UID = self.otherId;
     //   self.toChatUsr = [[RuntimeStatus instance].recentUsrList objectAtIndex:self.toChatUsrIndex];
@@ -69,6 +69,11 @@
     
     self.delegate = self;
     self.dataSource = self;
+}
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_RESET_UNREADMSG object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -115,7 +120,16 @@
 
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.messages.count;
+    NSInteger i= self.messages.count;
+    if (i>10) {
+        self.cellcount = 10;
+    }
+    else
+    {
+        self.cellcount = self.messages.count;
+    }
+    return self.cellcount;
+    
 }
 
 #pragma mark - Messages view delegate
@@ -362,15 +376,16 @@
   
 }
 - (id)dataForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSNumber *r = @(indexPath.row);
+    NSInteger i = self.messages.count - self.cellcount + indexPath.row;
+    NSNumber *r = @(i);
     AVFile *file = [_loadedData objectForKey:r];
     if (file) {
         NSData *data = [file getData];
         UIImage *image = [[UIImage alloc] initWithData:data];
         return image;
     } else {
-        NSString *objectId = [[self.messages objectAtIndex:indexPath.row] objectForKey:@"object"];
-        NSString *type = [[self.messages objectAtIndex:indexPath.row] objectForKey:@"type"];
+        NSString *objectId = [[self.messages objectAtIndex:i] objectForKey:@"object"];
+        NSString *type = [[self.messages objectAtIndex:i] objectForKey:@"type"];
         AVObject *object = [AVObject objectWithoutDataWithClassName:@"Attachments" objectId:objectId];
         [object fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
             AVFile *file = [object objectForKey:type];
