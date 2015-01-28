@@ -37,6 +37,14 @@
       </ContextState>
       <ContextState
          contextName = "-[CDChatRoomController dataForRowAtIndexPath:]:CDChatRoomController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.cellcount">
+            </PersistentString>
+            <PersistentString
+               value = "self.messages.count">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "isLegalVehicleJumpRule:CheseTools.m">
@@ -46,6 +54,9 @@
       </ContextState>
       <ContextState
          contextName = "-[CDChatRoomController tableView:numberOfRowsInSection:]:CDChatRoomController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[ViewControllerRecent startFetchUserList]:ViewControllerRecent.m">
       </ContextState>
       <ContextState
          contextName = "+[CDSessionManager sharedInstance]:CDSessionManager.m">

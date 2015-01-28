@@ -35,8 +35,10 @@
     self.headImage = [UIImage imageNamed:@"head.jpg"];
     self.iconImage = [UIImage imageNamed:@"5.png"];
 //    [self startFetchUserList];
-    [[CDSessionManager sharedInstance] addChatWithPeerId:@"15926305768"];
-    [[CDSessionManager sharedInstance] addChatWithPeerId:@"13437251599"];
+//    [[CDSessionManager sharedInstance] clearData];
+//    [[CDSessionManager sharedInstance] addChatWithPeerId:@"15926305768"];
+//    [[CDSessionManager sharedInstance] addChatWithPeerId:@"13437251599"];
+//    [[CDSessionManager sharedInstance] addChatWithPeerId:@"13451825813"];
     [self waitStatus];
     UIImageView *imageview = [[UIImageView alloc] initWithFrame:self.view.bounds];
     [imageview setImage:[UIImage imageNamed:@"zuijin_background"]];
@@ -113,7 +115,8 @@
 - (void)startFetchUserList {
     AVQuery * query = [AVUser query];
     query.cachePolicy = kAVCachePolicyIgnoreCache;
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    NSError *error;
+    NSArray *objects =[query findObjects];//(NSArray *objects, NSError *error) {
         if (objects) {
             NSMutableArray *users = [NSMutableArray array];
             for (AVUser *user in objects) {
@@ -126,7 +129,7 @@
         } else {
             NSLog(@"error:%@", error);
         }
-    }];
+    
 }
 
 
@@ -181,6 +184,13 @@
     cell.lastMsg.text = str;
     str = [chatroom objectForKey:@"unreadmsg"];
     [cell.unreadmsg setTitle:str forState:UIControlStateNormal];
+    if ([str intValue] == 0) {
+        [cell.unreadmsg setHidden:YES];
+    }
+    else
+    {
+        [cell.unreadmsg setHidden:FALSE];
+    }
 
     
     
