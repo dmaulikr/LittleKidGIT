@@ -29,15 +29,17 @@
     [RuntimeStatus instance];
     
     //TODO: if already sign up, just login directly
-//    
-//    if ([AVUser currentUser]) {
-//        
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        
-//        UIViewController* nextController = [storyboard instantiateViewControllerWithIdentifier:@"mainTabViewController"];
-//        
+    
+    if ([AVUser currentUser]) {
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        UITableViewController* nextController = [storyboard instantiateViewControllerWithIdentifier:@"mainTabViewController"];
+        
 //        self.window.rootViewController = nextController;
-//    }
+        [self.window setRootViewController:nextController];
+        [self.window makeKeyAndVisible];
+    }
     
     [self registerNotifications: application];
     //后台时有服务器推送，进入程序即调用下方法(可能)，此时可判断推送调用方法。remote推送是会自动调用的。
