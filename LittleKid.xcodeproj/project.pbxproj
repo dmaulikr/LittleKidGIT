@@ -99,6 +99,7 @@
 		577A6F611A7A0B3D004BE99B /* blue_expand_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 577A6F5F1A7A0B3D004BE99B /* blue_expand_highlight@2x.png */; };
 		577A6F621A7A0B3D004BE99B /* blue_expand_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 577A6F601A7A0B3D004BE99B /* blue_expand_normal@2x.png */; };
 		577A6F651A7A147D004BE99B /* InvitePlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 577A6F641A7A147D004BE99B /* InvitePlayViewController.m */; };
+		577A6F681A7A3F7A004BE99B /* invatedPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 577A6F671A7A3F7A004BE99B /* invatedPlayViewController.m */; };
 		57AC8FD11A71FA58008F0892 /* CDChatRoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AC8FC81A71FA58008F0892 /* CDChatRoomController.m */; };
 		57AC8FD21A71FA58008F0892 /* CDContactDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AC8FCB1A71FA58008F0892 /* CDContactDetailController.m */; };
 		57AC8FD31A71FA58008F0892 /* CDContactListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AC8FCD1A71FA58008F0892 /* CDContactListController.m */; };
@@ -410,6 +411,8 @@
 		577A6F601A7A0B3D004BE99B /* blue_expand_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blue_expand_normal@2x.png"; sourceTree = "<group>"; };
 		577A6F631A7A147D004BE99B /* InvitePlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitePlayViewController.h; sourceTree = "<group>"; };
 		577A6F641A7A147D004BE99B /* InvitePlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitePlayViewController.m; sourceTree = "<group>"; };
+		577A6F661A7A3F7A004BE99B /* invatedPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = invatedPlayViewController.h; sourceTree = "<group>"; };
+		577A6F671A7A3F7A004BE99B /* invatedPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = invatedPlayViewController.m; sourceTree = "<group>"; };
 		57AC8FC71A71FA58008F0892 /* CDChatRoomController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDChatRoomController.h; sourceTree = "<group>"; };
 		57AC8FC81A71FA58008F0892 /* CDChatRoomController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDChatRoomController.m; sourceTree = "<group>"; };
 		57AC8FCA1A71FA58008F0892 /* CDContactDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDContactDetailController.h; sourceTree = "<group>"; };
@@ -1416,6 +1419,8 @@
 				E4A5385D1A5FFCFB002456A4 /* FriendTableViewCell.m */,
 				577A6F631A7A147D004BE99B /* InvitePlayViewController.h */,
 				577A6F641A7A147D004BE99B /* InvitePlayViewController.m */,
+				577A6F661A7A3F7A004BE99B /* invatedPlayViewController.h */,
+				577A6F671A7A3F7A004BE99B /* invatedPlayViewController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1906,6 +1911,7 @@
 				E422F8AB1A43FDE800CF2F9C /* ViewControllerChat.m in Sources */,
 				57AC91151A71FEC6008F0892 /* QR_Encode.cpp in Sources */,
 				57AC90CF1A71FEC6008F0892 /* JSBubbleMessageCell.m in Sources */,
+				577A6F681A7A3F7A004BE99B /* invatedPlayViewController.m in Sources */,
 				57AC8FD21A71FA58008F0892 /* CDContactDetailController.m in Sources */,
 				57AC91161A71FEC6008F0892 /* QREncoder.mm in Sources */,
 				57AC90CE1A71FEC6008F0892 /* FMResultSet.m in Sources */,
