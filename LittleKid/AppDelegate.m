@@ -34,9 +34,11 @@
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         
-        UIViewController* nextController = [storyboard instantiateViewControllerWithIdentifier:@"mainTabViewController"];
+        UITableViewController* nextController = [storyboard instantiateViewControllerWithIdentifier:@"mainTabViewController"];
         
-        self.window.rootViewController = nextController;
+//        self.window.rootViewController = nextController;
+        [self.window setRootViewController:nextController];
+        [self.window makeKeyAndVisible];
     }
     
     [self registerNotifications: application];
