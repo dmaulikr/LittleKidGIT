@@ -16,7 +16,7 @@
 //@property(nonatomic) int blackOrRed;
 @property (retain,readwrite,nonatomic)CheseInterface * cheseInterface;
 @property (retain,nonatomic,readwrite) UILabel * label;
-@property  bool blackOrRed;//0 red 1 black
+@property  bool isblack;//0 red 1 black
 @property (strong,nonatomic) AVAudioPlayer *play;
 @property int sendCmd;
 @property UIAlertView *alertwait;

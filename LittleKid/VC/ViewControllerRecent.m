@@ -11,6 +11,8 @@
 #import "ViewControllerChat.h"
 #import "CDSessionManager.h"
 #import "CDChatRoomController.h"
+#import "InvitePlayViewController.h"
+#import "invatedPlayViewController.h"
 
 @interface ViewControllerRecent ()
 
@@ -28,7 +30,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setUI];
     self.recentUsrList = [[NSMutableArray alloc]init];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshRecentContacts:) name:NOTIFI_GET_RECENT_MSG object:nil];
@@ -45,12 +46,18 @@
     _recentTableView.backgroundView = imageview;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageUpdated:) name:NOTIFICATION_MESSAGE_UPDATED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetunread:) name:NOTIFICATION_RESET_UNREADMSG object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(invatedPlay:) name:NOTIFICATION_INVITE_PLAY_CHESS_UPDATED object:nil];
     [self loadList];
 }
-
-- (void)setUI{
-    
+- (void) invatedPlay:(NSNotification *)notification
+{
+    NSDictionary *dict = notification.userInfo;
+    UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    invatedPlayViewController *Controller1 = [mainStoryboard instantiateViewControllerWithIdentifier:@"invatedPlayViewController"];
+    Controller1.toid = [dict objectForKey:@"fromid"];
+    [self.navigationController pushViewController:Controller1 animated:NO];
 }
+
 - (void)resetunread:(NSNotification *)notification
 {
     NSMutableDictionary *dict = [self.recentUsrList objectAtIndex:self.toChatUsrIndex];
@@ -181,6 +188,10 @@
     NSString *str = [chatroom objectForKey:@"otherid"];
     cell.nickName.text = str;
     str = [chatroom objectForKey:@"type"];
+    if ([str isEqualToString:@"image"]) {
+        cell.lastMsg.text = @"语音";
+    }
+    else
     cell.lastMsg.text = str;
     str = [chatroom objectForKey:@"unreadmsg"];
     [cell.unreadmsg setTitle:str forState:UIControlStateNormal];

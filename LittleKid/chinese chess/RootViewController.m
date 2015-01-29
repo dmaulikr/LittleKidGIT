@@ -40,7 +40,7 @@
     [super viewDidLoad];
 //    [NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_CHESS_MOVE object:nil queue:[NSOperationQueue mainQueue] usingBlock:<#^(NSNotification *note)block#>
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(procCmd:) name:NOTIFICATION_MESSAGE_UPDATED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(procCmd:) name:NOTIFICATION_PLAY_CHESS_UPDATED object:nil];
     UIImageView *bacakGroundImage = [[UIImageView alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     NSString *path = [[NSBundle mainBundle]pathForResource:@"music" ofType:@"wav"];
     NSURL *url = [[NSURL alloc]initFileURLWithPath:path];
@@ -62,7 +62,7 @@
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(procCmd:) name:NOTIFI_CHESS_MOVE object:nil];
     self.view.backgroundColor = [UIColor blackColor];
     _cheseInterface = [[CheseInterface alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-    _cheseInterface.ischessReverse = 1;
+    _cheseInterface.ischessReverse = self.isblack;
     [_cheseInterface loadCheseInterface];
     _cheseInterface.center = CGPointMake(self.view.bounds.size.width/2.0, self.view.bounds.size.height/2.0);
     _cheseInterface.delegate = self;
@@ -126,14 +126,15 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         NSDictionary *dict = notify.userInfo;
         NSString *fromID = [dict objectForKey:@"fromid"];
+        dict = [dict objectForKey:@"cmd"];
         if (![fromID isEqualToString:self.otherId])
         {
             return;
         }
         
-        NSDictionary *message_value = [dict objectForKey:@"message"];
+//        NSDictionary *message_value = [dict objectForKey:@"message"];
         
-        NSString *cmd = [message_value objectForKey:@"CHESS_CMD"];
+        NSString *cmd = [dict objectForKey:@"CHESS_CMD"];
         NSInteger cmdindex = [cmd integerValue];
         //        NSLog(@"receve a data:%@",err);
         switch (cmdindex)
@@ -161,7 +162,7 @@
             }
             case CHESS_CMD_ACK:
             {
-                NSString *chessack = [message_value objectForKey:@"CHESS_CHOOSE"];
+                NSString *chessack = [dict objectForKey:@"CHESS_CHOOSE"];
                 [self.alertwait dismissWithClickedButtonIndex:0 animated:YES];
                 self.alertwait = nil;
                 switch (self.sendCmd)
@@ -226,7 +227,7 @@
 {
     NSString *str_cmd = [[NSString alloc]initWithFormat:@"%d",CHESS_CMD_ACK];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:str_cmd,@"CHESS_CMD",string,@"CHESS_CHOOSE", nil];
-    [[CDSessionManager sharedInstance] sendMessage:dict toPeerId:self.otherId];
+    [[CDSessionManager sharedInstance] sendPlayChess:dict toPeerId:self.otherId];
 //    [[RuntimeStatus instance].udpP2P sendDict:dict toUser:self.cheseInterface.userother withProtocol:CHESS];
 }
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
@@ -272,8 +273,8 @@
 {
     NSString *chesscmdtype = [[NSString alloc]initWithFormat:@"%d", (int)index+2];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:chesscmdtype,@"CHESS_CMD", nil];
-    [[CDSessionManager sharedInstance] sendMessage:dict toPeerId:self.otherId];
-//    [[RuntimeStatus instance].udpP2P sendDict:dict toUser:self.cheseInterface.userother withProtocol:CHESS];
+    [[CDSessionManager sharedInstance] sendPlayChess:dict toPeerId:self.otherId];
+    //    [[RuntimeStatus instance].udpP2P sendDict:dict toUser:self.cheseInterface.userother withProtocol:CHESS];
 }
 
 

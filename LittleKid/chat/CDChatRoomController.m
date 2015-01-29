@@ -13,6 +13,8 @@
 #import "UIImage+Resize.h"
 #import "User.h"
 #import <AVFoundation/AVFoundation.h>
+#import "CDContactDetailController.h"
+#import "InvitePlayViewController.h"
 
 @interface CDChatRoomController () <JSMessagesViewDelegate, JSMessagesViewDataSource, QBImagePickerControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate> {
     NSMutableArray *_timestampArray;
@@ -128,16 +130,18 @@
 
 #pragma mark - Messages view delegate
 - (void)sendPressed:(UIButton *)sender withText:(NSString *)text {
-    if (self.type == CDChatRoomTypeGroup) {
-        if (!self.group.groupId) {
-            return;
-        }
-        [[CDSessionManager sharedInstance] sendMessage:text toGroup:self.group.groupId];
-    } else {
-        [[CDSessionManager sharedInstance] sendMessage:text toPeerId:self.otherId];
-    }
-    [self refreshTimestampArray];
-    [self finishSend];
+
+    [[CDSessionManager sharedInstance] invitePlayChess:self.otherId];
+//    InvitePlayViewController *controller = mainStoryboard instantiateViewControllerWithIdentifier:@"leftViewController"];//[[InvitePlayViewController alloc] initWithUser:self.otherId];
+//    [self.navigationController pushViewController:controller animated:NO];
+
+    UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    InvitePlayViewController *Controller = [mainStoryboard instantiateViewControllerWithIdentifier:@"InvitePlayViewController"];
+    Controller.otherId = self.otherId;
+    [self.navigationController pushViewController:Controller animated:NO];
+
+//    [self refreshTimestampArray];
+//    [self finishSend];
 }
 
 - (void)sendAttachment:(AVObject *)object avfile:(AVFile *) file{
