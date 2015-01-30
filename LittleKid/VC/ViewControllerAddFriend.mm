@@ -20,7 +20,7 @@
 @property(strong, nonatomic) NSDictionary *toAddFriendInfoDict;
 @property (weak, nonatomic) IBOutlet UIImageView *barcodeSelfImgView;
 
-@property (weak, atomic) NSString * peerID;
+@property (strong, atomic) NSString * peerID;
 
 @end
 
@@ -61,6 +61,7 @@
 
 - (IBAction)editEndToFindFriend:(id)sender {
     NSString *inputStr = [[NSString alloc] initWithString:((UITextField *)sender).text];
+    self.peerID = inputStr;
     if (inputStr.length == 0) {
         [[[UIAlertView alloc] initWithTitle:@"输入不合法" message:@"提示原因" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil , nil] show];
         return;
@@ -84,8 +85,9 @@
 
 - (void)receiveAddFriendRequest:(NSNotification *)notification {
     NSDictionary *dict = notification.userInfo;
-    dict = [dict objectForKey:@"cmd"];
+//    NSString* peerid = [dict objectForKey:@"fromid"];
     self.peerID = [dict objectForKey:@"fromid"];
+    dict = [dict objectForKey:@"cmd"];
     NSString *str = [dict objectForKey:@"cmd_type"];
     if ([str isEqualToString:ADD_FRIEND_CMD] ) {
         [[[UIAlertView alloc] initWithTitle:@"请求加好友" message:@"是否同意" delegate:(self) cancelButtonTitle:@"否" otherButtonTitles:@"是", nil] show];
@@ -100,12 +102,27 @@
         str = [dict objectForKey:@"ack_value"];
         if ([str isEqualToString:@"OK"])
         {
-            [[AVUser currentUser] follow:self.peerID andCallback:^(BOOL succeeded, NSError *error) {
-                if (succeeded) {
-                    //TODO
-                    NSLog(@"Add friend %@ sucaessful", self.peerID);
+            AVQuery * query = [AVUser query];
+            [query whereKey:@"username" equalTo:self.peerID];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (error == nil) {
+                    AVUser  *peerUser = [objects firstObject];
+                    
+                    if (peerUser == nil) {
+                        //TODO
+                        return;
+                    }
+                    
+                    [[AVUser currentUser] follow:peerUser.objectId andCallback:^(BOOL succeeded, NSError *error) {
+                        if (succeeded) {
+                            //TODO
+                            NSLog(@"Add friend %@ sucaessful", self.peerID);
+                        } else {
+                            NSLog(@"Add friend %@ error %@", self.peerID, error);
+                        }
+                    }];
                 } else {
-                    NSLog(@"Add friend %@ error %@", self.peerID, error);
+                    
                 }
             }];
         }
@@ -177,6 +194,31 @@
 #pragma mark -- UIAlertView Delegate Method
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex != 0) {
+        AVQuery * query = [AVUser query];
+        [query whereKey:@"username" equalTo:self.peerID];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (error == nil) {
+                AVUser  *peerUser = [objects firstObject];
+                
+                if (peerUser == nil) {
+                    //TODO
+                    return;
+                }
+                
+                [[AVUser currentUser] follow:peerUser.objectId andCallback:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        //TODO
+                        NSLog(@"Add friend %@ sucaessful", self.peerID);
+                    } else {
+                        NSLog(@"Add friend %@ error %@", self.peerID, error);
+                    }
+                }];
+            } else {
+                
+            }
+        }];
+        
+
         [[CDSessionManager sharedInstance] sendAddFriendRequestAck:@"OK" toPeerId:self.peerID];
     }
     else {
