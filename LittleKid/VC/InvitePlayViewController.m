@@ -26,8 +26,15 @@
 }
 - (IBAction)onCancel:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+    
 }
-
+- (void)rootViewControllerCancel:(UIViewController *)Controller
+{
+    NSLog(@"*** qb_imagePickerControllerDidCancel:");
+    [self dismissViewControllerAnimated:YES completion:NULL];
+    [self.navigationController popViewControllerAnimated:NO];
+//    [Controller dealloc ];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.username.text = self.otherId;
@@ -47,6 +54,7 @@
                 RootViewController *vc = [[RootViewController alloc] init];
                 vc.otherId = self.otherId;
                 vc.isblack = FALSE;
+            vc.delegate = self;
                 [self presentViewController:vc animated:YES completion:nil];
         }
         else

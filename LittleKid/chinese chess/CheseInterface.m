@@ -114,6 +114,10 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
     AudioServicesPlaySystemSound(soundId);
 }
 
+- (void) removenotifition
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_PLAY_CHESS_UPDATED object:nil];
+}
 - (void)loadCheseInterface
 {
     

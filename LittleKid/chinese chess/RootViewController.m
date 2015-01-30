@@ -38,11 +38,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_CHESS_MOVE object:nil queue:[NSOperationQueue mainQueue] usingBlock:<#^(NSNotification *note)block#>
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(procCmd:) name:NOTIFICATION_PLAY_CHESS_UPDATED object:nil];    
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(procCmd:) name:NOTIFICATION_PLAY_CHESS_UPDATED object:nil];
     UIImageView *bacakGroundImage = [[UIImageView alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-    NSString *path = [[NSBundle mainBundle]pathForResource:@"music" ofType:@"wav"];
+    NSString *path = [[NSBundle mainBundle]pathForResource:@"music" ofType:@"mp3"];
     NSURL *url = [[NSURL alloc]initFileURLWithPath:path];
     self.play = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:nil];
     self.play.numberOfLoops = -1;
@@ -99,17 +98,17 @@
     UILabel *opponentname = [[UILabel alloc]initWithFrame:CGRectMake(mainrect.size.width/2+photowidth/2+mainrect.size.height/30, mainrect.size.height*0.05, mainrect.size.width/4, mainrect.size.width/16)];
     
     UILabel *opponentgrade = [[UILabel alloc]initWithFrame:CGRectMake(mainrect.size.width/2+photowidth/2+mainrect.size.height/30, mainrect.size.height*0.05+mainrect.size.width/16, mainrect.size.width/4, mainrect.size.width/16)];
-    myname.text =@"习近平";
-    mygrade.text =@"国王";
-    opponentname.text = @"李克强";
-    opponentgrade.text = @"相";
+    myname.text =[AVUser currentUser].username;
+    mygrade.text =@"九级棋士";
+    opponentname.text = self.otherId;
+    opponentgrade.text = @"九级棋士";
     
     myname.font = [UIFont boldSystemFontOfSize:mainrect.size.width/16];
     opponentname.font =[UIFont boldSystemFontOfSize:mainrect.size.width/16];
-    opponentname.textColor = myname.textColor = [UIColor redColor];
+    opponentname.textColor = myname.textColor = [UIColor whiteColor];
     opponentgrade.backgroundColor = opponentname.backgroundColor = mygrade.backgroundColor = myname.backgroundColor = [UIColor clearColor];
     mygrade.font = opponentgrade.font =[UIFont boldSystemFontOfSize:mainrect.size.width/16];
-    mygrade.textColor = opponentgrade.textColor =[UIColor orangeColor];
+    mygrade.textColor = opponentgrade.textColor =[UIColor whiteColor];
     
     
     [bacakGroundImage addSubview:myname];
@@ -174,7 +173,6 @@
                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意重新开始" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
                             [alert setTag:25];
                             [alert show];
-                            [self Restart];
                         }
                         else
                         {
@@ -193,7 +191,6 @@
                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意和局" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
                             [alert setTag:27];
                             [alert show];
-                            [self Restart];
                         }
                         else
                         {
@@ -208,7 +205,6 @@
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意认输" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
                         [alert setTag:29];
                         [alert show];
-                        [self Restart];
                         break;
                     }
                     default:
@@ -262,7 +258,25 @@
         [self sendack:@"可以"];
         [self Restart];
     }
-
+    if ([alertView tag] == 25)
+    {    // it's the Error alert
+        if (buttonIndex == 0)
+        {
+            [self Restart];
+        }
+    }
+    if ([alertView tag] ==27)
+    {
+        if (buttonIndex == 0)
+        {
+            [self Restart];
+        }
+       
+    }
+    if ([alertView tag] ==29)
+    {
+        [self Restart];
+    }
     
 }
 //(void)(^callbackMoveChess)(NSNotification *notify) = ^(NSNotification *notify){
@@ -281,9 +295,18 @@
 
 - (void)Restart
 {
-//    [_cheseInterface removeFromSuperview];
-    [_cheseInterface loadCheseInterface];
-//    [self.view addSubview:_cheseInterface];
+
+    [_cheseInterface removenotifition];
+//    [_cheseInterface loadCheseInterface];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    
+//    UITableViewController* nextController = [storyboard instantiateViewControllerWithIdentifier:@"mainTabViewController"];
+//    [self presentViewController:nextController animated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    
+
+        [self.delegate rootViewControllerCancel:self];
+   
 }
 #pragma mark - RNGridMenuDelegate
 

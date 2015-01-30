@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RootViewController.h"
 
-@interface InvitePlayViewController : UIViewController
+@interface InvitePlayViewController : UIViewController<RootViewControllerDelegate>
 @property(strong, nonatomic) NSString * otherId;
 @property (weak, nonatomic) IBOutlet UILabel *username;
 @property (weak, nonatomic) IBOutlet UIImageView *userPhoto;
