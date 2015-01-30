@@ -24,6 +24,7 @@
 //        [clloc requestAlwaysAuthorization];
 //    }
     //For leancloud initilization
+    setenv("LOG_CURL", "YES", 0);
     [AVOSCloud setApplicationId:AVOSAppID clientKey:AVOSAppKey];
     
     [RuntimeStatus instance];
