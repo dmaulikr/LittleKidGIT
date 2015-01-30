@@ -39,8 +39,11 @@
 {
     [super viewDidLoad];
 //    [NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_CHESS_MOVE object:nil queue:[NSOperationQueue mainQueue] usingBlock:<#^(NSNotification *note)block#>
+    static dispatch_once_t onceToken = 0;
+    dispatch_once(&onceToken, ^{
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(procCmd:) name:NOTIFICATION_PLAY_CHESS_UPDATED object:nil];
+    });
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(procCmd:) name:NOTIFICATION_PLAY_CHESS_UPDATED object:nil];
     UIImageView *bacakGroundImage = [[UIImageView alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     NSString *path = [[NSBundle mainBundle]pathForResource:@"music" ofType:@"wav"];
     NSURL *url = [[NSURL alloc]initFileURLWithPath:path];
@@ -48,7 +51,7 @@
     self.play.numberOfLoops = -1;
     [self.play prepareToPlay];
     [self.play play];
-//    [self.play stop];
+    [self.play stop];
     bacakGroundImage.image = [UIImage imageNamed:@"象棋主界面.png"];
     bacakGroundImage.userInteractionEnabled = YES;
     [self.view addSubview:bacakGroundImage];
@@ -174,7 +177,6 @@
                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意重新开始" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
                             [alert setTag:25];
                             [alert show];
-                            [self Restart];
                         }
                         else
                         {
@@ -193,7 +195,6 @@
                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意和局" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
                             [alert setTag:27];
                             [alert show];
-                            [self Restart];
                         }
                         else
                         {
@@ -208,7 +209,6 @@
                         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意认输" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
                         [alert setTag:29];
                         [alert show];
-                        [self Restart];
                         break;
                     }
                     default:
@@ -262,7 +262,25 @@
         [self sendack:@"可以"];
         [self Restart];
     }
-
+    if ([alertView tag] == 25)
+    {    // it's the Error alert
+        if (buttonIndex == 0)
+        {
+            [self Restart];
+        }
+    }
+    if ([alertView tag] ==27)
+    {
+        if (buttonIndex == 0)
+        {
+            [self Restart];
+        }
+       
+    }
+    if ([alertView tag] ==29)
+    {
+        [self Restart];
+    }
     
 }
 //(void)(^callbackMoveChess)(NSNotification *notify) = ^(NSNotification *notify){
@@ -282,8 +300,13 @@
 - (void)Restart
 {
 //    [_cheseInterface removeFromSuperview];
-    [_cheseInterface loadCheseInterface];
+//    [_cheseInterface loadCheseInterface];
 //    [self.view addSubview:_cheseInterface];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    
+//    UITableViewController* nextController = [storyboard instantiateViewControllerWithIdentifier:@"mainTabViewController"];
+//    [self presentViewController:nextController animated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 #pragma mark - RNGridMenuDelegate
 
