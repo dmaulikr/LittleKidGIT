@@ -38,20 +38,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [NSNotificationCenter defaultCenter] addObserverForName:NOTIFI_CHESS_MOVE object:nil queue:[NSOperationQueue mainQueue] usingBlock:<#^(NSNotification *note)block#>
-    static dispatch_once_t onceToken = 0;
-    dispatch_once(&onceToken, ^{
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(procCmd:) name:NOTIFICATION_PLAY_CHESS_UPDATED object:nil];
-    });
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(procCmd:) name:NOTIFICATION_PLAY_CHESS_UPDATED object:nil];    
     
     UIImageView *bacakGroundImage = [[UIImageView alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-    NSString *path = [[NSBundle mainBundle]pathForResource:@"music" ofType:@"wav"];
+    NSString *path = [[NSBundle mainBundle]pathForResource:@"music" ofType:@"mp3"];
     NSURL *url = [[NSURL alloc]initFileURLWithPath:path];
     self.play = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:nil];
     self.play.numberOfLoops = -1;
     [self.play prepareToPlay];
     [self.play play];
-    [self.play stop];
+//    [self.play stop];
     bacakGroundImage.image = [UIImage imageNamed:@"象棋主界面.png"];
     bacakGroundImage.userInteractionEnabled = YES;
     [self.view addSubview:bacakGroundImage];
@@ -102,17 +98,17 @@
     UILabel *opponentname = [[UILabel alloc]initWithFrame:CGRectMake(mainrect.size.width/2+photowidth/2+mainrect.size.height/30, mainrect.size.height*0.05, mainrect.size.width/4, mainrect.size.width/16)];
     
     UILabel *opponentgrade = [[UILabel alloc]initWithFrame:CGRectMake(mainrect.size.width/2+photowidth/2+mainrect.size.height/30, mainrect.size.height*0.05+mainrect.size.width/16, mainrect.size.width/4, mainrect.size.width/16)];
-    myname.text =@"习近平";
-    mygrade.text =@"国王";
-    opponentname.text = @"李克强";
-    opponentgrade.text = @"相";
+    myname.text =[AVUser currentUser].username;
+    mygrade.text =@"九级棋士";
+    opponentname.text = self.otherId;
+    opponentgrade.text = @"九级棋士";
     
     myname.font = [UIFont boldSystemFontOfSize:mainrect.size.width/16];
     opponentname.font =[UIFont boldSystemFontOfSize:mainrect.size.width/16];
-    opponentname.textColor = myname.textColor = [UIColor redColor];
+    opponentname.textColor = myname.textColor = [UIColor whiteColor];
     opponentgrade.backgroundColor = opponentname.backgroundColor = mygrade.backgroundColor = myname.backgroundColor = [UIColor clearColor];
     mygrade.font = opponentgrade.font =[UIFont boldSystemFontOfSize:mainrect.size.width/16];
-    mygrade.textColor = opponentgrade.textColor =[UIColor orangeColor];
+    mygrade.textColor = opponentgrade.textColor =[UIColor whiteColor];
     
     
     [bacakGroundImage addSubview:myname];
@@ -299,14 +295,18 @@
 
 - (void)Restart
 {
-//    [_cheseInterface removeFromSuperview];
+
+    [_cheseInterface removenotifition];
 //    [_cheseInterface loadCheseInterface];
-//    [self.view addSubview:_cheseInterface];
 //    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 //    
 //    UITableViewController* nextController = [storyboard instantiateViewControllerWithIdentifier:@"mainTabViewController"];
 //    [self presentViewController:nextController animated:YES completion:nil];
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    
+
+        [self.delegate rootViewControllerCancel:self];
+   
 }
 #pragma mark - RNGridMenuDelegate
 

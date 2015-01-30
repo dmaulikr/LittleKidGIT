@@ -22,6 +22,7 @@
 @property (assign)BOOL ischessReverse;
 @property (nonatomic, strong) NSString *otherId;
 -(void)loadCheseInterface;
+- (void) removenotifition;
 
 
 

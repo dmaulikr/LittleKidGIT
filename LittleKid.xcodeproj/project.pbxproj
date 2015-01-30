@@ -77,7 +77,6 @@
 		573230BC1A6F70CE004E187F /* 菜单二级(悔棋）.png in Resources */ = {isa = PBXBuildFile; fileRef = 5732308F1A6F70CE004E187F /* 菜单二级(悔棋）.png */; };
 		573230BD1A6F70CE004E187F /* 菜单二级（求和）.png in Resources */ = {isa = PBXBuildFile; fileRef = 573230901A6F70CE004E187F /* 菜单二级（求和）.png */; };
 		573230BE1A6F70CE004E187F /* 菜单二级（认输）.png in Resources */ = {isa = PBXBuildFile; fileRef = 573230911A6F70CE004E187F /* 菜单二级（认输）.png */; };
-		573230BF1A6F70CE004E187F /* music.wav in Resources */ = {isa = PBXBuildFile; fileRef = 573230921A6F70CE004E187F /* music.wav */; };
 		573230C01A6F70CE004E187F /* removechess.wav in Resources */ = {isa = PBXBuildFile; fileRef = 573230931A6F70CE004E187F /* removechess.wav */; };
 		573230C11A6F70CE004E187F /* 菜单.png in Resources */ = {isa = PBXBuildFile; fileRef = 573230941A6F70CE004E187F /* 菜单.png */; };
 		573230C21A6F70CE004E187F /* 象棋主界面.png in Resources */ = {isa = PBXBuildFile; fileRef = 573230951A6F70CE004E187F /* 象棋主界面.png */; };
@@ -209,6 +208,7 @@
 		57B651641A6120D1002A78F9 /* impinfo_sex.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B651591A6120D1002A78F9 /* impinfo_sex.png */; };
 		57B651651A6120D1002A78F9 /* impinfo_star.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B6515A1A6120D1002A78F9 /* impinfo_star.png */; };
 		57B651671A61236E002A78F9 /* impinfo_bg_arc_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 57B651661A61236E002A78F9 /* impinfo_bg_arc_blue.png */; };
+		57C732101A7B8251008DB84B /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 57C7320F1A7B8251008DB84B /* music.mp3 */; };
 		57E8F9AF1A7242A300C6FAA3 /* juxing_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 57E8F9AE1A7242A300C6FAA3 /* juxing_0.png */; };
 		57FE76071A75E8BB002D8292 /* liaotian_0011_圆角矩形-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 57FE76061A75E8BB002D8292 /* liaotian_0011_圆角矩形-1.png */; };
 		57FF75BD1A7742DB00CADBE4 /* liaotiankuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 57FF75BC1A7742DB00CADBE4 /* liaotiankuang.png */; };
@@ -383,7 +383,6 @@
 		5732308F1A6F70CE004E187F /* 菜单二级(悔棋）.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "菜单二级(悔棋）.png"; sourceTree = "<group>"; };
 		573230901A6F70CE004E187F /* 菜单二级（求和）.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "菜单二级（求和）.png"; sourceTree = "<group>"; };
 		573230911A6F70CE004E187F /* 菜单二级（认输）.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "菜单二级（认输）.png"; sourceTree = "<group>"; };
-		573230921A6F70CE004E187F /* music.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = music.wav; sourceTree = "<group>"; };
 		573230931A6F70CE004E187F /* removechess.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = removechess.wav; sourceTree = "<group>"; };
 		573230941A6F70CE004E187F /* 菜单.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "菜单.png"; sourceTree = "<group>"; };
 		573230951A6F70CE004E187F /* 象棋主界面.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "象棋主界面.png"; sourceTree = "<group>"; };
@@ -621,6 +620,7 @@
 		57B651591A6120D1002A78F9 /* impinfo_sex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_sex.png; sourceTree = "<group>"; };
 		57B6515A1A6120D1002A78F9 /* impinfo_star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_star.png; sourceTree = "<group>"; };
 		57B651661A61236E002A78F9 /* impinfo_bg_arc_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = impinfo_bg_arc_blue.png; sourceTree = "<group>"; };
+		57C7320F1A7B8251008DB84B /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
 		57E8F9AE1A7242A300C6FAA3 /* juxing_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = juxing_0.png; sourceTree = "<group>"; };
 		57FE76061A75E8BB002D8292 /* liaotian_0011_圆角矩形-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liaotian_0011_圆角矩形-1.png"; sourceTree = "<group>"; };
 		57FF75BC1A7742DB00CADBE4 /* liaotiankuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liaotiankuang.png; sourceTree = "<group>"; };
@@ -857,6 +857,7 @@
 		573230701A6F70CE004E187F /* ChessRes */ = {
 			isa = PBXGroup;
 			children = (
+				57C7320F1A7B8251008DB84B /* music.mp3 */,
 				573230711A6F70CE004E187F /* 0.png */,
 				573230721A6F70CE004E187F /* 1.png */,
 				573230731A6F70CE004E187F /* 10.png */,
@@ -887,7 +888,6 @@
 				5732308C1A6F70CE004E187F /* 6.png */,
 				5732308D1A6F70CE004E187F /* chosechess.wav */,
 				5732308E1A6F70CE004E187F /* icons */,
-				573230921A6F70CE004E187F /* music.wav */,
 				573230931A6F70CE004E187F /* removechess.wav */,
 				573230941A6F70CE004E187F /* 菜单.png */,
 				573230951A6F70CE004E187F /* 象棋主界面.png */,
@@ -1727,7 +1727,6 @@
 				573230AF1A6F70CE004E187F /* 115.png in Resources */,
 				5759E2531A5FCA65002A9315 /* 云注册.png in Resources */,
 				57E8F9AF1A7242A300C6FAA3 /* juxing_0.png in Resources */,
-				573230BF1A6F70CE004E187F /* music.wav in Resources */,
 				572E3F611A63BA1300323683 /* tianxieyanzhengma.png in Resources */,
 				573230C41A6F70CE004E187F /* 象棋界面（人头男）.png in Resources */,
 				573230A81A6F70CE004E187F /* 106.png in Resources */,
@@ -1809,6 +1808,7 @@
 				570876041A5CF82100892B53 /* wo_bg_woblue.png in Resources */,
 				57AC90DC1A71FEC6008F0892 /* bubble-default-incoming@2x.png in Resources */,
 				572E3F6B1A63BA1300323683 /* yanzhengma_01.png in Resources */,
+				57C732101A7B8251008DB84B /* music.mp3 in Resources */,
 				57AC90F91A71FEC6008F0892 /* input-bar.png in Resources */,
 				57FE76071A75E8BB002D8292 /* liaotian_0011_圆角矩形-1.png in Resources */,
 				E422F8A01A43FDE800CF2F9C /* Main.storyboard in Resources */,

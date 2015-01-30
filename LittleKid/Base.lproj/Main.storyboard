@@ -225,6 +225,9 @@
                                 <state key="normal" backgroundImage="云登陆.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="43" y="581" width="75" height="45"/>
+                                </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="70" y="383" width="75" height="45"/>
                                 </variation>
@@ -271,6 +274,9 @@
                                 <state key="normal" backgroundImage="云注册.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="183" y="581" width="75" height="45"/>
+                                </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="231" y="383" width="75" height="45"/>
                                 </variation>
@@ -987,7 +993,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="H6J-kN-a3q">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="H6J-kN-a3q">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -1046,6 +1052,8 @@
                         <constraints>
                             <constraint firstAttribute="centerY" secondItem="H6J-kN-a3q" secondAttribute="centerY" id="HUF-Qn-9rZ"/>
                             <constraint firstAttribute="centerX" secondItem="H6J-kN-a3q" secondAttribute="centerX" id="P8f-Tz-XWR"/>
+                            <constraint firstAttribute="width" secondItem="H6J-kN-a3q" secondAttribute="width" id="Vub-bt-ZH5"/>
+                            <constraint firstAttribute="height" secondItem="H6J-kN-a3q" secondAttribute="height" id="xHg-J2-FX7"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="最近" id="k7w-az-Zp1"/>
@@ -1242,7 +1250,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="t5c-Fg-vg1">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="t5c-Fg-vg1">
                                 <rect key="frame" x="140" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1318,7 +1326,7 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
+                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                 </variation>
                                 <connections>
@@ -1329,8 +1337,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="t5c-Fg-vg1" firstAttribute="width" secondItem="uuC-H6-dqc" secondAttribute="width" id="30z-ch-EAa"/>
                             <constraint firstAttribute="centerX" secondItem="t5c-Fg-vg1" secondAttribute="centerX" id="8PI-8p-xxA"/>
                             <constraint firstAttribute="centerY" secondItem="t5c-Fg-vg1" secondAttribute="centerY" id="BNz-dh-mgC"/>
+                            <constraint firstItem="t5c-Fg-vg1" firstAttribute="height" secondItem="uuC-H6-dqc" secondAttribute="height" id="BvN-iR-XYp"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="我的小伙伴" id="N3O-YH-PAl"/>
@@ -1642,7 +1652,7 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
+                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                 </variation>
                                 <connections>
@@ -2549,6 +2559,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="379" y="242" width="42" height="21"/>
+                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="是否接受对方邀请" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Enh-IO-Bal">
                                 <rect key="frame" x="221" y="271" width="158" height="21"/>

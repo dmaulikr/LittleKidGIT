@@ -114,6 +114,10 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
     AudioServicesPlaySystemSound(soundId);
 }
 
+- (void) removenotifition
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_PLAY_CHESS_UPDATED object:nil];
+}
 - (void)loadCheseInterface
 {
     
@@ -130,11 +134,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
         UIButton *newbutton =(UIButton *) [self viewWithTag:i];
         [newbutton removeFromSuperview];
     }
-    static dispatch_once_t onceToken = 0;
-    dispatch_once(&onceToken, ^{
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveChess:) name:NOTIFICATION_PLAY_CHESS_UPDATED object:nil];
-    });
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveChess:) name:NOTIFICATION_PLAY_CHESS_UPDATED object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveChess:) name:NOTIFI_CHESS_MOVE object:nil];
 //    [[RuntimeStatus instance].udpP2P sendData:[NSData dataWithBytes:"hello world" length:11] toHost:@"192.168.1.13" port:20108 withTimeout:3 tag:0];
 //    rect.origin.x +=lenthOfUnitWidth/2;

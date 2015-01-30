@@ -20,6 +20,7 @@
     RootViewController *vc = [[RootViewController alloc] init];
     vc.otherId = self.otherid.text;
     vc.isblack = TRUE;
+    vc.delegate = self;
     [self presentViewController:vc animated:YES completion:nil];
 }
 - (IBAction)reject:(id)sender {
@@ -38,6 +39,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)rootViewControllerCancel:(RootViewController *)Controller
+{
+    NSLog(@"*** qb_imagePickerControllerDidCancel:");
+    [self dismissViewControllerAnimated:YES completion:NULL];
+    [self.navigationController popViewControllerAnimated:NO];
+}
 /*
 #pragma mark - Navigation
 
