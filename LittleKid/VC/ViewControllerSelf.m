@@ -7,7 +7,7 @@
 //
 
 #import "ViewControllerSelf.h"
-
+#import "CDCommon.h"
 
 @interface ViewControllerSelf ()
 
@@ -112,4 +112,7 @@
 
 
 
+- (IBAction)logout:(id)sender {
+    [AVUser logOut];
+}
 @end

@@ -84,8 +84,9 @@ static int seconds = 60;
 #define SEGUE_TO_MAIN @"segueToMain"
 
 - (IBAction)onCheckMsg:(id)sender {
+    [AVOSCloud verifySmsCode:self.verificationCode.text mobilePhoneNumber:self.kiduser.username callback:^(BOOL succeeded, NSError *error) {
 
-    [AVOSCloud verifySmsCode:self.verificationCode.text callback:^(BOOL succeeded, NSError *error) {
+//    [AVOSCloud verifySmsCode:self.verificationCode.text callback:^(BOOL succeeded, NSError *error) {
         //code
         if (succeeded) {
             

@@ -11,5 +11,6 @@
 
 @interface ViewControllerSelf : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+- (IBAction)logout:(id)sender;
 
 @end
