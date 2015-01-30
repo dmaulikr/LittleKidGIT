@@ -95,6 +95,10 @@
 		5759E2531A5FCA65002A9315 /* 云注册.png in Resources */ = {isa = PBXBuildFile; fileRef = 5759E2511A5FCA65002A9315 /* 云注册.png */; };
 		5767F0B21A541D33003CE13D /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5767F0B01A541D33003CE13D /* selected.png */; };
 		5767F0B31A541D33003CE13D /* unSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5767F0B11A541D33003CE13D /* unSelected.png */; };
+		577A6F611A7A0B3D004BE99B /* blue_expand_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 577A6F5F1A7A0B3D004BE99B /* blue_expand_highlight@2x.png */; };
+		577A6F621A7A0B3D004BE99B /* blue_expand_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 577A6F601A7A0B3D004BE99B /* blue_expand_normal@2x.png */; };
+		577A6F651A7A147D004BE99B /* InvitePlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 577A6F641A7A147D004BE99B /* InvitePlayViewController.m */; };
+		577A6F681A7A3F7A004BE99B /* invatedPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 577A6F671A7A3F7A004BE99B /* invatedPlayViewController.m */; };
 		57AC8FD11A71FA58008F0892 /* CDChatRoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AC8FC81A71FA58008F0892 /* CDChatRoomController.m */; };
 		57AC8FD21A71FA58008F0892 /* CDContactDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AC8FCB1A71FA58008F0892 /* CDContactDetailController.m */; };
 		57AC8FD31A71FA58008F0892 /* CDContactListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AC8FCD1A71FA58008F0892 /* CDContactListController.m */; };
@@ -377,6 +381,12 @@
 		5759E2511A5FCA65002A9315 /* 云注册.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "云注册.png"; path = "LittleKid/image/云注册.png"; sourceTree = SOURCE_ROOT; };
 		5767F0B01A541D33003CE13D /* selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selected.png; sourceTree = "<group>"; };
 		5767F0B11A541D33003CE13D /* unSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unSelected.png; sourceTree = "<group>"; };
+		577A6F5F1A7A0B3D004BE99B /* blue_expand_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blue_expand_highlight@2x.png"; sourceTree = "<group>"; };
+		577A6F601A7A0B3D004BE99B /* blue_expand_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blue_expand_normal@2x.png"; sourceTree = "<group>"; };
+		577A6F631A7A147D004BE99B /* InvitePlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitePlayViewController.h; sourceTree = "<group>"; };
+		577A6F641A7A147D004BE99B /* InvitePlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitePlayViewController.m; sourceTree = "<group>"; };
+		577A6F661A7A3F7A004BE99B /* invatedPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = invatedPlayViewController.h; sourceTree = "<group>"; };
+		577A6F671A7A3F7A004BE99B /* invatedPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = invatedPlayViewController.m; sourceTree = "<group>"; };
 		57AC8FC71A71FA58008F0892 /* CDChatRoomController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDChatRoomController.h; sourceTree = "<group>"; };
 		57AC8FC81A71FA58008F0892 /* CDChatRoomController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDChatRoomController.m; sourceTree = "<group>"; };
 		57AC8FCA1A71FA58008F0892 /* CDContactDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDContactDetailController.h; sourceTree = "<group>"; };
@@ -1338,6 +1348,10 @@
 				E4A85E2E1A5A781400C0A222 /* SelfMsgTableViewCell.m */,
 				E4A5385C1A5FFCFB002456A4 /* FriendTableViewCell.h */,
 				E4A5385D1A5FFCFB002456A4 /* FriendTableViewCell.m */,
+				577A6F631A7A147D004BE99B /* InvitePlayViewController.h */,
+				577A6F641A7A147D004BE99B /* InvitePlayViewController.m */,
+				577A6F661A7A3F7A004BE99B /* invatedPlayViewController.h */,
+				577A6F671A7A3F7A004BE99B /* invatedPlayViewController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1391,6 +1405,8 @@
 		E43ED30D1A5E9BA000A8D90D /* ViewControllerChat */ = {
 			isa = PBXGroup;
 			children = (
+				577A6F5F1A7A0B3D004BE99B /* blue_expand_highlight@2x.png */,
+				577A6F601A7A0B3D004BE99B /* blue_expand_normal@2x.png */,
 				57FE76061A75E8BB002D8292 /* liaotian_0011_圆角矩形-1.png */,
 				E43ED31A1A5E9BA000A8D90D /* liaotian_background.png */,
 				E43ED31B1A5E9BA000A8D90D /* liaotian_bubble1.png */,
@@ -1573,6 +1589,7 @@
 				57B651601A6120D1002A78F9 /* impinfo_boy.png in Resources */,
 				570876051A5CF82100892B53 /* wo_bg_zong.png in Resources */,
 				572E3F5D1A63BA1300323683 /* chatu.png in Resources */,
+				577A6F611A7A0B3D004BE99B /* blue_expand_highlight@2x.png in Resources */,
 				572E3F5E1A63BA1300323683 /* fanhuijian.png in Resources */,
 				573230AC1A6F70CE004E187F /* 112.png in Resources */,
 				E43ED2D61A5E24A900A8D90D /* zuijin_star.png in Resources */,
@@ -1593,6 +1610,7 @@
 				572EA3501A737A650018C678 /* xinxi_0002_椭圆-2.png in Resources */,
 				57AC90E51A71FEC6008F0892 /* bubble-flat-incoming.png in Resources */,
 				573230A41A6F70CE004E187F /* 102.png in Resources */,
+				577A6F621A7A0B3D004BE99B /* blue_expand_normal@2x.png in Resources */,
 				57AC90F11A71FEC6008F0892 /* bubble-square-outgoing-selected.png in Resources */,
 				E48D20E81A65060A0099537F /* checkcode_backgroundRed.png in Resources */,
 				57AC90FE1A71FEC6008F0892 /* PhotoIcon@2x.png in Resources */,
@@ -1703,6 +1721,7 @@
 				57AC910C1A71FEC6008F0892 /* QBAssetsCollectionOverlayView.m in Sources */,
 				57AC90CB1A71FEC6008F0892 /* FMDatabaseAdditions.m in Sources */,
 				57AC90CD1A71FEC6008F0892 /* FMDatabaseQueue.m in Sources */,
+				577A6F651A7A147D004BE99B /* InvitePlayViewController.m in Sources */,
 				57AC91171A71FEC6008F0892 /* UIImage+Resize.m in Sources */,
 				E422F8E51A4459C200CF2F9C /* RuntimeStatus.m in Sources */,
 				E422F8A71A43FDE800CF2F9C /* ViewControllerLogin.m in Sources */,
@@ -1766,6 +1785,7 @@
 				E422F8AB1A43FDE800CF2F9C /* ViewControllerChat.m in Sources */,
 				57AC91151A71FEC6008F0892 /* QR_Encode.cpp in Sources */,
 				57AC90CF1A71FEC6008F0892 /* JSBubbleMessageCell.m in Sources */,
+				577A6F681A7A3F7A004BE99B /* invatedPlayViewController.m in Sources */,
 				57AC8FD21A71FA58008F0892 /* CDContactDetailController.m in Sources */,
 				57AC91161A71FEC6008F0892 /* QREncoder.mm in Sources */,
 				57AC90CE1A71FEC6008F0892 /* FMResultSet.m in Sources */,

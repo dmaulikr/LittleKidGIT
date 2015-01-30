@@ -119,7 +119,7 @@
     self.inputToolBarView.textView.placeHolder = @"说点什么呢？";
     
     UIButton *sendButton = [self sendButton];
-    sendButton.enabled = NO;
+    sendButton.enabled = YES;
     
     sendButton.frame = CGRectMake(self.inputToolBarView.frame.size.width - 65.0f, 8.0f, 59.0f, 26.0f);
     [sendButton addTarget:self
@@ -131,6 +131,7 @@
     UIImage *imgView = [UIImage imageNamed:@"liaotian_0011_圆角矩形-1"];//liaotian_chess
     
     self.inputToolBarView.image = imgView;
+    [sendButton setTitle:@"" forState:UIControlStateNormal];
     imgView = [UIImage imageNamed:@"liaotian_chess"];
     [self.inputToolBarView.sendButton setBackgroundImage:imgView forState:UIControlStateNormal];
 	if (kAllowsMedia)
@@ -414,8 +415,8 @@
 
 - (void)finishSend
 {
-    [self.inputToolBarView.textView setText:nil];
-    [self textViewDidChange:self.inputToolBarView.textView];
+//    [self.inputToolBarView.textView setText:nil];
+//    [self textViewDidChange:self.inputToolBarView.textView];
     [self.tableView reloadData];
     [self scrollToBottomAnimated:YES];
 }
