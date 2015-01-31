@@ -10,4 +10,11 @@
 
 @interface FriendApplyMsgTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *acceptApplySegCtrl;
+@property (weak, nonatomic) IBOutlet UIImageView *headPictureView;
+@property (weak, nonatomic) IBOutlet UILabel *nicknameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cellNumberLabel;
+
+
+
 @end

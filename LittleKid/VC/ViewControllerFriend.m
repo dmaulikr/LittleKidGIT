@@ -103,6 +103,10 @@
     else if (indexPath.section == SECTION_FRIEND_APPLY_MSG) {
         FriendApplyMsgTableViewCell *cell;
         cell = [tableView dequeueReusableCellWithIdentifier:@"cellFriendApplyMsg" forIndexPath:indexPath];
+        if (cell == nil) {
+            cell = [[FriendApplyMsgTableViewCell alloc] init];
+        }
+        cell.cellNumberLabel.text = [self.friendAddMsg objectAtIndex:indexPath.row];//用此index方式定位数据
         return cell;
     }
     else{//section_friend_list
@@ -114,7 +118,7 @@
         cell.nickName.text = @"nickname";
         cell.state.text = @"state";
         cell.starNumber.text = @"5";
-        cell.signature.text = @"signature";
+        cell.signature.text = [self.friendList objectAtIndex:indexPath.row];//用此index方式定位数据
         return  cell;
     }
 }
