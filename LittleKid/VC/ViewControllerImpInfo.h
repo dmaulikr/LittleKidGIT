@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomAlertView.h"
 
-@interface ViewControllerImpInfo : UIViewController
+@interface ViewControllerImpInfo : UIViewController<MBAlertViewDelegate>
+
 
 @end

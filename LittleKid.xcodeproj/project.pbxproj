@@ -20,6 +20,7 @@
 		570876111A5D161700892B53 /* wo_0012_scan.png in Resources */ = {isa = PBXBuildFile; fileRef = 570876101A5D161700892B53 /* wo_0012_scan.png */; };
 		5708761C1A5D5FD400892B53 /* denglu_0007_rainbow.png in Resources */ = {isa = PBXBuildFile; fileRef = 5708761A1A5D5FD400892B53 /* denglu_0007_rainbow.png */; };
 		5708761D1A5D5FD400892B53 /* denglu_0013_animals.png in Resources */ = {isa = PBXBuildFile; fileRef = 5708761B1A5D5FD400892B53 /* denglu_0013_animals.png */; };
+		5727D3B91A7B7ACA00491C7F /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5727D3B81A7B7ACA00491C7F /* CustomAlertView.m */; };
 		572DF9D91A73D369000A1DB6 /* ViewControllerRealTalk.m in Sources */ = {isa = PBXBuildFile; fileRef = 572DF9D81A73D369000A1DB6 /* ViewControllerRealTalk.m */; };
 		572E3F5C1A63BA1300323683 /* beijing.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F471A63BA1300323683 /* beijing.png */; };
 		572E3F5D1A63BA1300323683 /* chatu.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F481A63BA1300323683 /* chatu.png */; };
@@ -319,6 +320,8 @@
 		57211CBA1A53F7D6001A1A47 /* AnyChatDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatDefine.h; path = anyChatSDK/include/AnyChatDefine.h; sourceTree = SOURCE_ROOT; };
 		57211CBB1A53F7D6001A1A47 /* AnyChatErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatErrorCode.h; path = anyChatSDK/include/AnyChatErrorCode.h; sourceTree = SOURCE_ROOT; };
 		57211CBC1A53F7D6001A1A47 /* AnyChatPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatPlatform.h; path = anyChatSDK/include/AnyChatPlatform.h; sourceTree = SOURCE_ROOT; };
+		5727D3B71A7B7ACA00491C7F /* CustomAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlertView.h; sourceTree = "<group>"; };
+		5727D3B81A7B7ACA00491C7F /* CustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlertView.m; sourceTree = "<group>"; };
 		572DF9D71A73D369000A1DB6 /* ViewControllerRealTalk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerRealTalk.h; sourceTree = "<group>"; };
 		572DF9D81A73D369000A1DB6 /* ViewControllerRealTalk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerRealTalk.m; sourceTree = "<group>"; };
 		572E3F471A63BA1300323683 /* beijing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beijing.png; sourceTree = "<group>"; };
@@ -1371,6 +1374,8 @@
 		E422F88D1A43FDE800CF2F9C /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				5727D3B71A7B7ACA00491C7F /* CustomAlertView.h */,
+				5727D3B81A7B7ACA00491C7F /* CustomAlertView.m */,
 				572DF9D71A73D369000A1DB6 /* ViewControllerRealTalk.h */,
 				572DF9D81A73D369000A1DB6 /* ViewControllerRealTalk.m */,
 				9654745D1A709B0A00C29287 /* UIViewControllerBase.h */,
@@ -1864,6 +1869,7 @@
 				57AC8FD11A71FA58008F0892 /* CDChatRoomController.m in Sources */,
 				57AC8FEF1A71FB06008F0892 /* CDPopMenuItem.m in Sources */,
 				57AC91111A71FEC6008F0892 /* QBImagePickerController.m in Sources */,
+				5727D3B91A7B7ACA00491C7F /* CustomAlertView.m in Sources */,
 				57AC91061A71FEC6008F0892 /* UIColor+JSMessagesView.m in Sources */,
 				57AC91081A71FEC6008F0892 /* UIView+AnimationOptionsForCurve.m in Sources */,
 				57AC90D31A71FEC6008F0892 /* JSMessageSoundEffect.m in Sources */,
