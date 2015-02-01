@@ -14,8 +14,6 @@
 @interface ViewControllerFriend ()
 
 @property (weak, nonatomic) IBOutlet UITableView *friendTableView;
-@property (strong, nonatomic) NSMutableArray *friendList;
-@property (strong, nonatomic) NSMutableArray *friendAddMsg;
 
 
 @end
@@ -26,23 +24,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setUI];
-    [self testCode];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshTable) name:NOTIFI_GET_FRIEND_LIST object:nil];
     
-}
-
-- (void)testCode{
-    self.friendList = [[NSMutableArray alloc] init];
-    self.friendAddMsg = [[NSMutableArray alloc] init];
-    NSString *UID1 = @"15527913002";
-    NSString *UID2 = @"12423423132";
-    NSString *UID3 = @"124e2312312";
-    [self.friendList addObject:UID1];
-    [self.friendList addObject:UID2];
-    [self.friendList addObject:UID3];
-    [self.friendAddMsg addObject:UID1];
-    [self.friendAddMsg addObject:UID1];
-    [self.friendAddMsg addObject:UID1];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,10 +57,10 @@
         return 1;
     }
     if (section == SECTION_FRIEND_LIST) {
-        return [self.friendList count];
+        return [[RuntimeStatus instance].friends count];
     }
     if (section == SECTION_FRIEND_APPLY_MSG) {
-        return [self.friendAddMsg count];
+        return [[RuntimeStatus instance].friendsToBeConfirm count];
     }
     return 0;
 }
@@ -106,7 +89,7 @@
         if (cell == nil) {
             cell = [[FriendApplyMsgTableViewCell alloc] init];
         }
-        cell.cellNumberLabel.text = [self.friendAddMsg objectAtIndex:indexPath.row];//用此index方式定位数据
+        cell.cellNumberLabel.text = [[RuntimeStatus instance].friendsToBeConfirm objectAtIndex:indexPath.row];//用此index方式定位数据
         return cell;
     }
     else{//section_friend_list
@@ -115,10 +98,11 @@
         if (cell == nil) {
             cell = [[FriendTableViewCell alloc] init];
         }
+        AVUser *user = [[RuntimeStatus instance].friends objectAtIndex:indexPath.row];
         cell.nickName.text = @"nickname";
         cell.state.text = @"state";
         cell.starNumber.text = @"5";
-        cell.signature.text = [self.friendList objectAtIndex:indexPath.row];//用此index方式定位数据
+        cell.signature.text = user.username;//用此index方式定位数据
         return  cell;
     }
 }

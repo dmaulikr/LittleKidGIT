@@ -33,6 +33,24 @@
     return self;
 }
 
+- (void) initial {
+    self.currentUser = [AVUser currentUser];
+    
+    [self.currentUser getFollowees:^(NSArray *objects, NSError *error) {
+        NSMutableArray *friends = [NSMutableArray array];
+        for (AVUser *user in objects) {
+            if (![user isEqual:self.currentUser]) {
+                [friends addObject:user];
+            }
+        }
+        
+        self.friends = friends;
+    }];
+    
+    //TODO
+    self.friendsToBeConfirm = [NSMutableArray array];
+}
+
 - (void)loadLocalInfo{
     self.usrSelf = [[UserSelf alloc] initWithUID:self.signAccountUID];
     [self loadLocalRecent];

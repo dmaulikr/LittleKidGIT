@@ -40,6 +40,8 @@
 //        self.window.rootViewController = nextController;
         [self.window setRootViewController:nextController];
         [self.window makeKeyAndVisible];
+        
+        [[RuntimeStatus instance] initial];
     }
     
     [self registerNotifications: application];
