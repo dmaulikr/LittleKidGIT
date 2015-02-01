@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RNGridMenu.h"
 #import <AVFoundation/AVFoundation.h>
+#import "ViewController.h"
 
 @class CheseInterface;
 @protocol RootViewControllerDelegate <NSObject>
@@ -16,7 +17,7 @@
 - (void) rootViewControllerCancel:(UIViewController *)rootViewController;
 
 @end
-@interface RootViewController : UIViewController<RNGridMenuDelegate>
+@interface RootViewController : UIViewController<RNGridMenuDelegate,ViewControllerDelegate>
 
 //@property(nonatomic) int blackOrRed;
 @property (retain,readwrite,nonatomic)CheseInterface * cheseInterface;

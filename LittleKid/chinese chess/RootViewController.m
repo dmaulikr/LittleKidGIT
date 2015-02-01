@@ -11,6 +11,7 @@
 #import "CheseTools.h"
 #import <AVOSCloud/AVOSCloud.h>
 #import "CDSessionManager.h"
+#import "ViewController.h"
 
 
 #define MAINSCREEN_WIDTH     ([[UIScreen mainScreen]bounds].size.width)
@@ -304,10 +305,23 @@
 //    [self presentViewController:nextController animated:YES completion:nil];
 //    [self dismissViewControllerAnimated:YES completion:nil];
     
+    ViewController *controller = [[ViewController alloc]init];
+    controller.delegate = self;
+    [self presentViewController:controller animated:YES completion:nil];
+//    [self.navigationController pushViewController:controller animated:YES];
 
-        [self.delegate rootViewControllerCancel:self];
+ //       [self.delegate rootViewControllerCancel:self];
    
 }
+
+#pragma mark -ViewControllerDelegate
+
+- (void)ViewControllerCancel:(ViewController *)Controller
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+    [self.delegate rootViewControllerCancel:self];
+}
+
 #pragma mark - RNGridMenuDelegate
 
 - (void)gridMenu:(RNGridMenu *)gridMenu willDismissWithSelectedItem:(RNGridMenuItem *)item atIndex:(NSInteger)itemIndex {
