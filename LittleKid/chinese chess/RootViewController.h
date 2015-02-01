@@ -11,13 +11,19 @@
 #import <AVFoundation/AVFoundation.h>
 
 @class CheseInterface;
+@protocol RootViewControllerDelegate <NSObject>
+
+- (void) rootViewControllerCancel:(UIViewController *)rootViewController;
+
+@end
 @interface RootViewController : UIViewController<RNGridMenuDelegate>
 
 //@property(nonatomic) int blackOrRed;
 @property (retain,readwrite,nonatomic)CheseInterface * cheseInterface;
 @property (retain,nonatomic,readwrite) UILabel * label;
-@property  bool blackOrRed;//0 red 1 black
+@property  bool isblack;//0 red 1 black
 @property (strong,nonatomic) AVAudioPlayer *play;
+@property (nonatomic, weak) id<RootViewControllerDelegate> delegate;
 @property int sendCmd;
 @property UIAlertView *alertwait;
 @property (nonatomic, strong) NSString *otherId;

@@ -12,12 +12,15 @@
 #import "QREncoder.h"
 #import "DataMatrix.h"
 #import "TableViewControllerFriendConfirm.h"
+#import "CDSessionManager.h"
 
-@interface ViewControllerAddFriend () <ZXingDelegate>
+@interface ViewControllerAddFriend () <ZXingDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *cellNumberTextField;
 @property(strong, nonatomic) NSDictionary *toAddFriendInfoDict;
 @property (weak, nonatomic) IBOutlet UIImageView *barcodeSelfImgView;
+
+@property (strong, atomic) NSString * peerID;
 
 @end
 
@@ -27,6 +30,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self addSelfBarCode];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveAddFriendRequest:) name:NOTIFICATION_ADD_FRIEND_UPDATED object:nil]; //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveAddFriendRequestAck:) name:NOTIFICATION_ADD_FRIEND_ACK_UPDATED object:nil]; //注册通知
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,7 +44,7 @@
     int qrcodeImageDimension = 250;
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    [dict setObject:@"13164696487" forKey:@"uid"];
+    [dict setObject:[AVUser currentUser].username forKey:@"uid"];
     [dict setObject:@"nickname" forKey:@"nickname"];
     [dict setObject:@"otherinfo" forKey:@"otherinfo"];
     NSError *error = nil;
@@ -56,6 +61,7 @@
 
 - (IBAction)editEndToFindFriend:(id)sender {
     NSString *inputStr = [[NSString alloc] initWithString:((UITextField *)sender).text];
+    self.peerID = inputStr;
     if (inputStr.length == 0) {
         [[[UIAlertView alloc] initWithTitle:@"输入不合法" message:@"提示原因" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil , nil] show];
         return;
@@ -64,6 +70,9 @@
     [self queryWithUID_NICKNAME:inputStr];
     //等待状态动画
     [self waitStatus];
+    
+    [[CDSessionManager sharedInstance] sendAddFriendRequest:inputStr];
+    NSLog(@"send add friend request to: %@",inputStr);
 }
 
 -(void)waitStatus{
@@ -74,6 +83,51 @@
 
 }
 
+- (void)receiveAddFriendRequest:(NSNotification *)notification {
+    NSDictionary *dict = notification.userInfo;
+//    NSString* peerid = [dict objectForKey:@"fromid"];
+    self.peerID = [dict objectForKey:@"fromid"];
+    dict = [dict objectForKey:@"cmd"];
+    NSString *str = [dict objectForKey:@"cmd_type"];
+    if ([str isEqualToString:ADD_FRIEND_CMD] ) {
+        [[[UIAlertView alloc] initWithTitle:@"请求加好友" message:@"是否同意" delegate:(self) cancelButtonTitle:@"否" otherButtonTitles:@"是", nil] show];
+    }
+}
+
+- (void)receiveAddFriendRequestAck:(NSNotification *)notification {
+    NSDictionary *dict = notification.userInfo;
+    dict = [dict objectForKey:@"cmd"];
+    NSString *str = [dict objectForKey:@"cmd_type"];
+    if ([str isEqualToString:ADD_FRIEND_CMD_ACK] ) {
+        str = [dict objectForKey:@"ack_value"];
+        if ([str isEqualToString:@"OK"])
+        {
+            AVQuery * query = [AVUser query];
+            [query whereKey:@"username" equalTo:self.peerID];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (error == nil) {
+                    AVUser  *peerUser = [objects firstObject];
+                    
+                    if (peerUser == nil) {
+                        //TODO
+                        return;
+                    }
+                    
+                    [[AVUser currentUser] follow:peerUser.objectId andCallback:^(BOOL succeeded, NSError *error) {
+                        if (succeeded) {
+                            //TODO
+                            NSLog(@"Add friend %@ sucaessful", self.peerID);
+                        } else {
+                            NSLog(@"Add friend %@ error %@", self.peerID, error);
+                        }
+                    }];
+                } else {
+                    
+                }
+            }];
+        }
+    }
+}
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -129,5 +183,48 @@
     }
 
 }
+
+#pragma mark -- UITextField Delegate Method
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+#pragma mark -- UIAlertView Delegate Method
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != 0) {
+        AVQuery * query = [AVUser query];
+        [query whereKey:@"username" equalTo:self.peerID];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (error == nil) {
+                AVUser  *peerUser = [objects firstObject];
+                
+                if (peerUser == nil) {
+                    //TODO
+                    return;
+                }
+                
+                [[AVUser currentUser] follow:peerUser.objectId andCallback:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        //TODO
+                        NSLog(@"Add friend %@ sucaessful", self.peerID);
+                    } else {
+                        NSLog(@"Add friend %@ error %@", self.peerID, error);
+                    }
+                }];
+            } else {
+                
+            }
+        }];
+        
+
+        [[CDSessionManager sharedInstance] sendAddFriendRequestAck:@"OK" toPeerId:self.peerID];
+    }
+    else {
+        [[CDSessionManager sharedInstance] sendAddFriendRequestAck:@"NO" toPeerId:self.peerID];
+    }
+}
+
 
 @end

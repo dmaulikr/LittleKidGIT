@@ -13,6 +13,8 @@
 #import "UIImage+Resize.h"
 #import "User.h"
 #import <AVFoundation/AVFoundation.h>
+#import "CDContactDetailController.h"
+#import "InvitePlayViewController.h"
 
 @interface CDChatRoomController () <JSMessagesViewDelegate, JSMessagesViewDataSource, QBImagePickerControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate> {
     NSMutableArray *_timestampArray;
@@ -26,6 +28,7 @@
 @property (strong, nonatomic) NSString *dateToRecordStr;
 @property(strong, nonatomic) UserOther *toChatUsr;/* @property设置 */
 @property(strong, nonatomic)AVAudioSession *session;
+@property NSInteger cellcount;
 @end
 
 @implementation CDChatRoomController
@@ -45,7 +48,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _session = [AVAudioSession sharedInstance];
-   
     self.toChatUsr = [[UserOther alloc]init];
     self.toChatUsr.UID = self.otherId;
     //   self.toChatUsr = [[RuntimeStatus instance].recentUsrList objectAtIndex:self.toChatUsrIndex];
@@ -69,6 +71,11 @@
     
     self.delegate = self;
     self.dataSource = self;
+}
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_RESET_UNREADMSG object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -115,31 +122,37 @@
 
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.messages.count;
+//    NSInteger i= self.messages.count;
+    self.cellcount = self.messages.count;
+    return self.cellcount;
+    
 }
 
 #pragma mark - Messages view delegate
 - (void)sendPressed:(UIButton *)sender withText:(NSString *)text {
-    if (self.type == CDChatRoomTypeGroup) {
-        if (!self.group.groupId) {
-            return;
-        }
-        [[CDSessionManager sharedInstance] sendMessage:text toGroup:self.group.groupId];
-    } else {
-        [[CDSessionManager sharedInstance] sendMessage:text toPeerId:self.otherId];
-    }
-    [self refreshTimestampArray];
-    [self finishSend];
+
+    [[CDSessionManager sharedInstance] invitePlayChess:self.otherId];
+//    InvitePlayViewController *controller = mainStoryboard instantiateViewControllerWithIdentifier:@"leftViewController"];//[[InvitePlayViewController alloc] initWithUser:self.otherId];
+//    [self.navigationController pushViewController:controller animated:NO];
+
+    UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    InvitePlayViewController *Controller = [mainStoryboard instantiateViewControllerWithIdentifier:@"InvitePlayViewController"];
+    Controller.otherId = self.otherId;
+    [self.navigationController pushViewController:Controller animated:NO];
+
+//    [self refreshTimestampArray];
+//    [self finishSend];
 }
 
-- (void)sendAttachment:(AVObject *)object {
+- (void)sendAttachment:(AVObject *)object avfile:(AVFile *) file{
     if (self.type == CDChatRoomTypeGroup) {
         if (!self.group.groupId) {
             return;
         }
         [[CDSessionManager sharedInstance] sendAttachment:object toGroup:self.group.groupId];
     } else {
-        [[CDSessionManager sharedInstance] sendAttachment:object toPeerId:self.otherId];
+//        [[CDSessionManager sharedInstance] sendAttachment:object toPeerId:self.otherId];
+        [[CDSessionManager sharedInstance] sendAttachment:object avfile:file toPeerId:self.otherId];
     }
     [self refreshTimestampArray];
     [self finishSend];
@@ -198,7 +211,7 @@
             [object setObject:imageFile forKey:@"image"];
             [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (succeeded) {
-                    [self sendAttachment:object];
+                    [self sendAttachment:object avfile:imageFile];
                 }
             }];
         }
@@ -362,23 +375,27 @@
   
 }
 - (id)dataForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSNumber *r = @(indexPath.row);
+    NSInteger i = indexPath.row;
+    NSNumber *r = @(i);
     AVFile *file = [_loadedData objectForKey:r];
     if (file) {
         NSData *data = [file getData];
         UIImage *image = [[UIImage alloc] initWithData:data];
         return image;
     } else {
-        NSString *objectId = [[self.messages objectAtIndex:indexPath.row] objectForKey:@"object"];
-        NSString *type = [[self.messages objectAtIndex:indexPath.row] objectForKey:@"type"];
-        AVObject *object = [AVObject objectWithoutDataWithClassName:@"Attachments" objectId:objectId];
-        [object fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-            AVFile *file = [object objectForKey:type];
-            [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-                [_loadedData setObject:file forKey:r];
-                [self.tableView reloadData];
-            }];
-        }];
+//        NSString *objectId = [[self.messages objectAtIndex:i] objectForKey:@"object"];
+//        NSString *type = [[self.messages objectAtIndex:i] objectForKey:@"type"];
+//        AVObject *object = [AVObject objectWithoutDataWithClassName:@"Attachments" objectId:objectId];
+//        [object fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+//            AVFile *file = [object objectForKey:type];
+//            [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+//                [_loadedData setObject:file forKey:r];
+//                [self.tableView reloadData];
+//            }];
+//        }];
+        AVFile *file = [[self.messages objectAtIndex:i] objectForKey:@"avfile"];
+        [_loadedData setObject:file forKey:r];
+        [self.tableView reloadData];
         UIImage *image = [UIImage imageNamed:@"image_placeholder"];
         return image;
     }
@@ -481,7 +498,7 @@
                 [object setObject:imageFile forKey:@"image"];
                 [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     if (succeeded) {
-                        [self sendAttachment:object];
+                        [self sendAttachment:object avfile:imageFile];
                     }
                 }];
             }
@@ -523,7 +540,7 @@
                 [object setObject:imageFile forKey:@"image"];
                 [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                     if (succeeded) {
-                        [self sendAttachment:object];
+                        [self sendAttachment:object avfile:imageFile];
                     }
                 }];
             }

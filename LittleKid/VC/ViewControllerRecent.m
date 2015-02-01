@@ -11,6 +11,8 @@
 #import "ViewControllerChat.h"
 #import "CDSessionManager.h"
 #import "CDChatRoomController.h"
+#import "InvitePlayViewController.h"
+#import "invatedPlayViewController.h"
 
 @interface ViewControllerRecent ()
 
@@ -28,23 +30,41 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setUI];
     self.recentUsrList = [[NSMutableArray alloc]init];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshRecentContacts:) name:NOTIFI_GET_RECENT_MSG object:nil];
     self.headImage = [UIImage imageNamed:@"head.jpg"];
     self.iconImage = [UIImage imageNamed:@"5.png"];
-//    [self startFetchUserList];
+    [self startFetchUserList];
+//    [[CDSessionManager sharedInstance] clearData];
+//    [[CDSessionManager sharedInstance] addChatWithPeerId:@"15926305768"];
+//    [[CDSessionManager sharedInstance] addChatWithPeerId:@"13437251599"];
+//    [[CDSessionManager sharedInstance] addChatWithPeerId:@"13451825813"];
     [self waitStatus];
     UIImageView *imageview = [[UIImageView alloc] initWithFrame:self.view.bounds];
     [imageview setImage:[UIImage imageNamed:@"zuijin_background"]];
     _recentTableView.backgroundView = imageview;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageUpdated:) name:NOTIFICATION_MESSAGE_UPDATED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetunread:) name:NOTIFICATION_RESET_UNREADMSG object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(invatedPlay:) name:NOTIFICATION_INVITE_PLAY_CHESS_UPDATED object:nil];
     [self loadList];
 }
+- (void) invatedPlay:(NSNotification *)notification
+{
+    NSDictionary *dict = notification.userInfo;
+    UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    invatedPlayViewController *Controller1 = [mainStoryboard instantiateViewControllerWithIdentifier:@"invatedPlayViewController"];
+    Controller1.toid = [dict objectForKey:@"fromid"];
+    [self.navigationController pushViewController:Controller1 animated:NO];
+}
 
-- (void)setUI{
-    
+- (void)resetunread:(NSNotification *)notification
+{
+    NSMutableDictionary *dict = [self.recentUsrList objectAtIndex:self.toChatUsrIndex];
+    NSInteger unread = [[dict objectForKey:@"unreadmsg"]integerValue];
+    unread++;
+    [dict setObject:@"0" forKey:@"unreadmsg"];
+    [self.recentTableView reloadData];
 }
 - (void)loadList
 {
@@ -102,7 +122,8 @@
 - (void)startFetchUserList {
     AVQuery * query = [AVUser query];
     query.cachePolicy = kAVCachePolicyIgnoreCache;
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    NSError *error;
+    NSArray *objects =[query findObjects];//(NSArray *objects, NSError *error) {
         if (objects) {
             NSMutableArray *users = [NSMutableArray array];
             for (AVUser *user in objects) {
@@ -115,7 +136,7 @@
         } else {
             NSLog(@"error:%@", error);
         }
-    }];
+    
 }
 
 
@@ -167,9 +188,20 @@
     NSString *str = [chatroom objectForKey:@"otherid"];
     cell.nickName.text = str;
     str = [chatroom objectForKey:@"type"];
+    if ([str isEqualToString:@"image"]) {
+        cell.lastMsg.text = @"语音";
+    }
+    else
     cell.lastMsg.text = str;
     str = [chatroom objectForKey:@"unreadmsg"];
     [cell.unreadmsg setTitle:str forState:UIControlStateNormal];
+    if ([str intValue] == 0) {
+        [cell.unreadmsg setHidden:YES];
+    }
+    else
+    {
+        [cell.unreadmsg setHidden:FALSE];
+    }
 
     
     
@@ -192,6 +224,7 @@
     NSString *otherid = [chatRoom objectForKey:@"otherid"];
     CDChatRoomController *controller = [[CDChatRoomController alloc] init];
     controller.type = type;
+    controller.cellindex = self.toChatUsrIndex;
     if (type == CDChatRoomTypeGroup) {
         AVGroup *group = [[CDSessionManager sharedInstance] joinGroup:otherid];
         controller.group = group;
@@ -199,6 +232,9 @@
     } else {
         controller.otherId = otherid;
     }
+    NSMutableDictionary *dict = [self.recentUsrList objectAtIndex:self.toChatUsrIndex];
+    [dict setObject:@"0" forKey:@"unreadmsg"];
+    [self.recentTableView reloadData];
     [self.navigationController pushViewController:controller animated:YES];
 }
 

@@ -65,7 +65,9 @@ static BOOL initialized = NO;
 
 - (void)commonInit {
     if (![_database tableExists:@"messages"]) {
-        [_database executeUpdate:@"create table \"messages\" (\"fromid\" text, \"toid\" text, \"type\" text, \"message\" text, \"object\" text, \"time\" integer)"];
+        if ([_database executeUpdate:@"create table \"messages\" (\"fromid\" text, \"toid\" text, \"type\" text, \"message\" text, \"object\" text, \"time\" integer, \"avfile\" blob)"]) {
+            NSLog(@"creat success");
+        }
     }
     if (![_database tableExists:@"sessions"]) {
         [_database executeUpdate:@"create table \"sessions\" (\"type\" integer, \"otherid\" text)"];
@@ -92,7 +94,10 @@ static BOOL initialized = NO;
         }
         [_chatRooms addObject:dict];
     }
+    
     [_session watchPeerIds:peerIds];
+   
+    
     initialized = YES;
 }
 
@@ -215,16 +220,16 @@ static BOOL initialized = NO;
     NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
     NSString *payload = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     AVMessage *messageObject = [AVMessage messageForPeerWithSession:_session toPeerId:peerId payload:payload];
-    [_session sendMessage:messageObject];
-    
-    dict = [NSMutableDictionary dictionary];
-    [dict setObject:_session.peerId forKey:@"fromid"];
-    [dict setObject:peerId forKey:@"toid"];
-    [dict setObject:@"cmd" forKey:@"type"];
-    [dict setObject:cmd forKey:@"cmd"];
-    [dict setObject:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:@"time"];
-    [_database executeUpdate:@"insert into \"cmd\" (\"fromid\", \"toid\", \"type\", \"cmd\", \"time\") values (:fromid, :toid, :type, :cmd, :time)" withParameterDictionary:dict];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MESSAGE_UPDATED object:nil userInfo:dict];
+    [_session sendMessage:messageObject transient:NO];
+//    
+//    dict = [NSMutableDictionary dictionary];
+//    [dict setObject:_session.peerId forKey:@"fromid"];
+//    [dict setObject:peerId forKey:@"toid"];
+//    [dict setObject:@"cmd" forKey:@"type"];
+//    [dict setObject:cmd forKey:@"cmd"];
+//    [dict setObject:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:@"time"];
+//    [_database executeUpdate:@"insert into \"cmd\" (\"fromid\", \"toid\", \"type\", \"cmd\", \"time\") values (:fromid, :toid, :type, :cmd, :time)" withParameterDictionary:dict];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MESSAGE_UPDATED object:nil userInfo:dict];
     
 }
 
@@ -238,7 +243,7 @@ static BOOL initialized = NO;
     NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
     NSString *payload = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     AVMessage *messageObject = [AVMessage messageForPeerWithSession:_session toPeerId:peerId payload:payload];
-    [_session sendMessage:messageObject];
+    [_session sendMessage:messageObject transient:NO];
     
     dict = [NSMutableDictionary dictionary];
     [dict setObject:_session.peerId forKey:@"fromid"];
@@ -246,7 +251,30 @@ static BOOL initialized = NO;
     [dict setObject:@"text" forKey:@"type"];
     [dict setObject:message forKey:@"message"];
     [dict setObject:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:@"time"];
-    [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"message\", \"time\") values (:fromid, :toid, :type, :message, :time)" withParameterDictionary:dict];
+//    [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"message\", \"time\") values (:fromid, :toid, :type, :message, :time)" withParameterDictionary:dict];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MESSAGE_UPDATED object:nil userInfo:dict];
+    
+}
+
+- (void)sendMessage:(NSString *)message toGroup:(NSString *)groupId {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:_session.peerId forKey:@"dn"];
+    [dict setObject:@"text" forKey:@"type"];
+    [dict setObject:message forKey:@"msg"];
+    NSError *error = nil;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
+    NSString *payload = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    AVGroup *group = [AVGroup getGroupWithGroupId:groupId session:_session];
+    AVMessage *messageObject = [AVMessage messageForGroup:group payload:payload];
+    [group sendMessage:messageObject transient:NO];
+    
+    dict = [NSMutableDictionary dictionary];
+    [dict setObject:_session.peerId forKey:@"fromid"];
+    [dict setObject:groupId forKey:@"toid"];
+    [dict setObject:@"text" forKey:@"type"];
+    [dict setObject:message forKey:@"message"];
+    [dict setObject:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:@"time"];
+//    [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"message\", \"time\") values (:fromid, :toid, :type, :message, :time)" withParameterDictionary:dict];
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MESSAGE_UPDATED object:nil userInfo:dict];
     
 }
@@ -264,7 +292,7 @@ static BOOL initialized = NO;
     NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
     NSString *payload = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     AVMessage *messageObject = [AVMessage messageForPeerWithSession:_session toPeerId:peerId payload:payload];
-    [_session sendMessage:messageObject];
+    [_session sendMessage:messageObject transient:NO];
     //    [_session sendMessage:payload isTransient:NO toPeerIds:@[peerId]];
     
     dict = [NSMutableDictionary dictionary];
@@ -273,12 +301,68 @@ static BOOL initialized = NO;
     [dict setObject:type forKey:@"type"];
     [dict setObject:object.objectId forKey:@"object"];
     [dict setObject:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:@"time"];
-    [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"object\", \"time\") values (:fromid, :toid, :type, :object, :time)" withParameterDictionary:dict];
+//    [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"object\", \"time\") values (:fromid, :toid, :type, :object, :time)" withParameterDictionary:dict];
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MESSAGE_UPDATED object:nil userInfo:dict];
     
 }
 
-
+- (void)sendAttachment:(AVObject *)object avfile:(AVFile *)file toPeerId:(NSString *)peerId {
+    NSString *type = [object objectForKey:@"type"];
+    //    AVFile *file = [object objectForKey:type];
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:_session.peerId forKey:@"dn"];
+    [dict setObject:type forKey:@"type"];
+    [dict setObject:object.objectId forKey:@"object"];
+    
+    NSError *error = nil;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
+    NSString *payload = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    AVMessage *messageObject = [AVMessage messageForPeerWithSession:_session toPeerId:peerId payload:payload];
+    [_session sendMessage:messageObject transient:NO];
+    //    [_session sendMessage:payload isTransient:NO toPeerIds:@[peerId]];
+    
+    dict = [NSMutableDictionary dictionary];
+    [dict setObject:_session.peerId forKey:@"fromid"];
+    [dict setObject:peerId forKey:@"toid"];
+    [dict setObject:type forKey:@"type"];
+    [dict setObject:object.objectId forKey:@"object"];
+    NSData *filedata = [file getData];
+    [dict setObject:filedata forKey:@"filedata"];
+    [dict setObject:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:@"time"];
+    if ([_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"object\", \"time\", \"avfile\") values (:fromid, :toid, :type, :object, :time, :filedata)" withParameterDictionary:dict]) {
+        NSLog(@"database insert sucess");
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MESSAGE_UPDATED object:nil userInfo:dict];
+    
+}
+- (void)sendAttachment:(AVObject *)object avfile:(AVFile *)file toGroup:(NSString *)groupId {
+    NSString *type = [object objectForKey:@"type"];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:_session.peerId forKey:@"dn"];
+    [dict setObject:type forKey:@"type"];
+    [dict setObject:object.objectId forKey:@"object"];
+    NSError *error = nil;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
+    NSString *payload = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    AVGroup *group = [AVGroup getGroupWithGroupId:groupId session:_session];
+    AVMessage *messageObject = [AVMessage messageForGroup:group payload:payload];
+    [group sendMessage:messageObject transient:NO];
+    
+    dict = [NSMutableDictionary dictionary];
+    [dict setObject:_session.peerId forKey:@"fromid"];
+    [dict setObject:groupId forKey:@"toid"];
+    [dict setObject:type forKey:@"type"];
+    [dict setObject:object.objectId forKey:@"object"];
+    [dict setObject:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:@"time"];
+//    if ([_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"object\", \"time\", \"avfile\") values (:fromid, :toid, :type, :object, :time, :filedata)" withParameterDictionary:dict]) {
+//        NSLog(@"database insert sucess");
+//    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MESSAGE_UPDATED object:nil userInfo:dict];
+    
+}
 - (void)sendAttachment:(AVObject *)object toGroup:(NSString *)groupId {
     NSString *type = [object objectForKey:@"type"];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -290,7 +374,7 @@ static BOOL initialized = NO;
     NSString *payload = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     AVGroup *group = [AVGroup getGroupWithGroupId:groupId session:_session];
     AVMessage *messageObject = [AVMessage messageForGroup:group payload:payload];
-    [group sendMessage:messageObject];
+    [group sendMessage:messageObject transient:NO];
     
     dict = [NSMutableDictionary dictionary];
     [dict setObject:_session.peerId forKey:@"fromid"];
@@ -298,14 +382,14 @@ static BOOL initialized = NO;
     [dict setObject:type forKey:@"type"];
     [dict setObject:object.objectId forKey:@"object"];
     [dict setObject:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:@"time"];
-    [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"object\", \"time\") values (:fromid, :toid, :type, :object, :time)" withParameterDictionary:dict];
+//    [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"object\", \"time\") values (:fromid, :toid, :type, :object, :time)" withParameterDictionary:dict];
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MESSAGE_UPDATED object:nil userInfo:dict];
 
 }
 
 - (NSArray *)getMessagesForPeerId:(NSString *)peerId {
     NSString *selfId = _session.peerId;
-    FMResultSet *rs = [_database executeQuery:@"select \"fromid\", \"toid\", \"type\", \"message\", \"object\", \"time\" from \"messages\" where (\"fromid\"=? and \"toid\"=?) or (\"fromid\"=? and \"toid\"=?)" withArgumentsInArray:@[selfId, peerId, peerId, selfId]];
+    FMResultSet *rs = [_database executeQuery:@"select \"fromid\", \"toid\", \"type\", \"message\", \"object\", \"time\", \"avfile\" from \"messages\" where (\"fromid\"=? and \"toid\"=?) or (\"fromid\"=? and \"toid\"=?)" withArgumentsInArray:@[selfId, peerId, peerId, selfId]];
     NSMutableArray *result = [NSMutableArray array];
     while ([rs next]) {
         NSString *fromid = [rs stringForColumn:@"fromid"];
@@ -313,13 +397,15 @@ static BOOL initialized = NO;
         double time = [rs doubleForColumn:@"time"];
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
         NSString *type = [rs stringForColumn:@"type"];
+        NSData *data = [rs dataForColumn:@"avfile"];
+        AVFile *file = [AVFile fileWithData:data];
         if ([type isEqualToString:@"text"]) {
             NSString *message = [rs stringForColumn:@"message"];
             NSDictionary *dict = @{@"fromid":fromid, @"toid":toid, @"type":type, @"message":message, @"time":date};
             [result addObject:dict];
         } else {
             NSString *object = [rs stringForColumn:@"object"];
-            NSDictionary *dict = @{@"fromid":fromid, @"toid":toid, @"type":type, @"object":object, @"time":date};
+            NSDictionary *dict = @{@"fromid":fromid, @"toid":toid, @"type":type, @"object":object, @"time":date,@"avfile":file};
             [result addObject:dict];
         }
     }
@@ -395,47 +481,67 @@ static BOOL initialized = NO;
     if ([type isEqualToString:@"text"])
     {
         [dict setObject:msg forKey:@"message"];
-        [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"message\", \"time\") values (:fromid, :toid, :type, :message, :time)" withParameterDictionary:dict];
+//        [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"message\", \"time\") values (:fromid, :toid, :type, :message, :time)" withParameterDictionary:dict];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MESSAGE_UPDATED object:session userInfo:dict];
     }
-    else if([type isEqualToString:ADD_FRIEND_CMD])
+    else if([type isEqualToString:@"cmd"])
     {
-        NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
-        [dict setObject:cmdDict forKey:@"cmd"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ADD_FRIEND_UPDATED object:session userInfo:dict];
-        return;
+        NSDictionary *cmddict = [jsonDict objectForKey:@"cmd"];
+        NSString *cmd_type = [cmddict objectForKey:@"cmd_type"];
+        if([cmd_type isEqualToString:ADD_FRIEND_CMD])
+        {
+            NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
+            [dict setObject:cmdDict forKey:@"cmd"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ADD_FRIEND_UPDATED object:session userInfo:dict];
+            return;
+        }
+        else if ([cmd_type isEqualToString:INVITE_PLAY_CHESS_CMD])
+        {
+            NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
+            [dict setObject:cmdDict forKey:@"cmd"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_INVITE_PLAY_CHESS_UPDATED object:session userInfo:dict];
+            return;
+        }
+        else if ([cmd_type isEqualToString:PLAY_CHESS_CMD])
+        {
+            NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
+            [dict setObject:cmdDict forKey:@"cmd"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PLAY_CHESS_UPDATED object:session userInfo:dict];
+            return;
+        }
+        else if ([cmd_type isEqualToString:ADD_FRIEND_CMD_ACK])
+        {
+            NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
+            [dict setObject:cmdDict forKey:@"cmd"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ADD_FRIEND_ACK_UPDATED object:session userInfo:dict];
+            return;
+        }
+        else if ([cmd_type isEqualToString:INVITE_PLAY_CHESS_CMD_ACK])
+        {
+            NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
+            [dict setObject:cmdDict forKey:@"cmd"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_INVITE_PLAY_CHESS_ACK_UPDATED object:session userInfo:dict];
+            return;
+        }
     }
-    else if ([type isEqualToString:INVITE_PLAY_CHESS_CMD])
-    {
-        NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
-        [dict setObject:cmdDict forKey:@"cmd"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_INVITE_PLAY_CHESS_UPDATED object:session userInfo:dict];
-        return;
-    }
-    else if ([type isEqualToString:PLAY_CHESS_CMD])
-    {
-        NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
-        [dict setObject:cmdDict forKey:@"cmd"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_PLAY_CHESS_UPDATED object:session userInfo:dict];
-        return;
-    }
-    else if ([type isEqualToString:ADD_FRIEND_CMD_ACK])
-    {
-        NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
-        [dict setObject:cmdDict forKey:@"cmd"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ADD_FRIEND_ACK_UPDATED object:session userInfo:dict];
-        return;
-    }
-    else if ([type isEqualToString:INVITE_PLAY_CHESS_CMD_ACK])
-    {
-        NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
-        [dict setObject:cmdDict forKey:@"cmd"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_INVITE_PLAY_CHESS_ACK_UPDATED object:session userInfo:dict];
-        return;
-    }
-    else
+    else if([type isEqualToString:@"image"])
     {
         [dict setObject:object forKey:@"object"];
-        [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"object\", \"time\") values (:fromid, :toid, :type, :object, :time)" withParameterDictionary:dict];
+        NSString *objectId = object;
+        AVObject *avobject = [AVObject objectWithoutDataWithClassName:@"Attachments" objectId:objectId];
+        [avobject fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+            AVFile *avfile = [object objectForKey:type];
+            [avfile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                
+                NSData *filedata = [avfile getData];
+                [dict setObject:filedata forKey:@"avfile"];
+                [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"object\", \"time\", \"avfile\") values (:fromid, :toid, :type, :object, :time, :avfile)" withParameterDictionary:dict];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MESSAGE_UPDATED object:session userInfo:dict];
+                return ;
+            }];
+        }];
+
+        
     }
     
     BOOL exist = NO;
@@ -451,7 +557,7 @@ static BOOL initialized = NO;
         [self addChatWithPeerId:message.fromPeerId];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SESSION_UPDATED object:session userInfo:nil];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MESSAGE_UPDATED object:session userInfo:dict];
+    
     //    NSError *error;
     //    NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
     //    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
@@ -527,10 +633,10 @@ static BOOL initialized = NO;
     [dict setObject:type forKey:@"type"];
     if ([type isEqualToString:@"text"]) {
         [dict setObject:msg forKey:@"message"];
-        [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"message\", \"time\") values (:fromid, :toid, :type, :message, :time)" withParameterDictionary:dict];
+//        [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"message\", \"time\") values (:fromid, :toid, :type, :message, :time)" withParameterDictionary:dict];
     } else {
         [dict setObject:object forKey:@"object"];
-        [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"object\", \"time\") values (:fromid, :toid, :type, :object, :time)" withParameterDictionary:dict];
+//        [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"object\", \"time\") values (:fromid, :toid, :type, :object, :time)" withParameterDictionary:dict];
     }
 
     BOOL exist = NO;

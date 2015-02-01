@@ -55,15 +55,16 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
         }
         NSDictionary *dict = notify.userInfo;
         NSString *fromID = [dict objectForKey:@"fromid"];
+        dict = [dict objectForKey:@"cmd"];
         if (![fromID isEqualToString:self.otherId])
         {
             return;
         }
         
-        NSDictionary *message_value = [dict objectForKey:@"message"];
-        NSString *chess_cmd = [message_value objectForKey:@"CHESS_CMD"];
-        NSString *chess_x = [message_value objectForKey:@"CHESS_X"];
-        NSString *chess_tag = [message_value objectForKey:@"CHESS_TAG"];
+//        NSDictionary *message_value = [dict objectForKey:@"message"];
+        NSString *chess_cmd = [dict objectForKey:@"CHESS_CMD"];
+        NSString *chess_x = [dict objectForKey:@"CHESS_X"];
+        NSString *chess_tag = [dict objectForKey:@"CHESS_TAG"];
         NSInteger tag = [chess_tag integerValue];
         _optionButton = (UIButton *)[self viewWithTag:tag];
         NSInteger cmdindex = [chess_cmd integerValue];
@@ -72,7 +73,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
         {
             case CHESS_CMD_MOVE://MOVE
             {
-                NSString *chess_y = [message_value objectForKey:@"CHESS_Y"];
+                NSString *chess_y = [dict objectForKey:@"CHESS_Y"];
                 NSInteger x = [chess_x integerValue];
                 NSInteger y = [chess_y integerValue];
                 x = 8 - x;
@@ -85,7 +86,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
                 break;
             case CHESS_CMD_REMOVE://REMOVE
             {
-                NSString *chess_newtag = [message_value objectForKey:@"NEW_CHESS_TAG"];
+                NSString *chess_newtag = [dict objectForKey:@"NEW_CHESS_TAG"];
                 NSInteger newtag = [chess_newtag integerValue];
                 UIButton *newbutton =(UIButton *) [self viewWithTag:newtag];
                 [self removeChesePiecesAnimation:newbutton];
@@ -113,6 +114,10 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
     AudioServicesPlaySystemSound(soundId);
 }
 
+- (void) removenotifition
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_PLAY_CHESS_UPDATED object:nil];
+}
 - (void)loadCheseInterface
 {
     
@@ -129,7 +134,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
         UIButton *newbutton =(UIButton *) [self viewWithTag:i];
         [newbutton removeFromSuperview];
     }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveChess:) name:NOTIFICATION_MESSAGE_UPDATED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveChess:) name:NOTIFICATION_PLAY_CHESS_UPDATED object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveChess:) name:NOTIFI_CHESS_MOVE object:nil];
 //    [[RuntimeStatus instance].udpP2P sendData:[NSData dataWithBytes:"hello world" length:11] toHost:@"192.168.1.13" port:20108 withTimeout:3 tag:0];
 //    rect.origin.x +=lenthOfUnitWidth/2;
@@ -310,7 +315,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
                 NSString *str_newtag = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",(int)chesePieces.tag]];
                 NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:str_cmd,@"CHESS_CMD",str_tag,@"CHESS_TAG",str_newtag, @"NEW_CHESS_TAG", nil];
 //                [[RuntimeStatus instance].udpP2P sendDict:dict toUser:self.userother withProtocol:CHESS];
-                [[CDSessionManager sharedInstance] sendMessage:dict toPeerId:self.otherId];
+                [[CDSessionManager sharedInstance] sendPlayChess:dict toPeerId:self.otherId];
          
             
             [self removeChesePiecesAnimation:chesePieces];
@@ -446,7 +451,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
             NSString *str_y = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",(int)newPiecesindex.y]];
             NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:str_cmd,@"CHESS_CMD", str_tag,@"CHESS_TAG",str_x, @"CHESS_X", str_y, @"CHESS_Y", nil];
 //            [[RuntimeStatus instance].udpP2P sendDict:dict toUser:self.userother withProtocol:CHESS];
-            [[CDSessionManager sharedInstance] sendMessage:dict toPeerId:self.otherId];
+            [[CDSessionManager sharedInstance] sendPlayChess:dict toPeerId:self.otherId];
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
 
             _optionButton.layer.transform = CATransform3DTranslate(_optionButton.layer.transform, _pointLocation.x - _optionButton.frame.origin.x, _pointLocation.y - _optionButton.frame.origin.y, 0);

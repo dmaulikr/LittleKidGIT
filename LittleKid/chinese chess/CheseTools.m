@@ -58,23 +58,31 @@ BOOL isLegalRuleToJumpNewLocationOfChese(UIButton * piecesButton,CGRect oldLocat
     if (piecesButton.tag>100)
     {
         redChesePiecesTagWeight = 100;
+        if (ischessToolsReverse) {
+            generalOrSoldierMoveScope = TheBlackGeneralOrSoldierMoveScope;
+        }
+        else
         generalOrSoldierMoveScope = TheRedGeneralOrSoldierMoveScope;
         isRedOrBlackChesePieces = RedChesePieces;
     }
     else
     {
         redChesePiecesTagWeight = 0;
+        if (ischessToolsReverse) {
+            generalOrSoldierMoveScope = TheRedGeneralOrSoldierMoveScope;
+        }
+        else
         generalOrSoldierMoveScope = TheBlackGeneralOrSoldierMoveScope;
         isRedOrBlackChesePieces = BlackChesePieces;
     }
-    if (oldLocation.origin.y<lenthOfUnitHight*4)
-    {
-        generalOrSoldierMoveScope = TheBlackGeneralOrSoldierMoveScope;
-    }
-    else
-    {
-        generalOrSoldierMoveScope = TheRedGeneralOrSoldierMoveScope;
-    }
+//    if (oldLocation.origin.y<lenthOfUnitHight*4)
+//    {
+//        generalOrSoldierMoveScope = TheBlackGeneralOrSoldierMoveScope;
+//    }
+//    else
+//    {
+//        generalOrSoldierMoveScope = TheRedGeneralOrSoldierMoveScope;
+//    }
     
     if (piecesButton.tag == 1+redChesePiecesTagWeight||piecesButton.tag == 9+redChesePiecesTagWeight)//处理军走法
     {
@@ -183,9 +191,9 @@ BOOL isLegalhurriedlyJumpRule(CGPoint oldLocation,CGPoint newLocation,int cheseI
         ||((oldLocation.x-lenthOfUnitWidth == newLocation.x||(oldLocation.x+lenthOfUnitWidth == newLocation.x))&&(oldLocation.y == newLocation.y)&&(oldLocationIndex.y<5)&&(((isRedOrBlackChesePieces == RedChesePieces&&(!ischessToolsReverse)))||(isRedOrBlackChesePieces == BlackChesePieces&&(ischessToolsReverse))))
         
         
-        ||((oldLocation.x == newLocation.x)&&(oldLocation.y+30*isRedOrBlackChesePieces*isReseve == newLocation.y))
+        ||((oldLocation.x == newLocation.x)&&(oldLocation.y+lenthOfUnitHight*isRedOrBlackChesePieces*isReseve == newLocation.y))
         
-        ||((oldLocation.x == newLocation.x)&&(oldLocation.y+40*isRedOrBlackChesePieces*isReseve == newLocation.y)))
+        ||((oldLocation.x == newLocation.x)&&(oldLocation.y+lenthOfUnitHight*isRedOrBlackChesePieces*isReseve == newLocation.y)))
     {
         moveDownAndSetNewCheseIndex(cheseIndex, oldLocationIndex, newLocationIndex);
         return YES;
