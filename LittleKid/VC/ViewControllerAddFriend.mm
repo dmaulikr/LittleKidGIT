@@ -13,6 +13,7 @@
 #import "DataMatrix.h"
 #import "TableViewControllerFriendConfirm.h"
 #import "CDSessionManager.h"
+#import "RuntimeStatus.h"
 
 @interface ViewControllerAddFriend () <ZXingDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
@@ -20,7 +21,7 @@
 @property(strong, nonatomic) NSDictionary *toAddFriendInfoDict;
 @property (weak, nonatomic) IBOutlet UIImageView *barcodeSelfImgView;
 
-@property (strong, atomic) NSString * peerID;
+//@property (strong, atomic) NSString * peerID;
 
 @end
 
@@ -61,7 +62,7 @@
 
 - (IBAction)editEndToFindFriend:(id)sender {
     NSString *inputStr = [[NSString alloc] initWithString:((UITextField *)sender).text];
-    self.peerID = inputStr;
+
     if (inputStr.length == 0) {
         [[[UIAlertView alloc] initWithTitle:@"输入不合法" message:@"提示原因" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil , nil] show];
         return;
@@ -72,6 +73,8 @@
     [self waitStatus];
     
     [[CDSessionManager sharedInstance] sendAddFriendRequest:inputStr];
+    [RuntimeStatus instance].peerId = inputStr;
+
     NSLog(@"send add friend request to: %@",inputStr);
 }
 
@@ -85,8 +88,9 @@
 
 - (void)receiveAddFriendRequest:(NSNotification *)notification {
     NSDictionary *dict = notification.userInfo;
-//    NSString* peerid = [dict objectForKey:@"fromid"];
-    self.peerID = [dict objectForKey:@"fromid"];
+
+    NSString *peerID = [dict objectForKey:@"fromid"];
+    [[RuntimeStatus instance] addFriendsToBeConfirm:peerID];
     dict = [dict objectForKey:@"cmd"];
     NSString *str = [dict objectForKey:@"cmd_type"];
     if ([str isEqualToString:ADD_FRIEND_CMD] ) {
@@ -96,6 +100,7 @@
 
 - (void)receiveAddFriendRequestAck:(NSNotification *)notification {
     NSDictionary *dict = notification.userInfo;
+    NSString *peerid = [dict objectForKey:@"fromid"];
     dict = [dict objectForKey:@"cmd"];
     NSString *str = [dict objectForKey:@"cmd_type"];
     if ([str isEqualToString:ADD_FRIEND_CMD_ACK] ) {
@@ -103,7 +108,7 @@
         if ([str isEqualToString:@"OK"])
         {
             AVQuery * query = [AVUser query];
-            [query whereKey:@"username" equalTo:self.peerID];
+            [query whereKey:@"username" equalTo:peerid];
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                 if (error == nil) {
                     AVUser  *peerUser = [objects firstObject];
@@ -116,9 +121,9 @@
                     [[AVUser currentUser] follow:peerUser.objectId andCallback:^(BOOL succeeded, NSError *error) {
                         if (succeeded) {
                             //TODO
-                            NSLog(@"Add friend %@ sucaessful", self.peerID);
+                            NSLog(@"Add friend %@ successful", [RuntimeStatus instance].peerId);
                         } else {
-                            NSLog(@"Add friend %@ error %@", self.peerID, error);
+                            NSLog(@"Add friend %@ error %@", [RuntimeStatus instance].peerId, error);
                         }
                     }];
                 } else {
@@ -195,7 +200,7 @@
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex != 0) {
         AVQuery * query = [AVUser query];
-        [query whereKey:@"username" equalTo:self.peerID];
+        [query whereKey:@"username" equalTo:[RuntimeStatus instance].peerId];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (error == nil) {
                 AVUser  *peerUser = [objects firstObject];
@@ -208,9 +213,9 @@
                 [[AVUser currentUser] follow:peerUser.objectId andCallback:^(BOOL succeeded, NSError *error) {
                     if (succeeded) {
                         //TODO
-                        NSLog(@"Add friend %@ sucaessful", self.peerID);
+                        NSLog(@"Add friend %@ sucaessful", [RuntimeStatus instance].peerId);
                     } else {
-                        NSLog(@"Add friend %@ error %@", self.peerID, error);
+                        NSLog(@"Add friend %@ error %@", [RuntimeStatus instance].peerId, error);
                     }
                 }];
             } else {
@@ -219,10 +224,10 @@
         }];
         
 
-        [[CDSessionManager sharedInstance] sendAddFriendRequestAck:@"OK" toPeerId:self.peerID];
+        [[CDSessionManager sharedInstance] sendAddFriendRequestAck:@"OK" toPeerId:[RuntimeStatus instance].peerId];
     }
     else {
-        [[CDSessionManager sharedInstance] sendAddFriendRequestAck:@"NO" toPeerId:self.peerID];
+        [[CDSessionManager sharedInstance] sendAddFriendRequestAck:@"NO" toPeerId:[RuntimeStatus instance].peerId];
     }
 }
 

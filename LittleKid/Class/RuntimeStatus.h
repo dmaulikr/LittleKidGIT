@@ -24,7 +24,7 @@
 @property (strong, nonatomic) AVUser *currentUser;
 @property (strong, nonatomic) NSMutableArray *friends;
 @property (strong, nonatomic) NSMutableArray *friendsToBeConfirm;
-
+@property (strong, nonatomic) NSString *peerId; //for temp use
 
 + (instancetype)instance;
 - (void)loadLocalInfo;
@@ -32,5 +32,6 @@
 - (void)procNewP2PChatMsg:(NSDictionary *)newChatMsgDict;
 
 - (void)initial;
+- (void)addFriendsToBeConfirm:(NSString *)oneFriend;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "TableViewControllerFriendConfirm.h"
 #import "CDSessionManager.h"
+#import "RuntimeStatus.h"
 
 @interface TableViewControllerFriendConfirm ()
 
@@ -48,12 +49,9 @@
 }
 
 - (IBAction)addFriendBtnTouchDown:(id)sender {
-    if(YES == [self sendAddFriendMsg:self.uidLabel.text]){
-        [[[UIAlertView alloc] initWithTitle:nil message:@"好友请求已发送\n请耐心等待" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil] show];
-    }
-    else{
-        
-    }
+    [self sendAddFriendMsg:self.uidLabel.text];
+
+    [[[UIAlertView alloc] initWithTitle:nil message:@"好友请求已发送\n请耐心等待" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil] show];
 }
 
 -(BOOL)sendAddFriendMsg:(NSString*) uid{

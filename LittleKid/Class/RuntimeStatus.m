@@ -51,6 +51,10 @@
     self.friendsToBeConfirm = [NSMutableArray array];
 }
 
+- (void) addFriendsToBeConfirm:(NSDictionary *)oneFriend {
+    [self.friendsToBeConfirm addObject:oneFriend];
+}
+
 - (void)loadLocalInfo{
     self.usrSelf = [[UserSelf alloc] initWithUID:self.signAccountUID];
     [self loadLocalRecent];
