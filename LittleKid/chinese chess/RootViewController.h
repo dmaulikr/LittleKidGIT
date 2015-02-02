@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "RNGridMenu.h"
 #import <AVFoundation/AVFoundation.h>
-#import "ViewController.h"
 
 @class CheseInterface;
 @protocol RootViewControllerDelegate <NSObject>
@@ -17,8 +16,13 @@
 - (void) rootViewControllerCancel:(UIViewController *)rootViewController;
 
 @end
-@interface RootViewController : UIViewController<RNGridMenuDelegate,ViewControllerDelegate>
-
+@interface RootViewController : UIViewController<RNGridMenuDelegate>
+{
+    UIImageView *image1,*image2;
+    float random;
+    float orign;
+    NSInteger rezult; //0负 1平 2胜
+}
 //@property(nonatomic) int blackOrRed;
 @property (retain,readwrite,nonatomic)CheseInterface * cheseInterface;
 @property (retain,nonatomic,readwrite) UILabel * label;

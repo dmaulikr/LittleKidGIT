@@ -98,7 +98,6 @@
 		577A6F621A7A0B3D004BE99B /* blue_expand_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 577A6F601A7A0B3D004BE99B /* blue_expand_normal@2x.png */; };
 		577A6F651A7A147D004BE99B /* InvitePlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 577A6F641A7A147D004BE99B /* InvitePlayViewController.m */; };
 		577A6F681A7A3F7A004BE99B /* invatedPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 577A6F671A7A3F7A004BE99B /* invatedPlayViewController.m */; };
-		5786D5861A7E6376001341D6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5786D5851A7E6376001341D6 /* ViewController.m */; };
 		5786D5891A7E638A001341D6 /* disk.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5786D5871A7E638A001341D6 /* disk.jpg */; };
 		5786D58A1A7E638A001341D6 /* start.png in Resources */ = {isa = PBXBuildFile; fileRef = 5786D5881A7E638A001341D6 /* start.png */; };
 		57AC8FD11A71FA58008F0892 /* CDChatRoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57AC8FC81A71FA58008F0892 /* CDChatRoomController.m */; };
@@ -221,9 +220,6 @@
 		96AB5DCE1A6F598F0086818E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96AB5DCD1A6F598F0086818E /* CoreTelephony.framework */; };
 		96AB5DD01A6F59960086818E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96AB5DCF1A6F59960086818E /* CoreLocation.framework */; };
 		96AB5DD21A6F59A60086818E /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 96AB5DD11A6F59A60086818E /* libicucore.dylib */; };
-		E406A4291A7CB6E4001D8523 /* 0$FP6XI3NI8EQP1%LDMB9PB.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E406A4061A7CB6E4001D8523 /* 0$FP6XI3NI8EQP1%LDMB9PB.jpg */; };
-		E406A42A1A7CB6E4001D8523 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = E406A4071A7CB6E4001D8523 /* 1.png */; };
-		E406A42B1A7CB6E4001D8523 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = E406A4081A7CB6E4001D8523 /* 2.png */; };
 		E406A42C1A7CB6E4001D8523 /* friend_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = E406A4091A7CB6E4001D8523 /* friend_bg.png */; };
 		E406A4501A7CBA92001D8523 /* FriendApplyMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E406A44F1A7CBA92001D8523 /* FriendApplyMsgTableViewCell.m */; };
 		E40DA0971A416F6000CA1431 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E40DA0961A416F6000CA1431 /* main.m */; };
@@ -394,8 +390,6 @@
 		577A6F641A7A147D004BE99B /* InvitePlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitePlayViewController.m; sourceTree = "<group>"; };
 		577A6F661A7A3F7A004BE99B /* invatedPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = invatedPlayViewController.h; sourceTree = "<group>"; };
 		577A6F671A7A3F7A004BE99B /* invatedPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = invatedPlayViewController.m; sourceTree = "<group>"; };
-		5786D5841A7E6376001341D6 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		5786D5851A7E6376001341D6 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		5786D5871A7E638A001341D6 /* disk.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = disk.jpg; sourceTree = "<group>"; };
 		5786D5881A7E638A001341D6 /* start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start.png; sourceTree = "<group>"; };
 		57AC8FC71A71FA58008F0892 /* CDChatRoomController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDChatRoomController.h; sourceTree = "<group>"; };
@@ -618,9 +612,6 @@
 		96AB5DCD1A6F598F0086818E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		96AB5DCF1A6F59960086818E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		96AB5DD11A6F59A60086818E /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
-		E406A4061A7CB6E4001D8523 /* 0$FP6XI3NI8EQP1%LDMB9PB.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "0$FP6XI3NI8EQP1%LDMB9PB.jpg"; sourceTree = "<group>"; };
-		E406A4071A7CB6E4001D8523 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
-		E406A4081A7CB6E4001D8523 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		E406A4091A7CB6E4001D8523 /* friend_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friend_bg.png; sourceTree = "<group>"; };
 		E406A44E1A7CBA92001D8523 /* FriendApplyMsgTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendApplyMsgTableViewCell.h; sourceTree = "<group>"; };
 		E406A44F1A7CBA92001D8523 /* FriendApplyMsgTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendApplyMsgTableViewCell.m; sourceTree = "<group>"; };
@@ -793,8 +784,6 @@
 		5732306B1A6F70CE004E187F /* chinese chess */ = {
 			isa = PBXGroup;
 			children = (
-				5786D5841A7E6376001341D6 /* ViewController.h */,
-				5786D5851A7E6376001341D6 /* ViewController.m */,
 				573230701A6F70CE004E187F /* ChessRes */,
 				5732306C1A6F70CE004E187F /* CheseInterface.h */,
 				5732306D1A6F70CE004E187F /* CheseInterface.m */,
@@ -1241,9 +1230,6 @@
 		E406A4051A7CB6E4001D8523 /* friendViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E406A4061A7CB6E4001D8523 /* 0$FP6XI3NI8EQP1%LDMB9PB.jpg */,
-				E406A4071A7CB6E4001D8523 /* 1.png */,
-				E406A4081A7CB6E4001D8523 /* 2.png */,
 				E406A4091A7CB6E4001D8523 /* friend_bg.png */,
 				E406A40D1A7CB6E4001D8523 /* images */,
 			);
@@ -1657,7 +1643,6 @@
 				57AC90E51A71FEC6008F0892 /* bubble-flat-incoming.png in Resources */,
 				573230A41A6F70CE004E187F /* 102.png in Resources */,
 				577A6F621A7A0B3D004BE99B /* blue_expand_normal@2x.png in Resources */,
-				E406A42B1A7CB6E4001D8523 /* 2.png in Resources */,
 				57AC90F11A71FEC6008F0892 /* bubble-square-outgoing-selected.png in Resources */,
 				E48D20E81A65060A0099537F /* checkcode_backgroundRed.png in Resources */,
 				57AC90FE1A71FEC6008F0892 /* PhotoIcon@2x.png in Resources */,
@@ -1682,7 +1667,6 @@
 				57AC90EF1A71FEC6008F0892 /* bubble-square-incoming.png in Resources */,
 				5708761D1A5D5FD400892B53 /* denglu_0013_animals.png in Resources */,
 				573230B01A6F70CE004E187F /* 116.png in Resources */,
-				E406A42A1A7CB6E4001D8523 /* 1.png in Resources */,
 				573230C21A6F70CE004E187F /* 象棋主界面.png in Resources */,
 				57AC91011A71FEC6008F0892 /* send.png in Resources */,
 				570876021A5CF82100892B53 /* wo_bg_red.png in Resources */,
@@ -1707,7 +1691,6 @@
 				57AC90D91A71FEC6008F0892 /* bubble-default-incoming-selected.png in Resources */,
 				572E3F681A63BA1300323683 /* xinpengyou_0013_图层-6.png in Resources */,
 				57AC90EC1A71FEC6008F0892 /* bubble-flat-outgoing@2x.png in Resources */,
-				E406A4291A7CB6E4001D8523 /* 0$FP6XI3NI8EQP1%LDMB9PB.jpg in Resources */,
 				573230B91A6F70CE004E187F /* 5.png in Resources */,
 				57AC90EB1A71FEC6008F0892 /* bubble-flat-outgoing.png in Resources */,
 				57AC90F31A71FEC6008F0892 /* bubble-square-outgoing.png in Resources */,
@@ -1802,7 +1785,6 @@
 				9654745F1A709B0A00C29287 /* UIViewControllerBase.m in Sources */,
 				E4E729AE1A4BB6FD000FA552 /* ChatMessage.m in Sources */,
 				57AC91121A71FEC6008F0892 /* QBImagePickerGroupCell.m in Sources */,
-				5786D5861A7E6376001341D6 /* ViewController.m in Sources */,
 				57AC90D61A71FEC6008F0892 /* NSString+JSMessagesView.m in Sources */,
 				57AC90D11A71FEC6008F0892 /* JSDismissiveTextView.m in Sources */,
 				57AC90051A71FC0D008F0892 /* CDBaseTabBarController.m in Sources */,

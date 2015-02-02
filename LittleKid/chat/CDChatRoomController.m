@@ -62,7 +62,7 @@
     } else {
         self.title = self.otherId;
     }
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showDetail:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showDetail:)];
     UIImageView *imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liaotian_background.png"]];
     [self.tableView setBackgroundView:imgView];
     [self setBackgroundColor:[UIColor clearColor]];
