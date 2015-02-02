@@ -43,6 +43,19 @@
     NSLog(@"I also get the newRemoteMsg");
 }
 
+
+- (IBAction)logoutBtn:(id)sender {
+    if ([AVUser currentUser]) {
+        [AVUser logOut];
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        UIViewController* nextController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        
+         [self presentViewController:nextController animated:YES completion:nil];
+    }
+}
+
 //#pragma mark - Table view data source
 //
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

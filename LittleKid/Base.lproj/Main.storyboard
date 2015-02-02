@@ -11,7 +11,7 @@
         <!--登陆-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewControllerLogin" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ViewControllerLogin" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qNk-3j-XZs"/>
                         <viewControllerLayoutGuide type="bottom" id="n1u-ic-B87"/>
@@ -1776,9 +1776,6 @@
                             <constraint firstItem="8qh-az-CTg" firstAttribute="top" secondItem="STb-Fj-ed8" secondAttribute="bottom" constant="24" id="zOn-Lf-rpW">
                                 <variation key="heightClass=regular-widthClass=regular" constant="50"/>
                             </constraint>
-                            <constraint firstItem="Dhe-qx-PBr" firstAttribute="top" secondItem="4n7-pJ-11U" secondAttribute="bottom" constant="-298" id="zr4-c3-Yyo">
-                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
-                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -1789,7 +1786,6 @@
                                 <exclude reference="lor-DU-vcM"/>
                                 <exclude reference="oAM-Lx-wsH"/>
                                 <exclude reference="vvR-Rz-xmh"/>
-                                <exclude reference="zr4-c3-Yyo"/>
                                 <exclude reference="Kha-6x-Q1l"/>
                                 <exclude reference="Uqf-4E-0mI"/>
                                 <exclude reference="p5c-KK-uQd"/>
@@ -1811,7 +1807,6 @@
                             <mask key="constraints">
                                 <include reference="6cA-D8-jje"/>
                                 <include reference="vvR-Rz-xmh"/>
-                                <include reference="zr4-c3-Yyo"/>
                                 <include reference="Uqf-4E-0mI"/>
                                 <include reference="pCA-7k-rHO"/>
                                 <include reference="ypc-qx-UBI"/>
@@ -2624,7 +2619,11 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="我" id="7Rc-EW-VRh" colorLabel="IBBuiltInLabel-Blue">
-                        <barButtonItem key="rightBarButtonItem" title="登出" id="N3c-4c-MRA"/>
+                        <barButtonItem key="rightBarButtonItem" title="登出" id="N3c-4c-MRA">
+                            <connections>
+                                <action selector="logoutBtn:" destination="QyL-Q3-JWK" id="21X-sQ-Efx"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="profileImageView" destination="yxp-N8-SeD" id="trr-TB-Jnw"/>
@@ -2929,6 +2928,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="179" y="242" width="42" height="21"/>
+                                </variation>
                                 <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="379" y="242" width="42" height="21"/>
                                 </variation>
@@ -3031,7 +3033,6 @@
         <image name="impinfo_bg_bottom.png" width="640" height="364"/>
         <image name="impinfo_bg_up.png" width="180" height="184"/>
         <image name="impinfo_birth.png" width="144" height="52"/>
-        <image name="impinfo_date.png" width="206" height="40"/>
         <image name="impinfo_nick.png" width="99" height="51"/>
         <image name="impinfo_sex.png" width="99" height="51"/>
         <image name="impinfo_star.png" width="136" height="129"/>
