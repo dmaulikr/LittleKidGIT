@@ -13,9 +13,9 @@
 
 @interface ViewControllerLogin ()
 
-@property (weak, nonatomic) IBOutlet UITextField *account;
+@property (strong, nonatomic) IBOutlet UITextField *account;
 
-@property (weak, nonatomic) IBOutlet UITextField *password;
+@property (strong, nonatomic) IBOutlet UITextField *password;
 
 @end
 
@@ -46,8 +46,8 @@
     //add-2
     self.account.returnKeyType = UIReturnKeyNext;
     self.password.returnKeyType = UIReturnKeyGo;
-//    self.account.text = @"15926305768";
-//    self.password.text = @"qqqqqq";
+    self.account.text = @"15926305768";
+    self.password.text = @"qqqqqq";
 //    [self onLogin:nil];
     //按下背景退出输入法
     UITapGestureRecognizer *gestureTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeKeyBoard)];
