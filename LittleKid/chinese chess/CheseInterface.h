@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "RNGridMenu.h"
 
+@protocol CheseInterfaceDelegat <NSObject>
+
+-(void) cheseInterRezult;
+
+@end
+
 @interface CheseInterface : UIView
 @property (assign,readwrite,nonatomic)id delegate;
 @property (retain,readwrite,nonatomic)UIImageView * cheseView;
@@ -19,8 +25,10 @@
 @property (assign,readwrite,nonatomic)UIButton * removeButton;
 @property (assign)int theDeadBlackCheseNumber;
 @property (assign)int theDeadRedCheseNumber;
-@property (assign)BOOL ischessReverse;
+@property (assign)BOOL ischessReverse;//1 b 0red
 @property (nonatomic, strong) NSString *otherId;
+-(void) cheseInterRezult;
+@property NSInteger rezult;
 -(void)loadCheseInterface;
 - (void) removenotifition;
 

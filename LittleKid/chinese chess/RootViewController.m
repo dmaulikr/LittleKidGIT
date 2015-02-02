@@ -23,7 +23,6 @@
 @end
 
 @implementation RootViewController
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -138,13 +137,13 @@
         //        NSLog(@"receve a data:%@",err);
         switch (cmdindex)
         {
-            case CHESS_CMD_BACKMOVE://RESTAT
-            {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请求重新开始" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:@"不可以", nil];
-                [alert setTag:22];
-                [alert show];
-                break;
-            }
+//            case CHESS_CMD_BACKMOVE://RESTAT
+//            {
+//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请求重新开始" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:@"不可以", nil];
+//                [alert setTag:22];
+//                [alert show];
+//                break;
+//            }
             case CHESS_CMD_DRAWOFFER:
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方请求和局" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:@"不可以", nil];
@@ -166,35 +165,35 @@
                 self.alertwait = nil;
                 switch (self.sendCmd)
                 {
-                    case CHESS_CMD_BACKMOVE:
-                    {
-                        if ([chessack  isEqual: @"可以"])
-                        {
-                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意重新开始" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
-                            [alert setTag:25];
-                            [alert show];
-                        }
-                        else
-                        {
-                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方不同意重新开始" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
-                            [alert setTag:26];
-                            [alert show];
-                        }
-                        
-                        
-                        break;
-                    }
+//                    case CHESS_CMD_BACKMOVE:
+//                    {
+//                        if ([chessack  isEqual: @"可以"])
+//                        {
+//                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意重新开始" message:nil delegate:self cancelButtonTitle:@"确定"  otherButtonTitles:nil, nil];
+//                            [alert setTag:25];
+//                            [alert show];
+//                        }
+//                        else
+//                        {
+//                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方不同意重新开始" message:nil delegate:self cancelButtonTitle:@"确定"  otherButtonTitles:nil, nil];
+//                            [alert setTag:26];
+//                            [alert show];
+//                        }
+//                        
+//                        
+//                        break;
+//                    }
                     case CHESS_CMD_DRAWOFFER:
                     {
                         if ([chessack  isEqual: @"可以"])
                         {
-                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意和局" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意和局" message:nil delegate:self cancelButtonTitle:@"确定"  otherButtonTitles:nil, nil];
                             [alert setTag:27];
                             [alert show];
                         }
                         else
                         {
-                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方不同意和局" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方不同意和局" message:nil delegate:self cancelButtonTitle:@"确定"  otherButtonTitles:nil, nil];
                             [alert setTag:28];
                             [alert show];
                         }
@@ -202,7 +201,7 @@
                         break;
                     case CHESS_CMD_DEFEAL:
                     {
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意认输" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:nil, nil];
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意认输" message:nil delegate:self cancelButtonTitle:@"确定"  otherButtonTitles:nil, nil];
                         [alert setTag:29];
                         [alert show];
                         break;
@@ -228,23 +227,25 @@
 }
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    if ([alertView tag] == 22)
-    {    // it's the Error alert
-        if (buttonIndex == 0)
-        {
-            [self sendack:@"可以"];
-            [self Restart];
-        }
-        else
-        {
-            [self sendack:@"不可以"];
-        }
-    }
+//    if ([alertView tag] == 22)
+//    {    // it's the Error alert
+//        if (buttonIndex == 0)
+//        {
+//            [self sendack:@"可以"];
+//            rezult = 2;
+//            [self Restart];
+//        }
+//        else
+//        {
+//            [self sendack:@"不可以"];
+//        }
+//    }
     if ([alertView tag] ==23)
     {
         if (buttonIndex == 0)
         {
             [self sendack:@"可以"];
+            rezult = 1;
             [self Restart];
         }
         else
@@ -256,26 +257,32 @@
     if ([alertView tag] ==24)
     {
         [self sendack:@"可以"];
+        rezult =2;
         [self Restart];
     }
-    if ([alertView tag] == 25)
-    {    // it's the Error alert
-        if (buttonIndex == 0)
-        {
-            [self Restart];
-        }
-    }
-    if ([alertView tag] ==27)
+//    if ([alertView tag] == 25)
+//    {    // it's the Error alert
+//        if (buttonIndex == 0)
+//        {
+//            [self Restart];
+//        }
+//    }
+    if ([alertView tag] ==27)//和局
     {
         if (buttonIndex == 0)
         {
+            rezult = 1;
             [self Restart];
         }
        
     }
-    if ([alertView tag] ==29)
+    if ([alertView tag] ==29)//认输
     {
+        rezult = 0;
         [self Restart];
+    }
+    if ([alertView tag] == 56) {
+        [self.delegate rootViewControllerCancel:self];
     }
     
 }
@@ -297,6 +304,8 @@
 {
 
     [_cheseInterface removenotifition];
+    [_cheseInterface removeFromSuperview];
+    [self addrezultView];
 //    [_cheseInterface loadCheseInterface];
 //    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 //    
@@ -304,23 +313,178 @@
 //    [self presentViewController:nextController animated:YES completion:nil];
 //    [self dismissViewControllerAnimated:YES completion:nil];
     
+//    ViewController *controller = [[ViewController alloc]init];
+//    controller.delegate = self;
+//    [self presentViewController:controller animated:YES completion:nil];
+//    [self.navigationController pushViewController:controller animated:YES];
 
-        [self.delegate rootViewControllerCancel:self];
+//    [self.delegate rootViewControllerCancel:self];
    
 }
+-(void) addrezultView
+{
+    
+    //添加背景
+    UIImageView *image_backgroup = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkcode_backgroundRed.png"]];
+    image_backgroup.frame = [[UIScreen mainScreen]bounds];
+    image2 = image_backgroup;
+    [self.view addSubview:image2];
+    //添加转盘
+    UIImageView *image_disk = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disk.jpg"]];
+    image_disk.frame = CGRectMake(0.0, 0.0, 320.0, 320.0);
+    image1 = image_disk;
+    [self.view addSubview:image1];
+    
+    //添加转针
+    UIImageView *image_start = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"start.png"]];
+    image_start.frame = CGRectMake(103.0, 55.0, 120.0, 210.0);
+    image2 = image_start;
+    [self.view addSubview:image2];
+    
+    //添加按钮
+    UIButton *btn_start = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    btn_start.frame = CGRectMake(140.0, 350.0, 70.0, 70.0);
+    [btn_start setTitle:@"抽奖" forState:UIControlStateNormal];
+    [btn_start addTarget:self action:@selector(choujiang) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn_start];
+    
+    UILabel *rezultlabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 400, 310, 100)];
+    NSString *str = [[NSString alloc]init];
+    if (rezult==0) {
+        str = @"您输掉了比赛，但是获得了1000分/n的鼓励，您还可以参与抽奖";
+    }
+    else if(rezult == 1)
+    {
+        str = @"您战平了对手，获得了2000分/n的鼓励，您还可以参与抽奖";
+    }
+    else if (rezult ==2)
+    {
+        str = @"您战胜了对手，获得了3000分/n的鼓励，您还可以参与抽奖";
+    }
+    rezultlabel.text =str;
+    //设置字体颜色为白色
+    rezultlabel.textColor = [UIColor whiteColor];
+    //文字居中显示
+    rezultlabel.textAlignment = UITextAlignmentCenter;
+    //自动折行设置
+    rezultlabel.lineBreakMode = UILineBreakModeWordWrap;
+    rezultlabel.numberOfLines = 0;//表示label可以多行显示
+    [self.view addSubview:rezultlabel];
+}
+
+- (void)choujiang
+{
+    //******************旋转动画******************
+    //产生随机角度
+    
+    srand((unsigned)time(0));  //不加这句每次产生的随机数不变
+    random = (rand() % 20) / 10.0;
+    //设置动画
+    CABasicAnimation *spin = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    [spin setFromValue:[NSNumber numberWithFloat:M_PI * (0.0+orign)]];
+    [spin setToValue:[NSNumber numberWithFloat:M_PI * (10.0+random+orign)]];
+    [spin setDuration:2.5];
+    [spin setDelegate:self];//设置代理，可以相应animationDidStop:finished:函数，用以弹出提醒框
+    //速度控制器
+    [spin setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    //添加动画
+    [[image2 layer] addAnimation:spin forKey:nil];
+    //锁定结束位置
+    image2.transform = CGAffineTransformMakeRotation(M_PI * (10.0+random+orign));
+    //锁定fromValue的位置
+    orign = 10.0+random+orign;
+    orign = fmodf(orign, 2.0);
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    //判断抽奖结果
+    if (orign >= 0.0 && orign < (0.5/3.0)) {
+        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:@"您中了一等奖，获得了3倍积分！ " delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+        [result setTag:56];
+        [result show];
+    }
+    else if (orign >= (0.5/3.0) && orign < ((0.5/3.0)*2))
+    {
+        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:@"您中了 七等奖，获得了1倍积分！ " delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+        [result setTag:56];
+        [result show];
+    }else if (orign >= ((0.5/3.0)*2) && orign < ((0.5/3.0)*3))
+    {
+        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:@"您中了 六等奖，获得了1.2倍积分！ " delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+        [result setTag:56];
+        [result show];
+    }else if (orign >= (0.0+0.5) && orign < ((0.5/3.0)+0.5))
+    {
+        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:@"您中了 七等奖，获得了1倍积分！ " delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+        [result setTag:56];
+        [result show];
+    }else if (orign >= ((0.5/3.0)+0.5) && orign < (((0.5/3.0)*2)+0.5))
+    {
+        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:@"您中了 五等奖，获得了1.5倍积分！ " delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+        [result setTag:56];
+        [result show];
+    }else if (orign >= (((0.5/3.0)*2)+0.5) && orign < (((0.5/3.0)*3)+0.5))
+    {
+        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:@"您中了 七等奖，获得了1倍积分！ " delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+        [result setTag:56];
+        [result show];
+    }else if (orign >= (0.0+1.0) && orign < ((0.5/3.0)+1.0))
+    {
+        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:@"您中了 四等奖，获得了1.8倍积分！ " delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+        [result setTag:56];
+        [result show];
+    }else if (orign >= ((0.5/3.0)+1.0) && orign < (((0.5/3.0)*2)+1.0))
+    {
+        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:@"您中了 七等奖，获得了1倍积分！ " delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+        [result setTag:56];
+        [result show];
+    }else if (orign >= (((0.5/3.0)*2)+1.0) && orign < (((0.5/3.0)*3)+1.0))
+    {
+        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:@"您中了 三等奖，获得了2倍积分！ " delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+        [result setTag:56];
+        [result show];
+    }else if (orign >= (0.0+1.5) && orign < ((0.5/3.0)+1.5))
+    {
+        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:@"您中了 七等奖，获得了1倍积分！ " delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+        [result setTag:56];
+        [result show];
+    }else if (orign >= ((0.5/3.0)+1.5) && orign < (((0.5/3.0)*2)+1.5))
+    {
+        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:@"您中了 二等奖，获得了2.5倍积分！ " delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+        [result setTag:56];
+        [result show];
+    }else if (orign >= (((0.5/3.0)*2)+1.5) && orign < (((0.5/3.0)*3)+1.5))
+    {
+        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:@"您中了 七等奖，获得了1倍积分！ " delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+        [result setTag:56];
+        [result show];
+    }
+}
+//
+//#pragma mark -ViewControllerDelegate
+//
+//- (void)ViewControllerCancel:(ViewController *)Controller
+//{
+//    [self dismissViewControllerAnimated:YES completion:NULL];
+//    [self.delegate rootViewControllerCancel:self];
+//}
+
 #pragma mark - RNGridMenuDelegate
 
 - (void)gridMenu:(RNGridMenu *)gridMenu willDismissWithSelectedItem:(RNGridMenuItem *)item atIndex:(NSInteger)itemIndex {
     NSLog(@"Dismissed with item %d: %@", itemIndex, item.title);
-    [self sendchessRequest:itemIndex];
+    
     switch (itemIndex) {
-        case 0:
+        case 0://关闭声音
             self.sendCmd = CHESS_CMD_BACKMOVE;
             break;
         case 1:
+            [self sendchessRequest:itemIndex];
             self.sendCmd = CHESS_CMD_DRAWOFFER;
             break;
         case 2:
+            [self sendchessRequest:itemIndex];
             self.sendCmd = CHESS_CMD_DEFEAL;
             break;
             
@@ -331,6 +495,18 @@
     [self.alertwait setTag:30];
     [self.alertwait show];
     
+}
+
+-(void) cheseInterRezult
+{
+    if (_cheseInterface.rezult) {
+        rezult = 2;
+    }
+    else
+    {
+        rezult = 0;
+    }
+    [self Restart];
 }
 
 #pragma mark - Private
@@ -377,7 +553,7 @@
 - (void)showGrid {
     NSInteger numberOfOptions = 3;
     NSArray *items = @[
-                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"菜单二级(悔棋）"] title:@"悔棋"],
+                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"enter"] title:@"音效"],
                        [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"菜单二级（求和）"] title:@"求和"],
                        [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"菜单二级（认输）"] title:@"认输"],
                      //  [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"bluetooth"] title:@"聊天"],

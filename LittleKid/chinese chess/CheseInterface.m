@@ -15,7 +15,6 @@
 @implementation CheseInterface
 static  BOOL isShouldBlackChessPlayer = YES;
 static BOOL isShouldRedChessPlayer = YES;
-extern bool ischessReverse;
 int cheseIndex[9][10];//存储棋子的小标索引,以及棋子的类型(黑方/红方),最后一个数组位有三种状态,0空位 1.黑车 2、黑马 3、黑像 4、黑士5、黑将 6、黑炮 7、黑卒  101 红车 102 红马 103 红相 104 红士 105 红帅 106 红炮 107 红兵
 int blackChesePngIndex[16] = {0,1,2,3,4,3,2,1,0,5,5,6,6,6,6,6};
 int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,106,106,106};
@@ -381,29 +380,46 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
         
         if (chesePieces.tag == 5)
         {
-            UIView * gameView = [[UIView alloc]initWithFrame:self.bounds];
-            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 40)];
-            label.center = CGPointMake(self.frame.size.width/2.0, self.frame.size.height/2.0);
-            label.textAlignment = NSTextAlignmentCenter;
-            [label setTextColor:[UIColor redColor]];
-            gameView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.5];
-            label.font = [UIFont boldSystemFontOfSize:20];
-            [self addSubview:gameView];
-            [label setText:@"红方赢"];
-            [self addSubview:label];
+//            UIView * gameView = [[UIView alloc]initWithFrame:self.bounds];
+//            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 40)];
+//            label.center = CGPointMake(self.frame.size.width/2.0, self.frame.size.height/2.0);
+//            label.textAlignment = NSTextAlignmentCenter;
+//            [label setTextColor:[UIColor redColor]];
+//            gameView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.5];
+//            label.font = [UIFont boldSystemFontOfSize:20];
+//            [self addSubview:gameView];
+//            [label setText:@"红方赢"];
+//            [self addSubview:label];
+            if (self.ischessReverse) {
+                self.rezult = 0 ;
+            }
+            else
+            {
+                self.rezult = 1;
+            }
+            [self.delegate cheseInterRezult];
+            
         }
         else if (chesePieces.tag == 105)
         {
-            UIView * gameView = [[UIView alloc]initWithFrame:self.bounds];
-            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 40)];
-            label.center = CGPointMake(self.frame.size.width/2.0, self.frame.size.height/2.0);
-            [label setTextColor:[UIColor redColor]];
-            label.textAlignment = NSTextAlignmentCenter;
-            label.font = [UIFont boldSystemFontOfSize:20];
-            gameView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.5];
-            [self addSubview:gameView];
-            [label setText:@"黑方赢"];
-            [self addSubview:label];
+//            UIView * gameView = [[UIView alloc]initWithFrame:self.bounds];
+//            UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 40)];
+//            label.center = CGPointMake(self.frame.size.width/2.0, self.frame.size.height/2.0);
+//            [label setTextColor:[UIColor redColor]];
+//            label.textAlignment = NSTextAlignmentCenter;
+//            label.font = [UIFont boldSystemFontOfSize:20];
+//            gameView.backgroundColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:0.5];
+//            [self addSubview:gameView];
+//            [label setText:@"黑方赢"];
+//            [self addSubview:label];
+            if (self.ischessReverse) {
+                self.rezult = 1 ;
+            }
+            else
+            {
+                self.rezult = 0;
+            }
+            [self.delegate cheseInterRezult];
         }
 
         
