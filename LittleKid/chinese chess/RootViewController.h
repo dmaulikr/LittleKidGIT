@@ -17,7 +17,12 @@
 
 @end
 @interface RootViewController : UIViewController<RNGridMenuDelegate>
-
+{
+    UIImageView *image1,*image2;
+    float random;
+    float orign;
+    NSInteger rezult; //0负 1平 2胜
+}
 //@property(nonatomic) int blackOrRed;
 @property (retain,readwrite,nonatomic)CheseInterface * cheseInterface;
 @property (retain,nonatomic,readwrite) UILabel * label;

@@ -1189,8 +1189,10 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="t5c-Fg-vg1">
                                 <rect key="frame" x="140" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellToAddFriend" id="ILn-gD-lgZ">
+                                    <tableViewCell alpha="0.20000000000000001" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellToAddFriend" id="ILn-gD-lgZ">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ILn-gD-lgZ" id="BDA-42-twM">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -1248,6 +1250,9 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="head.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="4HW-fe-IVs">
+                                                    <rect key="frame" x="22" y="0.0" width="40" height="40"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -1256,6 +1261,43 @@
                                             <outlet property="signature" destination="Mjn-BY-d9H" id="YX6-v1-UjS"/>
                                             <outlet property="starNumber" destination="O2R-Ti-jOU" id="Xcr-Ca-WKJ"/>
                                             <outlet property="state" destination="o8b-TK-gHV" id="3Jl-zb-ing"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellFriendApplyMsg" id="gfz-ec-YmM" customClass="FriendApplyMsgTableViewCell">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gfz-ec-YmM" id="omW-72-Pch">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="昵称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="taC-eN-1sm">
+                                                    <rect key="frame" x="70" y="0.0" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="head.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="J0t-7I-mgQ">
+                                                    <rect key="frame" x="22" y="0.0" width="40" height="40"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="手机号码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MjT-6S-mHh">
+                                                    <rect key="frame" x="163" y="-1" width="79" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Jnk-An-7oE">
+                                                    <rect key="frame" x="131" y="12" width="123" height="29"/>
+                                                    <segments>
+                                                        <segment title="同意"/>
+                                                        <segment title="拒绝"/>
+                                                        <segment title="忽略"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="acceptApplySegCtrl" destination="Jnk-An-7oE" id="YjV-Fh-w0T"/>
+                                            <outlet property="cellNumberLabel" destination="MjT-6S-mHh" id="PP6-AE-lUE"/>
+                                            <outlet property="headPictureView" destination="J0t-7I-mgQ" id="Qt7-IA-3uW"/>
+                                            <outlet property="nicknameLabel" destination="taC-eN-1sm" id="5um-BW-ScR"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -2609,6 +2651,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入手机号码或昵称查找好友" minimumFontSize="21" translatesAutoresizingMaskIntoConstraints="NO" id="LiJ-qG-rBm">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入手机号码查找好友" textAlignment="center" minimumFontSize="21" translatesAutoresizingMaskIntoConstraints="NO" id="LiJ-qG-rBm">
                                                     <rect key="frame" x="14" y="8" width="294" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>

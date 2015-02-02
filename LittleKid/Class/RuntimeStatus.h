@@ -11,6 +11,7 @@
 #import "typedef.h"
 #import "HTTTClient.h"
 #import "UDPP2P.h"
+#import "CDCommon.h"
 
 @interface RuntimeStatus : NSObject
 
@@ -20,9 +21,16 @@
 @property (strong, nonatomic) HTTTClient *httpClient;
 @property (strong, nonatomic) UDPP2P *udpP2P;
 
+@property (strong, nonatomic) AVUser *currentUser;
+@property (strong, nonatomic) NSMutableArray *friends;
+@property (strong, nonatomic) NSMutableArray *friendsToBeConfirm;
+
+
 + (instancetype)instance;
 - (void)loadLocalInfo;
 - (void)loadServerRecentMsg:(NSArray *)serverRecentMsgList;
 - (void)procNewP2PChatMsg:(NSDictionary *)newChatMsgDict;
+
+- (void)initial;
 
 @end

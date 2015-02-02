@@ -8,6 +8,7 @@
 
 #import "ViewControllerFriend.h"
 #import "FriendTableViewCell.h"
+#import "FriendApplyMsgTableViewCell.h"
 #import "RuntimeStatus.h"
 
 @interface ViewControllerFriend ()
@@ -33,7 +34,7 @@
 }
 
 - (void)setUI{
-    
+    self.friendTableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"friend_bg.png"]];
 }
 
 - (void)freshTable{
@@ -44,42 +45,76 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return 3;
 }
 
+#define  SECTION_ADD_FRIEND 0
+#define  SECTION_FRIEND_LIST 2
+#define  SECTION_FRIEND_APPLY_MSG 1
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 1+3;
+    if (section == SECTION_ADD_FRIEND) {
+        return 1;
+    }
+    if (section == SECTION_FRIEND_LIST) {
+        return [[RuntimeStatus instance].friends count];
+    }
+    if (section == SECTION_FRIEND_APPLY_MSG) {
+        return [[RuntimeStatus instance].friendsToBeConfirm count];
+    }
+    return 0;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if(section == SECTION_ADD_FRIEND){
+        return @"找朋友";
+    }
+    else if (section == SECTION_FRIEND_APPLY_MSG){
+        return @"好友申请";
+    }
+    else{
+        return @"我的小伙伴";
+    }
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ( indexPath.row == 0 ) {
+    if ( indexPath.section == SECTION_ADD_FRIEND ) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellToAddFriend" forIndexPath:indexPath];
         return cell;
     }
-    else{// 一个BUG，加载friendCell老是挂掉，还没找到原因
-        //you must minus 1 as cell number is 1 more than array count
+    else if (indexPath.section == SECTION_FRIEND_APPLY_MSG) {
+        FriendApplyMsgTableViewCell *cell;
+        cell = [tableView dequeueReusableCellWithIdentifier:@"cellFriendApplyMsg" forIndexPath:indexPath];
+        if (cell == nil) {
+            cell = [[FriendApplyMsgTableViewCell alloc] init];
+        }
+        cell.cellNumberLabel.text = [[RuntimeStatus instance].friendsToBeConfirm objectAtIndex:indexPath.row];//用此index方式定位数据
+        return cell;
+    }
+    else{//section_friend_list
         FriendTableViewCell *cell;
         cell = [tableView dequeueReusableCellWithIdentifier:@"cellFriend" forIndexPath:indexPath];
         if (cell == nil) {
             cell = [[FriendTableViewCell alloc] init];
         }
+        AVUser *user = [[RuntimeStatus instance].friends objectAtIndex:indexPath.row];
         cell.nickName.text = @"nickname";
         cell.state.text = @"state";
         cell.starNumber.text = @"5";
-        cell.signature.text = @"signature";
+        cell.signature.text = user.username;//用此index方式定位数据
         return  cell;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {//这个segue在mainstoryboard中完成了，此处直接退出即可
+    if (indexPath.section == SECTION_ADD_FRIEND) {//这个segue在mainstoryboard中完成了，此处直接退出即可
         return;
     }
-    //根据indexPath加载响应好友信息
-    
-    
+    if (indexPath.section == SECTION_FRIEND_LIST) {
+        //根据indexPath加载响应好友信息
+        
+    }
 }
 
 
