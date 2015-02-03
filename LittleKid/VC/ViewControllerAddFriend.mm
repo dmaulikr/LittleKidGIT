@@ -90,6 +90,7 @@
     NSDictionary *dict = notification.userInfo;
 
     NSString *peerID = [dict objectForKey:@"fromid"];
+    [RuntimeStatus instance].peerId = peerID;
     [[RuntimeStatus instance] addFriendsToBeConfirm:peerID];
     dict = [dict objectForKey:@"cmd"];
     NSString *str = [dict objectForKey:@"cmd_type"];
