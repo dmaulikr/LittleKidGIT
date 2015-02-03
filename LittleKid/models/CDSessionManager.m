@@ -69,6 +69,9 @@ static BOOL initialized = NO;
             NSLog(@"creat success");
         }
     }
+    if (![_database tableExists:@"addfriend"]) {
+        [_database executeUpdate:@"create table \"addfriend\" (\"fromid\" text,\"toid\" text, \"message\" text, \"time\" integer)"];
+    }
     if (![_database tableExists:@"sessions"]) {
         [_database executeUpdate:@"create table \"sessions\" (\"type\" integer, \"otherid\" text)"];
     }
@@ -104,6 +107,7 @@ static BOOL initialized = NO;
 - (void)clearData {
     [_database executeUpdate:@"DROP TABLE IF EXISTS messages"];
     [_database executeUpdate:@"DROP TABLE IF EXISTS sessions"];
+    [_database executeUpdate:@"DROP TABLE IF EXISTS addfriend"];
     [_chatRooms removeAllObjects];
     [_session close];
     initialized = NO;
@@ -411,6 +415,24 @@ static BOOL initialized = NO;
     }
     return result;
 }
+//@"create table \"addfriend\" (\"fromid\" text,\"toid\" text, \"message\" text, \"time\" integer)"];
+- (NSArray *)getAddFriendForPeerId:(NSString *)peerId {
+//    NSString *selfId = _session.peerId;
+    FMResultSet *rs = [_database executeQuery:@"select \"fromid\", \"message\", \"time\" from \"addfriend\" where (\"toid\"=?)" withArgumentsInArray:@[peerId]];
+    NSMutableArray *result = [NSMutableArray array];
+    while ([rs next]) {
+        NSString *fromid = [rs stringForColumn:@"fromid"];
+        double time = [rs doubleForColumn:@"time"];
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
+        NSString *message = [rs stringForColumn:@"message"];
+        
+        NSDictionary *dict = @{@"fromid":fromid, @"message":message, @"time":date};
+        [result addObject:dict];
+        
+      
+    }
+    return result;
+}
 
 - (NSArray *)getMessagesForGroup:(NSString *)groupId {
     FMResultSet *rs = [_database executeQuery:@"select \"fromid\", \"toid\", \"type\", \"message\", \"object\", \"time\" from \"messages\" where \"toid\"=?" withArgumentsInArray:@[groupId]];
@@ -488,11 +510,13 @@ static BOOL initialized = NO;
     {
         NSDictionary *cmddict = [jsonDict objectForKey:@"cmd"];
         NSString *cmd_type = [cmddict objectForKey:@"cmd_type"];
+        //@"create table \"addfriend\" (\"otherid\" text,\"toid\" text, \"message\" text, \"time\" integer)"];
         if([cmd_type isEqualToString:ADD_FRIEND_CMD])
         {
             NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
             [dict setObject:cmdDict forKey:@"cmd"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ADD_FRIEND_UPDATED object:session userInfo:dict];
+             [_database executeUpdate:@"insert into \"addfriend\" (\"fromid\",\"toid\", \"message\", \"time\") values (:fromid, :toid :message, :time)" withParameterDictionary:dict];
+            [[NSNotificationCenter defaultCenter] postNotificationName:          NOTIFICATION_ADD_FRIEND_UPDATED object:session userInfo:dict];
             return;
         }
         else if ([cmd_type isEqualToString:INVITE_PLAY_CHESS_CMD])
