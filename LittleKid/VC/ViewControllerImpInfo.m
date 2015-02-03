@@ -181,7 +181,7 @@
         UIImage *originImage = [info objectForKey:UIImagePickerControllerOriginalImage];
         
         //图片压缩，因为原图都是很大的，不必要传原图
-        UIImage *scaleImage = [self scaleImage:originImage toScale:0.3];
+        UIImage *scaleImage = originImage;//[self scaleImage:originImage toScale:0.3];
         
         //以下这两步都是比较耗时的操作，最好开一个HUD提示用户，这样体验会好些，不至于阻塞界面
         if (UIImagePNGRepresentation(scaleImage) == nil) {
@@ -196,9 +196,6 @@
         UIImage *image = [UIImage imageWithData:data];
         
         //将图片传递给截取界面进行截取并设置回调方法（协议）
-//        CaptureViewController *captureView = [[CaptureViewController alloc] init];
-//        captureView.delegate = self;
-//        captureView.image = image;
         CropperImgViewController *captureView = [[CropperImgViewController alloc] init];
         captureView.delegate = self;
         captureView.image = image;
