@@ -28,6 +28,7 @@
     [AVOSCloud setApplicationId:AVOSAppID clientKey:AVOSAppKey];
     
     [RuntimeStatus instance];
+    [[RuntimeStatus instance] initial];
     
     //TODO: if already sign up, just login directly
     
@@ -41,7 +42,7 @@
         [self.window setRootViewController:nextController];
         [self.window makeKeyAndVisible];
         
-        [[RuntimeStatus instance] initial];
+        
     }
     
     [self registerNotifications: application];

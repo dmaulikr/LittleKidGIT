@@ -33,5 +33,7 @@
 
 - (void)initial;
 - (void)addFriendsToBeConfirm:(NSString *)oneFriend;
+- (void) getFriends;
+- (void)removeFriendsToBeConfirm:(NSString *)oneFriend;
 
 @end

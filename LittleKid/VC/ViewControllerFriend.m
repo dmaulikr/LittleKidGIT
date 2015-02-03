@@ -27,7 +27,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setUI];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshTable) name:NOTIFI_GET_FRIEND_LIST object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshTable) name:NOTIFI_GET_FRIEND_LIST object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveAddFriendRequest:) name:NOTIFICATION_ADD_FRIEND_UPDATED object:nil]; //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveAddFriendRequestAck:) name:NOTIFICATION_ADD_FRIEND_ACK_UPDATED object:nil]; //注册通知
     
 }
 
@@ -37,13 +39,102 @@
 }
 
 - (void)setUI{
-    self.friendTableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"friend_bg.png"]];
+    self.friendTableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"zhuce_0030_图层-14_01.png"]];
 }
+- (void)receiveAddFriendRequest:(NSNotification *)notification {
+    NSDictionary *dict = notification.userInfo;
+    
+    NSString *peerID = [dict objectForKey:@"fromid"];
+    dict = [dict objectForKey:@"cmd"];
+    NSString *str = [dict objectForKey:@"cmd_type"];
+    if ([str isEqualToString:ADD_FRIEND_CMD] ) {
+        [RuntimeStatus instance].peerId = peerID;
+        [[RuntimeStatus instance] addFriendsToBeConfirm:peerID];
+        [self freshTable];
+    }
+}
+
+- (void)receiveAddFriendRequestAck:(NSNotification *)notification {
+    NSDictionary *dict = notification.userInfo;
+    NSString *peerid = [dict objectForKey:@"fromid"];
+    dict = [dict objectForKey:@"cmd"];
+    NSString *str = [dict objectForKey:@"cmd_type"];
+    if ([str isEqualToString:ADD_FRIEND_CMD_ACK] ) {
+        str = [dict objectForKey:@"ack_value"];
+        if ([str isEqualToString:@"OK"])
+        {
+            AVQuery * query = [AVUser query];
+            [query whereKey:@"username" equalTo:peerid];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (error == nil) {
+                    AVUser  *peerUser = [objects firstObject];
+                    
+                    if (peerUser == nil) {
+                        //TODO
+                        return;
+                    }
+                    
+                    [[AVUser currentUser] follow:peerUser.objectId andCallback:^(BOOL succeeded, NSError *error) {
+                        if (succeeded) {
+                            //TODO
+                            NSLog(@"Add friend %@ successful", [RuntimeStatus instance].peerId);
+                            [[RuntimeStatus instance] getFriends];
+                            [self freshTable];
+                        } else {
+                            NSLog(@"Add friend %@ error %@", [RuntimeStatus instance].peerId, error);
+                        }
+                    }];
+                } else {
+                    
+                }
+            }];
+        }
+    }
+    
+}
+
 
 - (void)freshTable{
     [self.friendTableView reloadData];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 90;
+}
+- (void) accpectAddFriend
+{
+    AVQuery * query = [AVUser query];
+    [query whereKey:@"username" equalTo:[RuntimeStatus instance].peerId];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error == nil) {
+            AVUser  *peerUser = [objects firstObject];
+            
+            if (peerUser == nil) {
+                //TODO
+                return;
+            }
+            
+            [[AVUser currentUser] follow:peerUser.objectId andCallback:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    //TODO
+                    NSLog(@"Add friend %@ sucaessful", [RuntimeStatus instance].peerId);
+                    
+                } else {
+                    NSLog(@"Add friend %@ error %@", [RuntimeStatus instance].peerId, error);
+                }
+            }];
+        } else {
+            
+        }
+        [[RuntimeStatus instance] removeFriendsToBeConfirm:[RuntimeStatus instance].peerId];
+        [[RuntimeStatus instance] getFriends];
+        [self freshTable];
+    }];
+    
+    [[CDSessionManager sharedInstance] sendAddFriendRequestAck:@"OK" toPeerId:[RuntimeStatus instance].peerId];
+    
+    
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -60,39 +151,40 @@
         return 1;
     }
     if (section == SECTION_FRIEND_LIST) {
-        return [[RuntimeStatus instance].friends count];
+        NSInteger i = [[RuntimeStatus instance].friends count];
+        return  i;
     }
     if (section == SECTION_FRIEND_APPLY_MSG) {
-        return [[RuntimeStatus instance].friendsToBeConfirm count];
+        NSInteger i = [[RuntimeStatus instance].friendsToBeConfirm count];
+        return i;
     }
     return 0;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    if(section == SECTION_ADD_FRIEND){
-        return @"找朋友";
-    }
-    else if (section == SECTION_FRIEND_APPLY_MSG){
-        return @"好友申请";
-    }
-    else{
-        return @"我的小伙伴";
-    }
-}
+
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ( indexPath.section == SECTION_ADD_FRIEND ) {
+    NSInteger indexsection = indexPath.section;
+    if ( indexsection == SECTION_ADD_FRIEND ) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellToAddFriend" forIndexPath:indexPath];
+        UIImageView *imageview = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"好友_02"]];
+        cell.backgroundView = imageview;
+        cell.backgroundView.alpha = 1;
         return cell;
     }
-    else if (indexPath.section == SECTION_FRIEND_APPLY_MSG) {
+    else if (indexsection == SECTION_FRIEND_APPLY_MSG) {
         FriendApplyMsgTableViewCell *cell;
         cell = [tableView dequeueReusableCellWithIdentifier:@"cellFriendApplyMsg" forIndexPath:indexPath];
         if (cell == nil) {
             cell = [[FriendApplyMsgTableViewCell alloc] init];
         }
         cell.cellNumberLabel.text = [[RuntimeStatus instance].friendsToBeConfirm objectAtIndex:indexPath.row];//用此index方式定位数据
+        UIImageView *imageview = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liaotiankuang"]];
+        cell.backgroundView = imageview;
+        cell.nicknameLabel.text = [RuntimeStatus instance].peerId;
+        cell.backgroundView.alpha = 0.5;
+        cell.delegate = self;
         return cell;
     }
     else{//section_friend_list
@@ -106,6 +198,9 @@
         cell.state.text = @"state";
         cell.starNumber.text = @"5";
         cell.signature.text = user.username;//用此index方式定位数据
+        UIImageView *imageview = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liaotiankuang"]];
+        cell.backgroundView = imageview;
+        cell.backgroundView.alpha = 0.5;
         return  cell;
     }
 }
@@ -117,7 +212,7 @@
     if (indexPath.section == SECTION_FRIEND_LIST) {
         //根据indexPath加载响应好友信息
         AVUser *user = [[RuntimeStatus instance].friends objectAtIndex:indexPath.row];
-        CDBaseNavigationController *nav = self.tabBarController.childViewControllers.firstObject;
+        CDBaseNavigationController *nav = self.tabBarController.childViewControllers.firstObject ;
         CDChatRoomController *controller = [[CDChatRoomController alloc] init];
         [[CDSessionManager sharedInstance] addChatWithPeerId:user.username];
         controller.otherId = user.username;

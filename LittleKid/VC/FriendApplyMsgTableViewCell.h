@@ -8,9 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FriendApplyMsgTableViewCell : UITableViewCell
+@protocol FriendApplyMsgTableViewCellDelegate <NSObject>
 
-@property (weak, nonatomic) IBOutlet UISegmentedControl *acceptApplySegCtrl;
+- (void) accpectAddFriend;
+
+@end
+@interface FriendApplyMsgTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *accept;
+@property (nonatomic, weak) id<FriendApplyMsgTableViewCellDelegate> delegate;
+-(void)accpectAddFriend;
 @property (weak, nonatomic) IBOutlet UIImageView *headPictureView;
 @property (weak, nonatomic) IBOutlet UILabel *nicknameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cellNumberLabel;
