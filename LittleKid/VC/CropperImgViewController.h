@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ImageCropperView.h"
+#import "PassImageDelegate.h"
 
 @interface CropperImgViewController : UIViewController
+{
+    UIImage *image;
+}
+
+@property(nonatomic,strong) UIImage *image;
+
+@property(strong,nonatomic) NSObject<PassImageDelegate> *delegate;
 
 @end

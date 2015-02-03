@@ -20,6 +20,10 @@
 		570876111A5D161700892B53 /* wo_0012_scan.png in Resources */ = {isa = PBXBuildFile; fileRef = 570876101A5D161700892B53 /* wo_0012_scan.png */; };
 		5708761C1A5D5FD400892B53 /* denglu_0007_rainbow.png in Resources */ = {isa = PBXBuildFile; fileRef = 5708761A1A5D5FD400892B53 /* denglu_0007_rainbow.png */; };
 		5708761D1A5D5FD400892B53 /* denglu_0013_animals.png in Resources */ = {isa = PBXBuildFile; fileRef = 5708761B1A5D5FD400892B53 /* denglu_0013_animals.png */; };
+		571D793A1A80D2B400723AA0 /* corner.png in Resources */ = {isa = PBXBuildFile; fileRef = 571D79391A80D2B400723AA0 /* corner.png */; };
+		571D79401A80D2C200723AA0 /* CropperImgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D793C1A80D2C200723AA0 /* CropperImgViewController.m */; };
+		571D79411A80D2C200723AA0 /* CropViewLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D793E1A80D2C200723AA0 /* CropViewLayer.m */; };
+		571D79441A80D2EC00723AA0 /* ImageCropperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D79431A80D2EC00723AA0 /* ImageCropperView.m */; };
 		5727D3B91A7B7ACA00491C7F /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5727D3B81A7B7ACA00491C7F /* CustomAlertView.m */; };
 		572E3F5C1A63BA1300323683 /* beijing.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F471A63BA1300323683 /* beijing.png */; };
 		572E3F5D1A63BA1300323683 /* chatu.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F481A63BA1300323683 /* chatu.png */; };
@@ -318,6 +322,14 @@
 		570876101A5D161700892B53 /* wo_0012_scan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wo_0012_scan.png; sourceTree = "<group>"; };
 		5708761A1A5D5FD400892B53 /* denglu_0007_rainbow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = denglu_0007_rainbow.png; sourceTree = "<group>"; };
 		5708761B1A5D5FD400892B53 /* denglu_0013_animals.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = denglu_0013_animals.png; sourceTree = "<group>"; };
+		571D79391A80D2B400723AA0 /* corner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = corner.png; path = image/corner.png; sourceTree = "<group>"; };
+		571D793B1A80D2C200723AA0 /* CropperImgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropperImgViewController.h; sourceTree = "<group>"; };
+		571D793C1A80D2C200723AA0 /* CropperImgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropperImgViewController.m; sourceTree = "<group>"; };
+		571D793D1A80D2C200723AA0 /* CropViewLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropViewLayer.h; sourceTree = "<group>"; };
+		571D793E1A80D2C200723AA0 /* CropViewLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropViewLayer.m; sourceTree = "<group>"; };
+		571D793F1A80D2C200723AA0 /* PassImageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassImageDelegate.h; sourceTree = "<group>"; };
+		571D79421A80D2EC00723AA0 /* ImageCropperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCropperView.h; sourceTree = "<group>"; };
+		571D79431A80D2EC00723AA0 /* ImageCropperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCropperView.m; sourceTree = "<group>"; };
 		57211CBA1A53F7D6001A1A47 /* AnyChatDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatDefine.h; path = anyChatSDK/include/AnyChatDefine.h; sourceTree = SOURCE_ROOT; };
 		57211CBB1A53F7D6001A1A47 /* AnyChatErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatErrorCode.h; path = anyChatSDK/include/AnyChatErrorCode.h; sourceTree = SOURCE_ROOT; };
 		57211CBC1A53F7D6001A1A47 /* AnyChatPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatPlatform.h; path = anyChatSDK/include/AnyChatPlatform.h; sourceTree = SOURCE_ROOT; };
@@ -1324,6 +1336,7 @@
 		E40DA0941A416F6000CA1431 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				571D79391A80D2B400723AA0 /* corner.png */,
 				E4A8D2DC1A53DAE6000BFAA3 /* anyChatSDK */,
 				E41C543F1A45266200334465 /* libstdc++.6.dylib */,
 				E422F8AC1A43FE0300CF2F9C /* image */,
@@ -1377,6 +1390,13 @@
 		E422F88D1A43FDE800CF2F9C /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				571D79421A80D2EC00723AA0 /* ImageCropperView.h */,
+				571D79431A80D2EC00723AA0 /* ImageCropperView.m */,
+				571D793B1A80D2C200723AA0 /* CropperImgViewController.h */,
+				571D793C1A80D2C200723AA0 /* CropperImgViewController.m */,
+				571D793D1A80D2C200723AA0 /* CropViewLayer.h */,
+				571D793E1A80D2C200723AA0 /* CropViewLayer.m */,
+				571D793F1A80D2C200723AA0 /* PassImageDelegate.h */,
 				57BC40401A7FEF6300A5F6BE /* FriendApplyMsgTableViewCell.h */,
 				57BC40411A7FEF6300A5F6BE /* FriendApplyMsgTableViewCell.m */,
 				57BC40421A7FEF6300A5F6BE /* invatedPlayViewController.h */,
@@ -1760,6 +1780,7 @@
 				572E3F6D1A63BA1300323683 /* yanzhengma_04.png in Resources */,
 				572E3F5F1A63BA1300323683 /* jieshouduanxinwenzi.png in Resources */,
 				573230B71A6F70CE004E187F /* 3.png in Resources */,
+				571D793A1A80D2B400723AA0 /* corner.png in Resources */,
 				57AC90F61A71FEC6008F0892 /* bubble-typing@2x.png in Resources */,
 				573230AB1A6F70CE004E187F /* 111.png in Resources */,
 				573230A31A6F70CE004E187F /* 101.png in Resources */,
@@ -1844,6 +1865,7 @@
 				E422F8A71A43FDE800CF2F9C /* ViewControllerLogin.m in Sources */,
 				E4AD93341A738C1300C10EB8 /* ViewControllerAddFriend.mm in Sources */,
 				573230CB1A6F7219004E187F /* CDSessionManager.m in Sources */,
+				571D79441A80D2EC00723AA0 /* ImageCropperView.m in Sources */,
 				E4A5385E1A5FFCFB002456A4 /* FriendTableViewCell.m in Sources */,
 				57AC91141A71FEC6008F0892 /* DataMatrix.mm in Sources */,
 				E4B101A41A4EA2D7004E1224 /* ContactTableViewCell.m in Sources */,
@@ -1854,6 +1876,7 @@
 				E422F8A31A43FDE800CF2F9C /* LittleKid.xcdatamodeld in Sources */,
 				57AC90D51A71FEC6008F0892 /* JSMessageTextView.m in Sources */,
 				57AC90061A71FC0D008F0892 /* CDBaseTableController.m in Sources */,
+				571D79411A80D2C200723AA0 /* CropViewLayer.m in Sources */,
 				57AC90111A71FD10008F0892 /* CDChatConfirmController.m in Sources */,
 				57AC90D21A71FEC6008F0892 /* JSMessageInputView.m in Sources */,
 				57AC910D1A71FEC6008F0892 /* QBAssetsCollectionVideoIndicatorView.m in Sources */,
@@ -1910,6 +1933,7 @@
 				57AC91161A71FEC6008F0892 /* QREncoder.mm in Sources */,
 				57AC90CE1A71FEC6008F0892 /* FMResultSet.m in Sources */,
 				E4B1017A1A4CF01B004E1224 /* RecentTableViewCell.m in Sources */,
+				571D79401A80D2C200723AA0 /* CropperImgViewController.m in Sources */,
 				57AC90121A71FD10008F0892 /* CDChatDetailController.mm in Sources */,
 				57AC90041A71FC0D008F0892 /* CDBaseNavigationController.m in Sources */,
 				57AC91101A71FEC6008F0892 /* QBAssetsCollectionViewLayout.m in Sources */,

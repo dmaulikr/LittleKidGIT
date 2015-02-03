@@ -10,4 +10,6 @@
 
 @protocol PassImageDelegate <NSObject>
 
+-(void)passImage:(UIImage *)image;
+
 @end

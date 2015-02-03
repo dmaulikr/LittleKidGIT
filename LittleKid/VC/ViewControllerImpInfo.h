@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomAlertView.h"
+#import "CropperImgViewController.h"
+#import "PassImageDelegate.h"
 
-@interface ViewControllerImpInfo : UIViewController<MBAlertViewDelegate>
+@interface ViewControllerImpInfo : UIViewController<MBAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,PassImageDelegate>
 
 
 @end
