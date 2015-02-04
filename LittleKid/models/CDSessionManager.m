@@ -178,6 +178,7 @@ static BOOL initialized = NO;
 
 - (void)sendAddFriendRequest:(NSString *)peerId
 {
+    [self addChatWithPeerId:peerId];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:ADD_FRIEND_CMD forKey:@"cmd_type"];
     [self sendCmd:dict toPeerId:peerId];
@@ -198,6 +199,7 @@ static BOOL initialized = NO;
 }
 - (void) sendAddFriendRequestAck:(NSString *)ack toPeerId:(NSString *)peerId
 {
+    [self addChatWithPeerId:peerId];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:ADD_FRIEND_CMD_ACK  forKey:@"cmd_type"];
     [dict setObject:ack forKey:@"ack_value"];

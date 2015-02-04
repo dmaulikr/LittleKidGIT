@@ -46,6 +46,7 @@
         }
         
         self.friends = friends;
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFI_GET_FRIEND_LIST object:nil];
     }];
 }
 

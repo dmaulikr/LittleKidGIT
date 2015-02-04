@@ -27,7 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setUI];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshTable) name:NOTIFI_GET_FRIEND_LIST object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshTable) name:NOTIFI_GET_FRIEND_LIST object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveAddFriendRequest:) name:NOTIFICATION_ADD_FRIEND_UPDATED object:nil]; //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveAddFriendRequestAck:) name:NOTIFICATION_ADD_FRIEND_ACK_UPDATED object:nil]; //注册通知
     
@@ -111,6 +111,8 @@
             
             if (peerUser == nil) {
                 //TODO
+                [[RuntimeStatus instance] removeFriendsToBeConfirm:[RuntimeStatus instance].peerId];
+                [self freshTable];
                 return;
             }
             
@@ -118,17 +120,21 @@
                 if (succeeded) {
                     //TODO
                     NSLog(@"Add friend %@ sucaessful", [RuntimeStatus instance].peerId);
-                    
+                    [[RuntimeStatus instance] removeFriendsToBeConfirm:[RuntimeStatus instance].peerId];
+                    [[RuntimeStatus instance] getFriends];
+                    [self freshTable];
                 } else {
+                    [[RuntimeStatus instance] removeFriendsToBeConfirm:[RuntimeStatus instance].peerId];
+                    [self freshTable];
                     NSLog(@"Add friend %@ error %@", [RuntimeStatus instance].peerId, error);
                 }
             }];
         } else {
+            [[RuntimeStatus instance] removeFriendsToBeConfirm:[RuntimeStatus instance].peerId];
+            [self freshTable];
             
         }
-        [[RuntimeStatus instance] removeFriendsToBeConfirm:[RuntimeStatus instance].peerId];
-        [[RuntimeStatus instance] getFriends];
-        [self freshTable];
+        
     }];
     
     [[CDSessionManager sharedInstance] sendAddFriendRequestAck:@"OK" toPeerId:[RuntimeStatus instance].peerId];
