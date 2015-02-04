@@ -12,6 +12,12 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import "CDSessionManager.h"
+@interface CheseInterface()
+
+@property(weak, nonatomic) NSTimer *repickBtnFreshTimer;
+@end
+
+
 @implementation CheseInterface
 static  BOOL isShouldBlackChessPlayer = YES;
 static BOOL isShouldRedChessPlayer = YES;
@@ -100,17 +106,23 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
 }
 - (void) touchChessMusic
 {
-    NSURL *url = [[NSBundle mainBundle]URLForResource:@"chosechess" withExtension:@"wav"];
-    SystemSoundID soundId =0;
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &soundId);
-    AudioServicesPlaySystemSound(soundId);
+    if (!self.isnoMusic) {
+        NSURL *url = [[NSBundle mainBundle]URLForResource:@"chosechess" withExtension:@"wav"];
+        SystemSoundID soundId =0;
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &soundId);
+        AudioServicesPlaySystemSound(soundId);
+    }
+    
 }
 - (void) removechessMusic
 {
-    NSURL *url = [[NSBundle mainBundle]URLForResource:@"removechess" withExtension:@"wav"];
-    SystemSoundID soundId =0;
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &soundId);
-    AudioServicesPlaySystemSound(soundId);
+    if (!self.isnoMusic) {
+        NSURL *url = [[NSBundle mainBundle]URLForResource:@"removechess" withExtension:@"wav"];
+        SystemSoundID soundId =0;
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &soundId);
+        AudioServicesPlaySystemSound(soundId);
+    }
+    
 }
 
 - (void) removenotifition
@@ -148,7 +160,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
     //CGRectContainsPoint(<#CGRect rect#>, <#CGPoint point#>)判断选中点是否在点击范围的方法
     _isShouldremoveChesePieces = NO;
     _optionButton = nil;
-    
+    self.repickBtnFreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
     [self addSubview:_cheseView];
     if(self.ischessReverse)
     {
@@ -170,6 +182,34 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
     _theDeadBlackCheseNumber = 1;
     _theDeadRedCheseNumber = 1;//记录红色棋子被吃掉的个数
     
+    
+}
+- (void)sendchessRequest :(NSInteger)index
+{
+    NSString *chesscmdtype = [[NSString alloc]initWithFormat:@"%d", (int)index];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:chesscmdtype,@"CHESS_CMD", nil];
+    [[CDSessionManager sharedInstance] sendPlayChess:dict toPeerId:self.otherId];
+    //    [[RuntimeStatus instance].udpP2P sendDict:dict toUser:self.cheseInterface.userother withProtocol:CHESS];
+}
+#pragma mark --定时器
+
+static int seconds = 180;
+-(void)timerFireMethod:(NSTimer *)theTimer {
+    if (seconds == 0) {
+        [self sendchessRequest:CHESS_CMD_DEFEAL];
+        if (isShouldBlackChessPlayer||isShouldRedChessPlayer) {
+            self.rezult = 0 ;
+            [self.delegate cheseInterRezult];
+        }
+        else
+        {
+            
+        }
+        [theTimer invalidate];
+        seconds = 180;
+    }else{
+        seconds--;
+    }
 }
 
 - (void)loadUpChesePieces:(int *)chessindex//布置上面棋盘
@@ -308,15 +348,6 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
         else
         {
             //不是一家人也要判断吃子规则是否满足,不满足还是不能吃
-           
-                NSString *str_cmd = [[NSString alloc]initWithFormat:@"%d",1];
-                NSString *str_tag = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",(int)_optionButton.tag]];
-                NSString *str_newtag = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",(int)chesePieces.tag]];
-                NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:str_cmd,@"CHESS_CMD",str_tag,@"CHESS_TAG",str_newtag, @"NEW_CHESS_TAG", nil];
-//                [[RuntimeStatus instance].udpP2P sendDict:dict toUser:self.userother withProtocol:CHESS];
-                [[CDSessionManager sharedInstance] sendPlayChess:dict toPeerId:self.otherId];
-         
-            
             [self removeChesePiecesAnimation:chesePieces];
         }
     }
@@ -371,6 +402,12 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
       //  _optionButton = nil;
         return;
     }
+    NSString *str_cmd = [[NSString alloc]initWithFormat:@"%d",1];
+    NSString *str_tag = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",(int)_optionButton.tag]];
+    NSString *str_newtag = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",(int)chesePieces.tag]];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:str_cmd,@"CHESS_CMD",str_tag,@"CHESS_TAG",str_newtag, @"NEW_CHESS_TAG", nil];
+    //                [[RuntimeStatus instance].udpP2P sendDict:dict toUser:self.userother withProtocol:CHESS];
+    [[CDSessionManager sharedInstance] sendPlayChess:dict toPeerId:self.otherId];
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         
         

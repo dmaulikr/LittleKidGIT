@@ -79,7 +79,6 @@
 		573230BA1A6F70CE004E187F /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = 5732308C1A6F70CE004E187F /* 6.png */; };
 		573230BB1A6F70CE004E187F /* chosechess.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5732308D1A6F70CE004E187F /* chosechess.wav */; };
 		573230BC1A6F70CE004E187F /* 菜单二级(悔棋）.png in Resources */ = {isa = PBXBuildFile; fileRef = 5732308F1A6F70CE004E187F /* 菜单二级(悔棋）.png */; };
-		573230BD1A6F70CE004E187F /* 菜单二级（求和）.png in Resources */ = {isa = PBXBuildFile; fileRef = 573230901A6F70CE004E187F /* 菜单二级（求和）.png */; };
 		573230BE1A6F70CE004E187F /* 菜单二级（认输）.png in Resources */ = {isa = PBXBuildFile; fileRef = 573230911A6F70CE004E187F /* 菜单二级（认输）.png */; };
 		573230C01A6F70CE004E187F /* removechess.wav in Resources */ = {isa = PBXBuildFile; fileRef = 573230931A6F70CE004E187F /* removechess.wav */; };
 		573230C11A6F70CE004E187F /* 菜单.png in Resources */ = {isa = PBXBuildFile; fileRef = 573230941A6F70CE004E187F /* 菜单.png */; };
@@ -216,6 +215,8 @@
 		57BC40461A7FEF6300A5F6BE /* FriendApplyMsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BC40411A7FEF6300A5F6BE /* FriendApplyMsgTableViewCell.m */; };
 		57BC40471A7FEF6300A5F6BE /* invatedPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BC40431A7FEF6300A5F6BE /* invatedPlayViewController.m */; };
 		57BC40481A7FEF6300A5F6BE /* InvitePlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 57BC40451A7FEF6300A5F6BE /* InvitePlayViewController.m */; };
+		57BD31411A81E44A0050F3E8 /* 音乐.png in Resources */ = {isa = PBXBuildFile; fileRef = 57BD313F1A81E44A0050F3E8 /* 音乐.png */; };
+		57BD31421A81E44A0050F3E8 /* 音乐不删除.png in Resources */ = {isa = PBXBuildFile; fileRef = 57BD31401A81E44A0050F3E8 /* 音乐不删除.png */; };
 		57E8F9AF1A7242A300C6FAA3 /* juxing_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 57E8F9AE1A7242A300C6FAA3 /* juxing_0.png */; };
 		57FE76071A75E8BB002D8292 /* liaotian_0011_圆角矩形-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 57FE76061A75E8BB002D8292 /* liaotian_0011_圆角矩形-1.png */; };
 		57FF75BD1A7742DB00CADBE4 /* liaotiankuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 57FF75BC1A7742DB00CADBE4 /* liaotiankuang.png */; };
@@ -396,7 +397,6 @@
 		5732308C1A6F70CE004E187F /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6.png; sourceTree = "<group>"; };
 		5732308D1A6F70CE004E187F /* chosechess.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chosechess.wav; sourceTree = "<group>"; };
 		5732308F1A6F70CE004E187F /* 菜单二级(悔棋）.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "菜单二级(悔棋）.png"; sourceTree = "<group>"; };
-		573230901A6F70CE004E187F /* 菜单二级（求和）.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "菜单二级（求和）.png"; sourceTree = "<group>"; };
 		573230911A6F70CE004E187F /* 菜单二级（认输）.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "菜单二级（认输）.png"; sourceTree = "<group>"; };
 		573230931A6F70CE004E187F /* removechess.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = removechess.wav; sourceTree = "<group>"; };
 		573230941A6F70CE004E187F /* 菜单.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "菜单.png"; sourceTree = "<group>"; };
@@ -640,6 +640,8 @@
 		57BC40431A7FEF6300A5F6BE /* invatedPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = invatedPlayViewController.m; sourceTree = "<group>"; };
 		57BC40441A7FEF6300A5F6BE /* InvitePlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvitePlayViewController.h; sourceTree = "<group>"; };
 		57BC40451A7FEF6300A5F6BE /* InvitePlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InvitePlayViewController.m; sourceTree = "<group>"; };
+		57BD313F1A81E44A0050F3E8 /* 音乐.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "音乐.png"; sourceTree = "<group>"; };
+		57BD31401A81E44A0050F3E8 /* 音乐不删除.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "音乐不删除.png"; sourceTree = "<group>"; };
 		57E8F9AE1A7242A300C6FAA3 /* juxing_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = juxing_0.png; sourceTree = "<group>"; };
 		57FE76061A75E8BB002D8292 /* liaotian_0011_圆角矩形-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liaotian_0011_圆角矩形-1.png"; sourceTree = "<group>"; };
 		57FF75BC1A7742DB00CADBE4 /* liaotiankuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liaotiankuang.png; sourceTree = "<group>"; };
@@ -919,8 +921,9 @@
 		5732308E1A6F70CE004E187F /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				57BD313F1A81E44A0050F3E8 /* 音乐.png */,
+				57BD31401A81E44A0050F3E8 /* 音乐不删除.png */,
 				5732308F1A6F70CE004E187F /* 菜单二级(悔棋）.png */,
-				573230901A6F70CE004E187F /* 菜单二级（求和）.png */,
 				573230911A6F70CE004E187F /* 菜单二级（认输）.png */,
 			);
 			path = icons;
@@ -1727,6 +1730,7 @@
 				E48D20E91A65060A0099537F /* checkcode_blueRect.png in Resources */,
 				57AC91001A71FEC6008F0892 /* send-highlighted@2x.png in Resources */,
 				5708760F1A5D141100892B53 /* wo_0019_xingxing.png in Resources */,
+				57BD31421A81E44A0050F3E8 /* 音乐不删除.png in Resources */,
 				573230A61A6F70CE004E187F /* 104.png in Resources */,
 				57AC90DD1A71FEC6008F0892 /* bubble-default-outgoing-green.png in Resources */,
 				570876071A5D051800892B53 /* wo_bg_yello.png in Resources */,
@@ -1820,8 +1824,8 @@
 				573230AB1A6F70CE004E187F /* 111.png in Resources */,
 				573230A31A6F70CE004E187F /* 101.png in Resources */,
 				573230A11A6F70CE004E187F /* 10.png in Resources */,
-				573230BD1A6F70CE004E187F /* 菜单二级（求和）.png in Resources */,
 				57AC90DB1A71FEC6008F0892 /* bubble-default-incoming.png in Resources */,
+				57BD31411A81E44A0050F3E8 /* 音乐.png in Resources */,
 				E48D20EB1A65060A0099537F /* checkcode_goldWord.png in Resources */,
 				57AC90F41A71FEC6008F0892 /* bubble-square-outgoing@2x.png in Resources */,
 				57AC90FD1A71FEC6008F0892 /* PhotoIcon.png in Resources */,
