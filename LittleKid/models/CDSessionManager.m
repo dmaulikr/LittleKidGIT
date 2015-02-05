@@ -98,7 +98,15 @@ static BOOL initialized = NO;
         [_chatRooms addObject:dict];
     }
     
-    [_session watchPeerIds:peerIds];
+//    [_session watchPeerIds:peerIds];
+    [_session watchPeerIds:peerIds callback:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"watch succeed peerId");
+        }
+        else{
+            
+        }
+    }];
    
     
     initialized = YES;
@@ -127,7 +135,15 @@ static BOOL initialized = NO;
         }
     }
     if (!exist) {
-        [_session watchPeerIds:@[peerId]];
+        //[_session watchPeerIds:@[peerId]];
+        [_session watchPeerIds:@[peerId] callback:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                NSLog(@"watch succeed peerId");
+            }
+            else{
+                
+            }
+        }];
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
         [dict setObject:[NSNumber numberWithInteger:CDChatRoomTypeSingle] forKey:@"type"];
         [dict setObject:peerId forKey:@"otherid"];
