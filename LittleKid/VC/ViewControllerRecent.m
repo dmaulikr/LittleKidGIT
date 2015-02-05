@@ -108,7 +108,7 @@
         if ([[dict objectForKey:@"otherid"] isEqualToString:fromid]) {
             NSInteger unread = [[dict objectForKey:@"unreadmsg"]integerValue];
             unread++;
-            NSString *str = [[NSString alloc]initWithFormat:@"%d",unread];
+            NSString *str = [@(unread) stringValue];
             [dict setObject:str forKey:@"unreadmsg"];
             [self.recentTableView reloadData];
             return;
