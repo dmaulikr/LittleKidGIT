@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "RNGridMenu.h"
 #import <AVFoundation/AVFoundation.h>
+#import "CheseInterface.h"
 
 @class CheseInterface;
 @protocol RootViewControllerDelegate <NSObject>
@@ -16,7 +17,7 @@
 - (void) rootViewControllerCancel:(UIViewController *)rootViewController;
 
 @end
-@interface RootViewController : UIViewController<RNGridMenuDelegate>
+@interface RootViewController : UIViewController<RNGridMenuDelegate,CheseInterfaceDelegat>
 {
     UIImageView *image1,*image2;
     float random;
@@ -31,6 +32,9 @@
 @property (nonatomic, weak) id<RootViewControllerDelegate> delegate;
 @property int sendCmd;
 @property UIAlertView *alertwait;
+@property(nonatomic) UILabel *mytime;
+@property(nonatomic) UILabel *opponenttime;
+@property(nonatomic) UIButton *btn_start;
 @property (nonatomic, strong) NSString *otherId;
 - (void)showWhoShouldPlayChese:(NSInteger)num;
 @end
