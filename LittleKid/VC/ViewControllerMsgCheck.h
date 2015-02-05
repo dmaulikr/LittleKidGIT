@@ -12,5 +12,6 @@
 @interface ViewControllerMsgCheck : UIViewControllerBase
 
 @property(strong, nonatomic) NSString *checkCode;
+@property(strong, nonatomic) NSString *nickname;
 
 @end

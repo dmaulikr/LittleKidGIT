@@ -98,7 +98,15 @@ static BOOL initialized = NO;
         [_chatRooms addObject:dict];
     }
     
-    [_session watchPeerIds:peerIds];
+//    [_session watchPeerIds:peerIds];
+    [_session watchPeerIds:peerIds callback:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"watch succeed peerId");
+        }
+        else{
+            
+        }
+    }];
    
     
     initialized = YES;
@@ -127,7 +135,15 @@ static BOOL initialized = NO;
         }
     }
     if (!exist) {
-        [_session watchPeerIds:@[peerId]];
+        //[_session watchPeerIds:@[peerId]];
+        [_session watchPeerIds:@[peerId] callback:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                NSLog(@"watch succeed peerId");
+            }
+            else{
+                
+            }
+        }];
         NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
         [dict setObject:[NSNumber numberWithInteger:CDChatRoomTypeSingle] forKey:@"type"];
         [dict setObject:peerId forKey:@"otherid"];
@@ -181,20 +197,20 @@ static BOOL initialized = NO;
     [self addChatWithPeerId:peerId];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:ADD_FRIEND_CMD forKey:@"cmd_type"];
-    [self sendCmd:dict toPeerId:peerId];
+    [self sendCmd:dict toPeerId:peerId transient:NO];
 }
 - (void)invitePlayChess:(NSString *)peerId
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:INVITE_PLAY_CHESS_CMD  forKey:@"cmd_type"];
-    [self sendCmd:dict toPeerId:peerId];
+    [self sendCmd:dict toPeerId:peerId transient:YES];
 }
 - (void) sendPlayChess:(NSDictionary *) chessCmd toPeerId:(NSString *) peerId
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:PLAY_CHESS_CMD  forKey:@"cmd_type"];
     [dict addEntriesFromDictionary:chessCmd];
-    [self sendCmd:dict toPeerId:peerId];
+    [self sendCmd:dict toPeerId:peerId requsetReceipt:YES];
     
 }
 - (void) sendAddFriendRequestAck:(NSString *)ack toPeerId:(NSString *)peerId
@@ -203,14 +219,14 @@ static BOOL initialized = NO;
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:ADD_FRIEND_CMD_ACK  forKey:@"cmd_type"];
     [dict setObject:ack forKey:@"ack_value"];
-    [self sendCmd:dict toPeerId:peerId];
+    [self sendCmd:dict toPeerId:peerId transient:NO];
 }
 - (void) invitePlayChessAck:(NSString *)ack toPeerId:(NSString *)peerId
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:INVITE_PLAY_CHESS_CMD_ACK  forKey:@"cmd_type"];
     [dict setObject:ack forKey:@"ack_value"];
-    [self sendCmd:dict toPeerId:peerId];
+    [self sendCmd:dict toPeerId:peerId transient:YES];
 }
 /*
  *  发送命令@“dn”  @"type" @"cmd"  cmd的object 为dictionary  cmd_dictionary @"cmd_type" @""ack_value"
@@ -226,7 +242,7 @@ static BOOL initialized = NO;
     NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
     NSString *payload = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     AVMessage *messageObject = [AVMessage messageForPeerWithSession:_session toPeerId:peerId payload:payload];
-    [_session sendMessage:messageObject transient:NO];
+    [_session sendMessage:messageObject];
 //    
 //    dict = [NSMutableDictionary dictionary];
 //    [dict setObject:_session.peerId forKey:@"fromid"];
@@ -238,6 +254,33 @@ static BOOL initialized = NO;
 //    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MESSAGE_UPDATED object:nil userInfo:dict];
     
 }
+
+- (void)sendCmd:(NSDictionary *)cmd toPeerId:(NSString *)peerId transient:(BOOL)isOnline {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:_session.peerId forKey:@"dn"];
+    [dict setObject:@"cmd" forKey:@"type"];
+    [dict setObject:cmd forKey:@"cmd"];
+    NSError *error = nil;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
+    NSString *payload = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    AVMessage *messageObject = [AVMessage messageForPeerWithSession:_session toPeerId:peerId payload:payload];
+    [_session sendMessage:messageObject transient:isOnline];
+    
+}
+
+- (void)sendCmd:(NSDictionary *)cmd toPeerId:(NSString *)peerId requsetReceipt:(BOOL)isRequset {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:_session.peerId forKey:@"dn"];
+    [dict setObject:@"cmd" forKey:@"type"];
+    [dict setObject:cmd forKey:@"cmd"];
+    NSError *error = nil;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
+    NSString *payload = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    AVMessage *messageObject = [AVMessage messageForPeerWithSession:_session toPeerId:peerId payload:payload];
+    [_session sendMessage:messageObject requestReceipt:isRequset];
+    
+}
+
 
 
 - (void)sendMessage:(NSString *)message toPeerId:(NSString *)peerId {
@@ -622,11 +665,13 @@ static BOOL initialized = NO;
 
 - (void)session:(AVSession *)session messageSendFailed:(AVMessage *)message error:(NSError *)error {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    [[NSNotificationCenter defaultCenter]postNotificationName:NOTIFICATION_PLAY_CHESS_SEND_FAILED object:message];
     NSLog(@"session:%@ message:%@ toPeerId:%@ error:%@", session.peerId, message, message.toPeerId, error);
 }
 
 - (void)session:(AVSession *)session messageSendFinished:(AVMessage *)message {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    [[NSNotificationCenter defaultCenter]postNotificationName:NOTIFICATION_PLAY_CHESS_SEND_FINISH object:message];
     NSLog(@"session:%@ message:%@ toPeerId:%@", session.peerId, message, message.toPeerId);
 }
 

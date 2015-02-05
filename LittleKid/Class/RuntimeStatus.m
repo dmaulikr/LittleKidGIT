@@ -8,6 +8,9 @@
 
 #import "RuntimeStatus.h"
 
+@implementation UserInfo
+@end
+
 @implementation RuntimeStatus
 
 + (instancetype)instance
@@ -53,11 +56,48 @@
 - (void) initial {
     self.currentUser = [AVUser currentUser];
     
+    AVObject* userInfo = [self.currentUser objectForKey:@"userInfo"];
+    [userInfo fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+        if (error) {
+            NSLog(@"fetch user info error: %@", error);
+        }
+        else {
+            self.userInfo = [UserInfo new];
+            NSData *headImage = [object objectForKey:@"headImage"];
+            self.userInfo.headImage = [UIImage imageWithData:headImage];
+            self.userInfo.nickname = [userInfo objectForKey:@"nickname"];
+            self.userInfo.birthday = [userInfo objectForKey:@"birthday"];
+            self.userInfo.gender = [userInfo objectForKey:@"gender"];
+            self.userInfo.level = [userInfo objectForKey:@"level"];
+            self.userInfo.score = [userInfo objectForKey:@"score"];
+        }
+    }];
+    
     [self.currentUser getFollowees:^(NSArray *objects, NSError *error) {
         NSMutableArray *friends = [NSMutableArray array];
+        NSMutableArray *friendUserInfo = [NSMutableArray array];
         for (AVUser *user in objects) {
             if (![user isEqual:self.currentUser]) {
                 [friends addObject:user];
+                
+                AVObject *currentUserInfo = [user objectForKey:@"userInfo"];
+                if (!currentUserInfo) {
+                    [friendUserInfo addObject:[UserInfo new]];
+                    continue;
+                }
+                [currentUserInfo fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+                    UserInfo *userInfo = [UserInfo new];
+
+                    NSData *headImage = [object objectForKey:@"headImage"];
+                    userInfo.headImage = [UIImage imageWithData:headImage];
+                    userInfo.nickname = [object objectForKey:@"nickname"];
+                    userInfo.birthday = [object objectForKey:@"birthday"];
+                    userInfo.gender = [object objectForKey:@"gender"];
+                    userInfo.level = [object objectForKey:@"level"];
+                    userInfo.score = [object objectForKey:@"score"];
+                    
+                    [self.friendUserInfo addObject:userInfo];
+                }];
             }
         }
         
@@ -66,6 +106,65 @@
     
     //TODO
     self.friendsToBeConfirm = [NSMutableArray array];
+    
+
+
+}
+
+- (void) saveUserInfo {
+    AVObject* userInfo = [self.currentUser objectForKey:@"userInfo"];
+    [userInfo setObject:UIImageJPEGRepresentation(self.userInfo.headImage, 1.0) forKey:@"headImage"];
+    [userInfo setObject:self.userInfo.nickname forKey:@"nickname"];
+    [userInfo setObject:self.userInfo.birthday forKey:@"birthday"];
+    //TODO
+    
+//    [self.currentUser saveInBackground];
+    [userInfo saveInBackground];
+}
+
+- (void) setNickName:(NSString *)nickname {
+    self.userInfo.nickname = nickname;
+    [self saveUserInfo];
+}
+
+- (void) setBirthday:(NSDate *)birthday {
+    self.userInfo.birthday = birthday;
+    [self saveUserInfo];
+}
+
+- (void) setHeadImage:(UIImage *)image {
+    self.userInfo.headImage = image;
+    [self saveUserInfo];
+}
+
+- (NSString*) getFriendNicknameByIndex:(NSInteger)index {
+//    AVUser *user = [self.friends objectAtIndex:index];
+//    AVObject *userInfo = [user objectForKey:@"userInfo"];
+//    if (userInfo) {
+//        [userInfo fetchIfNeeded];
+//        return [userInfo objectForKey:@"nickname"];
+//    } else {
+//        return nil;
+//    }
+    UserInfo *userInfo = [self.friendUserInfo objectAtIndex:index];
+    if (userInfo) {
+        return userInfo.nickname;
+    } else {
+        return nil;
+    }
+}
+
+- (NSString*) getFriendNicknameByUserName:(NSString *)userName {
+    for (AVUser *user in self.friends) {
+        if ([user.username isEqual:userName]) {
+            AVObject* userInfo = [user objectForKey:userName];
+            if (userInfo) {
+                return [userInfo objectForKey:@"nickname"];
+            }
+        }
+    }
+    
+    return nil;
 }
 
 - (void) addFriendsToBeConfirm:(NSDictionary *)oneFriend {

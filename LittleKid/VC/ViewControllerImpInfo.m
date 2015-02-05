@@ -7,6 +7,7 @@
 //
 
 #import "ViewControllerImpInfo.h"
+#import "RuntimeStatus.h"
 
 @interface ViewControllerImpInfo ()
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -15,7 +16,6 @@
 @property(retain,nonatomic) UITextField *birthText;
 @property (strong, nonatomic) IBOutlet UIButton *nickBtn;
 @property (strong, nonatomic) IBOutlet UIButton *birthBtn;
-@property(retain,nonatomic)NSUserDefaults *defaults;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *sexText;
 
 @end
@@ -34,14 +34,15 @@
     [self.profileImageView addGestureRecognizer:singleTap];
     
     //初始化本地数据
-    self.defaults =[NSUserDefaults standardUserDefaults];
+    self.profileImageView.image = [RuntimeStatus instance].userInfo.headImage;
+    [self.nickBtn setTitle:[RuntimeStatus instance].userInfo.nickname forState:UIControlStateNormal];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *strDate = [dateFormatter stringFromDate:[RuntimeStatus instance].userInfo.birthday];
     
-    NSData *imgdata = [self.defaults dataForKey:@"image"];
-    self.profileImageView.image =  [UIImage imageWithData:imgdata];
-    [self.nickBtn setTitle:[self.defaults objectForKey:@"nick"] forState:UIControlStateNormal];
-    [self.birthBtn setTitle:[self.defaults objectForKey:@"birth"] forState:UIControlStateNormal];
-    [self.sexText setSelectedSegmentIndex:[self.defaults integerForKey:@"sex_index"]];
-    
+    [self.birthBtn setTitle:strDate forState:UIControlStateNormal];
+    //TODO
+    //set gender
     
     //监听性别选择点击
     [self.sexText addTarget:self action:@selector(sexSegmentAction) forControlEvents:UIControlEventValueChanged];
@@ -54,13 +55,7 @@
 }
 
 - (IBAction)pickerFinish:(id)sender {
-    
-    //保存用户图像
-    NSData *imgData = UIImageJPEGRepresentation(self.profileImageView.image, 100);
-    [self.defaults setObject:imgData forKey:@"image"];
-    
-    //数据同步到磁盘，这里把前面设置的昵称、性别等所有数据同步
-    [self.defaults synchronize];
+    [[RuntimeStatus instance] setHeadImage:self.profileImageView.image];
 }
 
 
@@ -73,7 +68,7 @@
     self.nickText.backgroundColor = [UIColor whiteColor];
     self.nickText.borderStyle = UITextBorderStyleBezel;
     self.nickText.frame = CGRectMake(alertView.frame.origin.x+40, alertView.frame.origin.y+5,210, 23);
-    self.nickText.text = [self.defaults objectForKey:@"nick"];//self.nickBtn.currentTitle;
+    self.nickText.text = [RuntimeStatus instance].userInfo.nickname;
     
     [alertView addCustomerSubview:self.nickText];
     [alertView show];
@@ -111,15 +106,15 @@
         {
             case 1:{
                 [self.nickBtn setTitle:self.nickText.text forState:UIControlStateNormal];
-                [self.defaults setObject:self.nickText.text forKey:@"nick"];
+                [[RuntimeStatus instance] setNickName:self.nickText.text];
             }
             break;
             case 2:{
                 NSDate *mydate = [self.datePicker date];
                 NSString *dateFromData = [NSString stringWithFormat:@"%@",mydate];
                 NSString *date = [dateFromData substringWithRange:NSMakeRange(0, 10)];
+                [[RuntimeStatus instance] setBirthday:mydate];
                 [self.birthBtn setTitle:date forState:UIControlStateNormal];
-                [self.defaults setObject:date forKey:@"birth"];
             }
             break;
                 
@@ -228,6 +223,6 @@
 
 -(void)sexSegmentAction
 {
-    [self.defaults setInteger:self.sexText.selectedSegmentIndex forKey:@"sex_index"];
+//    [self.defaults setInteger:self.sexText.selectedSegmentIndex forKey:@"sex_index"];
 }
 @end

@@ -20,8 +20,11 @@
 @property (weak, nonatomic) IBOutlet UIView *moreView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) NSArray *messages;
+@property (nonatomic) BOOL isnoMusic;
+@property(weak, nonatomic) NSTimer *repickBtnFreshTimer;
+@property(nonatomic) NSDictionary *senddict;
 @end
-
+static  BOOL isShouldChessPlayer = YES;
 @implementation RootViewController
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,8 +40,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.isnoMusic = self.cheseInterface.isnoMusic = FALSE;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(procCmd:) name:NOTIFICATION_PLAY_CHESS_UPDATED object:nil];    
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatesendfailed:) name:NOTIFICATION_PLAY_CHESS_SEND_FAILED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatesendfinish:) name:NOTIFICATION_PLAY_CHESS_SEND_FINISH object:nil];
     UIImageView *bacakGroundImage = [[UIImageView alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     NSString *path = [[NSBundle mainBundle]pathForResource:@"music" ofType:@"mp3"];
     NSURL *url = [[NSURL alloc]initFileURLWithPath:path];
@@ -61,6 +66,10 @@
     self.view.backgroundColor = [UIColor blackColor];
     _cheseInterface = [[CheseInterface alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     _cheseInterface.ischessReverse = self.isblack;
+    isShouldChessPlayer = !self.isblack;
+    self.mytime = [UILabel alloc];
+    self.opponenttime = [UILabel alloc];
+    
     [_cheseInterface loadCheseInterface];
     _cheseInterface.center = CGPointMake(self.view.bounds.size.width/2.0, self.view.bounds.size.height/2.0);
     _cheseInterface.delegate = self;
@@ -68,6 +77,7 @@
     [self.view addSubview:_cheseInterface];
 
     
+    self.repickBtnFreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
     
     self.sendCmd = 0;
     CGRect mainrect = [[UIScreen mainScreen]bounds];//获取主屏
@@ -101,15 +111,22 @@
     mygrade.text =@"九级棋士";
     opponentname.text = self.otherId;
     opponentgrade.text = @"九级棋士";
+    self.mytime = [[UILabel alloc]initWithFrame:CGRectMake(mainrect.size.width/2-photowidth/2-mainrect.size.height/15, mainrect.size.height*0.9+mainrect.size.width/16, mainrect.size.width/4, mainrect.size.width/16)];
+    self.opponenttime = [[UILabel alloc]initWithFrame:CGRectMake(mainrect.size.width/2-photowidth/2-mainrect.size.height/15, mainrect.size.height*0.05+mainrect.size.width/16, mainrect.size.width/4, mainrect.size.width/16)];
+    self.mytime.font = self.opponenttime.font =[UIFont boldSystemFontOfSize:mainrect.size.width/32];
+    self.mytime.textColor = self.opponenttime.textColor =[UIColor whiteColor];
     
-    myname.font = [UIFont boldSystemFontOfSize:mainrect.size.width/16];
-    opponentname.font =[UIFont boldSystemFontOfSize:mainrect.size.width/16];
+    
+    myname.font = [UIFont boldSystemFontOfSize:mainrect.size.width/32];
+    opponentname.font =[UIFont boldSystemFontOfSize:mainrect.size.width/32];
     opponentname.textColor = myname.textColor = [UIColor whiteColor];
     opponentgrade.backgroundColor = opponentname.backgroundColor = mygrade.backgroundColor = myname.backgroundColor = [UIColor clearColor];
-    mygrade.font = opponentgrade.font =[UIFont boldSystemFontOfSize:mainrect.size.width/16];
+    mygrade.font = opponentgrade.font =[UIFont boldSystemFontOfSize:mainrect.size.width/32];
     mygrade.textColor = opponentgrade.textColor =[UIColor whiteColor];
-    
-    
+    self.mytime.hidden = self.isblack;
+    self.opponenttime.hidden = !self.isblack;
+    [bacakGroundImage addSubview:self.mytime];
+    [bacakGroundImage addSubview:self.opponenttime];
     [bacakGroundImage addSubview:myname];
     [bacakGroundImage addSubview:mygrade];
     [bacakGroundImage addSubview:opponentgrade];
@@ -119,6 +136,20 @@
 //    [self.view addGestureRecognizer:longPress];
     [self showWhoShouldPlayChese:0];
 }
+-(void) shouldPlayChange
+{
+    isShouldChessPlayer = !isShouldChessPlayer;
+    if (isShouldChessPlayer) {
+        self.mytime.hidden = NO;
+        self.opponenttime.hidden = YES;
+    }
+    else
+    {
+        self.mytime.hidden = YES;
+        self.opponenttime.hidden = NO;
+    }
+}
+
 - (void)procCmd:(NSNotification *)notify
 {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -129,21 +160,41 @@
         {
             return;
         }
-        
-//        NSDictionary *message_value = [dict objectForKey:@"message"];
-        
         NSString *cmd = [dict objectForKey:@"CHESS_CMD"];
         NSInteger cmdindex = [cmd integerValue];
+        NSString *chess_x = [dict objectForKey:@"CHESS_X"];
+        NSString *chess_tag = [dict objectForKey:@"CHESS_TAG"];
+        NSInteger tag = [chess_tag integerValue];
+        _cheseInterface.optionButton = (UIButton *)[self.cheseInterface viewWithTag:tag];
         //        NSLog(@"receve a data:%@",err);
         switch (cmdindex)
         {
-//            case CHESS_CMD_BACKMOVE://RESTAT
-//            {
-//                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"请求重新开始" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:@"不可以", nil];
-//                [alert setTag:22];
-//                [alert show];
-//                break;
-//            }
+            case CHESS_CMD_MOVE://MOVE
+            {
+                NSString *chess_y = [dict objectForKey:@"CHESS_Y"];
+                NSInteger x = [chess_x integerValue];
+                NSInteger y = [chess_y integerValue];
+                x = 8 - x;
+                y = 9 - y;
+                CGPoint point;
+                point.x =  chessStartPointX + (lenthOfUnitWidth*x);
+                point.y = chessStartPointY + (lenthOfUnitHight*y);
+                self.cheseInterface.pointLocation = point;
+                seconds = 180;
+                [self shouldPlayChange];
+                [self.cheseInterface opponentmovechess];
+            }
+                break;
+            case CHESS_CMD_REMOVE://REMOVE
+            {
+                NSString *chess_newtag = [dict objectForKey:@"NEW_CHESS_TAG"];
+                NSInteger newtag = [chess_newtag integerValue];
+                UIButton *newbutton =(UIButton *) [self.cheseInterface viewWithTag:newtag];
+                [self.cheseInterface opponentremoveChesePiecesAnimation:newbutton];
+                seconds = 180;
+                [self shouldPlayChange];
+            }
+                break;
             case CHESS_CMD_DRAWOFFER:
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方请求和局" message:nil delegate:self cancelButtonTitle:@"可以"  otherButtonTitles:@"不可以", nil];
@@ -165,24 +216,6 @@
                 self.alertwait = nil;
                 switch (self.sendCmd)
                 {
-//                    case CHESS_CMD_BACKMOVE:
-//                    {
-//                        if ([chessack  isEqual: @"可以"])
-//                        {
-//                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意重新开始" message:nil delegate:self cancelButtonTitle:@"确定"  otherButtonTitles:nil, nil];
-//                            [alert setTag:25];
-//                            [alert show];
-//                        }
-//                        else
-//                        {
-//                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方不同意重新开始" message:nil delegate:self cancelButtonTitle:@"确定"  otherButtonTitles:nil, nil];
-//                            [alert setTag:26];
-//                            [alert show];
-//                        }
-//                        
-//                        
-//                        break;
-//                    }
                     case CHESS_CMD_DRAWOFFER:
                     {
                         if ([chessack  isEqual: @"可以"])
@@ -199,13 +232,6 @@
                         }
                     }
                         break;
-                    case CHESS_CMD_DEFEAL:
-                    {
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意认输" message:nil delegate:self cancelButtonTitle:@"确定"  otherButtonTitles:nil, nil];
-                        [alert setTag:29];
-                        [alert show];
-                        break;
-                    }
                     default:
                         break;
                 }
@@ -218,28 +244,65 @@
     });
     
 }
+- (void)updatesendfailed:(NSNotification *)notify
+{
+    if (self.sendCmd == CHESS_CMD_CHECK) {
+        rezult = 0;
+        [self Restart];
+    }
+    else{
+        
+        [[CDSessionManager sharedInstance] sendPlayChess:self.senddict toPeerId:self.otherId];
+    }
+}
+-(void)updatesendfinish:(NSNotification *)notify
+{
+    if (self.sendCmd == CHESS_CMD_CHECK) {
+        rezult = 2;
+        [self Restart];
+        
+    }
+    else
+    {
+        seconds = 180;
+        [self shouldPlayChange];
+        [self.cheseInterface moveComplete];
+    }
+}
+#pragma mark --定时器
+
+static int seconds = 180;
+-(void)timerFireMethod:(NSTimer *)theTimer {
+    if (seconds == 0) {
+        if (isShouldChessPlayer) {
+            [self sendchessRequest:CHESS_CMD_DEFEAL];
+            rezult = 0;
+            [self Restart];
+        }
+        else
+        {
+            [self sendchessRequest:CHESS_CMD_CHECK];
+            
+        }
+        [theTimer invalidate];
+        seconds = 180;
+    }else{
+        seconds--;
+        self.mytime.text = self.opponenttime.text = [NSString stringWithFormat:@"%d:%2d",seconds/60,seconds%60];
+    }
+}
 - (void)sendack:(NSString *) string
 {
     NSString *str_cmd = [[NSString alloc]initWithFormat:@"%d",CHESS_CMD_ACK];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:str_cmd,@"CHESS_CMD",string,@"CHESS_CHOOSE", nil];
-    [[CDSessionManager sharedInstance] sendPlayChess:dict toPeerId:self.otherId];
+    self.senddict = dict;
+    self.sendCmd = CHESS_CMD_ACK;
+    [[CDSessionManager sharedInstance] sendPlayChess:self.senddict toPeerId:self.otherId];
 //    [[RuntimeStatus instance].udpP2P sendDict:dict toUser:self.cheseInterface.userother withProtocol:CHESS];
 }
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-//    if ([alertView tag] == 22)
-//    {    // it's the Error alert
-//        if (buttonIndex == 0)
-//        {
-//            [self sendack:@"可以"];
-//            rezult = 2;
-//            [self Restart];
-//        }
-//        else
-//        {
-//            [self sendack:@"不可以"];
-//        }
-//    }
+
     if ([alertView tag] ==23)
     {
         if (buttonIndex == 0)
@@ -256,17 +319,9 @@
     }
     if ([alertView tag] ==24)
     {
-        [self sendack:@"可以"];
         rezult =2;
         [self Restart];
     }
-//    if ([alertView tag] == 25)
-//    {    // it's the Error alert
-//        if (buttonIndex == 0)
-//        {
-//            [self Restart];
-//        }
-//    }
     if ([alertView tag] ==27)//和局
     {
         if (buttonIndex == 0)
@@ -276,26 +331,19 @@
         }
        
     }
-    if ([alertView tag] ==29)//认输
-    {
-        rezult = 0;
-        [self Restart];
-    }
     if ([alertView tag] == 56) {
         [self.delegate rootViewControllerCancel:self];
     }
     
 }
-//(void)(^callbackMoveChess)(NSNotification *notify) = ^(NSNotification *notify){
-//    
-//};
 
 - (void)sendchessRequest :(NSInteger)index
 {
-    NSString *chesscmdtype = [[NSString alloc]initWithFormat:@"%d", (int)index+2];
+    NSString *chesscmdtype = [[NSString alloc]initWithFormat:@"%d", (int)index];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:chesscmdtype,@"CHESS_CMD", nil];
-    [[CDSessionManager sharedInstance] sendPlayChess:dict toPeerId:self.otherId];
-    //    [[RuntimeStatus instance].udpP2P sendDict:dict toUser:self.cheseInterface.userother withProtocol:CHESS];
+    self.senddict = dict;
+    self.sendCmd = CHESS_CMD_DRAWOFFER;
+    [[CDSessionManager sharedInstance] sendPlayChess:self.senddict toPeerId:self.otherId];
 }
 
 
@@ -303,9 +351,12 @@
 - (void)Restart
 {
 
-    [_cheseInterface removenotifition];
+//    [_cheseInterface removenotifition];
+    self.play =nil;
+    [self.repickBtnFreshTimer invalidate];
     [_cheseInterface removeFromSuperview];
     [self addrezultView];
+    
 //    [_cheseInterface loadCheseInterface];
 //    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 //    
@@ -342,11 +393,11 @@
     [self.view addSubview:image2];
     
     //添加按钮
-    UIButton *btn_start = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    btn_start.frame = CGRectMake(140.0, 350.0, 70.0, 70.0);
-    [btn_start setTitle:@"抽奖" forState:UIControlStateNormal];
-    [btn_start addTarget:self action:@selector(choujiang) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn_start];
+    self.btn_start = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.btn_start.frame = CGRectMake(140.0, 350.0, 70.0, 70.0);
+    [self.btn_start setTitle:@"抽奖" forState:UIControlStateNormal];
+    [self.btn_start addTarget:self action:@selector(choujiang) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.btn_start];
     
     UILabel *rezultlabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 400, 310, 100)];
     NSString *str = [[NSString alloc]init];
@@ -376,7 +427,7 @@
 {
     //******************旋转动画******************
     //产生随机角度
-    
+    self.btn_start.enabled = FALSE;
     srand((unsigned)time(0));  //不加这句每次产生的随机数不变
     random = (rand() % 20) / 10.0;
     //设置动画
@@ -394,6 +445,7 @@
     //锁定fromValue的位置
     orign = 10.0+random+orign;
     orign = fmodf(orign, 2.0);
+    
 }
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
@@ -471,22 +523,39 @@
 //}
 
 #pragma mark - RNGridMenuDelegate
-
+- (void)turnoffMusic
+{
+    [self.play stop];
+}
+- (void)turnonMusic
+{
+    [self.play play];
+}
 - (void)gridMenu:(RNGridMenu *)gridMenu willDismissWithSelectedItem:(RNGridMenuItem *)item atIndex:(NSInteger)itemIndex {
     NSLog(@"Dismissed with item %d: %@", itemIndex, item.title);
     
     switch (itemIndex) {
         case 0://关闭声音
-            self.sendCmd = CHESS_CMD_BACKMOVE;
-            break;
+            //self.sendCmd = CHESS_CMD_BACKMOVE;
+            self.isnoMusic = ~self.isnoMusic;
+            self.cheseInterface.isnoMusic = self.isnoMusic;
+            if (self.isnoMusic) {
+                [self turnoffMusic];
+                
+            }
+            else
+            {
+                [self turnonMusic];
+            }
+            return;
         case 1:
-            [self sendchessRequest:itemIndex];
-            self.sendCmd = CHESS_CMD_DRAWOFFER;
+            [self sendchessRequest:CHESS_CMD_DRAWOFFER];
             break;
         case 2:
-            [self sendchessRequest:itemIndex];
-            self.sendCmd = CHESS_CMD_DEFEAL;
-            break;
+            [self sendchessRequest:CHESS_CMD_DEFEAL];
+            rezult = 0;
+            [self Restart];
+            return;
             
         default:
             break;
@@ -495,6 +564,12 @@
     [self.alertwait setTag:30];
     [self.alertwait show];
     
+}
+-(void)cheseInterSendcmd:(NSDictionary *)dict
+{
+    self.senddict = dict;
+    self.sendCmd = CHESS_CMD_MOVE;
+    [[CDSessionManager sharedInstance] sendPlayChess:self.senddict toPeerId:self.otherId];
 }
 
 -(void) cheseInterRezult
@@ -552,22 +627,46 @@
 
 - (void)showGrid {
     NSInteger numberOfOptions = 3;
-    NSArray *items = @[
-                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"enter"] title:@"音效"],
-                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"菜单二级（求和）"] title:@"求和"],
-                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"菜单二级（认输）"] title:@"认输"],
-                     //  [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"bluetooth"] title:@"聊天"],
-                     //  [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"cube"] title:@"设置"],
-                     //  [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"download"] title:@"视频"],
-                    //   [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"enter"] title:@"Enter"],
-                    //   [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"file"] title:@"Source Code"],
-                   //    [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"github"] title:@"Github"]
-                       ];
+    if (self.isnoMusic) {
+        NSArray *items = @[
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"音乐"] title:@"音效"],
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"菜单二级（求和）"] title:@"求和"],
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"菜单二级（认输）"] title:@"认输"],
+                           //  [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"bluetooth"] title:@"聊天"],
+                           //  [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"cube"] title:@"设置"],
+                           //  [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"download"] title:@"视频"],
+                           //   [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"enter"] title:@"Enter"],
+                           //   [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"file"] title:@"Source Code"],
+                           //    [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"github"] title:@"Github"]
+                           ];
+        RNGridMenu *av = [[RNGridMenu alloc] initWithItems:[items subarrayWithRange:NSMakeRange(0, numberOfOptions)]];
+        av.delegate = self;
+        //    av.bounces = NO;
+        [av showInViewController:self center:CGPointMake(self.view.bounds.size.width/2.f, 2*self.view.bounds.size.height/3.f)];
+    }
+    else
+    {
+        NSArray *items = @[
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"音乐不删除"] title:@"音效"],
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"菜单二级（求和）"] title:@"求和"],
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"菜单二级（认输）"] title:@"认输"],
+                           //  [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"bluetooth"] title:@"聊天"],
+                           //  [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"cube"] title:@"设置"],
+                           //  [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"download"] title:@"视频"],
+                           //   [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"enter"] title:@"Enter"],
+                           //   [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"file"] title:@"Source Code"],
+                           //    [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"github"] title:@"Github"]
+                           ];
+        RNGridMenu *av = [[RNGridMenu alloc] initWithItems:[items subarrayWithRange:NSMakeRange(0, numberOfOptions)]];
+        av.delegate = self;
+        //    av.bounces = NO;
+        [av showInViewController:self center:CGPointMake(self.view.bounds.size.width/2.f, 2*self.view.bounds.size.height/3.f)];
+    }
     
-    RNGridMenu *av = [[RNGridMenu alloc] initWithItems:[items subarrayWithRange:NSMakeRange(0, numberOfOptions)]];
-    av.delegate = self;
-    //    av.bounces = NO;
-    [av showInViewController:self center:CGPointMake(self.view.bounds.size.width/2.f, 2*self.view.bounds.size.height/3.f)];
+    
+    
+    
+   
 }
 
 - (void)showGridWithHeaderFromPoint:(CGPoint)point {

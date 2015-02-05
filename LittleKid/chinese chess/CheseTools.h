@@ -31,6 +31,7 @@ typedef struct index
 #define CHESS_CMD_DRAWOFFER 3
 #define CHESS_CMD_DEFEAL 4
 #define CHESS_CMD_ACK 5
+#define CHESS_CMD_CHECK 6
 
 extern int lenthOfUnitWidth;//  (int)(MAINSCREEN_WIDTH/9.14)
 

@@ -12,6 +12,13 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import "CDSessionManager.h"
+@interface CheseInterface()
+
+
+@property(weak, nonatomic)NSDictionary *senddict;
+@end
+
+
 @implementation CheseInterface
 static  BOOL isShouldBlackChessPlayer = YES;
 static BOOL isShouldRedChessPlayer = YES;
@@ -46,77 +53,89 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
     }
     return self;
 }
-- (void)moveChess:(NSNotification *)notify
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (isShouldBlackChessPlayer||isShouldRedChessPlayer) {
-            return;
-        }
-        NSDictionary *dict = notify.userInfo;
-        NSString *fromID = [dict objectForKey:@"fromid"];
-        dict = [dict objectForKey:@"cmd"];
-        if (![fromID isEqualToString:self.otherId])
-        {
-            return;
-        }
-        
-//        NSDictionary *message_value = [dict objectForKey:@"message"];
-        NSString *chess_cmd = [dict objectForKey:@"CHESS_CMD"];
-        NSString *chess_x = [dict objectForKey:@"CHESS_X"];
-        NSString *chess_tag = [dict objectForKey:@"CHESS_TAG"];
-        NSInteger tag = [chess_tag integerValue];
-        _optionButton = (UIButton *)[self viewWithTag:tag];
-        NSInteger cmdindex = [chess_cmd integerValue];
-//        NSLog(@"receve a data:%@",err);
-        switch (cmdindex)
-        {
-            case CHESS_CMD_MOVE://MOVE
-            {
-                NSString *chess_y = [dict objectForKey:@"CHESS_Y"];
-                NSInteger x = [chess_x integerValue];
-                NSInteger y = [chess_y integerValue];
-                x = 8 - x;
-                y = 9 - y;
-                _pointLocation.x = chessStartPointX + (lenthOfUnitWidth*x);
-                _pointLocation.y = chessStartPointY + (lenthOfUnitHight*y);
-                
-                [self opponentmovechess];
-            }
-                break;
-            case CHESS_CMD_REMOVE://REMOVE
-            {
-                NSString *chess_newtag = [dict objectForKey:@"NEW_CHESS_TAG"];
-                NSInteger newtag = [chess_newtag integerValue];
-                UIButton *newbutton =(UIButton *) [self viewWithTag:newtag];
-                [self removeChesePiecesAnimation:newbutton];
-            }
-                break;
-            default:
-                break;
-        }
-
-        });
-    
-}
+//- (void)moveChess:(NSNotification *)notify
+//{
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        if (isShouldBlackChessPlayer||isShouldRedChessPlayer) {
+//            return;
+//        }
+//        NSDictionary *dict = notify.userInfo;
+//        NSString *fromID = [dict objectForKey:@"fromid"];
+//        dict = [dict objectForKey:@"cmd"];
+//        if (![fromID isEqualToString:self.otherId])
+//        {
+//            return;
+//        }
+//        
+////        NSDictionary *message_value = [dict objectForKey:@"message"];
+//        NSString *chess_cmd = [dict objectForKey:@"CHESS_CMD"];
+//        NSString *chess_x = [dict objectForKey:@"CHESS_X"];
+//        NSString *chess_tag = [dict objectForKey:@"CHESS_TAG"];
+//        NSInteger tag = [chess_tag integerValue];
+//        _optionButton = (UIButton *)[self viewWithTag:tag];
+//        NSInteger cmdindex = [chess_cmd integerValue];
+////        NSLog(@"receve a data:%@",err);
+//        
+//        switch (cmdindex)
+//        {
+//            case CHESS_CMD_MOVE://MOVE
+//            {
+//                NSString *chess_y = [dict objectForKey:@"CHESS_Y"];
+//                NSInteger x = [chess_x integerValue];
+//                NSInteger y = [chess_y integerValue];
+//                x = 8 - x;
+//                y = 9 - y;
+//                _pointLocation.x = chessStartPointX + (lenthOfUnitWidth*x);
+//                _pointLocation.y = chessStartPointY + (lenthOfUnitHight*y);
+//                seconds = 180;
+//                [self opponentmovechess];
+//            }
+//                break;
+//            case CHESS_CMD_REMOVE://REMOVE
+//            {
+//                NSString *chess_newtag = [dict objectForKey:@"NEW_CHESS_TAG"];
+//                NSInteger newtag = [chess_newtag integerValue];
+//                UIButton *newbutton =(UIButton *) [self viewWithTag:newtag];
+//                [self opponentremoveChesePiecesAnimation:newbutton];
+//                seconds = 180;
+//            }
+//                break;
+//            default:
+//                break;
+//        }
+//
+//        });
+//    
+//}
 - (void) touchChessMusic
 {
-    NSURL *url = [[NSBundle mainBundle]URLForResource:@"chosechess" withExtension:@"wav"];
-    SystemSoundID soundId =0;
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &soundId);
-    AudioServicesPlaySystemSound(soundId);
+    if (!self.isnoMusic) {
+        NSURL *url = [[NSBundle mainBundle]URLForResource:@"chosechess" withExtension:@"wav"];
+        SystemSoundID soundId =0;
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &soundId);
+        AudioServicesPlaySystemSound(soundId);
+    }
+    
 }
 - (void) removechessMusic
 {
-    NSURL *url = [[NSBundle mainBundle]URLForResource:@"removechess" withExtension:@"wav"];
-    SystemSoundID soundId =0;
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &soundId);
-    AudioServicesPlaySystemSound(soundId);
+    if (!self.isnoMusic) {
+        NSURL *url = [[NSBundle mainBundle]URLForResource:@"removechess" withExtension:@"wav"];
+        SystemSoundID soundId =0;
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &soundId);
+        AudioServicesPlaySystemSound(soundId);
+    }
+    
 }
 
 - (void) removenotifition
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_PLAY_CHESS_UPDATED object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_PLAY_CHESS_SEND_FAILED object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NOTIFICATION_PLAY_CHESS_SEND_FINISH object:nil];
 }
+
+
 - (void)loadCheseInterface
 {
     
@@ -133,7 +152,6 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
         UIButton *newbutton =(UIButton *) [self viewWithTag:i];
         [newbutton removeFromSuperview];
     }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveChess:) name:NOTIFICATION_PLAY_CHESS_UPDATED object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moveChess:) name:NOTIFI_CHESS_MOVE object:nil];
 //    [[RuntimeStatus instance].udpP2P sendData:[NSData dataWithBytes:"hello world" length:11] toHost:@"192.168.1.13" port:20108 withTimeout:3 tag:0];
 //    rect.origin.x +=lenthOfUnitWidth/2;
@@ -148,7 +166,6 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
     //CGRectContainsPoint(<#CGRect rect#>, <#CGPoint point#>)判断选中点是否在点击范围的方法
     _isShouldremoveChesePieces = NO;
     _optionButton = nil;
-    
     [self addSubview:_cheseView];
     if(self.ischessReverse)
     {
@@ -170,7 +187,9 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
     _theDeadBlackCheseNumber = 1;
     _theDeadRedCheseNumber = 1;//记录红色棋子被吃掉的个数
     
+    
 }
+
 
 - (void)loadUpChesePieces:(int *)chessindex//布置上面棋盘
 {
@@ -308,15 +327,6 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
         else
         {
             //不是一家人也要判断吃子规则是否满足,不满足还是不能吃
-           
-                NSString *str_cmd = [[NSString alloc]initWithFormat:@"%d",1];
-                NSString *str_tag = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",(int)_optionButton.tag]];
-                NSString *str_newtag = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",(int)chesePieces.tag]];
-                NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:str_cmd,@"CHESS_CMD",str_tag,@"CHESS_TAG",str_newtag, @"NEW_CHESS_TAG", nil];
-//                [[RuntimeStatus instance].udpP2P sendDict:dict toUser:self.userother withProtocol:CHESS];
-                [[CDSessionManager sharedInstance] sendPlayChess:dict toPeerId:self.otherId];
-         
-            
             [self removeChesePiecesAnimation:chesePieces];
         }
     }
@@ -346,6 +356,81 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
 
 //除去对方棋子方法
 - (void)removeChesePiecesAnimation:(UIButton *)chesePieces
+{
+    
+    CGPoint pointNewLocation = chesePieces.frame.origin;//判定吃子是否符合规则
+    if (_optionButton.tag<100)
+    {
+        _isLegal = isLegalRuleToJumpNewLocationOfChese(_optionButton, _optionButton.frame, &pointNewLocation,cheseIndex);
+        if (_isLegal) {
+            [_optionButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d.png",blackChesePngIndex[_optionButton.tag-1]]] forState:UIControlStateNormal];
+            // [_delegate showWhoShouldPlayChese:2];
+        }
+    }
+    else
+    {
+        _isLegal = isLegalRuleToJumpNewLocationOfChese(_optionButton, _optionButton.frame, &pointNewLocation,cheseIndex);
+        if (_isLegal) {
+            [_optionButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d.png",redChesePngIndex[_optionButton.tag - 101]]] forState:UIControlStateNormal];
+            // [_delegate showWhoShouldPlayChese:1];
+        }
+    }
+    
+    if (!_isLegal)//如果是非法吃子
+    {
+        //  _optionButton = nil;
+        return;
+    }
+    NSString *str_cmd = [[NSString alloc]initWithFormat:@"%d",1];
+    NSString *str_tag = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",(int)_optionButton.tag]];
+    NSString *str_newtag = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",(int)chesePieces.tag]];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:str_cmd,@"CHESS_CMD",str_tag,@"CHESS_TAG",str_newtag, @"NEW_CHESS_TAG", nil];
+    //                [[RuntimeStatus instance].udpP2P sendDict:dict toUser:self.userother withProtocol:CHESS];
+    
+    self.senddict = dict;
+    [self.delegate cheseInterSendcmd:self.senddict];
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        
+        
+        _optionButton.frame = chesePieces.frame;
+        
+    } completion:^(BOOL finished) {
+        
+        if (chesePieces.tag == 5)
+        {
+            
+            if (self.ischessReverse) {
+                self.rezult = 0 ;
+            }
+            else
+            {
+                self.rezult = 1;
+            }
+            [self.delegate cheseInterRezult];
+            
+        }
+        else if (chesePieces.tag == 105)
+        {
+            
+            if (self.ischessReverse) {
+                self.rezult = 1 ;
+            }
+            else
+            {
+                self.rezult = 0;
+            }
+            [self.delegate cheseInterRezult];
+        }
+        
+        
+        
+        [chesePieces removeFromSuperview];
+        
+    }];
+}
+
+//除去对方棋子方法
+- (void)opponentremoveChesePiecesAnimation:(UIButton *)chesePieces
 {
     
     CGPoint pointNewLocation = chesePieces.frame.origin;//判定吃子是否符合规则
@@ -466,14 +551,15 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
             NSString *str_x = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",(int)newPiecesindex.x]];
             NSString *str_y = [[NSString alloc]initWithString:[NSString stringWithFormat:@"%d",(int)newPiecesindex.y]];
             NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:str_cmd,@"CHESS_CMD", str_tag,@"CHESS_TAG",str_x, @"CHESS_X", str_y, @"CHESS_Y", nil];
-//            [[RuntimeStatus instance].udpP2P sendDict:dict toUser:self.userother withProtocol:CHESS];
-            [[CDSessionManager sharedInstance] sendPlayChess:dict toPeerId:self.otherId];
+            self.senddict = dict;
+         //   [[CDSessionManager sharedInstance] sendPlayChess:self.senddict toPeerId:self.otherId];
+        [self.delegate cheseInterSendcmd:self.senddict];
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
 
             _optionButton.layer.transform = CATransform3DTranslate(_optionButton.layer.transform, _pointLocation.x - _optionButton.frame.origin.x, _pointLocation.y - _optionButton.frame.origin.y, 0);
 
         } completion:^(BOOL finished) {
-            [self moveComplete];
+           // [self moveComplete];
         }];
     }
 }
