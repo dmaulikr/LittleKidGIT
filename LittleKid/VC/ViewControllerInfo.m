@@ -16,8 +16,8 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *account;
 @property (weak, nonatomic) IBOutlet UITextField *password;
-@property (weak, nonatomic) IBOutlet UITextField *passwordCheck;
-@property (strong, nonatomic) NSString *checkCode;
+@property (weak, nonatomic) IBOutlet UITextField *nickname;
+@property (strong, nonatomic) NSString *nick;
 @property (strong, nonatomic) AVUser *user;
 @property (strong, nonatomic) AVQuery * query;
 
@@ -30,17 +30,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.checkCode = [[NSString alloc] init];
     //add-7
     self.account.delegate = self;
     self.password.delegate = self;
-    self.passwordCheck.delegate = self;
-    
-    self.password.returnKeyType = UIReturnKeyNext;
-    self.passwordCheck.returnKeyType = UIReturnKeyGo;
-    
-    self.password.secureTextEntry = YES;
-    self.passwordCheck.secureTextEntry = YES;
+    self.nickname.delegate = self;
     
     //add
     UITapGestureRecognizer *gestureTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeKeyBoard)];
@@ -62,7 +55,7 @@
 - (void)removeKeyBoard{
     [self.account resignFirstResponder];
     [self.password resignFirstResponder];
-    [self.passwordCheck resignFirstResponder];
+    [self.nickname resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,7 +66,7 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if (textField == self.password) {
-        [self.passwordCheck becomeFirstResponder];
+//        [self.passwordCheck becomeFirstResponder];
     } else {
         [self onBtnSignUp:nil];
     }
@@ -156,7 +149,6 @@
             
         }
     }else{
-        NSLog(@"str=%@; 本次长度=%d",str,[str length]);
         if ([str length] == 11) {
              NSLog(@"%@",@"#######################################1");
             
@@ -191,7 +183,7 @@
         return;
     }
 
-   
+    self.nick = self.nickname.text;
     self.user.username = self.account.text;
     self.user.password =  self.password.text;
  
@@ -226,11 +218,8 @@
         [alert show];
         return NO;    //if fail, return. don't go to next page
     }
-    if ( NSOrderedSame != [self.password.text compare:self.passwordCheck.text] ) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码错误" message:@"两次输入密码不一致" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
-        [alert show];
-        return NO;    //if fail, return. don't go to next page
-    }
+
+    
     if ( self.password.text.length < 6 ) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"密码不合法" message:@"请输入至少6位密码" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
         [alert show];
@@ -249,6 +238,7 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     ViewControllerMsgCheck *desVC = segue.destinationViewController;
+    desVC.nickname = self.nick;
     desVC.kiduser = self.user;
 }
 

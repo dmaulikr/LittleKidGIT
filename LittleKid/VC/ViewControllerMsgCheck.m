@@ -84,16 +84,20 @@ static int seconds = 60;
 #define SEGUE_TO_MAIN @"segueToMain"
 
 - (IBAction)onCheckMsg:(id)sender {
-
     [AVOSCloud verifySmsCode:self.verificationCode.text mobilePhoneNumber:self.kiduser.username callback:^(BOOL succeeded, NSError *error) {
 //    [AVOSCloud verifySmsCode:self.verificationCode.text callback:^(BOOL succeeded, NSError *error) {
-        //code
         if (succeeded) {
+            AVObject *userInfo = [AVObject objectWithClassName:@"UserInfo"];
+            [userInfo setObject:self.nickname forKey:@"nickname"];
             
-        // 注册
+            [self.kiduser setObject:userInfo forKey:@"userInfo"];
+
+            // 注册
             [self.kiduser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (succeeded) {
-                    //self.currentUser = [AVUser currentUser];
+                    AVObject *userInfo = [[AVUser currentUser] objectForKey:@"userInfo"];
+                    [userInfo setObject:self.nickname forKey:@"nickname"];
+                    [userInfo saveInBackground];
                     
                     //跳转主界面
                     [self performSegueWithIdentifier:SEGUE_TO_MAIN sender:sender];
@@ -108,7 +112,8 @@ static int seconds = 60;
             }];
      
         } else {
-            //statements
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
         }
         
     }];
