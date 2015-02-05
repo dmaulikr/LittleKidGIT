@@ -7,6 +7,7 @@
 //
 
 #import "ViewControllerImpInfo.h"
+#import "RuntimeStatus.h"
 
 @interface ViewControllerImpInfo ()
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -57,6 +58,8 @@
     
     //保存用户图像
     NSData *imgData = UIImageJPEGRepresentation(self.profileImageView.image, 100);
+    
+    [[RuntimeStatus instance] setHeadImage:self.profileImageView.image];
     [self.defaults setObject:imgData forKey:@"image"];
     
     //数据同步到磁盘，这里把前面设置的昵称、性别等所有数据同步
@@ -111,6 +114,7 @@
         {
             case 1:{
                 [self.nickBtn setTitle:self.nickText.text forState:UIControlStateNormal];
+                [[RuntimeStatus instance] setNickName:self.nickText.text];
                 [self.defaults setObject:self.nickText.text forKey:@"nick"];
             }
             break;
@@ -118,6 +122,7 @@
                 NSDate *mydate = [self.datePicker date];
                 NSString *dateFromData = [NSString stringWithFormat:@"%@",mydate];
                 NSString *date = [dateFromData substringWithRange:NSMakeRange(0, 10)];
+                [[RuntimeStatus instance] setBirthday:mydate];
                 [self.birthBtn setTitle:date forState:UIControlStateNormal];
                 [self.defaults setObject:date forKey:@"birth"];
             }
