@@ -36,11 +36,35 @@
 - (void) initial {
     self.currentUser = [AVUser currentUser];
     
+    self.userInfo = [self.currentUser objectForKey:@"userInfo"];
+    [self.userInfo fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+        if (error) {
+            NSLog(@"fetch user info error: %@", error);
+        }
+        else {
+            NSData *headImage = [self.userInfo objectForKey:@"headImage"];
+            self.headImage = [UIImage imageWithData:headImage];
+            self.nickname = [self.userInfo objectForKey:@"nickname"];
+            self.birthday = [self.userInfo objectForKey:@"birthday"];
+            self.gender = [self.userInfo objectForKey:@"gender"];
+            self.level = [self.userInfo objectForKey:@"level"];
+            self.score = [self.userInfo objectForKey:@"score"];
+        }
+    }];
+    
     [self.currentUser getFollowees:^(NSArray *objects, NSError *error) {
         NSMutableArray *friends = [NSMutableArray array];
         for (AVUser *user in objects) {
             if (![user isEqual:self.currentUser]) {
                 [friends addObject:user];
+                
+//                AVObject *userInfo = [user objectForKey:@"userInfo"];
+//                if (!userInfo) {
+//                    continue;
+//                }
+//                [userInfo fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+//                    [self.friendUserInfo addObject:userInfo];
+//                }];
             }
         }
         
@@ -49,6 +73,33 @@
     
     //TODO
     self.friendsToBeConfirm = [NSMutableArray array];
+    
+
+
+}
+
+- (NSString*) getFriendNicknameByIndex:(NSInteger)index {
+    AVUser *user = [self.friends objectAtIndex:index];
+    AVObject *userInfo = [user objectForKey:@"userInfo"];
+    if (userInfo) {
+        [userInfo fetchIfNeeded];
+        return [userInfo objectForKey:@"nickname"];
+    } else {
+        return nil;
+    }
+}
+
+- (NSString*) getFriendNicknameByUserName:(NSString *)userName {
+    for (AVUser *user in self.friends) {
+        if ([user.username isEqual:userName]) {
+            AVObject* userInfo = [user objectForKey:userName];
+            if (userInfo) {
+                return [userInfo objectForKey:@"nickname"];
+            }
+        }
+    }
+    
+    return nil;
 }
 
 - (void) addFriendsToBeConfirm:(NSDictionary *)oneFriend {

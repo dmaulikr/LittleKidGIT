@@ -22,9 +22,19 @@
 @property (strong, nonatomic) UDPP2P *udpP2P;
 
 @property (strong, nonatomic) AVUser *currentUser;
+@property (strong, nonatomic) AVObject *userInfo;
 @property (strong, nonatomic) NSMutableArray *friends;
+//@property (strong, nonatomic) NSMutableArray *friendUserInfo;
 @property (strong, nonatomic) NSMutableArray *friendsToBeConfirm;
+
 @property (strong, nonatomic) NSString *peerId; //for temp use
+
+@property (strong, nonatomic) UIImage *headImage;
+@property (strong, nonatomic) NSString *nickname;
+@property (strong, nonatomic) NSDate *birthday;
+@property (strong, nonatomic) NSString* gender;
+@property (strong, nonatomic) NSNumber *level;
+@property (strong, nonatomic) NSNumber *score;
 
 + (instancetype)instance;
 - (void)loadLocalInfo;
@@ -33,5 +43,8 @@
 
 - (void)initial;
 - (void)addFriendsToBeConfirm:(NSString *)oneFriend;
+
+-(NSString*)getFriendNicknameByIndex:(NSInteger)index;
+-(NSString*)getFriendNicknameByUserName:(NSString*)userName;
 
 @end
