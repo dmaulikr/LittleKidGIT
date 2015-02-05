@@ -37,7 +37,9 @@
     self.defaults =[NSUserDefaults standardUserDefaults];
     
     NSData *imgdata = [self.defaults dataForKey:@"image"];
-    self.profileImageView.image =  [UIImage imageWithData:imgdata];
+    if (imgdata != nil) {
+        self.profileImageView.image =  [UIImage imageWithData:imgdata];
+    }
     [self.nickBtn setTitle:[self.defaults objectForKey:@"nick"] forState:UIControlStateNormal];
     [self.birthBtn setTitle:[self.defaults objectForKey:@"birth"] forState:UIControlStateNormal];
     [self.sexText setSelectedSegmentIndex:[self.defaults integerForKey:@"sex_index"]];
