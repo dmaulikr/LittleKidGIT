@@ -210,7 +210,7 @@ static BOOL initialized = NO;
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:PLAY_CHESS_CMD  forKey:@"cmd_type"];
     [dict addEntriesFromDictionary:chessCmd];
-    [self sendCmd:dict toPeerId:peerId transient:YES];
+    [self sendCmd:dict toPeerId:peerId requsetReceipt:YES];
     
 }
 - (void) sendAddFriendRequestAck:(NSString *)ack toPeerId:(NSString *)peerId
@@ -265,15 +265,19 @@ static BOOL initialized = NO;
     NSString *payload = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     AVMessage *messageObject = [AVMessage messageForPeerWithSession:_session toPeerId:peerId payload:payload];
     [_session sendMessage:messageObject transient:isOnline];
-    //
-    //    dict = [NSMutableDictionary dictionary];
-    //    [dict setObject:_session.peerId forKey:@"fromid"];
-    //    [dict setObject:peerId forKey:@"toid"];
-    //    [dict setObject:@"cmd" forKey:@"type"];
-    //    [dict setObject:cmd forKey:@"cmd"];
-    //    [dict setObject:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:@"time"];
-    //    [_database executeUpdate:@"insert into \"cmd\" (\"fromid\", \"toid\", \"type\", \"cmd\", \"time\") values (:fromid, :toid, :type, :cmd, :time)" withParameterDictionary:dict];
-    //    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MESSAGE_UPDATED object:nil userInfo:dict];
+    
+}
+
+- (void)sendCmd:(NSDictionary *)cmd toPeerId:(NSString *)peerId requsetReceipt:(BOOL)isRequset {
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:_session.peerId forKey:@"dn"];
+    [dict setObject:@"cmd" forKey:@"type"];
+    [dict setObject:cmd forKey:@"cmd"];
+    NSError *error = nil;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
+    NSString *payload = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    AVMessage *messageObject = [AVMessage messageForPeerWithSession:_session toPeerId:peerId payload:payload];
+    [_session sendMessage:messageObject requestReceipt:isRequset];
     
 }
 
