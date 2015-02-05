@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIView *moreView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) NSArray *messages;
+@property (nonatomic) BOOL isnoMusic;
 @end
 
 @implementation RootViewController
@@ -37,6 +38,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.isnoMusic = self.cheseInterface.isnoMusic = FALSE;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(procCmd:) name:NOTIFICATION_PLAY_CHESS_UPDATED object:nil];    
     
     UIImageView *bacakGroundImage = [[UIImageView alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -199,13 +201,13 @@
                         }
                     }
                         break;
-                    case CHESS_CMD_DEFEAL:
-                    {
-                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意认输" message:nil delegate:self cancelButtonTitle:@"确定"  otherButtonTitles:nil, nil];
-                        [alert setTag:29];
-                        [alert show];
-                        break;
-                    }
+//                    case CHESS_CMD_DEFEAL:
+//                    {
+//                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"对方同意认输" message:nil delegate:self cancelButtonTitle:@"确定"  otherButtonTitles:nil, nil];
+//                        [alert setTag:29];
+//                        [alert show];
+//                        break;
+//                    }
                     default:
                         break;
                 }
@@ -256,7 +258,7 @@
     }
     if ([alertView tag] ==24)
     {
-        [self sendack:@"可以"];
+//        [self sendack:@"可以"];
         rezult =2;
         [self Restart];
     }
@@ -276,11 +278,11 @@
         }
        
     }
-    if ([alertView tag] ==29)//认输
-    {
-        rezult = 0;
-        [self Restart];
-    }
+//    if ([alertView tag] ==29)//认输
+//    {
+//        rezult = 0;
+//        [self Restart];
+//    }
     if ([alertView tag] == 56) {
         [self.delegate rootViewControllerCancel:self];
     }
@@ -471,14 +473,31 @@
 //}
 
 #pragma mark - RNGridMenuDelegate
-
+- (void)turnoffMusic
+{
+    [self.play stop];
+}
+- (void)turnonMusic
+{
+    [self.play play];
+}
 - (void)gridMenu:(RNGridMenu *)gridMenu willDismissWithSelectedItem:(RNGridMenuItem *)item atIndex:(NSInteger)itemIndex {
     NSLog(@"Dismissed with item %d: %@", itemIndex, item.title);
     
     switch (itemIndex) {
         case 0://关闭声音
-            self.sendCmd = CHESS_CMD_BACKMOVE;
-            break;
+            //self.sendCmd = CHESS_CMD_BACKMOVE;
+            self.isnoMusic = ~self.isnoMusic;
+            self.cheseInterface.isnoMusic = self.isnoMusic;
+            if (self.isnoMusic) {
+                [self turnoffMusic];
+                
+            }
+            else
+            {
+                [self turnonMusic];
+            }
+            return;
         case 1:
             [self sendchessRequest:itemIndex];
             self.sendCmd = CHESS_CMD_DRAWOFFER;
@@ -486,7 +505,9 @@
         case 2:
             [self sendchessRequest:itemIndex];
             self.sendCmd = CHESS_CMD_DEFEAL;
-            break;
+            rezult = 0;
+            [self Restart];
+            return;
             
         default:
             break;
@@ -552,22 +573,46 @@
 
 - (void)showGrid {
     NSInteger numberOfOptions = 3;
-    NSArray *items = @[
-                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"enter"] title:@"音效"],
-                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"菜单二级（求和）"] title:@"求和"],
-                       [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"菜单二级（认输）"] title:@"认输"],
-                     //  [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"bluetooth"] title:@"聊天"],
-                     //  [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"cube"] title:@"设置"],
-                     //  [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"download"] title:@"视频"],
-                    //   [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"enter"] title:@"Enter"],
-                    //   [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"file"] title:@"Source Code"],
-                   //    [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"github"] title:@"Github"]
-                       ];
+    if (self.isnoMusic) {
+        NSArray *items = @[
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"音乐"] title:@"音效"],
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"菜单二级（求和）"] title:@"求和"],
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"菜单二级（认输）"] title:@"认输"],
+                           //  [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"bluetooth"] title:@"聊天"],
+                           //  [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"cube"] title:@"设置"],
+                           //  [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"download"] title:@"视频"],
+                           //   [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"enter"] title:@"Enter"],
+                           //   [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"file"] title:@"Source Code"],
+                           //    [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"github"] title:@"Github"]
+                           ];
+        RNGridMenu *av = [[RNGridMenu alloc] initWithItems:[items subarrayWithRange:NSMakeRange(0, numberOfOptions)]];
+        av.delegate = self;
+        //    av.bounces = NO;
+        [av showInViewController:self center:CGPointMake(self.view.bounds.size.width/2.f, 2*self.view.bounds.size.height/3.f)];
+    }
+    else
+    {
+        NSArray *items = @[
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"音乐不删除"] title:@"音效"],
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"菜单二级（求和）"] title:@"求和"],
+                           [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"菜单二级（认输）"] title:@"认输"],
+                           //  [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"bluetooth"] title:@"聊天"],
+                           //  [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"cube"] title:@"设置"],
+                           //  [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"download"] title:@"视频"],
+                           //   [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"enter"] title:@"Enter"],
+                           //   [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"file"] title:@"Source Code"],
+                           //    [[RNGridMenuItem alloc] initWithImage:[UIImage imageNamed:@"github"] title:@"Github"]
+                           ];
+        RNGridMenu *av = [[RNGridMenu alloc] initWithItems:[items subarrayWithRange:NSMakeRange(0, numberOfOptions)]];
+        av.delegate = self;
+        //    av.bounces = NO;
+        [av showInViewController:self center:CGPointMake(self.view.bounds.size.width/2.f, 2*self.view.bounds.size.height/3.f)];
+    }
     
-    RNGridMenu *av = [[RNGridMenu alloc] initWithItems:[items subarrayWithRange:NSMakeRange(0, numberOfOptions)]];
-    av.delegate = self;
-    //    av.bounces = NO;
-    [av showInViewController:self center:CGPointMake(self.view.bounds.size.width/2.f, 2*self.view.bounds.size.height/3.f)];
+    
+    
+    
+   
 }
 
 - (void)showGridWithHeaderFromPoint:(CGPoint)point {

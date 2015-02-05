@@ -28,6 +28,7 @@
 @property (assign)BOOL ischessReverse;//1 b 0red
 @property (nonatomic, strong) NSString *otherId;
 -(void) cheseInterRezult;
+@property BOOL isnoMusic;//1无
 @property NSInteger rezult;
 -(void)loadCheseInterface;
 - (void) removenotifition;
