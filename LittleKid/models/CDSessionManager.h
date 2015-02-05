@@ -25,6 +25,7 @@ typedef enum : NSUInteger {
 - (void)startNewGroup:(AVGroupResultBlock)callback;
 - (void)sendMessage:(NSString *)message toPeerId:(NSString *)peerId;
 - (void)sendMessage:(NSString *)message toGroup:(NSString *)groupId;
+- (NSArray *)getAddFriendForPeerId:(NSString *)peerId;
 - (void)sendCmd:(NSDictionary *)cmd toPeerId:(NSString *)peerId;
 - (void)sendAttachment:(AVObject *)object toPeerId:(NSString *)peerId;
 - (void)sendAttachment:(AVObject *)object toGroup:(NSString *)groupId;

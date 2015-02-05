@@ -33,6 +33,23 @@
     return self;
 }
 
+- (void) getFriends
+{
+    self.currentUser = [AVUser currentUser];
+    
+    [self.currentUser getFollowees:^(NSArray *objects, NSError *error) {
+        NSMutableArray *friends = [NSMutableArray array];
+        for (AVUser *user in objects) {
+            if (![user isEqual:self.currentUser]) {
+                [friends addObject:user];
+            }
+        }
+        
+        self.friends = friends;
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFI_GET_FRIEND_LIST object:nil];
+    }];
+}
+
 - (void) initial {
     self.currentUser = [AVUser currentUser];
     
@@ -105,7 +122,10 @@
 - (void) addFriendsToBeConfirm:(NSDictionary *)oneFriend {
     [self.friendsToBeConfirm addObject:oneFriend];
 }
-
+- (void)removeFriendsToBeConfirm:(NSString *)oneFriend
+{
+    [self.friendsToBeConfirm removeObject:oneFriend];
+}
 - (void)loadLocalInfo{
     self.usrSelf = [[UserSelf alloc] initWithUID:self.signAccountUID];
     [self loadLocalRecent];

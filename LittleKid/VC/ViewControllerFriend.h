@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FriendApplyMsgTableViewCell.h"
 
-@interface ViewControllerFriend : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface ViewControllerFriend : UIViewController <UITableViewDelegate, UITableViewDataSource,FriendApplyMsgTableViewCellDelegate>
 
 @end

@@ -7,12 +7,14 @@
 //
 
 #import "FriendApplyMsgTableViewCell.h"
-
 @implementation FriendApplyMsgTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
     self.backgroundView.alpha = 0.2;
+}
+- (IBAction)acceptDidDown:(id)sender {
+    [self.delegate accpectAddFriend];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -20,5 +22,6 @@
 
     // Configure the view for the selected state
 }
+
 
 @end

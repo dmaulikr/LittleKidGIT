@@ -43,6 +43,8 @@
 
 - (void)initial;
 - (void)addFriendsToBeConfirm:(NSString *)oneFriend;
+- (void) getFriends;
+- (void)removeFriendsToBeConfirm:(NSString *)oneFriend;
 
 -(NSString*)getFriendNicknameByIndex:(NSInteger)index;
 -(NSString*)getFriendNicknameByUserName:(NSString*)userName;
