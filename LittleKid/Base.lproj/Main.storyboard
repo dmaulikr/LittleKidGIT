@@ -650,6 +650,11 @@
                             <mask key="constraints">
                                 <include reference="hCt-9a-gy8"/>
                                 <include reference="df2-j8-ICl"/>
+                                <include reference="H1x-al-e8b"/>
+                                <include reference="edg-sr-did"/>
+                                <include reference="nIM-Re-mOW"/>
+                                <include reference="tLg-M9-QBa"/>
+                                <include reference="tpR-cb-KD8"/>
                                 <include reference="87m-zw-ZLW"/>
                                 <include reference="WPI-CP-Suk"/>
                                 <include reference="156-kn-NN8"/>
@@ -657,11 +662,6 @@
                                 <include reference="Nj6-Fa-Vol"/>
                                 <include reference="iZK-m6-eNX"/>
                                 <include reference="uSl-Za-gDm"/>
-                                <include reference="H1x-al-e8b"/>
-                                <include reference="edg-sr-did"/>
-                                <include reference="nIM-Re-mOW"/>
-                                <include reference="tLg-M9-QBa"/>
-                                <include reference="tpR-cb-KD8"/>
                             </mask>
                         </variation>
                     </view>
@@ -2609,6 +2609,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="nickname" destination="4TZ-mi-5pu" id="l54-aK-96w"/>
                         <outlet property="profileImageView" destination="yxp-N8-SeD" id="trr-TB-Jnw"/>
                     </connections>
                 </viewController>

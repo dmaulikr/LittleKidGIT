@@ -8,8 +8,12 @@
 
 #import "ViewControllerSelf.h"
 #import "CDCommon.h"
+#import "RuntimeStatus.h"
 
 @interface ViewControllerSelf ()
+
+@property (weak, nonatomic) IBOutlet UILabel *nickname;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 
 @end
 
@@ -25,8 +29,10 @@
 - (void)setUI{
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
     self.profileImageView.clipsToBounds = YES;
+    self.profileImageView.image = [RuntimeStatus instance].userInfo.headImage;
     //    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"haha.png"]];
     
+    self.nickname.text = [RuntimeStatus instance].userInfo.nickname;
     
 }
 
