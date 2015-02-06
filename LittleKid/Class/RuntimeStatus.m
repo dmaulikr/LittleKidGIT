@@ -96,12 +96,13 @@
                     userInfo.level = [object objectForKey:@"level"];
                     userInfo.score = [object objectForKey:@"score"];
                     
-                    [self.friendUserInfo addObject:userInfo];
+                    [friendUserInfo addObject:userInfo];
                 }];
             }
         }
         
         self.friends = friends;
+        self.friendUserInfo = friendUserInfo;
     }];
     
     //TODO
