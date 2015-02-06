@@ -200,11 +200,19 @@
             cell = [[FriendTableViewCell alloc] init];
         }
         AVUser *user = [[RuntimeStatus instance].friends objectAtIndex:indexPath.row];
-        cell.nickName.text = @"nickname";
+        UserInfo *userInfo = [[RuntimeStatus instance].friendUserInfo objectAtIndex:indexPath.row];
+        
+        cell.nickName.text = userInfo.nickname;
         cell.state.text = @"state";
         cell.starNumber.text = @"5";
         cell.signature.text = user.username;//用此index方式定位数据
-        UIImageView *imageview = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liaotiankuang"]];
+        UIImage *headImage;
+        if (userInfo.headImage) {
+            headImage = userInfo.headImage;
+        } else {
+            headImage = [UIImage imageNamed:@"liaotiankuang"];
+        }
+        UIImageView *imageview = [[UIImageView alloc]initWithImage:headImage];
         cell.backgroundView = imageview;
         cell.backgroundView.alpha = 0.5;
         return  cell;
