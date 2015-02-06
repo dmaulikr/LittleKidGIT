@@ -207,11 +207,10 @@
         cell.starNumber.text = @"5";
         cell.signature.text = user.username;//用此index方式定位数据
         UIImage *headImage;
-        if (userInfo.headImage) {
-            headImage = userInfo.headImage;
-        } else {
-            headImage = [UIImage imageNamed:@"liaotiankuang"];
-        }
+        headImage = userInfo.headImage;
+        cell.headPicture.image = headImage;
+       
+        headImage = [UIImage imageNamed:@"liaotiankuang"];
         UIImageView *imageview = [[UIImageView alloc]initWithImage:headImage];
         cell.backgroundView = imageview;
         cell.backgroundView.alpha = 0.5;
