@@ -32,6 +32,7 @@
     _cropView = [[CropViewLayer alloc] initWithFrame:_imageView.bounds];
     [_cropView setBackgroundColor:[UIColor clearColor]];
     
+    self.clipsToBounds = YES;///add
     [self setAutoresizesSubviews:YES];
     [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     
