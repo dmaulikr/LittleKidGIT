@@ -10,6 +10,7 @@
 #import "CheseInterface.h"
 #import "CheseTools.h"
 #import <AVOSCloud/AVOSCloud.h>
+#import "RuntimeStatus.h"
 #import "CDSessionManager.h"
 
 
@@ -44,6 +45,7 @@ static  BOOL isShouldChessPlayer = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(procCmd:) name:NOTIFICATION_PLAY_CHESS_UPDATED object:nil];    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatesendfailed:) name:NOTIFICATION_PLAY_CHESS_SEND_FAILED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatesendfinish:) name:NOTIFICATION_PLAY_CHESS_SEND_FINISH object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSessionPaused:) name:NOTIFICATION_SESSION_PAUSED object:nil];
     UIImageView *bacakGroundImage = [[UIImageView alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     NSString *path = [[NSBundle mainBundle]pathForResource:@"music" ofType:@"mp3"];
     NSURL *url = [[NSURL alloc]initFileURLWithPath:path];
@@ -80,6 +82,7 @@ static  BOOL isShouldChessPlayer = YES;
     self.repickBtnFreshTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
     
     self.sendCmd = 0;
+    seconds = 180;
     CGRect mainrect = [[UIScreen mainScreen]bounds];//获取主屏
     
     UIButton * moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -244,16 +247,20 @@ static  BOOL isShouldChessPlayer = YES;
     });
     
 }
+- (void) updateSessionPaused:(NSNotification *)notify
+{
+    AVSession *session = notify.object;
+    if (session.peerId == [RuntimeStatus instance].currentUser.username) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络不正常" message:nil delegate:self cancelButtonTitle:@"确定"  otherButtonTitles:nil, nil];
+        [alert show];
+    }
+  
+}
 - (void)updatesendfailed:(NSNotification *)notify
 {
-    if (self.sendCmd == CHESS_CMD_CHECK) {
-        rezult = 0;
-        [self Restart];
-    }
-    else{
         
         [[CDSessionManager sharedInstance] sendPlayChess:self.senddict toPeerId:self.otherId];
-    }
+   
 }
 -(void)updatesendfinish:(NSNotification *)notify
 {
@@ -281,11 +288,17 @@ static int seconds = 180;
         }
         else
         {
-            [self sendchessRequest:CHESS_CMD_CHECK];
+            if ([[CDSessionManager sharedInstance] isOpen]) {
+                rezult = 2;
+                [self Restart];
+            }
+            else
+            {
+                rezult = 0;
+                [self Restart];
+            }
             
         }
-        [theTimer invalidate];
-        seconds = 180;
     }else{
         seconds--;
         self.mytime.text = self.opponenttime.text = [NSString stringWithFormat:@"%d:%2d",seconds/60,seconds%60];

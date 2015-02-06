@@ -186,6 +186,7 @@
     
     NSMutableDictionary *chatroom = [self.recentUsrList objectAtIndex:indexPath.row];
     NSString *str = [chatroom objectForKey:@"otherid"];
+//    [[RuntimeStatus instance].friendUserInfo objectAtIndex:<#(NSUInteger)#>]
     cell.nickName.text = str;
     str = [chatroom objectForKey:@"type"];
     if ([str isEqualToString:@"image"]) {
