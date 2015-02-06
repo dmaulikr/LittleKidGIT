@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface RecentTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIView *headPicture;
+@property (weak, nonatomic) IBOutlet UIImageView *headPicture;
 @property (weak, nonatomic) IBOutlet UILabel *nickName;
 @property (weak, nonatomic) IBOutlet UILabel *lastMsg;
 @property (weak, nonatomic) IBOutlet UIButton *unreadmsg;
