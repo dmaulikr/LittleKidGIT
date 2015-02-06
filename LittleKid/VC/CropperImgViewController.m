@@ -35,9 +35,10 @@
     
     //image为上一个界面传过来的图片资源
     editorView = [[ImageCropperView alloc] init];
-    [editorView setImage:image];
-    editorView.frame = CGRectMake(0, 0, self.view.frame.size.width ,  self.view.frame.size.width);
-    editorView.center = self.view.center;
+    [editorView setImage:self.image];
+    editorView.frame = CGRectMake(0, 44, self.view.frame.size.width ,  self.view.frame.size.height );
+    editorView.backgroundColor  = [UIColor redColor];
+    editorView.center = CGPointMake(self.view.center.x, self.view.center.y+44);
     
     [self.view addSubview:editorView];
 }
