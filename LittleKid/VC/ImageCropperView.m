@@ -16,6 +16,7 @@
 - (void)setCropRegionRect:(CGRect)cropRect
 {
     _cropRect = cropRect;
+    _scalingFactor = 1.0;
     _translatedCropRect =CGRectMake(cropRect.origin.x/_scalingFactor, cropRect.origin.y/_scalingFactor, cropRect.size.width/_scalingFactor, cropRect.size.height/_scalingFactor);
     [   _cropView setCropRegionRect:_translatedCropRect];
 }
@@ -32,10 +33,9 @@
     _cropView = [[CropViewLayer alloc] initWithFrame:_imageView.bounds];
     [_cropView setBackgroundColor:[UIColor clearColor]];
     
-    self.clipsToBounds = YES;///add
+
     [self setAutoresizesSubviews:YES];
     [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-    
     
     
     [self addSubview:_imageView];
@@ -73,14 +73,15 @@
 {
     float imgWidth = _image.size.width;
     float imgHeight = _image.size.height;
-    float viewWidth = self.bounds.size.width - 2*IMAGE_BOUNDRY_SPACE;
-    float viewHeight = self.bounds.size.height - 2*IMAGE_BOUNDRY_SPACE;
+    float viewWidth = self.bounds.size.width ;//- 2*IMAGE_BOUNDRY_SPACE;
+    float viewHeight = self.bounds.size.height ;//- 2*IMAGE_BOUNDRY_SPACE;
     
     float widthRatio = imgWidth / viewWidth;
     float heightRatio = imgHeight / viewHeight;
     _scalingFactor = widthRatio > heightRatio ? widthRatio : heightRatio;
     
     _imageView.bounds = CGRectMake(0, 0, imgWidth / _scalingFactor, imgHeight/_scalingFactor);
+    
     _imageView.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
     
     _imageView.layer.shadowColor = [UIColor blackColor].CGColor;
