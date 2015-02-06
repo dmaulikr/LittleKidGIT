@@ -104,8 +104,8 @@
         //check if right, then
         if ( YES == [self checkSignInInfo:signInAckDict] ) {
             //get info from local
-            [[RuntimeStatus instance] loadLocalInfo];
-            [[RuntimeStatus instance].usrSelf loadServerSelfInfo:signInAckDict];
+//            [[RuntimeStatus instance] loadLocalInfo];
+//            [[RuntimeStatus instance].usrSelf loadServerSelfInfo:signInAckDict];
             //get info from server//异步的,在全局量里处理就行了
 //            [HTTTClient sendData:nil withProtocol:RECENT_MSG_GET];
 //            [HTTTClient sendData:nil withProtocol:FRIEND_LIST_GET];
