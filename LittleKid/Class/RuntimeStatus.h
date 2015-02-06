@@ -61,4 +61,6 @@
 - (NSString*)getFriendNicknameByIndex:(NSInteger)index;
 - (NSString*)getFriendNicknameByUserName:(NSString*)userName;
 
+- (UserInfo*)getFriendUserInfo:(NSString*)userName;
+
 @end

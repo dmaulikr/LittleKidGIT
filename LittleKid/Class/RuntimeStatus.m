@@ -167,6 +167,17 @@
     return nil;
 }
 
+- (UserInfo*)getFriendUserInfo:(NSString *)userName {
+    for (int i = 0; i < self.friends.count; i++) {
+        AVUser *friend = [self.friends objectAtIndex:i];
+        if ([friend.username isEqualToString:userName]) {
+            return [self.friendUserInfo objectAtIndex:i];
+        }
+    }
+    
+    return nil;
+}
+
 - (void) addFriendsToBeConfirm:(NSDictionary *)oneFriend {
     [self.friendsToBeConfirm addObject:oneFriend];
 }
