@@ -36,6 +36,7 @@ typedef enum : NSUInteger {
 - (void)getHistoryMessagesForPeerId:(NSString *)peerId callback:(AVArrayResultBlock)callback;
 - (void)getHistoryMessagesForGroup:(NSString *)groupId callback:(AVArrayResultBlock)callback;
 - (void)clearData;
+- (BOOL)isOpen;
 /*
  *  发送加好友命令
  *  @param peerId 对方的peer id

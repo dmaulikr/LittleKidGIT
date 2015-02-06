@@ -192,6 +192,11 @@ static BOOL initialized = NO;
     }];
 }
 
+-(BOOL)isOpen
+{
+    return [_session isOpen];
+}
+
 - (void)sendAddFriendRequest:(NSString *)peerId
 {
     [self addChatWithPeerId:peerId];
@@ -523,6 +528,7 @@ static BOOL initialized = NO;
 - (void)sessionPaused:(AVSession *)session {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     NSLog(@"session:%@", session.peerId);
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SESSION_PAUSED object:session userInfo:nil];
 }
 
 - (void)sessionResumed:(AVSession *)session {
