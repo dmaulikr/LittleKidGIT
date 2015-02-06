@@ -98,6 +98,11 @@ static int seconds = 60;
                     AVObject *userInfo = [[AVUser currentUser] objectForKey:@"userInfo"];
                     [userInfo setObject:self.nickname forKey:@"nickname"];
                     [userInfo saveInBackground];
+                    [self.kiduser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                        if (error) {
+                            NSLog(@"save avuser error");
+                        }
+                    }];
                     
                     //跳转主界面
                     [self performSegueWithIdentifier:SEGUE_TO_MAIN sender:sender];
