@@ -23,6 +23,7 @@
     float random;
     float orign;
     NSInteger rezult; //0负 1平 2胜
+    NSInteger increaseScore;
 }
 //@property(nonatomic) int blackOrRed;
 @property (retain,readwrite,nonatomic)CheseInterface * cheseInterface;

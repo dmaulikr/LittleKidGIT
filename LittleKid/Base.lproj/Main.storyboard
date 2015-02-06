@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -458,7 +458,7 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" minimumFontSize="17" background="juxing_0.png" translatesAutoresizingMaskIntoConstraints="NO" id="GKW-fW-2sP">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机" minimumFontSize="17" background="juxing_0.png" translatesAutoresizingMaskIntoConstraints="NO" id="GKW-fW-2sP">
                                 <rect key="frame" x="44" y="255" width="270" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
@@ -469,7 +469,7 @@
                                     <rect key="frame" x="36" y="278" width="714" height="50"/>
                                 </variation>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机" minimumFontSize="17" background="juxing_0.png" translatesAutoresizingMaskIntoConstraints="NO" id="dqy-jc-LZB">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="昵称" minimumFontSize="17" background="juxing_0.png" translatesAutoresizingMaskIntoConstraints="NO" id="dqy-jc-LZB">
                                 <rect key="frame" x="44" y="213" width="270" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="7iP-0j-oxH"/>
@@ -588,7 +588,7 @@
                                     <action selector="onBtnSignUp:" destination="Gme-1v-GV1" eventType="touchUpInside" id="uP6-j3-H9b"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="昵称" minimumFontSize="17" background="juxing_0.png" translatesAutoresizingMaskIntoConstraints="NO" id="eKV-EZ-3fe">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" minimumFontSize="17" background="juxing_0.png" translatesAutoresizingMaskIntoConstraints="NO" id="eKV-EZ-3fe">
                                 <rect key="frame" x="44" y="167" width="270" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
@@ -667,9 +667,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="基本信息" id="nhT-Wg-HKa"/>
                     <connections>
-                        <outlet property="account" destination="dqy-jc-LZB" id="cJx-1E-Goc"/>
-                        <outlet property="nickname" destination="eKV-EZ-3fe" id="WbG-JL-oH1"/>
-                        <outlet property="password" destination="GKW-fW-2sP" id="Wxn-yN-NTf"/>
+                        <outlet property="account" destination="GKW-fW-2sP" id="duy-bs-JSS"/>
+                        <outlet property="nickname" destination="dqy-jc-LZB" id="Urq-V9-7Gd"/>
+                        <outlet property="password" destination="eKV-EZ-3fe" id="Rij-uS-d1w"/>
                         <segue destination="1VK-JR-O7d" kind="show" identifier="segueFromInfo" id="uXr-Xe-jwf"/>
                     </connections>
                 </viewController>
