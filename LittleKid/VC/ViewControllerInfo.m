@@ -14,9 +14,9 @@
 
 @interface ViewControllerInfo ()
 
-@property (weak, nonatomic) IBOutlet UITextField *account;
-@property (weak, nonatomic) IBOutlet UITextField *password;
-@property (weak, nonatomic) IBOutlet UITextField *nickname;
+@property (strong, nonatomic) IBOutlet UITextField *nickname;
+@property (strong, nonatomic) IBOutlet UITextField *account;
+@property (strong, nonatomic) IBOutlet UITextField *password;
 @property (strong, nonatomic) NSString *nick;
 @property (strong, nonatomic) AVUser *user;
 @property (strong, nonatomic) AVQuery * query;
