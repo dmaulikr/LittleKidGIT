@@ -44,6 +44,13 @@
     [self.birthBtn setTitle:strDate forState:UIControlStateNormal];
     //TODO
     //set gender
+    if ([[RuntimeStatus instance].userInfo.gender isEqualToString:@"boy"]) {
+        self.sexText.selectedSegmentIndex = 0;
+    }
+    else
+    {
+        self.sexText.selectedSegmentIndex = 1;
+    }
     
     //监听性别选择点击
     [self.sexText addTarget:self action:@selector(sexSegmentAction) forControlEvents:UIControlEventValueChanged];
@@ -303,11 +310,11 @@
 {
     if(self.sexText.selectedSegmentIndex)
     {
-        [RuntimeStatus instance].userInfo.gender = @"boy";
+        [RuntimeStatus instance].userInfo.gender = @"girl";
     }
     else
     {
-        [RuntimeStatus instance].userInfo.gender = @"girl";
+        [RuntimeStatus instance].userInfo.gender = @"boy";
     }
     
     [[RuntimeStatus instance] saveUserInfo];
