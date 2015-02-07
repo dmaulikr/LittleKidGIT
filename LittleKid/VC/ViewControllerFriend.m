@@ -157,7 +157,7 @@
         return 1;
     }
     if (section == SECTION_FRIEND_LIST) {
-        NSInteger i = [[RuntimeStatus instance].friends count];
+        NSInteger i = [[RuntimeStatus instance].friendUserInfo count];
         return  i;
     }
     if (section == SECTION_FRIEND_APPLY_MSG) {
@@ -226,16 +226,17 @@
     if (indexPath.section == SECTION_FRIEND_LIST) {
         //根据indexPath加载响应好友信息
         AVUser *user = [[RuntimeStatus instance].friends objectAtIndex:indexPath.row];
-        CDBaseNavigationController *nav = self.tabBarController.childViewControllers.firstObject ;
+//        CDBaseNavigationController *nav = self.tabBarController.childViewControllers.firstObject ;
         CDChatRoomController *controller = [[CDChatRoomController alloc] init];
         [[CDSessionManager sharedInstance] addChatWithPeerId:user.username];
         controller.otherId = user.username;
         controller.type = CDChatRoomTypeSingle;
-        self.tabBarController.selectedIndex = 0;
-        [nav popToRootViewControllerAnimated:NO];
+ //       self.tabBarController.selectedIndex = 0;
+///        [nav popToRootViewControllerAnimated:NO];
         
-        [self.tabBarController.childViewControllers.firstObject pushViewController:controller animated:YES];
-        [self.navigationController popToRootViewControllerAnimated:NO];
+ //       [self.tabBarController.childViewControllers.firstObject pushViewController:controller animated:YES];
+ //       [self.navigationController popToRootViewControllerAnimated:NO];
+        [self.navigationController pushViewController:controller animated:NO];
         
     }
 }

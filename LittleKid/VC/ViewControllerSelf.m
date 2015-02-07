@@ -99,7 +99,7 @@
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         
-        UIViewController* nextController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        UIViewController* nextController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavigationcontroller"];
         
          [self presentViewController:nextController animated:YES completion:nil];
     }
