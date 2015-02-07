@@ -225,11 +225,11 @@
     }
     if (indexPath.section == SECTION_FRIEND_LIST) {
         //根据indexPath加载响应好友信息
-        AVUser *user = [[RuntimeStatus instance].friends objectAtIndex:indexPath.row];
+        UserInfo *user = [[RuntimeStatus instance].friends objectAtIndex:indexPath.row];
         CDBaseNavigationController *nav = self.tabBarController.childViewControllers.firstObject ;
         CDChatRoomController *controller = [[CDChatRoomController alloc] init];
-        [[CDSessionManager sharedInstance] addChatWithPeerId:user.username];
-        controller.otherId = user.username;
+        [[CDSessionManager sharedInstance] addChatWithPeerId:user.userName];
+        controller.otherId = user.userName;
         controller.type = CDChatRoomTypeSingle;
         self.tabBarController.selectedIndex = 0;
         [nav popToRootViewControllerAnimated:NO];

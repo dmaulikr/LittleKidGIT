@@ -49,8 +49,8 @@
 }
 
 - (IBAction)addFriendBtnTouchDown:(id)sender {
-    for (AVUser *usr in [RuntimeStatus instance].friends) {
-        if([usr.username isEqualToString:self.uidLabel.text]){
+    for (UserInfo *usr in [RuntimeStatus instance].friends) {
+        if([usr.userName isEqualToString:self.uidLabel.text]){
             [[[UIAlertView alloc] initWithTitle:@"已经加为好友" message:@"提示原因" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil , nil] show];
             
             return;

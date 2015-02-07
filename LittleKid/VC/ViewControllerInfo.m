@@ -34,6 +34,8 @@
     self.account.delegate = self;
     self.password.delegate = self;
     self.nickname.delegate = self;
+    self.nickname.returnKeyType = UIReturnKeyNext;
+    self.password.returnKeyType = UIReturnKeyGo;
     
     //add
     UITapGestureRecognizer *gestureTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeKeyBoard)];

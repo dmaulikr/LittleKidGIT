@@ -69,8 +69,8 @@
     [self queryWithUID_NICKNAME:inputStr];
     //等待状态动画
     [self waitStatus];
-    for (AVUser *usr in [RuntimeStatus instance].friends) {
-        if([usr.username isEqualToString:inputStr]){
+    for (UserInfo *usr in [RuntimeStatus instance].friends) {
+        if([usr.userName isEqualToString:inputStr]){
             [[[UIAlertView alloc] initWithTitle:@"已经加为好友" message:@"提示原因" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil , nil] show];
             return;
         }

@@ -9,6 +9,15 @@
 #import "RuntimeStatus.h"
 
 @implementation UserInfo
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        //TODO
+        self.score = @0;
+    }
+    return self;
+}
 @end
 
 @implementation RuntimeStatus
@@ -32,6 +41,7 @@
         self.signAccountUID = [[NSString alloc] init];
         self.httpClient = [[HTTTClient alloc] init];
         self.udpP2P = [[UDPP2P alloc] init];
+        self.userInfo = [[UserInfo alloc] init];
         self.friends = [NSMutableArray array];
     }
     return self;
@@ -65,7 +75,6 @@
             NSLog(@"fetch user info error: %@", error);
         }
         else {
-            self.userInfo = [UserInfo new];
             NSData *headImage = [object objectForKey:@"headImage"];
             self.userInfo.headImage = [self circleImage:[UIImage imageWithData:headImage] withParam:0];
             self.userInfo.nickname = [userInfo objectForKey:@"nickname"];
@@ -158,7 +167,7 @@
 
 - (void) updateLocalFriend: (UserInfo *)userInfo byObjId: (NSString*)friendObjID {
     //TODO: complete all the update
-    [self.db executeUpdateWithFormat:@"update table friends set nickname = %@, birthday = %@, updatedAt = %@ where selfId = %@ and friendId = %@",
+    [self.db executeUpdateWithFormat:@"UPDATE friends SET nickname = %@, birthday = %@, updatedAt = %@ WHERE selfId = %@ and friendId = %@",
      userInfo.nickname,
      userInfo.birthday,
      userInfo.updatedAt,
@@ -321,6 +330,13 @@
     return userInfo;
 }
 
+- (void) addFriendsToBeConfirm:(NSDictionary *)oneFriend {
+    [self.friendsToBeConfirm addObject:oneFriend];
+}
+- (void)removeFriendsToBeConfirm:(NSString *)oneFriend
+{
+    [self.friendsToBeConfirm removeObject:oneFriend];
+}
 
 
 - (void)loadLocalInfo{
