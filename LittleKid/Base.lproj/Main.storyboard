@@ -1416,10 +1416,10 @@
                                 <rect key="frame" x="24" y="143" width="306" height="178"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="530" id="J9B-Eq-jpa">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="300"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="280"/>
                                     </constraint>
                                     <constraint firstAttribute="height" constant="625" id="zOc-Gc-9HP">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="150"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="280"/>
                                     </constraint>
                                 </constraints>
                                 <variation key="default">
@@ -1429,7 +1429,7 @@
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="-65" y="166" width="530" height="362"/>
+                                    <rect key="frame" x="-65" y="167" width="530" height="362"/>
                                     <mask key="constraints">
                                         <include reference="J9B-Eq-jpa"/>
                                         <include reference="zOc-Gc-9HP"/>
@@ -1463,10 +1463,10 @@
                                 <rect key="frame" x="47" y="276" width="234" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="Pe4-uM-vxZ">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="40"/>
                                     </constraint>
                                     <constraint firstAttribute="width" constant="234" id="mqH-ZX-f1I">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="280"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="240"/>
                                     </constraint>
                                 </constraints>
                                 <variation key="default">
@@ -1499,7 +1499,7 @@
                                 <rect key="frame" x="16" y="414" width="296" height="129"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="325" id="qOd-dm-tjY">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="100"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="160"/>
                                     </constraint>
                                 </constraints>
                                 <variation key="default">
@@ -1568,7 +1568,7 @@
                                     <segment title="女"/>
                                 </segments>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="233" y="338" width="90" height="21"/>
+                                    <rect key="frame" x="233" y="338" width="90" height="29"/>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="164" y="267" width="90" height="36"/>
@@ -1707,7 +1707,7 @@
                             </constraint>
                             <constraint firstItem="STb-Fj-ed8" firstAttribute="trailing" secondItem="qj3-J0-eLw" secondAttribute="trailing" id="VYb-9h-dZu"/>
                             <constraint firstItem="qj3-J0-eLw" firstAttribute="top" secondItem="8qh-az-CTg" secondAttribute="bottom" constant="30" id="YY3-Ec-RCX">
-                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="30"/>
                             </constraint>
                             <constraint firstItem="Rzi-Po-8ss" firstAttribute="centerY" secondItem="STb-Fj-ed8" secondAttribute="centerY" id="Z58-do-vTv"/>
                             <constraint firstItem="STb-Fj-ed8" firstAttribute="height" secondItem="8qh-az-CTg" secondAttribute="height" id="ZDF-jb-1FK"/>
@@ -1715,12 +1715,12 @@
                             <constraint firstItem="xon-G4-hnI" firstAttribute="centerY" secondItem="o4Y-CR-0LN" secondAttribute="centerY" id="cc2-BD-7e8"/>
                             <constraint firstItem="STb-Fj-ed8" firstAttribute="height" secondItem="qj3-J0-eLw" secondAttribute="height" id="etm-qd-pMJ"/>
                             <constraint firstItem="Rzi-Po-8ss" firstAttribute="leading" secondItem="Ogt-Ay-WfO" secondAttribute="trailing" constant="104" id="h3K-Kq-014">
-                                <variation key="heightClass=regular-widthClass=compact" constant="120"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="100"/>
                             </constraint>
                             <constraint firstItem="t8Y-It-kaI" firstAttribute="trailing" secondItem="xon-G4-hnI" secondAttribute="trailing" id="j9c-W9-LGs"/>
                             <constraint firstItem="STb-Fj-ed8" firstAttribute="leading" secondItem="qj3-J0-eLw" secondAttribute="leading" id="kGT-cq-R0O"/>
                             <constraint firstItem="qj3-J0-eLw" firstAttribute="top" secondItem="Dhe-qx-PBr" secondAttribute="bottom" constant="-132" id="kPZ-QM-kcj">
-                                <variation key="heightClass=regular-widthClass=compact" constant="-60"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="-90"/>
                             </constraint>
                             <constraint firstItem="Dhe-qx-PBr" firstAttribute="top" secondItem="STb-Fj-ed8" secondAttribute="bottom" constant="-51" id="lYK-6Z-Zxx">
                                 <variation key="heightClass=regular-widthClass=regular" constant="-80"/>
@@ -1735,20 +1735,19 @@
                             </constraint>
                             <constraint firstItem="8qh-az-CTg" firstAttribute="height" secondItem="3Rx-nS-Kmy" secondAttribute="height" id="p5c-KK-uQd"/>
                             <constraint firstItem="8qh-az-CTg" firstAttribute="top" secondItem="STb-Fj-ed8" secondAttribute="bottom" constant="24" id="pCA-7k-rHO">
-                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="30"/>
                             </constraint>
                             <constraint firstItem="Rzi-Po-8ss" firstAttribute="leading" secondItem="o4Y-CR-0LN" secondAttribute="leading" id="qeB-fX-Ua7"/>
                             <constraint firstItem="J8I-Y0-Lnq" firstAttribute="width" secondItem="tn6-TH-Zar" secondAttribute="width" id="rDv-KG-LnO"/>
                             <constraint firstItem="STb-Fj-ed8" firstAttribute="trailing" secondItem="8qh-az-CTg" secondAttribute="trailing" id="svN-PG-6r0"/>
                             <constraint firstItem="STb-Fj-ed8" firstAttribute="leading" secondItem="8qh-az-CTg" secondAttribute="leading" id="tT5-bf-xx9"/>
                             <constraint firstItem="Dhe-qx-PBr" firstAttribute="top" secondItem="vGE-nh-Eli" secondAttribute="bottom" constant="94" id="vvR-Rz-xmh">
-                                <variation key="heightClass=regular-widthClass=compact" constant="60"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="50"/>
                             </constraint>
                             <constraint firstItem="M7S-dg-T1X" firstAttribute="top" secondItem="J8I-Y0-Lnq" secondAttribute="bottom" id="xAK-1i-bgm"/>
                             <constraint firstItem="t8Y-It-kaI" firstAttribute="height" secondItem="xon-G4-hnI" secondAttribute="height" id="xMI-Gs-98H"/>
                             <constraint firstItem="t8Y-It-kaI" firstAttribute="leading" secondItem="xon-G4-hnI" secondAttribute="leading" id="yah-Ss-70a"/>
                             <constraint firstAttribute="centerX" secondItem="4n7-pJ-11U" secondAttribute="centerX" id="ybV-qj-NQf"/>
-                            <constraint firstItem="8qh-az-CTg" firstAttribute="height" secondItem="3Rx-nS-Kmy" secondAttribute="height" id="ypc-qx-UBI"/>
                             <constraint firstItem="t8Y-It-kaI" firstAttribute="centerY" secondItem="3Rx-nS-Kmy" secondAttribute="centerY" id="yrL-js-V03"/>
                             <constraint firstItem="8qh-az-CTg" firstAttribute="top" secondItem="STb-Fj-ed8" secondAttribute="bottom" constant="24" id="zOn-Lf-rpW">
                                 <variation key="heightClass=regular-widthClass=regular" constant="50"/>
@@ -1767,7 +1766,6 @@
                                 <exclude reference="Uqf-4E-0mI"/>
                                 <exclude reference="p5c-KK-uQd"/>
                                 <exclude reference="pCA-7k-rHO"/>
-                                <exclude reference="ypc-qx-UBI"/>
                                 <exclude reference="zOn-Lf-rpW"/>
                                 <exclude reference="h3K-Kq-014"/>
                                 <exclude reference="Ucb-6U-yEE"/>
@@ -1781,7 +1779,6 @@
                                 <include reference="vvR-Rz-xmh"/>
                                 <include reference="Uqf-4E-0mI"/>
                                 <include reference="pCA-7k-rHO"/>
-                                <include reference="ypc-qx-UBI"/>
                                 <include reference="h3K-Kq-014"/>
                                 <include reference="YY3-Ec-RCX"/>
                                 <include reference="kPZ-QM-kcj"/>
@@ -2220,7 +2217,7 @@
                                 <rect key="frame" x="107" y="303" width="100" height="26"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="114" y="555" width="100" height="26"/>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
@@ -2287,7 +2284,7 @@
                                 <rect key="frame" x="159" y="304" width="27" height="25"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="114" y="571" width="100" height="26"/>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
@@ -2394,9 +2391,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="155" y="571" width="65" height="22"/>
-                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.83428375909999997" green="0.12104473189999999" blue="0.02425412326" alpha="1" colorSpace="calibratedRGB"/>
