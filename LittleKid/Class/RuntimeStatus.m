@@ -32,6 +32,7 @@
         self.signAccountUID = [[NSString alloc] init];
         self.httpClient = [[HTTTClient alloc] init];
         self.udpP2P = [[UDPP2P alloc] init];
+        self.friends = [NSMutableArray array];
     }
     return self;
 }
@@ -76,14 +77,7 @@
     }];
     
     [self.currentUser getFollowees:^(NSArray *objects, NSError *error) {
-        NSMutableArray *friends = [NSMutableArray array];
-        for (AVUser *user in objects) {
-            if (![user isEqual:self.currentUser]) {
-                [friends addObject:user];
-            }
-        }
-        
-        self.friends = friends;
+        [self updateLoaclFriendList:objects];
     }];
     
     //TODO
@@ -164,6 +158,8 @@
         userInfo.score = [NSNumber numberWithInt:[resultSet intForColumn:@"score"]];
         userInfo.headImage = [UIImage imageWithData:[resultSet dataForColumn:@"headImage"]];
         userInfo.updatedAt = [resultSet dateForColumn:@"updatedAt"];
+        
+        [self.friends addObject:userInfo];
     }
 }
 
