@@ -65,9 +65,9 @@
 ///add
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if (textField == self.password) {
-//        [self.passwordCheck becomeFirstResponder];
-    } else {
+    if (textField == self.nickname) {
+        [self.account becomeFirstResponder];
+    } else if(textField == self.password){
         [self onBtnSignUp:nil];
     }
     return YES;
@@ -120,16 +120,13 @@
         if (!position) {
             NSLog(@"汉字");
             if ( str.length == 11) {
-                NSLog(@"%@",@"#######################################0");
-                
                
                 [self.query whereKey:@"username" equalTo:self.account.text];
                 [self.query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                    NSLog(@"objects:%@",objects);
                     if (error == nil) {
                         
                         if ( [objects  count] == 0 ) {
-                             NSLog(@"mnmnmnmnmnmnmnmnmnmnmnmnnmnmnmnmnmn00");
+    
                         }
                         else {
                             
@@ -150,15 +147,12 @@
         }
     }else{
         if ([str length] == 11) {
-             NSLog(@"%@",@"#######################################1");
-            
 
             [self.query whereKey:@"username" equalTo:self.account.text];
             [self.query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                 NSLog(@"objects:%@",objects);
                 if (error == nil) {
                     if ( [objects  count] == 0 ) {
-                        NSLog(@"mnmnmnmnmnmnmnmnmnmnmnmnnmnmnmnmnmn00");
                     }
                     else {
                         [[[UIAlertView alloc] initWithTitle:@"手机号已被注册" message:@"请更换手机号码或直接登陆" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil] show];

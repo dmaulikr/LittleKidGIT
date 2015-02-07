@@ -12,9 +12,8 @@
 @interface ViewControllerImpInfo ()
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
 @property(retain,nonatomic) UIDatePicker *datePicker;
-@property(retain,nonatomic) UITextField *nickText;
 @property(retain,nonatomic) UITextField *birthText;
-@property (strong, nonatomic) IBOutlet UIButton *nickBtn;
+@property (strong, nonatomic) IBOutlet UITextField *nickText;
 @property (strong, nonatomic) IBOutlet UIButton *birthBtn;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *sexText;
 
@@ -24,6 +23,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.nickText.delegate = self;
     //显示圆角
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
     self.profileImageView.clipsToBounds = YES;
@@ -35,7 +36,7 @@
     
     //初始化本地数据
     self.profileImageView.image = [RuntimeStatus instance].userInfo.headImage;
-    [self.nickBtn setTitle:[RuntimeStatus instance].userInfo.nickname forState:UIControlStateNormal];
+    self.nickText.text = [RuntimeStatus instance].userInfo.nickname;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *strDate = [dateFormatter stringFromDate:[RuntimeStatus instance].userInfo.birthday];
@@ -46,40 +47,43 @@
     
     //监听性别选择点击
     [self.sexText addTarget:self action:@selector(sexSegmentAction) forControlEvents:UIControlEventValueChanged];
-    // Do any additional setup after loading the view.
+    
+    //add--点击背景退出输入法
+    UITapGestureRecognizer *gestureTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeKeyBoard)];
+    gestureTap.numberOfTapsRequired = 1;
+    [self.view addGestureRecognizer:gestureTap];
 }
+
+///add
+- (void)removeKeyBoard{
+    [self.nickText resignFirstResponder];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField.returnKeyType == UIReturnKeyDefault) {
+        [textField resignFirstResponder];
+    }
+    return YES;
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)pickerFinish:(id)sender {
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:YES];
+    [[RuntimeStatus instance] setNickName:self.nickText.text];
     [[RuntimeStatus instance] setHeadImage:self.profileImageView.image];
-}
-
-
-
-- (IBAction)pickerName:(id)sender {
-    CustomAlertView *alertView = [[CustomAlertView alloc] initWithTitle:@"请输入昵称" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-     [alertView setTag:1];
     
-    self.nickText = [ [UITextField alloc] init];
-    self.nickText.backgroundColor = [UIColor whiteColor];
-    self.nickText.borderStyle = UITextBorderStyleBezel;
-    self.nickText.frame = CGRectMake(alertView.frame.origin.x+40, alertView.frame.origin.y+5,210, 23);
-    self.nickText.text = [RuntimeStatus instance].userInfo.nickname;
-    
-    [alertView addCustomerSubview:self.nickText];
-    [alertView show];
-    
-    
-    NSLog(@"%@",sender);
 }
 
 - (IBAction)pickerBirth:(id)sender {
     CustomAlertView *alertView = [[CustomAlertView alloc] initWithTitle:@"请选择生日" message:@"" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-    [alertView setTag:2];
+//    [alertView setTag:2];
     
     self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
     
@@ -89,7 +93,7 @@
     self.datePicker.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     self.datePicker.frame = CGRectMake(10, 50, 280, 100);
     self.datePicker.datePickerMode = UIDatePickerModeDate;
-    
+    self.datePicker.date = [RuntimeStatus instance].userInfo.birthday;
     
     
     // And launch the dialog
@@ -102,25 +106,11 @@
 -(void)alertView:(CustomAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 0)
     {
-        switch ((int)[alertView tag])
-        {
-            case 1:{
-                [self.nickBtn setTitle:self.nickText.text forState:UIControlStateNormal];
-                [[RuntimeStatus instance] setNickName:self.nickText.text];
-            }
-            break;
-            case 2:{
-                NSDate *mydate = [self.datePicker date];
-                NSString *dateFromData = [NSString stringWithFormat:@"%@",mydate];
-                NSString *date = [dateFromData substringWithRange:NSMakeRange(0, 10)];
-                [[RuntimeStatus instance] setBirthday:mydate];
-                [self.birthBtn setTitle:date forState:UIControlStateNormal];
-            }
-            break;
-                
-            default:
-                break;
-        }
+        NSDate *mydate = [self.datePicker date];
+        NSString *dateFromData = [NSString stringWithFormat:@"%@",mydate];
+        NSString *date = [dateFromData substringWithRange:NSMakeRange(0, 10)];
+        [[RuntimeStatus instance] setBirthday:mydate];
+        [self.birthBtn setTitle:date forState:UIControlStateNormal];
     }
 }
 
@@ -176,6 +166,7 @@
         UIImage *originImage = [info objectForKey:UIImagePickerControllerOriginalImage];
         
         //图片压缩，因为原图都是很大的，不必要传原图//[self scaleImage:originImage toScale:0.3];
+        //TODO:压缩
         
         /*
          用相机拍摄出来的照片含有EXIF信息，UIImage的imageOrientation属性指的就是EXIF中的orientation信息。
