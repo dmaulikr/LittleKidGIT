@@ -16,7 +16,6 @@
 - (void)setCropRegionRect:(CGRect)cropRect
 {
     _cropRect = cropRect;
-    _scalingFactor = 1.0;
     _translatedCropRect =CGRectMake(cropRect.origin.x/_scalingFactor, cropRect.origin.y/_scalingFactor, cropRect.size.width/_scalingFactor, cropRect.size.height/_scalingFactor);
     [   _cropView setCropRegionRect:_translatedCropRect];
 }
@@ -40,8 +39,9 @@
     
     [self addSubview:_imageView];
     [self addSubview:_cropView];
-    [self setCropRegionRect:CGRectMake(10, 10, 100, 100)];
     _scalingFactor = 1.0;
+    [self setCropRegionRect:CGRectMake(10, 10, 250, 250)];
+//    _scalingFactor = 1.0;
     _movePoint = NoPoint;
     _lastMovePoint = CGPointMake(0, 0);
     
