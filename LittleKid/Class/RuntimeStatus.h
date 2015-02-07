@@ -12,14 +12,18 @@
 #import "HTTTClient.h"
 #import "UDPP2P.h"
 #import "CDCommon.h"
+#import "FMDatabase.h"
 
 @interface UserInfo : NSObject
-@property (strong, nonatomic) UIImage *headImage;
+@property (strong, nonatomic) NSString *objID;
+@property (strong, nonatomic) NSString *userName;
 @property (strong, nonatomic) NSString *nickname;
 @property (strong, nonatomic) NSDate *birthday;
 @property (strong, nonatomic) NSString* gender;
 @property (strong, nonatomic) NSNumber *level;
 @property (strong, nonatomic) NSNumber *score;
+@property (strong, nonatomic) UIImage *headImage;
+@property (strong, nonatomic) NSDate *updatedAt;
 @end
 
 
@@ -34,13 +38,13 @@
 @property (strong, nonatomic) AVUser *currentUser;
 @property (strong, nonatomic) UserInfo *userInfo;
 
-//@property (strong, nonatomic) AVObject *userInfo;
 @property (strong, nonatomic) NSMutableArray *friends;
-@property (strong, nonatomic) NSMutableArray *friendUserInfo;
+//@property (strong, nonatomic) NSMutableArray *friendUserInfo;
 @property (strong, nonatomic) NSMutableArray *friendsToBeConfirm;
 
 @property (strong, nonatomic) NSString *peerId; //for temp use
 
+@property(nonatomic,strong)FMDatabase *db;
 
 
 + (instancetype)instance;
