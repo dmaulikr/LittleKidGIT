@@ -75,19 +75,19 @@
     
     [self.currentUser getFollowees:^(NSArray *objects, NSError *error) {
         NSMutableArray *friends = [NSMutableArray array];
-        self.friendUserInfo = [NSMutableArray array];
+        NSMutableArray *friendUserInfo = [NSMutableArray array];
         for (AVUser *user in objects) {
             if (![user isEqual:self.currentUser]) {
                 [friends addObject:user];
                 
                 AVObject *currentUserInfo = [user objectForKey:@"userInfo"];
                 if (!currentUserInfo) {
-                    [self.friendUserInfo addObject:[UserInfo new]];
+                    [friendUserInfo addObject:[UserInfo new]];
                     continue;
                 }
                 [currentUserInfo fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
                     UserInfo *userInfo = [UserInfo new];
-
+                    
                     NSData *headImage = [object objectForKey:@"headImage"];
                     userInfo.headImage = [UIImage imageWithData:headImage];
                     userInfo.nickname = [object objectForKey:@"nickname"];
