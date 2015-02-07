@@ -64,7 +64,7 @@
         else {
             self.userInfo = [UserInfo new];
             NSData *headImage = [object objectForKey:@"headImage"];
-            self.userInfo.headImage = [UIImage imageWithData:headImage];
+            self.userInfo.headImage = [self circleImage:[UIImage imageWithData:headImage] withParam:0];
             self.userInfo.nickname = [userInfo objectForKey:@"nickname"];
             self.userInfo.birthday = [userInfo objectForKey:@"birthday"];
             self.userInfo.gender = [userInfo objectForKey:@"gender"];
@@ -89,7 +89,7 @@
                     UserInfo *userInfo = [UserInfo new];
                     
                     NSData *headImage = [object objectForKey:@"headImage"];
-                    userInfo.headImage = [UIImage imageWithData:headImage];
+                    userInfo.headImage = [self circleImage:[UIImage imageWithData:headImage] withParam:0];
                     userInfo.nickname = [object objectForKey:@"nickname"];
                     userInfo.birthday = [object objectForKey:@"birthday"];
                     userInfo.gender = [object objectForKey:@"gender"];
@@ -111,12 +111,84 @@
 
 
 }
+-(UIImage*) circleImage:(UIImage*) image withParam:(CGFloat) inset {
+    
+    UIGraphicsBeginImageContext(image.size);
+    
+    CGContextRef context =UIGraphicsGetCurrentContext();
+    
+    //圆的边框宽度为2，颜色为红色
+    
+    CGContextSetLineWidth(context,2);
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
+    
+    CGRect rect = CGRectMake(inset, inset, image.size.width - inset *2.0f, image.size.height - inset *2.0f);
+    
+    CGContextAddEllipseInRect(context, rect);
+    
+    CGContextClip(context);
+    
+    //在圆区域内画出image原图
+    
+    [image drawInRect:rect];
+    
+    CGContextAddEllipseInRect(context, rect);
+    
+    CGContextStrokePath(context);
+    
+    //生成新的image
+    
+    UIImage *newimg = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return newimg;
+    
+}
+-(NSString *)getLevelString:(NSNumber *)number//0-12
+{
+    NSInteger i = number.integerValue;
+    i = i/10000;
+    switch (i) {
+        case 0:
+            return @"九级棋士";
+        case 1:
+            return @"八级棋士";
+        case 2:
+            return @"七级棋士";
+        case 3:
+            return @"六级棋士";
+        case 4:
+            return @"五级棋士";
+        case 5:
+            return @"四级棋士";
+        case 6:
+            return @"三级棋士";
+        case 7:
+            return @"二级棋士";
+        case 8:
+            return @"一级棋士";
+        case 9:
+            return @"三级大师";
+        case 10:
+            return @"二级大师";
+        case 11:
+            return @"一级大师";
+        case 12:
+            return @"特级大师";
+        default:
+            return nil;
+    }
+}
 
 - (void) saveUserInfo {
     AVObject* userInfo = [self.currentUser objectForKey:@"userInfo"];
     [userInfo setObject:UIImageJPEGRepresentation(self.userInfo.headImage, 1.0) forKey:@"headImage"];
     [userInfo setObject:self.userInfo.nickname forKey:@"nickname"];
     [userInfo setObject:self.userInfo.birthday forKey:@"birthday"];
+    [userInfo setObject:(self.userInfo.gender) forKey:@"gender"];
+    [userInfo setObject:(self.userInfo.score) forKey:@"score"];
     //TODO
     
 //    [self.currentUser saveInBackground];

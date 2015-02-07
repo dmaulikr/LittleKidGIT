@@ -310,6 +310,15 @@
 
 -(void)sexSegmentAction
 {
-//    [self.defaults setInteger:self.sexText.selectedSegmentIndex forKey:@"sex_index"];
+    if(self.sexText.selectedSegmentIndex)
+    {
+        [RuntimeStatus instance].userInfo.gender = @"boy";
+    }
+    else
+    {
+        [RuntimeStatus instance].userInfo.gender = @"girl";
+    }
+    
+    [[RuntimeStatus instance] saveUserInfo];
 }
 @end

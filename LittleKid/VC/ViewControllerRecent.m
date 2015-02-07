@@ -187,8 +187,7 @@
     NSMutableDictionary *chatroom = [self.recentUsrList objectAtIndex:indexPath.row];
     NSString *str = [chatroom objectForKey:@"otherid"];
     cell.nickName.text = [[RuntimeStatus instance] getFriendUserInfo:str].nickname;
-    UIImageView *imageview = [[UIImageView alloc]initWithImage:[[RuntimeStatus instance] getFriendUserInfo:str].headImage];
-    cell.headPicture = imageview;
+    cell.headPicture.image = [[RuntimeStatus instance] getFriendUserInfo:str].headImage;
     str = [chatroom objectForKey:@"type"];
     if ([str isEqualToString:@"image"]) {
         cell.lastMsg.text = @"语音";
@@ -209,6 +208,7 @@
     
     return cell;
 }
+
 
 //- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
 //    return @"最近的";
