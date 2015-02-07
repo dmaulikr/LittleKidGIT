@@ -99,7 +99,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 90;
+    return 100;
 }
 - (void) accpectAddFriend
 {
@@ -189,7 +189,7 @@
         UIImageView *imageview = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liaotiankuang"]];
         cell.backgroundView = imageview;
         cell.nicknameLabel.text = [RuntimeStatus instance].peerId;
-        cell.backgroundView.alpha = 0.5;
+        cell.backgroundView.alpha = 0.8;
         cell.delegate = self;
         return cell;
     }
@@ -199,13 +199,14 @@
         if (cell == nil) {
             cell = [[FriendTableViewCell alloc] init];
         }
-        AVUser *user = [[RuntimeStatus instance].friends objectAtIndex:indexPath.row];
+//        AVUser *user = [[RuntimeStatus instance].friends objectAtIndex:indexPath.row];
         UserInfo *userInfo = [[RuntimeStatus instance].friendUserInfo objectAtIndex:indexPath.row];
+        
         
         cell.nickName.text = userInfo.nickname;
         cell.state.text = @"state";
         cell.starNumber.text = @"5";
-        cell.signature.text = user.username;//用此index方式定位数据
+        cell.signature.text = [[RuntimeStatus instance] getLevelString:userInfo.score];
         UIImage *headImage;
         headImage = userInfo.headImage;
         cell.headPicture.image = headImage;
@@ -213,7 +214,7 @@
         headImage = [UIImage imageNamed:@"liaotiankuang"];
         UIImageView *imageview = [[UIImageView alloc]initWithImage:headImage];
         cell.backgroundView = imageview;
-        cell.backgroundView.alpha = 0.5;
+        cell.backgroundView.alpha = 0.8;
         return  cell;
     }
 }

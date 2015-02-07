@@ -583,6 +583,7 @@ static int seconds = 180;
     }
     increaseScore = increaseScore *ratio;
     [RuntimeStatus instance].userInfo.score = [NSNumber numberWithInt:increaseScore];
+    [[RuntimeStatus instance] saveUserInfo];
 }
 //
 //#pragma mark -ViewControllerDelegate
