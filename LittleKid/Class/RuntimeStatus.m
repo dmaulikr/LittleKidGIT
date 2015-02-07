@@ -86,6 +86,8 @@
 
 - (void) updateLoaclFriendList: (NSArray *)friends {
     //TODO: 暂时未考虑好友删除的情况
+    
+    //update local friend info
     for (UserInfo *userInfo in self.friends) {
         [friends enumerateObjectsUsingBlock:^(AVUser *obj, NSUInteger idx, BOOL *stop) {
             if ([userInfo.objID isEqualToString:obj.objectId]) {
@@ -111,16 +113,61 @@
             }
         }];
     }
+    
+    //add new friend info
+    for (AVUser* friend in friends) {
+        __block BOOL found = NO;
+        [self.friends enumerateObjectsUsingBlock:^(UserInfo *obj, NSUInteger idx, BOOL *stop) {
+            if ([obj.objID isEqualToString:friend.objectId]) {
+                *stop = YES;
+                found = YES;
+            }
+        }];
+        if (!found) {
+            UserInfo *user = [[UserInfo alloc] init];
+            user.objID = friend.objectId;
+            user.userName = friend.username;
+            
+//            [friend fetch];
+            
+            AVObject *userInfo = [friend objectForKey:@"userInfo"];
+            [userInfo fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+                user.nickname = [object objectForKey:@"nickname"];
+                user.birthday = [object objectForKey:@"birthday"];
+                
+                user.nickname = [object objectForKey:@"nickname"];
+                user.birthday = [object objectForKey:@"birthday"];
+                user.gender = [object objectForKey:@"gender"];
+                user.level = [object objectForKey:@"level"];
+                user.score = [object objectForKey:@"score"];
+
+                NSData *headImage = [object objectForKey:@"headImage"];
+                user.headImage = [UIImage imageWithData:headImage];
+                
+                user.updatedAt = object.updatedAt;
+                
+                [self updateLocalFriend:user byObjId:friend.objectId];
+
+            }];
+            
+            [self.friends addObject:user];
+            [self addLocalFriend:friend];
+        }
+    }
 }
 
-- (void) updateLocalFriend: (AVObject *)userInfo byObjId: (NSString*)friendObjID {
+- (void) updateLocalFriend: (UserInfo *)userInfo byObjId: (NSString*)friendObjID {
     //TODO: complete all the update
-    [self.db executeUpdate:@"update table friends set nickname = %@, birthday = %@, updatedAt = %@ where selfId = %@ and friendId = %@",
-     [userInfo objectForKey:@"nickname"],
-     [userInfo objectForKey:@"birthday"],
+    [self.db executeUpdateWithFormat:@"update table friends set nickname = %@, birthday = %@, updatedAt = %@ where selfId = %@ and friendId = %@",
+     userInfo.nickname,
+     userInfo.birthday,
      userInfo.updatedAt,
      [AVUser currentUser].objectId,
      friendObjID];
+}
+
+- (void) addLocalFriend: (AVUser*) user {
+    [self.db executeUpdateWithFormat:@"INSERT INTO friends (selfId, friendId, friendName) VALUES(%@, %@, %@)", [AVUser currentUser].username, user.objectId, user.username];
 }
 
 
@@ -136,7 +183,7 @@
     }
     
     //create the friend table if not exists
-    BOOL result = [self.db executeUpdate:@"CREATE TABLE IF NOT EXISTS friends (selfId text, friendId text, friendName text NOT NULL, nickname text, birthday text, gender text, level integer NOT NULL, score integer NOT NULL, headImage blob, updatedAt text);"];
+    BOOL result = [self.db executeUpdateWithFormat:@"CREATE TABLE IF NOT EXISTS friends (selfId text NOT NULL, friendId text NOT NULL, friendName text NOT NULL, nickname text, birthday text, gender text, level integer default 0, score integer default 0, headImage blob, updatedAt text);"];
     
     if (!result) {
         NSLog(@"Create table friends error!");
@@ -260,6 +307,20 @@
     self.userInfo.headImage = image;
     [self saveUserInfo];
 }
+
+- (UserInfo*)getFriendUserInfo:(NSString *)userName {
+    __block UserInfo *userInfo;
+    [self.friends enumerateObjectsUsingBlock:^(UserInfo *obj, NSUInteger idx, BOOL *stop) {
+        if ([obj.userName isEqualToString:userName]) {
+            *stop = YES;
+            userInfo = [self.friends objectAtIndex:idx];
+            return;
+        }
+    }];
+    
+    return userInfo;
+}
+
 
 
 - (void)loadLocalInfo{
