@@ -199,8 +199,8 @@
         if (cell == nil) {
             cell = [[FriendTableViewCell alloc] init];
         }
-//        AVUser *user = [[RuntimeStatus instance].friends objectAtIndex:indexPath.row];
-        UserInfo *userInfo = [[RuntimeStatus instance].friendUserInfo objectAtIndex:indexPath.row];
+
+        UserInfo *userInfo = [[RuntimeStatus instance].friends objectAtIndex:indexPath.row];
         
         
         cell.nickName.text = userInfo.nickname;

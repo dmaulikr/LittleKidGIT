@@ -32,6 +32,7 @@
         self.signAccountUID = [[NSString alloc] init];
         self.httpClient = [[HTTTClient alloc] init];
         self.udpP2P = [[UDPP2P alloc] init];
+        self.friends = [NSMutableArray array];
     }
     return self;
 }
@@ -54,6 +55,8 @@
 }
 
 - (void) initial {
+    [self initialDb];
+    
     self.currentUser = [AVUser currentUser];
     
     AVObject* userInfo = [self.currentUser objectForKey:@"userInfo"];
@@ -74,42 +77,90 @@
     }];
     
     [self.currentUser getFollowees:^(NSArray *objects, NSError *error) {
-        NSMutableArray *friends = [NSMutableArray array];
-        NSMutableArray *friendUserInfo = [NSMutableArray array];
-        for (AVUser *user in objects) {
-            if (![user isEqual:self.currentUser]) {
-                [friends addObject:user];
-                
-                AVObject *currentUserInfo = [user objectForKey:@"userInfo"];
-                if (!currentUserInfo) {
-                    [friendUserInfo addObject:[UserInfo new]];
-                    continue;
-                }
-                [currentUserInfo fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-                    UserInfo *userInfo = [UserInfo new];
-                    
-                    NSData *headImage = [object objectForKey:@"headImage"];
-                    userInfo.headImage = [self circleImage:[UIImage imageWithData:headImage] withParam:0];
-                    userInfo.nickname = [object objectForKey:@"nickname"];
-                    userInfo.birthday = [object objectForKey:@"birthday"];
-                    userInfo.gender = [object objectForKey:@"gender"];
-                    userInfo.level = [object objectForKey:@"level"];
-                    userInfo.score = [object objectForKey:@"score"];
-                    
-                    [friendUserInfo addObject:userInfo];
-                }];
-            }
-        }
-        
-        self.friends = friends;
-        self.friendUserInfo = friendUserInfo;
+        [self updateLoaclFriendList:objects];
     }];
     
     //TODO
     self.friendsToBeConfirm = [NSMutableArray array];
+}
+
+- (void) updateLoaclFriendList: (NSArray *)friends {
+    //TODO: 暂时未考虑好友删除的情况
+    for (UserInfo *userInfo in self.friends) {
+        [friends enumerateObjectsUsingBlock:^(AVUser *obj, NSUInteger idx, BOOL *stop) {
+            if ([userInfo.objID isEqualToString:obj.objectId]) {
+                *stop = YES;
+                
+                AVObject *u = [obj objectForKey:@"userInfo"];
+                [u fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+                    NSDate *updatedAt = object.updatedAt;
+                    if ([updatedAt laterDate:userInfo.updatedAt]) {
+                        userInfo.updatedAt = updatedAt;
+                        
+                        NSData *headImage = [object objectForKey:@"headImage"];
+                        userInfo.headImage = [UIImage imageWithData:headImage];
+                        userInfo.nickname = [object objectForKey:@"nickname"];
+                        userInfo.birthday = [object objectForKey:@"birthday"];
+                        userInfo.gender = [object objectForKey:@"gender"];
+                        userInfo.level = [object objectForKey:@"level"];
+                        userInfo.score = [object objectForKey:@"score"];
+                        
+                        [self updateLocalFriend:object byObjId:u.objectId];
+                    }
+                }];
+            }
+        }];
+    }
+}
+
+- (void) updateLocalFriend: (AVObject *)userInfo byObjId: (NSString*)friendObjID {
+    //TODO: complete all the update
+    [self.db executeUpdate:@"update table friends set nickname = %@, birthday = %@, updatedAt = %@ where selfId = %@ and friendId = %@",
+     [userInfo objectForKey:@"nickname"],
+     [userInfo objectForKey:@"birthday"],
+     userInfo.updatedAt,
+     [AVUser currentUser].objectId,
+     friendObjID];
+}
+
+
+- (void) initialDb {
+    NSString *dbPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *dbFileName =[dbPath stringByAppendingPathComponent:@"LittleKid.sqlite"];
     
-
-
+    self.db = [FMDatabase databaseWithPath:dbFileName];
+    
+    if (![self.db open]) {
+        NSLog(@"local database open error!");
+        return;
+    }
+    
+    //create the friend table if not exists
+    BOOL result = [self.db executeUpdate:@"CREATE TABLE IF NOT EXISTS friends (selfId text, friendId text, friendName text NOT NULL, nickname text, birthday text, gender text, level integer NOT NULL, score integer NOT NULL, headImage blob, updatedAt text);"];
+    
+    if (!result) {
+        NSLog(@"Create table friends error!");
+        return;
+    }
+    
+    //get all the friend user info
+    FMResultSet *resultSet = [self.db executeQueryWithFormat:@"select friendId, friendName, nickname, birthday, gender, level, score, headImage, updatedAt from friends where selfId = %@",
+                              [AVUser currentUser].objectId];
+    
+    while ([resultSet next]) {
+        UserInfo *userInfo = [[UserInfo alloc] init];
+        userInfo.objID = [resultSet stringForColumn:@"friendId"];
+        userInfo.userName = [resultSet stringForColumn:@"friendName"];
+        userInfo.nickname = [resultSet stringForColumn:@"nickname"];
+        userInfo.birthday = [resultSet dateForColumn:@"birthday"];
+        userInfo.gender = [resultSet stringForColumn:@"gender"];
+        userInfo.level = [NSNumber numberWithInt:[resultSet intForColumn:@"level"]];
+        userInfo.score = [NSNumber numberWithInt:[resultSet intForColumn:@"score"]];
+        userInfo.headImage = [UIImage imageWithData:[resultSet dataForColumn:@"headImage"]];
+        userInfo.updatedAt = [resultSet dateForColumn:@"updatedAt"];
+        
+        [self.friends addObject:userInfo];
+    }
 }
 -(UIImage*) circleImage:(UIImage*) image withParam:(CGFloat) inset {
     
@@ -210,57 +261,7 @@
     [self saveUserInfo];
 }
 
-- (NSString*) getFriendNicknameByIndex:(NSInteger)index {
-//    AVUser *user = [self.friends objectAtIndex:index];
-//    AVObject *userInfo = [user objectForKey:@"userInfo"];
-//    if (userInfo) {
-//        [userInfo fetchIfNeeded];
-//        return [userInfo objectForKey:@"nickname"];
-//    } else {
-//        return nil;
-//    }
-    UserInfo *userInfo = [self.friendUserInfo objectAtIndex:index];
-    if (userInfo) {
-        return userInfo.nickname;
-    } else {
-        return nil;
-    }
-}
 
-- (NSString*) getFriendNicknameByUserName:(NSString *)userName {
-    for (AVUser *user in self.friends) {
-        if ([user.username isEqual:userName]) {
-            AVObject* userInfo = [user objectForKey:userName];
-            if (userInfo) {
-                return [userInfo objectForKey:@"nickname"];
-            }
-        }
-    }
-    
-    return nil;
-}
-
-- (UserInfo*)getFriendUserInfo:(NSString *)userName {
-    __block UserInfo *userInfo;
-    [self.friends enumerateObjectsUsingBlock:^(AVUser *obj, NSUInteger idx, BOOL *stop) {
-        AVUser *friend = obj;
-        if ([friend.username isEqualToString:userName]) {
-            *stop = YES;
-            userInfo = [self.friendUserInfo objectAtIndex:idx];
-            return;
-        }
-    }];
-    
-    return userInfo;
-}
-
-- (void) addFriendsToBeConfirm:(NSDictionary *)oneFriend {
-    [self.friendsToBeConfirm addObject:oneFriend];
-}
-- (void)removeFriendsToBeConfirm:(NSString *)oneFriend
-{
-    [self.friendsToBeConfirm removeObject:oneFriend];
-}
 - (void)loadLocalInfo{
     self.usrSelf = [[UserSelf alloc] initWithUID:self.signAccountUID];
     [self loadLocalRecent];
