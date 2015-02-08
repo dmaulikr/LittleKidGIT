@@ -78,7 +78,7 @@
                         if (succeeded) {
                             //TODO
                             NSLog(@"Add friend %@ successful", [RuntimeStatus instance].peerId);
-                            [[RuntimeStatus instance] getFriends];
+                            [[RuntimeStatus instance] initial];//加好友更新
                             [self freshTable];
                         } else {
                             NSLog(@"Add friend %@ error %@", [RuntimeStatus instance].peerId, error);
@@ -121,7 +121,7 @@
                     //TODO
                     NSLog(@"Add friend %@ sucaessful", [RuntimeStatus instance].peerId);
                     [[RuntimeStatus instance] removeFriendsToBeConfirm:[RuntimeStatus instance].peerId];
-                    [[RuntimeStatus instance] getFriends];
+                    [[RuntimeStatus instance] initial];//加好友更新
                     [self freshTable];
                 } else {
                     [[RuntimeStatus instance] removeFriendsToBeConfirm:[RuntimeStatus instance].peerId];
@@ -157,7 +157,7 @@
         return 1;
     }
     if (section == SECTION_FRIEND_LIST) {
-        NSInteger i = [[RuntimeStatus instance].friendUserInfo count];
+        NSInteger i = [[RuntimeStatus instance].friends count];
         return  i;
     }
     if (section == SECTION_FRIEND_APPLY_MSG) {
@@ -200,7 +200,7 @@
             cell = [[FriendTableViewCell alloc] init];
         }
 //        AVUser *user = [[RuntimeStatus instance].friends objectAtIndex:indexPath.row];
-        UserInfo *userInfo = [[RuntimeStatus instance].friendUserInfo objectAtIndex:indexPath.row];
+        UserInfo *userInfo = [[RuntimeStatus instance].friends objectAtIndex:indexPath.row];
         
         
         cell.nickName.text = userInfo.nickname;
@@ -225,11 +225,11 @@
     }
     if (indexPath.section == SECTION_FRIEND_LIST) {
         //根据indexPath加载响应好友信息
-        AVUser *user = [[RuntimeStatus instance].friends objectAtIndex:indexPath.row];
+       UserInfo *user = [[RuntimeStatus instance].friends objectAtIndex:indexPath.row];
 //        CDBaseNavigationController *nav = self.tabBarController.childViewControllers.firstObject ;
         CDChatRoomController *controller = [[CDChatRoomController alloc] init];
-        [[CDSessionManager sharedInstance] addChatWithPeerId:user.username];
-        controller.otherId = user.username;
+        [[CDSessionManager sharedInstance] addChatWithPeerId:user.userName];
+        controller.otherId = user.userName;
         controller.type = CDChatRoomTypeSingle;
  //       self.tabBarController.selectedIndex = 0;
 ///        [nav popToRootViewControllerAnimated:NO];

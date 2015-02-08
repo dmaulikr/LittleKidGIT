@@ -47,22 +47,6 @@
     return self;
 }
 
-- (void) getFriends
-{
-    self.currentUser = [AVUser currentUser];
-    
-    [self.currentUser getFollowees:^(NSArray *objects, NSError *error) {
-        NSMutableArray *friends = [NSMutableArray array];
-        for (AVUser *user in objects) {
-            if (![user isEqual:self.currentUser]) {
-                [friends addObject:user];
-            }
-        }
-        
-        self.friends = friends;
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFI_GET_FRIEND_LIST object:nil];
-    }];
-}
 
 - (void) initial {
     [self initialDb];

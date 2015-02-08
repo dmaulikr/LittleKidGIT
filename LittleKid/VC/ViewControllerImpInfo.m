@@ -100,7 +100,14 @@
     self.datePicker.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     self.datePicker.frame = CGRectMake(10, 50, 280, 100);
     self.datePicker.datePickerMode = UIDatePickerModeDate;
-    self.datePicker.date = [RuntimeStatus instance].userInfo.birthday;
+    if ([RuntimeStatus instance].userInfo.birthday) {
+        self.datePicker.date = [RuntimeStatus instance].userInfo.birthday;
+    }
+    else
+    {
+        self.datePicker.date = [NSDate dateWithTimeIntervalSinceNow:0];
+    }
+    
     
     
     // And launch the dialog

@@ -59,7 +59,6 @@
 - (void) setHeadImage: (UIImage*) image;
 
 - (void)addFriendsToBeConfirm:(NSString *)oneFriend;
-- (void) getFriends;
 - (void)removeFriendsToBeConfirm:(NSString *)oneFriend;
 
 - (NSString *)getLevelString:(NSNumber *)number;//0-12
