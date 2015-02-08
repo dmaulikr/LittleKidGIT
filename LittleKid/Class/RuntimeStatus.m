@@ -295,22 +295,23 @@
     //TODO
     
 //    [self.currentUser saveInBackground];
+    [[NSNotificationCenter defaultCenter]postNotificationName:NOTIFI_INFO_UPDATE object:nil userInfo:nil];
     [userInfo saveInBackground];
 }
 
 - (void) setNickName:(NSString *)nickname {
     self.userInfo.nickname = nickname;
-//    [self saveUserInfo];
+    [self saveUserInfo];
 }
 
 - (void) setBirthday:(NSDate *)birthday {
     self.userInfo.birthday = birthday;
-//    [self saveUserInfo];
+    [self saveUserInfo];
 }
 
 - (void) setHeadImage:(UIImage *)image {
     self.userInfo.headImage = image;
-//    [self saveUserInfo];
+    [self saveUserInfo];
 }
 
 - (UserInfo*)getFriendUserInfo:(NSString *)userName {

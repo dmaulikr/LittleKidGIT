@@ -209,7 +209,8 @@
         CropperImgViewController *captureView = [[CropperImgViewController alloc] init];
         captureView.delegate = self;
         captureView.image = image;
-
+        [RuntimeStatus instance].userInfo.headImage = image;
+        
         //隐藏UIImagePickerController本身的导航栏
         picker.navigationBar.hidden = YES;
         [picker pushViewController:captureView animated:YES];

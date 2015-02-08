@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RuntimeStatus.h"
+#import "ViewControllerImpInfo.h"
 
 @interface ViewControllerSelf : UIViewController
 - (IBAction)logout:(id)sender;

@@ -27,6 +27,8 @@
     // Do any additional setup after loading the view.
     [self setUI];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshSelfMsg:) name:NOTIFI_GET_SELF_MSG object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadview:) name:NOTIFI_INFO_UPDATE object:nil];
+    
 }
 
 - (void)setUI{
@@ -171,10 +173,15 @@
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  // Get the new view controller using [segue destinationViewController].
+     
+     
  // Pass the selected object to the new view controller.
  }
 
-
+- (void) reloadview:(NSNotification *)notify
+{
+    [self setUI];
+}
 
 - (IBAction)logout:(id)sender {
     [AVUser logOut];
