@@ -100,7 +100,7 @@
                         userInfo.level = [object objectForKey:@"level"];
                         userInfo.score = [object objectForKey:@"score"];
                         
-                        [self updateLocalFriend:object byObjId:u.objectId];
+                        [self updateLocalFriend:userInfo byObjId:u.objectId];
                     }
                 }];
             }
@@ -150,11 +150,14 @@
 }
 
 - (void) updateLocalFriend: (UserInfo *)userInfo byObjId: (NSString*)friendObjID {
-    //TODO: complete all the update
-    [self.db executeUpdateWithFormat:@"UPDATE friends SET nickname = %@, birthday = %@, updatedAt = %@ WHERE selfId = %@ and friendId = %@",
+    [self.db executeUpdateWithFormat:@"UPDATE friends SET nickname = %@, birthday = %@, updatedAt = %@, gender = %@, level = %@, score = %@, headImage = %@ WHERE selfId = %@ and friendId = %@",
      userInfo.nickname,
      userInfo.birthday,
      userInfo.updatedAt,
+     userInfo.gender,
+     userInfo.level,
+     userInfo.score,
+     userInfo.headImage,
      [AVUser currentUser].objectId,
      friendObjID];
 }
