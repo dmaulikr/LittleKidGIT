@@ -1276,7 +1276,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gfz-ec-YmM" id="omW-72-Pch">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="昵称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="taC-eN-1sm">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="昵称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="taC-eN-1sm">
                                                     <rect key="frame" x="75" y="23" width="74" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1297,7 +1297,7 @@
                                                         <action selector="acceptDidDown:" destination="gfz-ec-YmM" eventType="touchDown" id="tKd-Yz-fhC"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="加您为好友" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MjT-6S-mHh">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="加您为好友" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MjT-6S-mHh">
                                                     <rect key="frame" x="142" y="23" width="100" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1309,8 +1309,10 @@
                                                 <constraint firstItem="J0t-7I-mgQ" firstAttribute="centerY" secondItem="MjT-6S-mHh" secondAttribute="centerY" constant="8.5" id="4VO-F3-o6H"/>
                                                 <constraint firstAttribute="centerY" secondItem="J0t-7I-mgQ" secondAttribute="centerY" constant="2" id="5bi-b2-AeE"/>
                                                 <constraint firstItem="J0t-7I-mgQ" firstAttribute="top" secondItem="omW-72-Pch" secondAttribute="topMargin" constant="2" id="cdb-xW-NXM"/>
+                                                <constraint firstItem="MjT-6S-mHh" firstAttribute="leading" secondItem="taC-eN-1sm" secondAttribute="trailing" constant="5" id="fe7-Mt-0Wt"/>
+                                                <constraint firstItem="taC-eN-1sm" firstAttribute="leading" secondItem="J0t-7I-mgQ" secondAttribute="trailing" constant="2" id="nk4-ZO-Ytb"/>
+                                                <constraint firstItem="GZ7-vB-Q5N" firstAttribute="bottom" secondItem="J0t-7I-mgQ" secondAttribute="bottom" id="oeI-iH-Tkd"/>
                                                 <constraint firstItem="J0t-7I-mgQ" firstAttribute="centerY" secondItem="taC-eN-1sm" secondAttribute="centerY" constant="8.5" id="pLv-tY-tlI"/>
-                                                <constraint firstItem="GZ7-vB-Q5N" firstAttribute="centerY" secondItem="J0t-7I-mgQ" secondAttribute="centerY" constant="-10" id="rBe-Fd-ox1"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2843,6 +2845,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="btnAdd" destination="oj6-aB-2Lk" id="13M-Ma-VLC"/>
                         <outlet property="headImageView" destination="pDM-Si-uC8" id="lRQ-LV-dgK"/>
                         <outlet property="nicknameLabel" destination="n87-hY-M1Z" id="cBX-Zc-R4u"/>
                         <outlet property="uidLabel" destination="Rao-Iw-6pC" id="n3g-5b-YWE"/>

@@ -95,14 +95,14 @@ static  BOOL isShouldChessPlayer = YES;
     [self.view addSubview:moreButton];
     
     UIImageView *myphoto = [[UIImageView alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-    myphoto.image = [RuntimeStatus instance].userInfo.headImage;
+    myphoto.image = [[RuntimeStatus instance] circleImage:[RuntimeStatus instance].userInfo.headImage withParam:0];
     CGFloat photowidth = mainrect.size.width/4.6;
     rect = CGRectMake(mainrect.size.width/2-photowidth/2, mainrect.size.height-photowidth, photowidth, photowidth);
     [myphoto setFrame:rect];
-    myphoto.layer.cornerRadius = myphoto.bounds.size.width/2;
+    
     [bacakGroundImage addSubview:myphoto];
     UIImageView *opponentphoto = [[UIImageView alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-    opponentphoto.image = [[RuntimeStatus instance] getFriendUserInfo:self.otherId].headImage;
+    opponentphoto.image = [[RuntimeStatus instance] circleImage:[[RuntimeStatus instance] getFriendUserInfo:self.otherId].headImage withParam:0];
     [opponentphoto setFrame:CGRectMake(mainrect.size.width/2-photowidth/2, mainrect.size.height/30, photowidth, photowidth)];
     [bacakGroundImage addSubview:opponentphoto];
     UILabel *myname = [[UILabel alloc]initWithFrame:CGRectMake(mainrect.size.width/2+photowidth/2+mainrect.size.height/30, mainrect.size.height*0.9, mainrect.size.width/4, mainrect.size.width/16)];

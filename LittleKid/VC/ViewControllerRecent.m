@@ -193,7 +193,7 @@
     NSMutableDictionary *chatroom = [self.recentUsrList objectAtIndex:indexPath.row];
     NSString *str = [chatroom objectForKey:@"otherid"];
     cell.nickName.text = [[RuntimeStatus instance] getFriendUserInfo:str].nickname;
-    cell.headPicture.image = [[RuntimeStatus instance] getFriendUserInfo:str].headImage;
+    cell.headPicture.image = [[RuntimeStatus instance] circleImage:[[RuntimeStatus instance] getFriendUserInfo:str].headImage withParam:0];
     str = [chatroom objectForKey:@"type"];
     if ([str isEqualToString:@"image"]) {
         cell.lastMsg.text = @"语音";
