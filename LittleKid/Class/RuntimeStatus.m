@@ -77,6 +77,7 @@
     self.friendsToBeConfirm = [NSMutableArray array];
 }
 
+
 - (void) updateLoaclFriendList: (NSArray *)friends {
     //TODO: 暂时未考虑好友删除的情况
     
@@ -299,17 +300,17 @@
 
 - (void) setNickName:(NSString *)nickname {
     self.userInfo.nickname = nickname;
-    [self saveUserInfo];
+//    [self saveUserInfo];
 }
 
 - (void) setBirthday:(NSDate *)birthday {
     self.userInfo.birthday = birthday;
-    [self saveUserInfo];
+//    [self saveUserInfo];
 }
 
 - (void) setHeadImage:(UIImage *)image {
     self.userInfo.headImage = image;
-    [self saveUserInfo];
+//    [self saveUserInfo];
 }
 
 - (UserInfo*)getFriendUserInfo:(NSString *)userName {
@@ -325,12 +326,63 @@
     return userInfo;
 }
 
-- (void) addFriendsToBeConfirm:(NSDictionary *)oneFriend {
-    [self.friendsToBeConfirm addObject:oneFriend];
+- (void) addFriendsToBeConfirm:(NSString *)oneFriend {
+    AVQuery * query = [AVUser query];
+    [query whereKey:@"username" equalTo:oneFriend];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error == nil) {
+            AVUser  *peerUser = [objects firstObject];
+            
+            if (peerUser == nil) {
+                //TODO
+                return;
+            }
+            UserInfo *user = [[UserInfo alloc] init];
+            user.objID = peerUser.objectId;
+            user.userName = peerUser.username;
+            AVObject *userInfo = [peerUser objectForKey:@"userInfo"];
+            [userInfo fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+                if (error) {
+                    NSLog(@"fetch tobeConfirmuserInfo error");
+                }
+                else
+                {
+                    user.nickname = [object objectForKey:@"nickname"];
+                    user.birthday = [object objectForKey:@"birthday"];
+                    
+                    user.nickname = [object objectForKey:@"nickname"];
+                    user.birthday = [object objectForKey:@"birthday"];
+                    user.gender = [object objectForKey:@"gender"];
+                    user.level = [object objectForKey:@"level"];
+                    user.score = [object objectForKey:@"score"];
+                    
+                    NSData *headImage = [object objectForKey:@"headImage"];
+                    user.headImage = [UIImage imageWithData:headImage];
+                    
+                    user.updatedAt = object.updatedAt;
+                    NSLog(@"fetch tobeConfirmuserInfo succes");
+                    [[NSNotificationCenter defaultCenter]postNotificationName:NOTIFI_GET_FRIEND_LIST object:nil userInfo:nil];
+                }
+                
+            }];
+            
+            [self.friendsToBeConfirm addObject:user];
+            ;
+        } else {
+            
+        }
+    }];
+    
 }
 - (void)removeFriendsToBeConfirm:(NSString *)oneFriend
 {
-    [self.friendsToBeConfirm removeObject:oneFriend];
+    [self.friendsToBeConfirm enumerateObjectsUsingBlock:^(UserInfo *obj, NSUInteger idx, BOOL *stop) {
+        if ([obj.userName isEqualToString:oneFriend]) {
+            *stop = YES;
+            [self.friendsToBeConfirm removeObject:obj];
+            return;
+        }
+    }];
 }
 
 
