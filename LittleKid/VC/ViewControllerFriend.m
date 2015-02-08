@@ -231,6 +231,7 @@
         [[CDSessionManager sharedInstance] addChatWithPeerId:user.userName];
         controller.otherId = user.userName;
         controller.type = CDChatRoomTypeSingle;
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ADD_CHATROOM object:nil userInfo:nil];
  //       self.tabBarController.selectedIndex = 0;
 ///        [nav popToRootViewControllerAnimated:NO];
         
