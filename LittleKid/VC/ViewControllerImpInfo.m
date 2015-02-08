@@ -26,8 +26,8 @@
     
     self.nickText.delegate = self;
     //显示圆角
-    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
-    self.profileImageView.clipsToBounds = YES;
+//    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
+//    self.profileImageView.layer.masksToBounds = YES;
     
     //监听图像区域点击事件
     self.profileImageView.userInteractionEnabled = YES;
@@ -35,7 +35,9 @@
     [self.profileImageView addGestureRecognizer:singleTap];
     
     //初始化本地数据
-    self.profileImageView.image = [RuntimeStatus instance].userInfo.headImage;
+    if ([RuntimeStatus instance].userInfo.headImage != nil) {
+        self.profileImageView.image = [RuntimeStatus instance].userInfo.headImage;
+    }
     self.nickText.text = [RuntimeStatus instance].userInfo.nickname;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];

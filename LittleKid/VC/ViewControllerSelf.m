@@ -32,7 +32,9 @@
 - (void)setUI{
 //    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
 //    self.profileImageView.clipsToBounds = YES;
-    self.profileImageView.image = [RuntimeStatus instance].userInfo.headImage;
+    if ([RuntimeStatus instance].userInfo.headImage != nil) {
+        self.profileImageView.image = [RuntimeStatus instance].userInfo.headImage;
+    }
     //    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"haha.png"]];
     
     self.nickname.text = [RuntimeStatus instance].userInfo.nickname;

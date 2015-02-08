@@ -20,6 +20,8 @@
 		570876111A5D161700892B53 /* wo_0012_scan.png in Resources */ = {isa = PBXBuildFile; fileRef = 570876101A5D161700892B53 /* wo_0012_scan.png */; };
 		5708761C1A5D5FD400892B53 /* denglu_0007_rainbow.png in Resources */ = {isa = PBXBuildFile; fileRef = 5708761A1A5D5FD400892B53 /* denglu_0007_rainbow.png */; };
 		5708761D1A5D5FD400892B53 /* denglu_0013_animals.png in Resources */ = {isa = PBXBuildFile; fileRef = 5708761B1A5D5FD400892B53 /* denglu_0013_animals.png */; };
+		571B09481A8702A400CDA057 /* denglu_bg_mima.png in Resources */ = {isa = PBXBuildFile; fileRef = 571B09461A8702A400CDA057 /* denglu_bg_mima.png */; };
+		571B09491A8702A400CDA057 /* denglu_bg_user.png in Resources */ = {isa = PBXBuildFile; fileRef = 571B09471A8702A400CDA057 /* denglu_bg_user.png */; };
 		571D793A1A80D2B400723AA0 /* corner.png in Resources */ = {isa = PBXBuildFile; fileRef = 571D79391A80D2B400723AA0 /* corner.png */; };
 		571D79401A80D2C200723AA0 /* CropperImgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D793C1A80D2C200723AA0 /* CropperImgViewController.m */; };
 		571D79411A80D2C200723AA0 /* CropViewLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 571D793E1A80D2C200723AA0 /* CropViewLayer.m */; };
@@ -328,6 +330,8 @@
 		570876101A5D161700892B53 /* wo_0012_scan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wo_0012_scan.png; sourceTree = "<group>"; };
 		5708761A1A5D5FD400892B53 /* denglu_0007_rainbow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = denglu_0007_rainbow.png; sourceTree = "<group>"; };
 		5708761B1A5D5FD400892B53 /* denglu_0013_animals.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = denglu_0013_animals.png; sourceTree = "<group>"; };
+		571B09461A8702A400CDA057 /* denglu_bg_mima.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = denglu_bg_mima.png; sourceTree = "<group>"; };
+		571B09471A8702A400CDA057 /* denglu_bg_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = denglu_bg_user.png; sourceTree = "<group>"; };
 		571D79391A80D2B400723AA0 /* corner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = corner.png; path = image/corner.png; sourceTree = "<group>"; };
 		571D793B1A80D2C200723AA0 /* CropperImgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropperImgViewController.h; sourceTree = "<group>"; };
 		571D793C1A80D2C200723AA0 /* CropperImgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropperImgViewController.m; sourceTree = "<group>"; };
@@ -950,6 +954,8 @@
 		579BA0181A80A144002176E2 /* main */ = {
 			isa = PBXGroup;
 			children = (
+				571B09461A8702A400CDA057 /* denglu_bg_mima.png */,
+				571B09471A8702A400CDA057 /* denglu_bg_user.png */,
 				572EA34F1A737A650018C678 /* xinxi_0002_椭圆-2.png */,
 				5708761A1A5D5FD400892B53 /* denglu_0007_rainbow.png */,
 				5708761B1A5D5FD400892B53 /* denglu_0013_animals.png */,
@@ -1714,6 +1720,7 @@
 				57AC90EE1A71FEC6008F0892 /* bubble-square-incoming-selected@2x.png in Resources */,
 				57B651641A6120D1002A78F9 /* impinfo_sex.png in Resources */,
 				57AC90F51A71FEC6008F0892 /* bubble-typing.png in Resources */,
+				571B09491A8702A400CDA057 /* denglu_bg_user.png in Resources */,
 				5708760D1A5D137B00892B53 /* wo_0013_erweima.png in Resources */,
 				57B6515F1A6120D1002A78F9 /* impinfo_birth.png in Resources */,
 				57AC90FA1A71FEC6008F0892 /* input-bar@2x.png in Resources */,
@@ -1779,6 +1786,7 @@
 				572E3F6E1A63BA1300323683 /* yanzhengma_08.png in Resources */,
 				573230AF1A6F70CE004E187F /* 115.png in Resources */,
 				5759E2531A5FCA65002A9315 /* 云注册.png in Resources */,
+				571B09481A8702A400CDA057 /* denglu_bg_mima.png in Resources */,
 				57E8F9AF1A7242A300C6FAA3 /* juxing_0.png in Resources */,
 				572E3F611A63BA1300323683 /* tianxieyanzhengma.png in Resources */,
 				573230C41A6F70CE004E187F /* 象棋界面（人头男）.png in Resources */,
