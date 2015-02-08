@@ -125,21 +125,29 @@
             
             AVObject *userInfo = [friend objectForKey:@"userInfo"];
             [userInfo fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
-                user.nickname = [object objectForKey:@"nickname"];
-                user.birthday = [object objectForKey:@"birthday"];
-                
-                user.nickname = [object objectForKey:@"nickname"];
-                user.birthday = [object objectForKey:@"birthday"];
-                user.gender = [object objectForKey:@"gender"];
-                user.level = [object objectForKey:@"level"];
-                user.score = [object objectForKey:@"score"];
-
-                NSData *headImage = [object objectForKey:@"headImage"];
-                user.headImage = [UIImage imageWithData:headImage];
-                
-                user.updatedAt = object.updatedAt;
-                
-                [self updateLocalFriend:user byObjId:friend.objectId];
+                if (error) {
+                    NSLog(@"fetch userInfo error");
+                }
+                else
+                {
+                    user.nickname = [object objectForKey:@"nickname"];
+                    user.birthday = [object objectForKey:@"birthday"];
+                    
+                    user.nickname = [object objectForKey:@"nickname"];
+                    user.birthday = [object objectForKey:@"birthday"];
+                    user.gender = [object objectForKey:@"gender"];
+                    user.level = [object objectForKey:@"level"];
+                    user.score = [object objectForKey:@"score"];
+                    
+                    NSData *headImage = [object objectForKey:@"headImage"];
+                    user.headImage = [UIImage imageWithData:headImage];
+                    
+                    user.updatedAt = object.updatedAt;
+                    
+                    [self updateLocalFriend:user byObjId:friend.objectId];
+                    NSLog(@"fetch userInfo succes");
+                    [[NSNotificationCenter defaultCenter]postNotificationName:NOTIFI_GET_FRIEND_LIST object:nil userInfo:nil];
+                }
 
             }];
             
