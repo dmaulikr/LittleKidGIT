@@ -64,4 +64,6 @@
 - (NSString *)getLevelString:(NSNumber *)number;//0-12
 - (UserInfo*)getFriendUserInfo:(NSString*)userName;
 
+-(UIImage*) circleImage:(UIImage*) image withParam:(CGFloat) inset;
+
 @end

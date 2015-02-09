@@ -36,7 +36,7 @@
     
     //初始化本地数据
     if ([RuntimeStatus instance].userInfo.headImage != nil) {
-        self.profileImageView.image = [RuntimeStatus instance].userInfo.headImage;
+        self.profileImageView.image = [[RuntimeStatus instance] circleImage:[RuntimeStatus instance].userInfo.headImage withParam:0];
     }
     self.nickText.text = [RuntimeStatus instance].userInfo.nickname;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -87,6 +87,7 @@
     [super viewWillDisappear:YES];
     [[RuntimeStatus instance] setNickName:self.nickText.text];
     [[RuntimeStatus instance] setHeadImage:self.profileImageView.image];
+    [[RuntimeStatus instance] saveUserInfo];
     
 }
 
@@ -208,7 +209,8 @@
         CropperImgViewController *captureView = [[CropperImgViewController alloc] init];
         captureView.delegate = self;
         captureView.image = image;
-
+        [RuntimeStatus instance].userInfo.headImage = image;
+        
         //隐藏UIImagePickerController本身的导航栏
         picker.navigationBar.hidden = YES;
         [picker pushViewController:captureView animated:YES];

@@ -27,6 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setUI];
+    [[RuntimeStatus instance] initial];//加好友更新
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshTable) name:NOTIFI_GET_FRIEND_LIST object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveAddFriendRequest:) name:NOTIFICATION_ADD_FRIEND_UPDATED object:nil]; //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveAddFriendRequestAck:) name:NOTIFICATION_ADD_FRIEND_ACK_UPDATED object:nil]; //注册通知
@@ -188,7 +189,9 @@
         cell.cellNumberLabel.text = [[RuntimeStatus instance].friendsToBeConfirm objectAtIndex:indexPath.row];//用此index方式定位数据
         UIImageView *imageview = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liaotiankuang"]];
         cell.backgroundView = imageview;
-        cell.nicknameLabel.text = [RuntimeStatus instance].peerId;
+        UserInfo * userinfo = [[RuntimeStatus instance].friendsToBeConfirm objectAtIndex:indexPath.row];
+        cell.nicknameLabel.text = userinfo.nickname;
+        cell.headPictureView.image = [[RuntimeStatus instance] circleImage:userinfo.headImage withParam:0];
         cell.backgroundView.alpha = 0.8;
         cell.delegate = self;
         return cell;
@@ -209,7 +212,7 @@
         cell.signature.text = [[RuntimeStatus instance] getLevelString:userInfo.score];
         UIImage *headImage;
         headImage = userInfo.headImage;
-        cell.headPicture.image = headImage;
+        cell.headPicture.image = [[RuntimeStatus instance] circleImage:headImage withParam:0];
        
         headImage = [UIImage imageNamed:@"liaotiankuang"];
         UIImageView *imageview = [[UIImageView alloc]initWithImage:headImage];
@@ -231,6 +234,7 @@
         [[CDSessionManager sharedInstance] addChatWithPeerId:user.userName];
         controller.otherId = user.userName;
         controller.type = CDChatRoomTypeSingle;
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ADD_CHATROOM object:nil userInfo:nil];
  //       self.tabBarController.selectedIndex = 0;
 ///        [nav popToRootViewControllerAnimated:NO];
         

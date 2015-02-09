@@ -45,9 +45,11 @@
     [imageview setImage:[UIImage imageNamed:@"zuijin_background"]];
     _recentTableView.backgroundView = imageview;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageUpdated:) name:NOTIFICATION_MESSAGE_UPDATED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadList:) name:NOTIFICATION_ADD_CHATROOM object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshTable) name:NOTIFI_GET_FRIEND_LIST object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetunread:) name:NOTIFICATION_RESET_UNREADMSG object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(invatedPlay:) name:NOTIFICATION_INVITE_PLAY_CHESS_UPDATED object:nil];
-    [self loadList];
+    [self loadList:nil];
 }
 - (void) invatedPlay:(NSNotification *)notification
 {
@@ -56,6 +58,9 @@
     invatedPlayViewController *Controller1 = [mainStoryboard instantiateViewControllerWithIdentifier:@"invatedPlayViewController"];
     Controller1.toid = [dict objectForKey:@"fromid"];
     [self.navigationController pushViewController:Controller1 animated:NO];
+}
+- (void)freshTable{
+    [self.recentTableView reloadData];
 }
 
 - (void)resetunread:(NSNotification *)notification
@@ -66,9 +71,9 @@
     [dict setObject:@"0" forKey:@"unreadmsg"];
     [self.recentTableView reloadData];
 }
-- (void)loadList
+- (void)loadList:(NSNotification *) notification
 {
-    
+    NSMutableArray *usrList = [[NSMutableArray alloc]init];
     for(NSMutableDictionary *chatRoom in [[CDSessionManager sharedInstance] chatRooms])
     {
         if (chatRoom == nil) {
@@ -96,8 +101,9 @@
         if (lasttime) {
             [dict setObject:lasttime forKey:@"time"];
         }
-        [self.recentUsrList addObject:dict];
+        [usrList addObject:dict];
     }
+    self.recentUsrList = usrList;
 }
 - (void)messageUpdated:(NSNotification *)notification {
     NSDictionary *dict = notification.userInfo;
@@ -187,7 +193,7 @@
     NSMutableDictionary *chatroom = [self.recentUsrList objectAtIndex:indexPath.row];
     NSString *str = [chatroom objectForKey:@"otherid"];
     cell.nickName.text = [[RuntimeStatus instance] getFriendUserInfo:str].nickname;
-    cell.headPicture.image = [[RuntimeStatus instance] getFriendUserInfo:str].headImage;
+    cell.headPicture.image = [[RuntimeStatus instance] circleImage:[[RuntimeStatus instance] getFriendUserInfo:str].headImage withParam:0];
     str = [chatroom objectForKey:@"type"];
     if ([str isEqualToString:@"image"]) {
         cell.lastMsg.text = @"语音";

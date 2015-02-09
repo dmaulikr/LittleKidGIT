@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nicknameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *uidLabel;
+@property (weak, nonatomic) IBOutlet UIButton *btnAdd;
 
 
 @end
@@ -49,6 +50,7 @@
 }
 
 - (IBAction)addFriendBtnTouchDown:(id)sender {
+    self.btnAdd.enabled = false;
     for (UserInfo *usr in [RuntimeStatus instance].friends) {
         if([usr.userName isEqualToString:self.uidLabel.text]){
             [[[UIAlertView alloc] initWithTitle:@"已经加为好友" message:@"提示原因" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil , nil] show];
