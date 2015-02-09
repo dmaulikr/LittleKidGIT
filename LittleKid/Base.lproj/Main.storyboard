@@ -2595,8 +2595,8 @@
         <!--最近-->
         <scene sceneID="Jha-sg-doP">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Mjc-6e-F2o" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="最近" id="MJn-dg-sVO" userLabel="消息"/>
+                <navigationController storyboardIdentifier="NavigationRecent" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Mjc-6e-F2o" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="最近" image="xuanzekuang2.png" id="MJn-dg-sVO" userLabel="消息" colorLabel="IBBuiltInLabel-Yellow"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YKO-Xm-dkX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2615,13 +2615,16 @@
         <scene sceneID="7mA-F9-MFd">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iMQ-YS-cxp" userLabel="我的小伙伴" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="小伙伴" id="Si5-dI-9gN" userLabel="我的小伙伴"/>
+                    <tabBarItem key="tabBarItem" title="小伙伴" image="好友_04.png" id="Si5-dI-9gN" userLabel="我的小伙伴" colorLabel="IBBuiltInLabel-Red"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vzG-Yz-Kfh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="3BA-Jx-8EO">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="KkB-Ru-t9F" kind="relationship" relationship="rootViewController" id="6Tt-gT-7YF"/>
                     </connections>
@@ -2634,7 +2637,7 @@
         <scene sceneID="ZC3-lr-yV3">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mRX-kI-uTn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我" id="feY-IR-qGv" userLabel="通讯录"/>
+                    <tabBarItem key="tabBarItem" title="我" image="zuijin_0016_recv6.png" id="feY-IR-qGv" userLabel="通讯录"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BNJ-37-8ZH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2996,10 +2999,13 @@
         <image name="wo_bg_yello.png" width="640" height="194"/>
         <image name="wo_bg_zong.png" width="640" height="158"/>
         <image name="wo_button_hand.png" width="93" height="62"/>
+        <image name="xuanzekuang2.png" width="20" height="11"/>
+        <image name="zuijin_0016_recv6.png" width="100" height="55"/>
         <image name="云注册.png" width="163" height="120"/>
         <image name="云登陆.png" width="160" height="116"/>
+        <image name="好友_04.png" width="100" height="59"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="x7y-XV-pXK"/>
+        <segue reference="BXi-mn-8Gv"/>
     </inferredMetricsTieBreakers>
 </document>

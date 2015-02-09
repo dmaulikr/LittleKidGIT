@@ -30,15 +30,44 @@
     [RuntimeStatus instance];
     [[RuntimeStatus instance] initial];
     
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    UITableViewController* nextController = [storyboard instantiateViewControllerWithIdentifier:@"mainTabViewController"];
+    
+    UINavigationController *recent = [storyboard instantiateViewControllerWithIdentifier:@"NavigationRecent"];
+    
+    UITabBarItem *tabbarTtem  = recent.tabBarItem;
+    
+//    NSLog(@"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%@",tabbarTtem);
+    
+    
+    
+//    tabbarTtem.image = [UIImage imageNamed:@"xuanzekuang2.png"];
+//    [tabbarTtem setSelectedImage:[UIImage imageNamed:@"xuanzekuang2.png"]];
+//    [tabbarTtem setTitle:@"hehe"];
+    
+    
+//    [tabbarTtem setS];
+    
+//    [tabbarTt];
+    
+    
+    
+//    NSArray *controllerArray = [NSArray arrayWithObjects:@"",@"",@"", nil];
+//    NSArray *titleArray = [NSArray arrayWithObjects:@"第一个",@"第二个",@"第三个", nil];
+//    NSArray *normalImageArray = [NSArray arrayWithObjects:@"wo_0005_rect2.png",@"xuanzekuang.png",@"zuijin_0016_recv6.png", nil];
+//    NSArray *selectedImageArray = [NSArray arrayWithObjects:@"xuanzekuang2.png",@"xuanzekuang.png",@"xuanzekuang.png", nil];
+//
+//    for (int i = 0; i < controllerArray.count; i++) {
+//
+//    }
+    
+    
     //TODO: if already sign up, just login directly
     
     if ([AVUser currentUser]) {
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        
-        UITableViewController* nextController = [storyboard instantiateViewControllerWithIdentifier:@"mainTabViewController"];
-        
-//        self.window.rootViewController = nextController;
+
         [self.window setRootViewController:nextController];
         [self.window makeKeyAndVisible];
         
