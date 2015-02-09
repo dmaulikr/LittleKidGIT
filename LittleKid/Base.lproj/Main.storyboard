@@ -2615,7 +2615,7 @@
         <scene sceneID="7mA-F9-MFd">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iMQ-YS-cxp" userLabel="我的小伙伴" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="小伙伴" image="好友_04.png" id="Si5-dI-9gN" userLabel="我的小伙伴" colorLabel="IBBuiltInLabel-Red"/>
+                    <tabBarItem key="tabBarItem" title="小伙伴" image="xuanzekuang2.png" id="Si5-dI-9gN" userLabel="我的小伙伴" colorLabel="IBBuiltInLabel-Red"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vzG-Yz-Kfh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2637,7 +2637,7 @@
         <scene sceneID="ZC3-lr-yV3">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mRX-kI-uTn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我" image="zuijin_0016_recv6.png" id="feY-IR-qGv" userLabel="通讯录"/>
+                    <tabBarItem key="tabBarItem" title="我" image="xuanzekuang2.png" id="feY-IR-qGv" userLabel="通讯录"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BNJ-37-8ZH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -3000,10 +3000,8 @@
         <image name="wo_bg_zong.png" width="640" height="158"/>
         <image name="wo_button_hand.png" width="93" height="62"/>
         <image name="xuanzekuang2.png" width="20" height="11"/>
-        <image name="zuijin_0016_recv6.png" width="100" height="55"/>
         <image name="云注册.png" width="163" height="120"/>
         <image name="云登陆.png" width="160" height="116"/>
-        <image name="好友_04.png" width="100" height="59"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="BXi-mn-8Gv"/>
