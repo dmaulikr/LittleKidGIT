@@ -21,6 +21,10 @@
 		5708761C1A5D5FD400892B53 /* denglu_0007_rainbow.png in Resources */ = {isa = PBXBuildFile; fileRef = 5708761A1A5D5FD400892B53 /* denglu_0007_rainbow.png */; };
 		5708761D1A5D5FD400892B53 /* denglu_0013_animals.png in Resources */ = {isa = PBXBuildFile; fileRef = 5708761B1A5D5FD400892B53 /* denglu_0013_animals.png */; };
 		570CCD7D1A885EB60016FA1D /* 好友_04.png in Resources */ = {isa = PBXBuildFile; fileRef = 570CCD7C1A885EB60016FA1D /* 好友_04.png */; };
+		570CCD8C1A88C2900016FA1D /* RSKImageCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 570CCD851A88C2900016FA1D /* RSKImageCropViewController.m */; };
+		570CCD8D1A88C2900016FA1D /* RSKImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 570CCD871A88C2900016FA1D /* RSKImageScrollView.m */; };
+		570CCD8E1A88C2900016FA1D /* RSKTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 570CCD891A88C2900016FA1D /* RSKTouchView.m */; };
+		570CCD8F1A88C2900016FA1D /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 570CCD8B1A88C2900016FA1D /* UIImage+FixOrientation.m */; };
 		571B09481A8702A400CDA057 /* denglu_bg_mima.png in Resources */ = {isa = PBXBuildFile; fileRef = 571B09461A8702A400CDA057 /* denglu_bg_mima.png */; };
 		571B09491A8702A400CDA057 /* denglu_bg_user.png in Resources */ = {isa = PBXBuildFile; fileRef = 571B09471A8702A400CDA057 /* denglu_bg_user.png */; };
 		571B094B1A87328300CDA057 /* wo_0005_rect2.png in Resources */ = {isa = PBXBuildFile; fileRef = 571B094A1A87328300CDA057 /* wo_0005_rect2.png */; };
@@ -336,6 +340,15 @@
 		5708761A1A5D5FD400892B53 /* denglu_0007_rainbow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = denglu_0007_rainbow.png; sourceTree = "<group>"; };
 		5708761B1A5D5FD400892B53 /* denglu_0013_animals.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = denglu_0013_animals.png; sourceTree = "<group>"; };
 		570CCD7C1A885EB60016FA1D /* 好友_04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "好友_04.png"; sourceTree = "<group>"; };
+		570CCD831A88C2900016FA1D /* RSKImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSKImageCropper.h; sourceTree = "<group>"; };
+		570CCD841A88C2900016FA1D /* RSKImageCropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSKImageCropViewController.h; sourceTree = "<group>"; };
+		570CCD851A88C2900016FA1D /* RSKImageCropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSKImageCropViewController.m; sourceTree = "<group>"; };
+		570CCD861A88C2900016FA1D /* RSKImageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSKImageScrollView.h; sourceTree = "<group>"; };
+		570CCD871A88C2900016FA1D /* RSKImageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSKImageScrollView.m; sourceTree = "<group>"; };
+		570CCD881A88C2900016FA1D /* RSKTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSKTouchView.h; sourceTree = "<group>"; };
+		570CCD891A88C2900016FA1D /* RSKTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSKTouchView.m; sourceTree = "<group>"; };
+		570CCD8A1A88C2900016FA1D /* UIImage+FixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FixOrientation.h"; sourceTree = "<group>"; };
+		570CCD8B1A88C2900016FA1D /* UIImage+FixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FixOrientation.m"; sourceTree = "<group>"; };
 		571B09461A8702A400CDA057 /* denglu_bg_mima.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = denglu_bg_mima.png; sourceTree = "<group>"; };
 		571B09471A8702A400CDA057 /* denglu_bg_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = denglu_bg_user.png; sourceTree = "<group>"; };
 		571B094A1A87328300CDA057 /* wo_0005_rect2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wo_0005_rect2.png; sourceTree = "<group>"; };
@@ -827,6 +840,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		570CCD821A88C2900016FA1D /* RSKImageCropper */ = {
+			isa = PBXGroup;
+			children = (
+				570CCD831A88C2900016FA1D /* RSKImageCropper.h */,
+				570CCD841A88C2900016FA1D /* RSKImageCropViewController.h */,
+				570CCD851A88C2900016FA1D /* RSKImageCropViewController.m */,
+				570CCD861A88C2900016FA1D /* RSKImageScrollView.h */,
+				570CCD871A88C2900016FA1D /* RSKImageScrollView.m */,
+				570CCD881A88C2900016FA1D /* RSKTouchView.h */,
+				570CCD891A88C2900016FA1D /* RSKTouchView.m */,
+				570CCD8A1A88C2900016FA1D /* UIImage+FixOrientation.h */,
+				570CCD8B1A88C2900016FA1D /* UIImage+FixOrientation.m */,
+			);
+			path = RSKImageCropper;
+			sourceTree = "<group>";
+		};
 		571A70DE1A5E2EDE002C8322 /* ImpInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -1455,6 +1484,7 @@
 		E422F88D1A43FDE800CF2F9C /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				570CCD821A88C2900016FA1D /* RSKImageCropper */,
 				571D79421A80D2EC00723AA0 /* ImageCropperView.h */,
 				571D79431A80D2EC00723AA0 /* ImageCropperView.m */,
 				571D793B1A80D2C200723AA0 /* CropperImgViewController.h */,
@@ -1959,6 +1989,7 @@
 				57BC40461A7FEF6300A5F6BE /* FriendApplyMsgTableViewCell.m in Sources */,
 				9654745F1A709B0A00C29287 /* UIViewControllerBase.m in Sources */,
 				E4E729AE1A4BB6FD000FA552 /* ChatMessage.m in Sources */,
+				570CCD8D1A88C2900016FA1D /* RSKImageScrollView.m in Sources */,
 				57AC91121A71FEC6008F0892 /* QBImagePickerGroupCell.m in Sources */,
 				57AC90D61A71FEC6008F0892 /* NSString+JSMessagesView.m in Sources */,
 				57AC90D11A71FEC6008F0892 /* JSDismissiveTextView.m in Sources */,
@@ -1983,13 +2014,16 @@
 				57AC8FEE1A71FB06008F0892 /* CDPopMenu.m in Sources */,
 				E422F89E1A43FDE800CF2F9C /* AppDelegate.m in Sources */,
 				E422F8A41A43FDE800CF2F9C /* ViewControllerContact.m in Sources */,
+				570CCD8C1A88C2900016FA1D /* RSKImageCropViewController.m in Sources */,
 				57AC90CA1A71FEC6008F0892 /* FMDatabase.m in Sources */,
 				E4A85E2F1A5A781400C0A222 /* SelfMsgTableViewCell.m in Sources */,
 				57BC40481A7FEF6300A5F6BE /* InvitePlayViewController.m in Sources */,
 				57AC91071A71FEC6008F0892 /* UIImage+JSMessagesView.m in Sources */,
+				570CCD8F1A88C2900016FA1D /* UIImage+FixOrientation.m in Sources */,
 				573230C71A6F70CE004E187F /* RootViewController.m in Sources */,
 				57AC910A1A71FEC6008F0892 /* QBAssetsCollectionCheckmarkView.m in Sources */,
 				E4B1019E1A4E9002004E1224 /* HTTTClient.m in Sources */,
+				570CCD8E1A88C2900016FA1D /* RSKTouchView.m in Sources */,
 				57AC8FD31A71FA58008F0892 /* CDContactListController.m in Sources */,
 				57AC90151A71FD97008F0892 /* CDChatListController.m in Sources */,
 				5732309D1A6F70CE004E187F /* CheseInterface.m in Sources */,

@@ -206,9 +206,9 @@
         
         
         //将图片传递给截取界面进行截取并设置回调方法（协议）
-        CropperImgViewController *captureView = [[CropperImgViewController alloc] init];
+        RSKImageCropViewController *captureView = [[RSKImageCropViewController alloc] initWithImage:image cropMode:RSKImageCropModeCircle];
         captureView.delegate = self;
-        captureView.image = image;
+//        captureView.image = image;
         [RuntimeStatus instance].userInfo.headImage = image;
         
         //隐藏UIImagePickerController本身的导航栏
@@ -217,6 +217,22 @@
         
     }
 }
+
+
+#pragma mark - RSKImageCropViewControllerDelegate
+
+- (void)imageCropViewControllerDidCancelCrop:(RSKImageCropViewController *)controller
+{
+    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popToViewController:self.vi animated:<#(BOOL)#>];
+}
+
+- (void)imageCropViewController:(RSKImageCropViewController *)controller didCropImage:(UIImage *)croppedImage
+{
+    [self passImage:croppedImage];
+}
+
+
 
 - (UIImage *)fixOrientation:(UIImage *)aImage {
     

@@ -11,8 +11,9 @@
 #import "CropperImgViewController.h"
 #import "PassImageDelegate.h"
 #import "UIViewControllerBase.h"
+#import "RSKImageCropViewController.h"
 
-@interface ViewControllerImpInfo : UIViewControllerBase<MBAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,PassImageDelegate>
+@interface ViewControllerImpInfo : UIViewControllerBase<MBAlertViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,PassImageDelegate,RSKImageCropViewControllerDelegate>
 
 
 @end
