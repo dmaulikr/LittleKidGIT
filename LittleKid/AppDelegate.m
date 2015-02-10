@@ -34,22 +34,20 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     UITableViewController* nextController = [storyboard instantiateViewControllerWithIdentifier:@"mainTabViewController"];
-//
-//    
+
+    
 //    NSArray *arr = [nextController.view subviews];
 //    
-//    NSLog(@"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^:%@",arr);
-//    
 //    UITabBar  *tabBar = [arr objectAtIndex:1];
+//
+////    tabBar.tintColor = [UIColor ];
 //    
-//    tabBar.backgroundColor = [UIColor redColor];
-//
-//    tabBar.tintColor = [UIColor greenColor];
-//
-//    tabBar.barStyle = UIBarStyleBlackOpaque;
-//
-//    NSLog(@"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^%@",tabBar);
-  
+//    NSArray *items = [tabBar items];
+//    
+//    UITabBarItem *near = [items objectAtIndex:0];
+    
+//    near.badgeValue = @"5";
+
     
     //TODO: if already sign up, just login directly
     

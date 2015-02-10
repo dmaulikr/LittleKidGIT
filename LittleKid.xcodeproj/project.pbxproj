@@ -33,6 +33,9 @@
 		571B09511A87367700CDA057 /* xuanzekuang2.png in Resources */ = {isa = PBXBuildFile; fileRef = 571B094F1A87367700CDA057 /* xuanzekuang2.png */; };
 		571D793A1A80D2B400723AA0 /* corner.png in Resources */ = {isa = PBXBuildFile; fileRef = 571D79391A80D2B400723AA0 /* corner.png */; };
 		5727D3B91A7B7ACA00491C7F /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5727D3B81A7B7ACA00491C7F /* CustomAlertView.m */; };
+		572A2A871A89EA7A0087C0B5 /* tabbar_huoban.png in Resources */ = {isa = PBXBuildFile; fileRef = 572A2A841A89EA7A0087C0B5 /* tabbar_huoban.png */; };
+		572A2A881A89EA7A0087C0B5 /* tabbar_wo.png in Resources */ = {isa = PBXBuildFile; fileRef = 572A2A851A89EA7A0087C0B5 /* tabbar_wo.png */; };
+		572A2A891A89EA7A0087C0B5 /* tabbar_zuijin.png in Resources */ = {isa = PBXBuildFile; fileRef = 572A2A861A89EA7A0087C0B5 /* tabbar_zuijin.png */; };
 		572E3F5C1A63BA1300323683 /* beijing.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F471A63BA1300323683 /* beijing.png */; };
 		572E3F5D1A63BA1300323683 /* chatu.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F481A63BA1300323683 /* chatu.png */; };
 		572E3F5E1A63BA1300323683 /* fanhuijian.png in Resources */ = {isa = PBXBuildFile; fileRef = 572E3F491A63BA1300323683 /* fanhuijian.png */; };
@@ -360,6 +363,9 @@
 		57211CBC1A53F7D6001A1A47 /* AnyChatPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnyChatPlatform.h; path = anyChatSDK/include/AnyChatPlatform.h; sourceTree = SOURCE_ROOT; };
 		5727D3B71A7B7ACA00491C7F /* CustomAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlertView.h; sourceTree = "<group>"; };
 		5727D3B81A7B7ACA00491C7F /* CustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlertView.m; sourceTree = "<group>"; };
+		572A2A841A89EA7A0087C0B5 /* tabbar_huoban.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_huoban.png; sourceTree = "<group>"; };
+		572A2A851A89EA7A0087C0B5 /* tabbar_wo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_wo.png; sourceTree = "<group>"; };
+		572A2A861A89EA7A0087C0B5 /* tabbar_zuijin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_zuijin.png; sourceTree = "<group>"; };
 		572E3F471A63BA1300323683 /* beijing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beijing.png; sourceTree = "<group>"; };
 		572E3F481A63BA1300323683 /* chatu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chatu.png; sourceTree = "<group>"; };
 		572E3F491A63BA1300323683 /* fanhuijian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fanhuijian.png; sourceTree = "<group>"; };
@@ -1529,6 +1535,9 @@
 		E422F8AC1A43FE0300CF2F9C /* image */ = {
 			isa = PBXGroup;
 			children = (
+				572A2A841A89EA7A0087C0B5 /* tabbar_huoban.png */,
+				572A2A851A89EA7A0087C0B5 /* tabbar_wo.png */,
+				572A2A861A89EA7A0087C0B5 /* tabbar_zuijin.png */,
 				570CCD7C1A885EB60016FA1D /* 好友_04.png */,
 				571B094E1A87367700CDA057 /* xuanzekuang.png */,
 				571B094F1A87367700CDA057 /* xuanzekuang2.png */,
@@ -1776,6 +1785,7 @@
 				57AC90DD1A71FEC6008F0892 /* bubble-default-outgoing-green.png in Resources */,
 				570876071A5D051800892B53 /* wo_bg_yello.png in Resources */,
 				57B651631A6120D1002A78F9 /* impinfo_nick.png in Resources */,
+				572A2A871A89EA7A0087C0B5 /* tabbar_huoban.png in Resources */,
 				E48D20FC1A650A620099537F /* signup_backgroundImage.png in Resources */,
 				57AC90E31A71FEC6008F0892 /* bubble-flat-incoming-selected.png in Resources */,
 				E422F8A21A43FDE800CF2F9C /* Images.xcassets in Resources */,
@@ -1815,8 +1825,10 @@
 				E43ED2D61A5E24A900A8D90D /* zuijin_star.png in Resources */,
 				57AC91021A71FEC6008F0892 /* send@2x.png in Resources */,
 				E43ED3311A5E9BA000A8D90D /* liaotian_microphone.png in Resources */,
+				572A2A881A89EA7A0087C0B5 /* tabbar_wo.png in Resources */,
 				E48D20FB1A650A620099537F /* reg_bg_blue.png in Resources */,
 				573230B21A6F70CE004E187F /* 13.png in Resources */,
+				572A2A891A89EA7A0087C0B5 /* tabbar_zuijin.png in Resources */,
 				57FF75BD1A7742DB00CADBE4 /* liaotiankuang.png in Resources */,
 				572E3F6E1A63BA1300323683 /* yanzhengma_08.png in Resources */,
 				573230AF1A6F70CE004E187F /* 115.png in Resources */,

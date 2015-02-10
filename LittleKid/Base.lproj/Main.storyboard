@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EqM-qm-1tu">
     <dependencies>
-        <deployment identifier="iOS"/>
+        <deployment version="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -1532,7 +1532,7 @@
                                     </constraint>
                                     <constraint firstAttribute="width" secondItem="4n7-pJ-11U" secondAttribute="height" multiplier="1:1" id="MA5-U8-1x4"/>
                                     <constraint firstAttribute="width" constant="75" id="TjX-wC-GL0">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="50"/>
+                                        <variation key="heightClass=regular-widthClass=compact" constant="75"/>
                                     </constraint>
                                 </constraints>
                                 <variation key="default">
@@ -2599,7 +2599,7 @@
         <scene sceneID="Jha-sg-doP">
             <objects>
                 <navigationController storyboardIdentifier="NavigationRecent" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Mjc-6e-F2o" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="最近" image="xuanzekuang2.png" id="MJn-dg-sVO" userLabel="消息" colorLabel="IBBuiltInLabel-Yellow"/>
+                    <tabBarItem key="tabBarItem" title="最近" image="tabbar_zuijin.png" id="MJn-dg-sVO" userLabel="消息" colorLabel="IBBuiltInLabel-Yellow"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YKO-Xm-dkX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2618,7 +2618,7 @@
         <scene sceneID="7mA-F9-MFd">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iMQ-YS-cxp" userLabel="我的小伙伴" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="小伙伴" image="xuanzekuang2.png" id="Si5-dI-9gN" userLabel="我的小伙伴" colorLabel="IBBuiltInLabel-Red"/>
+                    <tabBarItem key="tabBarItem" title="小伙伴" image="tabbar_huoban.png" id="Si5-dI-9gN" userLabel="我的小伙伴" colorLabel="IBBuiltInLabel-Red"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vzG-Yz-Kfh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2640,7 +2640,7 @@
         <scene sceneID="ZC3-lr-yV3">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mRX-kI-uTn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我" image="xuanzekuang2.png" id="feY-IR-qGv" userLabel="通讯录"/>
+                    <tabBarItem key="tabBarItem" title="我" image="tabbar_wo.png" id="feY-IR-qGv" userLabel="通讯录"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BNJ-37-8ZH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2993,6 +2993,9 @@
         <image name="reg_bg_blue.png" width="504" height="568"/>
         <image name="signup_backgroundImage.png" width="640" height="375"/>
         <image name="signup_btnSignUp.png" width="224" height="85"/>
+        <image name="tabbar_huoban.png" width="30" height="25"/>
+        <image name="tabbar_wo.png" width="30" height="29"/>
+        <image name="tabbar_zuijin.png" width="30" height="27"/>
         <image name="touxiang.png" width="153" height="153"/>
         <image name="wo_0012_scan.png" width="74" height="24"/>
         <image name="wo_0013_erweima.png" width="127" height="127"/>
@@ -3003,7 +3006,6 @@
         <image name="wo_bg_yello.png" width="640" height="194"/>
         <image name="wo_bg_zong.png" width="640" height="158"/>
         <image name="wo_button_hand.png" width="93" height="62"/>
-        <image name="xuanzekuang2.png" width="20" height="11"/>
         <image name="云注册.png" width="163" height="120"/>
         <image name="云登陆.png" width="160" height="116"/>
     </resources>
