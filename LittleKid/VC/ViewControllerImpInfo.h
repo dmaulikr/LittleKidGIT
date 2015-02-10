@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "CustomAlertView.h"
-#import "CropperImgViewController.h"
 #import "PassImageDelegate.h"
 #import "UIViewControllerBase.h"
 #import "RSKImageCropViewController.h"

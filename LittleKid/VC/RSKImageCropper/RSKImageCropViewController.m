@@ -545,7 +545,8 @@ static const CGFloat kLandscapeCancelAndChooseButtonsVerticalMargin = 12.0f;
 - (void)cancelCrop
 {
     if ([self.delegate respondsToSelector:@selector(imageCropViewControllerDidCancelCrop:)]) {
-        [self.delegate imageCropViewControllerDidCancelCrop:self];
+//        [self.delegate imageCropViewControllerDidCancelCrop:self];
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

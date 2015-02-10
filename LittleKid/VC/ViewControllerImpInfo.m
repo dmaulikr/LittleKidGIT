@@ -8,6 +8,7 @@
 
 #import "ViewControllerImpInfo.h"
 #import "RuntimeStatus.h"
+#import "UIImage+FixOrientation.h"
 
 @interface ViewControllerImpInfo ()
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
