@@ -303,16 +303,11 @@ static  BOOL isShouldChessPlayer = YES;
 }
 -(void)updatesendfinish:(NSNotification *)notify
 {
-    if (self.sendCmd == CHESS_CMD_CHECK) {
-        rezult = 2;
-        [self Restart];
-        
-    }
-    else
-    {
+    if (self.sendCmd == CHESS_CMD_MOVE) {
         seconds = 180;
         [self shouldPlayChange];
         [self.cheseInterface moveComplete];
+        
     }
 }
 #pragma mark --定时器
