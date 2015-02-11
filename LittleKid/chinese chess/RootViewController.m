@@ -423,55 +423,55 @@ static int seconds = 180;
 {
     
     //添加背景
-    UIImageView *image_backgroup = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkcode_backgroundRed.png"]];
+    UIImageView *image_backgroup = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rezultBackgroup"]];
     image_backgroup.frame = [[UIScreen mainScreen]bounds];
     image2 = image_backgroup;
     [self.view addSubview:image2];
     //添加转盘
-    UIImageView *image_disk = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disk.jpg"]];
-    image_disk.frame = CGRectMake(0.0, 0.0, 320.0, 320.0);
+    CGFloat x = image_backgroup.frame.size.width;
+    CGFloat disk_width = x*5/7;
+    CGFloat disk_starty = 175;
+    
+    UIImageView *image_disk = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"抽奖盘"]];
+    image_disk.frame = CGRectMake(x/7, disk_starty, disk_width , disk_width);
     image1 = image_disk;
     [self.view addSubview:image1];
     
     //添加转针
+    CGFloat start_width = 120;
     UIImageView *image_start = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"start.png"]];
-    image_start.frame = CGRectMake(103.0, 55.0, 120.0, 210.0);
+    image_start.frame = CGRectMake((x - start_width/2)/2, disk_starty + disk_width/2 - start_width /2, start_width/2, start_width);
     image2 = image_start;
     [self.view addSubview:image2];
     
     //添加按钮
     self.btn_start = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    self.btn_start.frame = CGRectMake(140.0, 350.0, 70.0, 70.0);
-    [self.btn_start setTitle:@"抽奖" forState:UIControlStateNormal];
+    self.btn_start.frame = CGRectMake(x/2 - 75, disk_starty + disk_width +60, 150.0, 40.0);
+    [self.btn_start setBackgroundImage:[UIImage imageNamed:@"抽奖按键"] forState:UIControlStateNormal];
+//    [self.btn_start setTitle:@"抽奖" ];
     [self.btn_start addTarget:self action:@selector(choujiang) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.btn_start];
     
-    UILabel *rezultlabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 400, 310, 100)];
-    NSString *str = [[NSString alloc]init];
+    CGFloat rezultwidty = 100;
+    UIImageView *rezultimage = [[UIImageView alloc]initWithFrame:CGRectMake((x - rezultwidty)/2, disk_starty - 60, rezultwidty, 40)];
+    
     if (rezult==0) {
-        str = @"您输掉了比赛，获得了30分的鼓励,您还可以参与抽奖";
+        rezultimage.image = [UIImage imageNamed:@"战败"];
         increaseScore = 30;
         
     }
     else if(rezult == 1)
     {
-        str = @"您战平了对手，获得了100分的鼓励，您还可以参与抽奖";
+        rezultimage.image = [UIImage imageNamed:@"和棋"];
         increaseScore = 100;
     }
     else if (rezult ==2)
     {
-        str = @"您战胜了对手，获得了300分的鼓励，您还可以参与抽奖";
+        rezultimage.image = [UIImage imageNamed:@"胜利"];
         increaseScore = 300;
     }
-    rezultlabel.text =str;
-    //设置字体颜色为白色
-    rezultlabel.textColor = [UIColor whiteColor];
-    //文字居中显示
-    rezultlabel.textAlignment = UITextAlignmentCenter;
-    //自动折行设置
-    rezultlabel.lineBreakMode = UILineBreakModeWordWrap;
-    rezultlabel.numberOfLines = 0;//表示label可以多行显示
-    [self.view addSubview:rezultlabel];
+    [self.view addSubview:rezultimage];
+    
 }
 
 - (void)choujiang

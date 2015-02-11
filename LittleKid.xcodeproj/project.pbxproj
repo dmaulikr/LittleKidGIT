@@ -89,7 +89,6 @@
 		573230B91A6F70CE004E187F /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 5732308B1A6F70CE004E187F /* 5.png */; };
 		573230BA1A6F70CE004E187F /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = 5732308C1A6F70CE004E187F /* 6.png */; };
 		573230BB1A6F70CE004E187F /* chosechess.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5732308D1A6F70CE004E187F /* chosechess.wav */; };
-		573230BC1A6F70CE004E187F /* 菜单二级(悔棋）.png in Resources */ = {isa = PBXBuildFile; fileRef = 5732308F1A6F70CE004E187F /* 菜单二级(悔棋）.png */; };
 		573230BE1A6F70CE004E187F /* 菜单二级（认输）.png in Resources */ = {isa = PBXBuildFile; fileRef = 573230911A6F70CE004E187F /* 菜单二级（认输）.png */; };
 		573230C01A6F70CE004E187F /* removechess.wav in Resources */ = {isa = PBXBuildFile; fileRef = 573230931A6F70CE004E187F /* removechess.wav */; };
 		573230C11A6F70CE004E187F /* 菜单.png in Resources */ = {isa = PBXBuildFile; fileRef = 573230941A6F70CE004E187F /* 菜单.png */; };
@@ -109,6 +108,14 @@
 		5759E2531A5FCA65002A9315 /* 云注册.png in Resources */ = {isa = PBXBuildFile; fileRef = 5759E2511A5FCA65002A9315 /* 云注册.png */; };
 		5767F0B21A541D33003CE13D /* selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5767F0B01A541D33003CE13D /* selected.png */; };
 		5767F0B31A541D33003CE13D /* unSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 5767F0B11A541D33003CE13D /* unSelected.png */; };
+		5779BA731A8B0482001FAC0B /* 菜单二级（求和）.png in Resources */ = {isa = PBXBuildFile; fileRef = 5779BA721A8B0482001FAC0B /* 菜单二级（求和）.png */; };
+		5779BA7A1A8B0AF8001FAC0B /* 抽奖按键.png in Resources */ = {isa = PBXBuildFile; fileRef = 5779BA741A8B0AF7001FAC0B /* 抽奖按键.png */; };
+		5779BA7B1A8B0AF8001FAC0B /* 抽奖盘.png in Resources */ = {isa = PBXBuildFile; fileRef = 5779BA751A8B0AF7001FAC0B /* 抽奖盘.png */; };
+		5779BA7C1A8B0AF8001FAC0B /* 和棋.png in Resources */ = {isa = PBXBuildFile; fileRef = 5779BA761A8B0AF7001FAC0B /* 和棋.png */; };
+		5779BA7D1A8B0AF8001FAC0B /* 胜利.png in Resources */ = {isa = PBXBuildFile; fileRef = 5779BA771A8B0AF7001FAC0B /* 胜利.png */; };
+		5779BA7E1A8B0AF8001FAC0B /* 战败.png in Resources */ = {isa = PBXBuildFile; fileRef = 5779BA781A8B0AF7001FAC0B /* 战败.png */; };
+		5779BA7F1A8B0AF8001FAC0B /* rezultBackgroup.png in Resources */ = {isa = PBXBuildFile; fileRef = 5779BA791A8B0AF8001FAC0B /* rezultBackgroup.png */; };
+		5779BA811A8B0C29001FAC0B /* start.png in Resources */ = {isa = PBXBuildFile; fileRef = 5779BA801A8B0C29001FAC0B /* start.png */; };
 		579BA01E1A80A3EE002176E2 /* juxing.png in Resources */ = {isa = PBXBuildFile; fileRef = 579BA01A1A80A3EE002176E2 /* juxing.png */; };
 		579BA01F1A80A3EE002176E2 /* shou.png in Resources */ = {isa = PBXBuildFile; fileRef = 579BA01B1A80A3EE002176E2 /* shou.png */; };
 		579BA0201A80A3EE002176E2 /* zhuce_0030_图层-14_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 579BA01C1A80A3EE002176E2 /* zhuce_0030_图层-14_01.png */; };
@@ -421,7 +428,6 @@
 		5732308B1A6F70CE004E187F /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
 		5732308C1A6F70CE004E187F /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6.png; sourceTree = "<group>"; };
 		5732308D1A6F70CE004E187F /* chosechess.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chosechess.wav; sourceTree = "<group>"; };
-		5732308F1A6F70CE004E187F /* 菜单二级(悔棋）.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "菜单二级(悔棋）.png"; sourceTree = "<group>"; };
 		573230911A6F70CE004E187F /* 菜单二级（认输）.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "菜单二级（认输）.png"; sourceTree = "<group>"; };
 		573230931A6F70CE004E187F /* removechess.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = removechess.wav; sourceTree = "<group>"; };
 		573230941A6F70CE004E187F /* 菜单.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "菜单.png"; sourceTree = "<group>"; };
@@ -446,6 +452,14 @@
 		5759E2511A5FCA65002A9315 /* 云注册.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "云注册.png"; path = "LittleKid/image/云注册.png"; sourceTree = SOURCE_ROOT; };
 		5767F0B01A541D33003CE13D /* selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selected.png; sourceTree = "<group>"; };
 		5767F0B11A541D33003CE13D /* unSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unSelected.png; sourceTree = "<group>"; };
+		5779BA721A8B0482001FAC0B /* 菜单二级（求和）.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "菜单二级（求和）.png"; sourceTree = "<group>"; };
+		5779BA741A8B0AF7001FAC0B /* 抽奖按键.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "抽奖按键.png"; path = "抽奖结果/抽奖按键.png"; sourceTree = "<group>"; };
+		5779BA751A8B0AF7001FAC0B /* 抽奖盘.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "抽奖盘.png"; path = "抽奖结果/抽奖盘.png"; sourceTree = "<group>"; };
+		5779BA761A8B0AF7001FAC0B /* 和棋.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "和棋.png"; path = "抽奖结果/和棋.png"; sourceTree = "<group>"; };
+		5779BA771A8B0AF7001FAC0B /* 胜利.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "胜利.png"; path = "抽奖结果/胜利.png"; sourceTree = "<group>"; };
+		5779BA781A8B0AF7001FAC0B /* 战败.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "战败.png"; path = "抽奖结果/战败.png"; sourceTree = "<group>"; };
+		5779BA791A8B0AF8001FAC0B /* rezultBackgroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rezultBackgroup.png; path = "抽奖结果/rezultBackgroup.png"; sourceTree = "<group>"; };
+		5779BA801A8B0C29001FAC0B /* start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start.png; sourceTree = "<group>"; };
 		579BA01A1A80A3EE002176E2 /* juxing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = juxing.png; sourceTree = "<group>"; };
 		579BA01B1A80A3EE002176E2 /* shou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shou.png; sourceTree = "<group>"; };
 		579BA01C1A80A3EE002176E2 /* zhuce_0030_图层-14_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zhuce_0030_图层-14_01.png"; sourceTree = "<group>"; };
@@ -921,6 +935,13 @@
 		573230701A6F70CE004E187F /* ChessRes */ = {
 			isa = PBXGroup;
 			children = (
+				5779BA801A8B0C29001FAC0B /* start.png */,
+				5779BA741A8B0AF7001FAC0B /* 抽奖按键.png */,
+				5779BA751A8B0AF7001FAC0B /* 抽奖盘.png */,
+				5779BA761A8B0AF7001FAC0B /* 和棋.png */,
+				5779BA771A8B0AF7001FAC0B /* 胜利.png */,
+				5779BA781A8B0AF7001FAC0B /* 战败.png */,
+				5779BA791A8B0AF8001FAC0B /* rezultBackgroup.png */,
 				57DCDF1F1A89DD18007175D3 /* music.mp3 */,
 				573230711A6F70CE004E187F /* 0.png */,
 				573230721A6F70CE004E187F /* 1.png */,
@@ -965,9 +986,9 @@
 		5732308E1A6F70CE004E187F /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				5779BA721A8B0482001FAC0B /* 菜单二级（求和）.png */,
 				57BD313F1A81E44A0050F3E8 /* 音乐.png */,
 				57BD31401A81E44A0050F3E8 /* 音乐不删除.png */,
-				5732308F1A6F70CE004E187F /* 菜单二级(悔棋）.png */,
 				573230911A6F70CE004E187F /* 菜单二级（认输）.png */,
 			);
 			path = icons;
@@ -1752,16 +1773,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5779BA7E1A8B0AF8001FAC0B /* 战败.png in Resources */,
 				5759E24F1A5FC6AC002A9315 /* 密码.png in Resources */,
 				570876031A5CF82100892B53 /* wo_bg_skyblue.png in Resources */,
 				579BA01F1A80A3EE002176E2 /* shou.png in Resources */,
 				57B6515E1A6120D1002A78F9 /* impinfo_bg_up.png in Resources */,
 				E48D20EA1A65060A0099537F /* checkcode_btnSubmit.png in Resources */,
+				5779BA7D1A8B0AF8001FAC0B /* 胜利.png in Resources */,
 				57AC90E71A71FEC6008F0892 /* bubble-flat-outgoing-old.png in Resources */,
 				57AC90E61A71FEC6008F0892 /* bubble-flat-incoming@2x.png in Resources */,
 				57AC90EE1A71FEC6008F0892 /* bubble-square-incoming-selected@2x.png in Resources */,
 				57B651641A6120D1002A78F9 /* impinfo_sex.png in Resources */,
 				57AC90F51A71FEC6008F0892 /* bubble-typing.png in Resources */,
+				5779BA7B1A8B0AF8001FAC0B /* 抽奖盘.png in Resources */,
 				571B09491A8702A400CDA057 /* denglu_bg_user.png in Resources */,
 				571B094B1A87328300CDA057 /* wo_0005_rect2.png in Resources */,
 				5708760D1A5D137B00892B53 /* wo_0013_erweima.png in Resources */,
@@ -1790,7 +1814,6 @@
 				57AC90E31A71FEC6008F0892 /* bubble-flat-incoming-selected.png in Resources */,
 				E422F8A21A43FDE800CF2F9C /* Images.xcassets in Resources */,
 				572E3F691A63BA1300323683 /* xinpengyou_0015_图层-1.png in Resources */,
-				573230BC1A6F70CE004E187F /* 菜单二级(悔棋）.png in Resources */,
 				57B651651A6120D1002A78F9 /* impinfo_star.png in Resources */,
 				E422F8B01A43FE0300CF2F9C /* head.jpg in Resources */,
 				573230B61A6F70CE004E187F /* 2.png in Resources */,
@@ -1839,6 +1862,7 @@
 				572E3F611A63BA1300323683 /* tianxieyanzhengma.png in Resources */,
 				573230C41A6F70CE004E187F /* 象棋界面（人头男）.png in Resources */,
 				573230A81A6F70CE004E187F /* 106.png in Resources */,
+				5779BA7F1A8B0AF8001FAC0B /* rezultBackgroup.png in Resources */,
 				573230AE1A6F70CE004E187F /* 114.png in Resources */,
 				572EA3501A737A650018C678 /* xinxi_0002_椭圆-2.png in Resources */,
 				57AC90E51A71FEC6008F0892 /* bubble-flat-incoming.png in Resources */,
@@ -1855,6 +1879,7 @@
 				579BA0211A80A3EE002176E2 /* 好友_02.png in Resources */,
 				E48D20FD1A650A620099537F /* signup_btnSignUp.png in Resources */,
 				5732309F1A6F70CE004E187F /* 0.png in Resources */,
+				5779BA811A8B0C29001FAC0B /* start.png in Resources */,
 				57B651621A6120D1002A78F9 /* impinfo_girl.png in Resources */,
 				57B6515C1A6120D1002A78F9 /* impinfo_bg_arc_yellow.png in Resources */,
 				57AC90DA1A71FEC6008F0892 /* bubble-default-incoming-selected@2x.png in Resources */,
@@ -1871,6 +1896,7 @@
 				573230B01A6F70CE004E187F /* 116.png in Resources */,
 				573230C21A6F70CE004E187F /* 象棋主界面.png in Resources */,
 				57AC91011A71FEC6008F0892 /* send.png in Resources */,
+				5779BA731A8B0482001FAC0B /* 菜单二级（求和）.png in Resources */,
 				570876021A5CF82100892B53 /* wo_bg_red.png in Resources */,
 				573230BE1A6F70CE004E187F /* 菜单二级（认输）.png in Resources */,
 				572E3F6D1A63BA1300323683 /* yanzhengma_04.png in Resources */,
@@ -1883,6 +1909,7 @@
 				573230A11A6F70CE004E187F /* 10.png in Resources */,
 				57AC90DB1A71FEC6008F0892 /* bubble-default-incoming.png in Resources */,
 				57BD31411A81E44A0050F3E8 /* 音乐.png in Resources */,
+				5779BA7C1A8B0AF8001FAC0B /* 和棋.png in Resources */,
 				E48D20EB1A65060A0099537F /* checkcode_goldWord.png in Resources */,
 				57AC90F41A71FEC6008F0892 /* bubble-square-outgoing@2x.png in Resources */,
 				57AC90FD1A71FEC6008F0892 /* PhotoIcon.png in Resources */,
@@ -1901,6 +1928,7 @@
 				E43ED32D1A5E9BA000A8D90D /* liaotian_background.png in Resources */,
 				5759E24E1A5FC6AC002A9315 /* 登陆.png in Resources */,
 				5708760B1A5D070000892B53 /* wo_button_hand.png in Resources */,
+				5779BA7A1A8B0AF8001FAC0B /* 抽奖按键.png in Resources */,
 				57AC90FB1A71FEC6008F0892 /* input-field.png in Resources */,
 				572E3F5C1A63BA1300323683 /* beijing.png in Resources */,
 				57AC90F21A71FEC6008F0892 /* bubble-square-outgoing-selected@2x.png in Resources */,
