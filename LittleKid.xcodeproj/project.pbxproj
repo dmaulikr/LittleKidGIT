@@ -116,6 +116,10 @@
 		5779BA7E1A8B0AF8001FAC0B /* 战败.png in Resources */ = {isa = PBXBuildFile; fileRef = 5779BA781A8B0AF7001FAC0B /* 战败.png */; };
 		5779BA7F1A8B0AF8001FAC0B /* rezultBackgroup.png in Resources */ = {isa = PBXBuildFile; fileRef = 5779BA791A8B0AF8001FAC0B /* rezultBackgroup.png */; };
 		5779BA811A8B0C29001FAC0B /* start.png in Resources */ = {isa = PBXBuildFile; fileRef = 5779BA801A8B0C29001FAC0B /* start.png */; };
+		5779BA861A8B3DDA001FAC0B /* 抽奖结果背景.png in Resources */ = {isa = PBXBuildFile; fileRef = 5779BA821A8B3DDA001FAC0B /* 抽奖结果背景.png */; };
+		5779BA871A8B3DDA001FAC0B /* 离开按键.png in Resources */ = {isa = PBXBuildFile; fileRef = 5779BA831A8B3DDA001FAC0B /* 离开按键.png */; };
+		5779BA881A8B3DDA001FAC0B /* 离升级分数.png in Resources */ = {isa = PBXBuildFile; fileRef = 5779BA841A8B3DDA001FAC0B /* 离升级分数.png */; };
+		5779BA891A8B3DDA001FAC0B /* 现有积分.png in Resources */ = {isa = PBXBuildFile; fileRef = 5779BA851A8B3DDA001FAC0B /* 现有积分.png */; };
 		579BA01E1A80A3EE002176E2 /* juxing.png in Resources */ = {isa = PBXBuildFile; fileRef = 579BA01A1A80A3EE002176E2 /* juxing.png */; };
 		579BA01F1A80A3EE002176E2 /* shou.png in Resources */ = {isa = PBXBuildFile; fileRef = 579BA01B1A80A3EE002176E2 /* shou.png */; };
 		579BA0201A80A3EE002176E2 /* zhuce_0030_图层-14_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 579BA01C1A80A3EE002176E2 /* zhuce_0030_图层-14_01.png */; };
@@ -236,6 +240,8 @@
 		57BD31411A81E44A0050F3E8 /* 音乐.png in Resources */ = {isa = PBXBuildFile; fileRef = 57BD313F1A81E44A0050F3E8 /* 音乐.png */; };
 		57BD31421A81E44A0050F3E8 /* 音乐不删除.png in Resources */ = {isa = PBXBuildFile; fileRef = 57BD31401A81E44A0050F3E8 /* 音乐不删除.png */; };
 		57DCDF201A89DD18007175D3 /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 57DCDF1F1A89DD18007175D3 /* music.mp3 */; };
+		57E0E0E01A8B8C51006A268A /* 背景.png in Resources */ = {isa = PBXBuildFile; fileRef = 57E0E0DE1A8B8C51006A268A /* 背景.png */; };
+		57E0E0E11A8B8C51006A268A /* 取消挑战按键.png in Resources */ = {isa = PBXBuildFile; fileRef = 57E0E0DF1A8B8C51006A268A /* 取消挑战按键.png */; };
 		57E8F9AF1A7242A300C6FAA3 /* juxing_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 57E8F9AE1A7242A300C6FAA3 /* juxing_0.png */; };
 		57FE76071A75E8BB002D8292 /* liaotian_0011_圆角矩形-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 57FE76061A75E8BB002D8292 /* liaotian_0011_圆角矩形-1.png */; };
 		57FF75BD1A7742DB00CADBE4 /* liaotiankuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 57FF75BC1A7742DB00CADBE4 /* liaotiankuang.png */; };
@@ -460,6 +466,10 @@
 		5779BA781A8B0AF7001FAC0B /* 战败.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "战败.png"; path = "抽奖结果/战败.png"; sourceTree = "<group>"; };
 		5779BA791A8B0AF8001FAC0B /* rezultBackgroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rezultBackgroup.png; path = "抽奖结果/rezultBackgroup.png"; sourceTree = "<group>"; };
 		5779BA801A8B0C29001FAC0B /* start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start.png; sourceTree = "<group>"; };
+		5779BA821A8B3DDA001FAC0B /* 抽奖结果背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "抽奖结果背景.png"; path = "抽奖结果/2月6日抽奖结果切图/抽奖结果背景.png"; sourceTree = "<group>"; };
+		5779BA831A8B3DDA001FAC0B /* 离开按键.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "离开按键.png"; path = "抽奖结果/2月6日抽奖结果切图/离开按键.png"; sourceTree = "<group>"; };
+		5779BA841A8B3DDA001FAC0B /* 离升级分数.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "离升级分数.png"; path = "抽奖结果/2月6日抽奖结果切图/离升级分数.png"; sourceTree = "<group>"; };
+		5779BA851A8B3DDA001FAC0B /* 现有积分.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "现有积分.png"; path = "抽奖结果/2月6日抽奖结果切图/现有积分.png"; sourceTree = "<group>"; };
 		579BA01A1A80A3EE002176E2 /* juxing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = juxing.png; sourceTree = "<group>"; };
 		579BA01B1A80A3EE002176E2 /* shou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shou.png; sourceTree = "<group>"; };
 		579BA01C1A80A3EE002176E2 /* zhuce_0030_图层-14_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zhuce_0030_图层-14_01.png"; sourceTree = "<group>"; };
@@ -682,6 +692,8 @@
 		57BD313F1A81E44A0050F3E8 /* 音乐.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "音乐.png"; sourceTree = "<group>"; };
 		57BD31401A81E44A0050F3E8 /* 音乐不删除.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "音乐不删除.png"; sourceTree = "<group>"; };
 		57DCDF1F1A89DD18007175D3 /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
+		57E0E0DE1A8B8C51006A268A /* 背景.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "背景.png"; sourceTree = "<group>"; };
+		57E0E0DF1A8B8C51006A268A /* 取消挑战按键.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "取消挑战按键.png"; sourceTree = "<group>"; };
 		57E8F9AE1A7242A300C6FAA3 /* juxing_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = juxing_0.png; sourceTree = "<group>"; };
 		57FE76061A75E8BB002D8292 /* liaotian_0011_圆角矩形-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liaotian_0011_圆角矩形-1.png"; sourceTree = "<group>"; };
 		57FF75BC1A7742DB00CADBE4 /* liaotiankuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liaotiankuang.png; sourceTree = "<group>"; };
@@ -935,6 +947,10 @@
 		573230701A6F70CE004E187F /* ChessRes */ = {
 			isa = PBXGroup;
 			children = (
+				5779BA821A8B3DDA001FAC0B /* 抽奖结果背景.png */,
+				5779BA831A8B3DDA001FAC0B /* 离开按键.png */,
+				5779BA841A8B3DDA001FAC0B /* 离升级分数.png */,
+				5779BA851A8B3DDA001FAC0B /* 现有积分.png */,
 				5779BA801A8B0C29001FAC0B /* start.png */,
 				5779BA741A8B0AF7001FAC0B /* 抽奖按键.png */,
 				5779BA751A8B0AF7001FAC0B /* 抽奖盘.png */,
@@ -1556,6 +1572,8 @@
 		E422F8AC1A43FE0300CF2F9C /* image */ = {
 			isa = PBXGroup;
 			children = (
+				57E0E0DE1A8B8C51006A268A /* 背景.png */,
+				57E0E0DF1A8B8C51006A268A /* 取消挑战按键.png */,
 				572A2A841A89EA7A0087C0B5 /* tabbar_huoban.png */,
 				572A2A851A89EA7A0087C0B5 /* tabbar_wo.png */,
 				572A2A861A89EA7A0087C0B5 /* tabbar_zuijin.png */,
@@ -1798,12 +1816,14 @@
 				E48D20F71A650A620099537F /* anniu.png in Resources */,
 				573230B51A6F70CE004E187F /* 16.png in Resources */,
 				573230A71A6F70CE004E187F /* 105.png in Resources */,
+				57E0E0E11A8B8C51006A268A /* 取消挑战按键.png in Resources */,
 				E43ED32F1A5E9BA000A8D90D /* liaotian_bubble2.png in Resources */,
 				5767F0B21A541D33003CE13D /* selected.png in Resources */,
 				573230C11A6F70CE004E187F /* 菜单.png in Resources */,
 				E48D20E91A65060A0099537F /* checkcode_blueRect.png in Resources */,
 				57AC91001A71FEC6008F0892 /* send-highlighted@2x.png in Resources */,
 				5708760F1A5D141100892B53 /* wo_0019_xingxing.png in Resources */,
+				5779BA881A8B3DDA001FAC0B /* 离升级分数.png in Resources */,
 				57BD31421A81E44A0050F3E8 /* 音乐不删除.png in Resources */,
 				573230A61A6F70CE004E187F /* 104.png in Resources */,
 				57AC90DD1A71FEC6008F0892 /* bubble-default-outgoing-green.png in Resources */,
@@ -1869,6 +1889,7 @@
 				573230A41A6F70CE004E187F /* 102.png in Resources */,
 				57AC90F11A71FEC6008F0892 /* bubble-square-outgoing-selected.png in Resources */,
 				E48D20E81A65060A0099537F /* checkcode_backgroundRed.png in Resources */,
+				5779BA891A8B3DDA001FAC0B /* 现有积分.png in Resources */,
 				57AC90FE1A71FEC6008F0892 /* PhotoIcon@2x.png in Resources */,
 				E43ED2D91A5E24A900A8D90D /* zuijin_roundCornerRect.png in Resources */,
 				572E3F631A63BA1300323683 /* xinpengyou_0000_我们已发送.png in Resources */,
@@ -1881,12 +1902,15 @@
 				5732309F1A6F70CE004E187F /* 0.png in Resources */,
 				5779BA811A8B0C29001FAC0B /* start.png in Resources */,
 				57B651621A6120D1002A78F9 /* impinfo_girl.png in Resources */,
+				5779BA861A8B3DDA001FAC0B /* 抽奖结果背景.png in Resources */,
 				57B6515C1A6120D1002A78F9 /* impinfo_bg_arc_yellow.png in Resources */,
 				57AC90DA1A71FEC6008F0892 /* bubble-default-incoming-selected@2x.png in Resources */,
 				E48D20FE1A650A620099537F /* touxiang.png in Resources */,
 				57AC90DF1A71FEC6008F0892 /* bubble-default-outgoing-selected.png in Resources */,
 				57AC90DE1A71FEC6008F0892 /* bubble-default-outgoing-green@2x.png in Resources */,
 				57B6515D1A6120D1002A78F9 /* impinfo_bg_bottom.png in Resources */,
+				5779BA871A8B3DDA001FAC0B /* 离开按键.png in Resources */,
+				57E0E0E01A8B8C51006A268A /* 背景.png in Resources */,
 				572E3F6F1A63BA1300323683 /* yanzhengmaduanxin.png in Resources */,
 				570CCD7D1A885EB60016FA1D /* 好友_04.png in Resources */,
 				57B651671A61236E002A78F9 /* impinfo_bg_arc_blue.png in Resources */,

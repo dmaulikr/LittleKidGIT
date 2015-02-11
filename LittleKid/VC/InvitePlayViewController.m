@@ -9,6 +9,7 @@
 #import "InvitePlayViewController.h"
 #import "CDCommonDefine.h"
 #import "RootViewController.h"
+#import "RuntimeStatus.h"
 
 @interface InvitePlayViewController ()
 
@@ -24,7 +25,7 @@
     }
     return self;
 }
-- (IBAction)onCancel:(id)sender {
+- (IBAction)onCancel{
     [self.navigationController popViewControllerAnimated:YES];
     
 }
@@ -38,6 +39,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.username.text = self.otherId;
+    UIImageView *image_backgroup = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"背景"]];
+    image_backgroup.frame = [[UIScreen mainScreen]bounds];
+    [self.view addSubview:image_backgroup];
+    UIImageView *headimageview = [[UIImageView alloc]initWithFrame:CGRectMake((image_backgroup.frame.size.width - 100)/2, 150, 100, 100)];
+    headimageview.image = [[RuntimeStatus instance]circleImage:[[RuntimeStatus instance] getFriendUserInfo:self.otherId].headImage withParam:0];
+    [self.view addSubview:headimageview];
+    UILabel * nicknamelabel = [[UILabel alloc]initWithFrame:CGRectMake((image_backgroup.frame.size.width - 100)/2, 270, 100, 20)];
+    nicknamelabel.text = [[RuntimeStatus instance] getFriendUserInfo:self.otherId].nickname;
+    nicknamelabel.textColor = [UIColor whiteColor];
+    nicknamelabel.textAlignment = UITextAlignmentCenter;
+    [self.view addSubview:nicknamelabel];
+    UILabel * gradelabel = [[UILabel alloc]initWithFrame:CGRectMake((image_backgroup.frame.size.width - 100)/2, 300, 100, 20)];
+    gradelabel.text = [[RuntimeStatus instance]getLevelString:[[RuntimeStatus instance] getFriendUserInfo:self.otherId].score];
+    gradelabel.textColor = [UIColor whiteColor];
+    gradelabel.textAlignment = UITextAlignmentCenter;
+    [self.view addSubview:gradelabel];
+    
+    UIButton *btn_start = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    btn_start.frame = CGRectMake((image_backgroup.frame.size.width - 150)/2, 430, 150.0, 40.0);
+    [btn_start setBackgroundImage:[UIImage imageNamed:@"取消挑战按键"] forState:UIControlStateNormal];
+    //    [self.btn_start setTitle:@"抽奖" ];
+    [btn_start addTarget:self action:@selector(onCancel) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn_start];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageUpdated:) name:NOTIFICATION_INVITE_PLAY_CHESS_ACK_UPDATED object:nil];
     // Do any additional setup after loading the view.
 }
