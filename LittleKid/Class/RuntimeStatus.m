@@ -47,7 +47,44 @@
     return self;
 }
 
-
+//{
+//    //    [self initialDb];
+//    AVQuery * query = [AVUser query];
+//    query.cachePolicy = kAVCachePolicyIgnoreCache;
+//    NSError *error;
+//    NSArray *objects =[query findObjects];//(NSArray *objects, NSError *error) {
+//    if (objects) {
+//        for (AVUser *user in objects) {
+//            AVObject * userInfo = [user objectForKey:@"userInfo"];
+//            [userInfo fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+//                if (error) {
+//                    NSLog(@"修改失败");
+//                }
+//                else {
+//                    NSData *headImage = [object objectForKey:@"headImage"];
+//                    if (headImage == nil) {
+//                        self.userInfo.headImage = [self circleImage:[UIImage imageNamed:@"touxiang"] withParam:0];
+//                    }
+//                    else
+//                        self.userInfo.headImage = [self circleImage:[UIImage imageWithData:headImage] withParam:0];
+//                    if (self.userInfo.headImage.size.height>75) {
+//                        self.userInfo.headImage = [self scaleToSize:self.userInfo.headImage size:CGSizeMake(70, 70)];
+//                    }
+//                    [userInfo setObject:UIImageJPEGRepresentation(self.userInfo.headImage, 1.0) forKey:@"headImage"];
+//                    
+//                    [userInfo saveInBackground];
+//                    NSLog(@"修改成功一个");
+//                }
+//            }];
+//        }
+//        
+//    } else {
+//        NSLog(@"error:%@", error);
+//    }
+//    
+//    
+//    
+//}
 - (void) initial {
     [self initialDb];
     

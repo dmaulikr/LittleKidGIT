@@ -99,7 +99,7 @@ static int seconds = 60;
                     [userInfo setObject:self.nickname forKey:@"nickname"];
                     [userInfo setObject:UIImageJPEGRepresentation([UIImage imageNamed:@"touxiang"], 0.5) forKey:@"headImage"];
                     [userInfo setObject:[NSDate dateWithTimeIntervalSinceNow:0] forKey:@"birthday"];
-                    [userInfo setObject:[NSNumber numberWithInt:0] forKey:@"gender"];
+                    [userInfo setObject:[NSString stringWithFormat:@"boy"] forKey:@"gender"];
                     [userInfo setObject:[NSNumber numberWithInt:9000] forKey:@"score"];
                     [self.kiduser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                         if (error) {

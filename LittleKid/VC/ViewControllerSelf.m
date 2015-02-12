@@ -82,7 +82,7 @@
         case 12:
             return @"特级大师";
         default:
-            return nil;
+            return @"特级大师";
     }
 }
 - (void)viewWillDisappear:(BOOL)animated{
