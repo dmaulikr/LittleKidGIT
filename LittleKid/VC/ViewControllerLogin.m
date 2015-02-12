@@ -88,7 +88,7 @@
             [self performSegueWithIdentifier:SIGN_IN_SEGUE sender:nil];
             return;
         } else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"User not exist!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[error description] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
             return;
         }
