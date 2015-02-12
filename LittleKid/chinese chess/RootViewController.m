@@ -289,11 +289,11 @@ static  BOOL isShouldChessPlayer = YES;
 }
 - (void) updateSessionPaused:(NSNotification *)notify
 {
-    AVSession *session = notify.object;
-    if (session.peerId == [RuntimeStatus instance].currentUser.username) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络不正常" message:nil delegate:self cancelButtonTitle:@"确定"  otherButtonTitles:nil, nil];
-        [alert show];
-    }
+//    AVSession *session = notify.object;
+//    if (session.peerId == [RuntimeStatus instance].currentUser.username) {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络不正常" message:nil delegate:self cancelButtonTitle:@"确定"  otherButtonTitles:nil, nil];
+//        [alert show];
+//    }
   
 }
 - (void)updatesendfailed:(NSNotification *)notify

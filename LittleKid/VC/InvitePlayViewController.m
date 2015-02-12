@@ -12,7 +12,7 @@
 #import "RuntimeStatus.h"
 
 @interface InvitePlayViewController ()
-
+@property (strong,nonatomic) AVAudioPlayer *play;
 @end
 
 
@@ -26,6 +26,7 @@
     return self;
 }
 - (IBAction)onCancel{
+    [self stopInvateMusic];
     [self.navigationController popViewControllerAnimated:YES];
     
 }
@@ -39,6 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.username.text = self.otherId;
+    [self playInvateMusic];
     UIImageView *image_backgroup = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"背景"]];
     image_backgroup.frame = [[UIScreen mainScreen]bounds];
     [self.view addSubview:image_backgroup];
@@ -65,9 +67,22 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageUpdated:) name:NOTIFICATION_INVITE_PLAY_CHESS_ACK_UPDATED object:nil];
     // Do any additional setup after loading the view.
 }
-
+-(void) playInvateMusic
+{
+    NSString *path = [[NSBundle mainBundle]pathForResource:@"invate" ofType:@"mp3"];
+    NSURL *url = [[NSURL alloc]initFileURLWithPath:path];
+    self.play = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:nil];
+    self.play.numberOfLoops = -1;
+    [self.play prepareToPlay];
+    [self.play play];
+}
+-(void) stopInvateMusic
+{
+    self.play = nil;
+}
 //cmd_dictionary @"cmd_type" @""ack_value"
 - (void)messageUpdated:(NSNotification *)notification {
+    [self stopInvateMusic];
     NSDictionary *dict = notification.userInfo;
     dict = [dict objectForKey:@"cmd"];
     NSString *str = [dict objectForKey:@"cmd_type"];
