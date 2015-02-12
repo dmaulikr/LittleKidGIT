@@ -77,8 +77,8 @@
                     
                     [[AVUser currentUser] follow:peerUser.objectId andCallback:^(BOOL succeeded, NSError *error) {
                         if (succeeded) {
-                            //TODO
                             NSLog(@"Add friend %@ successful", [RuntimeStatus instance].peerId);
+                            //TODO: just need to add one user to friend list, no need to call initial
                             [[RuntimeStatus instance] initial];//加好友更新
                             [self freshTable];
                         } else {
@@ -120,8 +120,9 @@
             [[AVUser currentUser] follow:peerUser.objectId andCallback:^(BOOL succeeded, NSError *error) {
                 if (succeeded) {
                     //TODO
-                    NSLog(@"Add friend %@ sucaessful", [RuntimeStatus instance].peerId);
+                    NSLog(@"Add friend %@ successful", [RuntimeStatus instance].peerId);
                     [[RuntimeStatus instance] removeFriendsToBeConfirm:[RuntimeStatus instance].peerId];
+                    //TODO: just need to add one friend, no need to call initial
                     [[RuntimeStatus instance] initial];//加好友更新
                     [self freshTable];
                 } else {
