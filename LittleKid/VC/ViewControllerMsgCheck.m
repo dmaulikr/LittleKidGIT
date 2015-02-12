@@ -97,7 +97,7 @@ static int seconds = 60;
                 if (succeeded) {
                     AVObject *userInfo = [[AVUser currentUser] objectForKey:@"userInfo"];
                     [userInfo setObject:self.nickname forKey:@"nickname"];
-                    [userInfo setObject:UIImageJPEGRepresentation([UIImage imageNamed:@"touxiang"], 1.0) forKey:@"headImage"];
+                    [userInfo setObject:UIImageJPEGRepresentation([UIImage imageNamed:@"touxiang"], 0.5) forKey:@"headImage"];
                     [userInfo setObject:[NSDate dateWithTimeIntervalSinceNow:0] forKey:@"birthday"];
                     [userInfo setObject:[NSNumber numberWithInt:0] forKey:@"gender"];
                     [userInfo setObject:[NSNumber numberWithInt:9000] forKey:@"score"];
