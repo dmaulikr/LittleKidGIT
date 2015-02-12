@@ -159,7 +159,7 @@
 }
 
 - (void) updateLocalFriend: (UserInfo *)userInfo byObjId: (NSString*)friendObjID {
-    [self.db executeUpdateWithFormat:@"UPDATE friends SET nickname = %@, birthday = %@, updatedAt = %@, gender = %@, level = %@, score = %@, headImage = %@ WHERE selfId = %@ and friendId = %@",
+    [self.db executeUpdateWithFormat:@"UPDATE friends SET nickname = %@, birthday = %@, updatedAt = %@, gender = %@, level = %@, score = %@, headImage = %@ WHERE friendId = %@",
      userInfo.nickname,
      userInfo.birthday,
      userInfo.updatedAt,
@@ -167,18 +167,18 @@
      userInfo.level,
      userInfo.score,
      userInfo.headImage,
-     [AVUser currentUser].objectId,
      friendObjID];
 }
 
 - (void) addLocalFriend: (AVUser*) user {
-    [self.db executeUpdateWithFormat:@"INSERT INTO friends (selfId, friendId, friendName) VALUES(%@, %@, %@)", [AVUser currentUser].username, user.objectId, user.username];
+    [self.db executeUpdateWithFormat:@"INSERT INTO friends (friendId, friendName) VALUES(%@, %@)", user.objectId, user.username];
 }
 
 
 - (void) initialDb {
     NSString *dbPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSString *dbFileName =[dbPath stringByAppendingPathComponent:@"LittleKid.sqlite"];
+    NSString *fileName = [NSString stringWithFormat:@"%@.sqlite", [AVUser currentUser].username];
+    NSString *dbFileName =[dbPath stringByAppendingPathComponent:fileName];
     
     self.db = [FMDatabase databaseWithPath:dbFileName];
     
@@ -188,7 +188,7 @@
     }
     
     //create the friend table if not exists
-    BOOL result = [self.db executeUpdateWithFormat:@"CREATE TABLE IF NOT EXISTS friends (selfId text NOT NULL, friendId text NOT NULL, friendName text NOT NULL, nickname text, birthday text, gender text, level integer default 0, score integer default 0, headImage blob, updatedAt text);"];
+    BOOL result = [self.db executeUpdateWithFormat:@"CREATE TABLE IF NOT EXISTS friends (friendId text NOT NULL PRIMARY KEY, friendName text NOT NULL, nickname text, birthday text, gender text, level integer default 0, score integer default 0, headImage blob, updatedAt text);"];
     
     if (!result) {
         NSLog(@"Create table friends error!");
@@ -196,8 +196,8 @@
     }
     
     //get all the friend user info
-    FMResultSet *resultSet = [self.db executeQueryWithFormat:@"select friendId, friendName, nickname, birthday, gender, level, score, headImage, updatedAt from friends where selfId = %@",
-                              [AVUser currentUser].objectId];
+    FMResultSet *resultSet = [self.db executeQuery:@"select friendId, friendName, nickname, birthday, gender, level, score, headImage, updatedAt from friends"];
+
     
     while ([resultSet next]) {
         UserInfo *userInfo = [[UserInfo alloc] init];

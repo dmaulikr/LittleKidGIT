@@ -24,11 +24,9 @@
 //        [clloc requestAlwaysAuthorization];
 //    }
     //For leancloud initilization
-    setenv("LOG_CURL", "YES", 0);
+//    setenv("LOG_CURL", "YES", 0);
     [AVOSCloud setApplicationId:AVOSAppID clientKey:AVOSAppKey];
     
-    [RuntimeStatus instance];
-    [[RuntimeStatus instance] initial];
     
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -36,34 +34,21 @@
     UITableViewController* nextController = [storyboard instantiateViewControllerWithIdentifier:@"mainTabViewController"];
 
     
-//    NSArray *arr = [nextController.view subviews];
-//    
-//    UITabBar  *tabBar = [arr objectAtIndex:1];
-//
-////    tabBar.tintColor = [UIColor ];
-//    
-//    NSArray *items = [tabBar items];
-//    
-//    UITabBarItem *near = [items objectAtIndex:0];
-    
-//    near.badgeValue = @"5";
-
-    
-    //TODO: if already sign up, just login directly
+    //if already sign up, just login directly
     
     if ([AVUser currentUser]) {
 
         [self.window setRootViewController:nextController];
         [self.window makeKeyAndVisible];
         
-        
+        [[RuntimeStatus instance] initial];
     }
     
     [self registerNotifications: application];
     //后台时有服务器推送，进入程序即调用下方法(可能)，此时可判断推送调用方法。remote推送是会自动调用的。
     [self procLaunchOptios:launchOptions];
-//    NSString *post=@"postData";
-//    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];    
+
+
     return YES;
 }
 
