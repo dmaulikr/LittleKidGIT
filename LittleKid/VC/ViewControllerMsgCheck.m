@@ -73,7 +73,7 @@ static int seconds = 60;
 
 - (IBAction)onRepickCode:(id)sender {
 
-    [AVOSCloud requestSmsCodeWithPhoneNumber:self.kiduser.username appName:@"应用" operation:@"注册验证" timeToLive:10  callback:^(BOOL succeeded, NSError *error) {
+    [AVOSCloud requestSmsCodeWithPhoneNumber:self.kiduser.username appName:@"一起兴趣班" operation:@"注册验证" timeToLive:10  callback:^(BOOL succeeded, NSError *error) {
         NSLog(@"bool:%c,error:xxxxxx--%@--xxxxxx",succeeded,error);
     }];
     
@@ -97,7 +97,10 @@ static int seconds = 60;
                 if (succeeded) {
                     AVObject *userInfo = [[AVUser currentUser] objectForKey:@"userInfo"];
                     [userInfo setObject:self.nickname forKey:@"nickname"];
-
+                    [userInfo setObject:UIImageJPEGRepresentation([UIImage imageNamed:@"touxiang"], 1.0) forKey:@"headImage"];
+                    [userInfo setObject:[NSDate dateWithTimeIntervalSinceNow:0] forKey:@"birthday"];
+                    [userInfo setObject:[NSNumber numberWithInt:0] forKey:@"gender"];
+                    [userInfo setObject:[NSNumber numberWithInt:9000] forKey:@"score"];
                     [self.kiduser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                         if (error) {
                             NSLog(@"save avuser error");
