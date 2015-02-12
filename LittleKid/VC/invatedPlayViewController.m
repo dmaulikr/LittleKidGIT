@@ -32,7 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.otherid.text = self.toid;
-    UIImageView *image_backgroup = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"背景"]];
+    UIImageView *image_backgroup = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"invatedbackview"]];
     image_backgroup.frame = [[UIScreen mainScreen]bounds];
     [self.view addSubview:image_backgroup];
     UIImageView *headimageview = [[UIImageView alloc]initWithFrame:CGRectMake((image_backgroup.frame.size.width - 100)/2, 150, 100, 100)];
@@ -51,14 +51,14 @@
     
     UIButton *btn_start = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     btn_start.frame = CGRectMake((image_backgroup.frame.size.width/2 - 100)/2, 430, 100, 40.0);
-    [btn_start setBackgroundImage:[UIImage imageNamed:@"取消挑战按键"] forState:UIControlStateNormal];
+    [btn_start setBackgroundImage:[UIImage imageNamed:@"invatedaccept"] forState:UIControlStateNormal];
     //    [self.btn_start setTitle:@"抽奖" ];
     [btn_start addTarget:self action:@selector(accept) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn_start];
     
     UIButton *btn_reject = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     btn_reject.frame = CGRectMake((image_backgroup.frame.size.width* 3/2 - 150)/2, 430, 100, 40.0);
-    [btn_reject setBackgroundImage:[UIImage imageNamed:@"取消挑战按键"] forState:UIControlStateNormal];
+    [btn_reject setBackgroundImage:[UIImage imageNamed:@"invatedreject"] forState:UIControlStateNormal];
     //    [self.btn_start setTitle:@"抽奖" ];
     [btn_reject addTarget:self action:@selector(reject) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn_reject];
