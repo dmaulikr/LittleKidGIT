@@ -84,6 +84,7 @@
     //登录功能
     [AVUser logInWithUsernameInBackground:self.account.text password:self.password.text block:^(AVUser *user, NSError *error) {
         if (user != nil) {
+            [[RuntimeStatus instance] init];
             [[RuntimeStatus instance] initial];
             [self performSegueWithIdentifier:SIGN_IN_SEGUE sender:nil];
             return;

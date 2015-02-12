@@ -47,7 +47,44 @@
     return self;
 }
 
-
+//{
+//    //    [self initialDb];
+//    AVQuery * query = [AVUser query];
+//    query.cachePolicy = kAVCachePolicyIgnoreCache;
+//    NSError *error;
+//    NSArray *objects =[query findObjects];//(NSArray *objects, NSError *error) {
+//    if (objects) {
+//        for (AVUser *user in objects) {
+//            AVObject * userInfo = [user objectForKey:@"userInfo"];
+//            [userInfo fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
+//                if (error) {
+//                    NSLog(@"修改失败");
+//                }
+//                else {
+//                    NSData *headImage = [object objectForKey:@"headImage"];
+//                    if (headImage == nil) {
+//                        self.userInfo.headImage = [self circleImage:[UIImage imageNamed:@"touxiang"] withParam:0];
+//                    }
+//                    else
+//                        self.userInfo.headImage = [self circleImage:[UIImage imageWithData:headImage] withParam:0];
+//                    if (self.userInfo.headImage.size.height>75) {
+//                        self.userInfo.headImage = [self scaleToSize:self.userInfo.headImage size:CGSizeMake(70, 70)];
+//                    }
+//                    [userInfo setObject:UIImageJPEGRepresentation(self.userInfo.headImage, 1.0) forKey:@"headImage"];
+//                    
+//                    [userInfo saveInBackground];
+//                    NSLog(@"修改成功一个");
+//                }
+//            }];
+//        }
+//        
+//    } else {
+//        NSLog(@"error:%@", error);
+//    }
+//    
+//    
+//    
+//}
 - (void) initial {
     [self initialDb];
     
@@ -284,9 +321,24 @@
             return nil;
     }
 }
-
+- (UIImage *)scaleToSize:(UIImage *)img size:(CGSize)size{
+    // 创建一个bitmap的context
+    // 并把它设置成为当前正在使用的context
+    UIGraphicsBeginImageContext(size);
+    // 绘制改变大小的图片
+    [img drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    // 从当前context中创建一个改变大小后的图片
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    // 使当前的context出堆栈
+    UIGraphicsEndImageContext();
+    // 返回新的改变大小后的图片
+    return scaledImage;
+}
 - (void) saveUserInfo {
     AVObject* userInfo = [self.currentUser objectForKey:@"userInfo"];
+    if (self.userInfo.headImage.size.height>75) {
+        self.userInfo.headImage = [self scaleToSize:self.userInfo.headImage size:CGSizeMake(70, 70)];
+    }
     [userInfo setObject:UIImageJPEGRepresentation(self.userInfo.headImage, 1.0) forKey:@"headImage"];
     [userInfo setObject:self.userInfo.nickname forKey:@"nickname"];
     [userInfo setObject:self.userInfo.birthday forKey:@"birthday"];

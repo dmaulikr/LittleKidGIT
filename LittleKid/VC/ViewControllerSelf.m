@@ -9,6 +9,8 @@
 #import "ViewControllerSelf.h"
 #import "CDCommon.h"
 #import "RuntimeStatus.h"
+#import "CDSessionManager.h"
+#import "RuntimeStatus.h"
 
 @interface ViewControllerSelf ()
 
@@ -80,7 +82,7 @@
         case 12:
             return @"特级大师";
         default:
-            return nil;
+            return @"特级大师";
     }
 }
 - (void)viewWillDisappear:(BOOL)animated{
@@ -98,17 +100,26 @@
 
 
 - (IBAction)logoutBtn:(id)sender {
-    if ([AVUser currentUser]) {
-        [AVUser logOut];
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        
-        UIViewController* nextController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavigationcontroller"];
-        
-         [self presentViewController:nextController animated:YES completion:nil];
-    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"确定要退出？" message:nil delegate:self cancelButtonTitle:@"确定"  otherButtonTitles:@"取消", nil];
+    [alert show];
+    
 }
 
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        if ([AVUser currentUser]) {
+            [AVUser logOut];
+            [[CDSessionManager sharedInstance] clearData];
+            
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            
+            UIViewController* nextController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavigationcontroller"];
+            
+            [self presentViewController:nextController animated:YES completion:nil];
+        }
+    }
+}
 //#pragma mark - Table view data source
 //
 //- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
