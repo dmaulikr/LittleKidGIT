@@ -222,9 +222,9 @@
     
     //圆的边框宽度为2，颜色为红色
     
-    CGContextSetLineWidth(context,2);
+    CGContextSetLineWidth(context,0);
     
-    CGContextSetStrokeColorWithColor(context, [UIColor redColor].CGColor);
+    CGContextSetStrokeColorWithColor(context, [UIColor clearColor].CGColor);
     
     CGRect rect = CGRectMake(inset, inset, image.size.width - inset *2.0f, image.size.height - inset *2.0f);
     

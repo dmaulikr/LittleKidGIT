@@ -24,6 +24,7 @@
 @property (nonatomic) BOOL isnoMusic;
 @property(weak, nonatomic) NSTimer *repickBtnFreshTimer;
 @property(nonatomic) NSDictionary *senddict;
+@property(nonatomic)int ratio;
 @end
 static  BOOL isShouldChessPlayer = YES;
 @implementation RootViewController
@@ -379,7 +380,7 @@ static int seconds = 180;
        
     }
     if ([alertView tag] == 56) {
-        [self.delegate rootViewControllerCancel:self];
+       [self showchoujiangrezult];
     }
     
 }
@@ -393,7 +394,10 @@ static int seconds = 180;
     [[CDSessionManager sharedInstance] sendPlayChess:self.senddict toPeerId:self.otherId];
 }
 
-
+-(void) off
+{
+    [self.delegate rootViewControllerCancel:self];
+}
 
 - (void)Restart
 {
@@ -423,55 +427,55 @@ static int seconds = 180;
 {
     
     //添加背景
-    UIImageView *image_backgroup = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkcode_backgroundRed.png"]];
+    UIImageView *image_backgroup = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rezultBackgroup"]];
     image_backgroup.frame = [[UIScreen mainScreen]bounds];
     image2 = image_backgroup;
     [self.view addSubview:image2];
     //添加转盘
-    UIImageView *image_disk = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disk.jpg"]];
-    image_disk.frame = CGRectMake(0.0, 0.0, 320.0, 320.0);
+    CGFloat x = image_backgroup.frame.size.width;
+    CGFloat disk_width = x*5/7;
+    CGFloat disk_starty = 175;
+    
+    UIImageView *image_disk = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"抽奖盘"]];
+    image_disk.frame = CGRectMake(x/7, disk_starty, disk_width , disk_width);
     image1 = image_disk;
     [self.view addSubview:image1];
     
     //添加转针
+    CGFloat start_width = 120;
     UIImageView *image_start = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"start.png"]];
-    image_start.frame = CGRectMake(103.0, 55.0, 120.0, 210.0);
+    image_start.frame = CGRectMake((x - start_width/2)/2, disk_starty + disk_width/2 - start_width /2, start_width/2, start_width);
     image2 = image_start;
     [self.view addSubview:image2];
     
     //添加按钮
     self.btn_start = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    self.btn_start.frame = CGRectMake(140.0, 350.0, 70.0, 70.0);
-    [self.btn_start setTitle:@"抽奖" forState:UIControlStateNormal];
+    self.btn_start.frame = CGRectMake(x/2 - 75, disk_starty + disk_width +60, 150.0, 40.0);
+    [self.btn_start setBackgroundImage:[UIImage imageNamed:@"抽奖按键"] forState:UIControlStateNormal];
+//    [self.btn_start setTitle:@"抽奖" ];
     [self.btn_start addTarget:self action:@selector(choujiang) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.btn_start];
     
-    UILabel *rezultlabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 400, 310, 100)];
-    NSString *str = [[NSString alloc]init];
+    CGFloat rezultwidty = 100;
+    UIImageView *rezultimage = [[UIImageView alloc]initWithFrame:CGRectMake((x - rezultwidty)/2, disk_starty - 60, rezultwidty, 40)];
+    
     if (rezult==0) {
-        str = @"您输掉了比赛，获得了30分的鼓励,您还可以参与抽奖";
+        rezultimage.image = [UIImage imageNamed:@"战败"];
         increaseScore = 30;
         
     }
     else if(rezult == 1)
     {
-        str = @"您战平了对手，获得了100分的鼓励，您还可以参与抽奖";
+        rezultimage.image = [UIImage imageNamed:@"和棋"];
         increaseScore = 100;
     }
     else if (rezult ==2)
     {
-        str = @"您战胜了对手，获得了300分的鼓励，您还可以参与抽奖";
+        rezultimage.image = [UIImage imageNamed:@"胜利"];
         increaseScore = 300;
     }
-    rezultlabel.text =str;
-    //设置字体颜色为白色
-    rezultlabel.textColor = [UIColor whiteColor];
-    //文字居中显示
-    rezultlabel.textAlignment = UITextAlignmentCenter;
-    //自动折行设置
-    rezultlabel.lineBreakMode = UILineBreakModeWordWrap;
-    rezultlabel.numberOfLines = 0;//表示label可以多行显示
-    [self.view addSubview:rezultlabel];
+    [self.view addSubview:rezultimage];
+    
 }
 
 - (void)choujiang
@@ -498,88 +502,151 @@ static int seconds = 180;
     orign = fmodf(orign, 2.0);
     
 }
+-(void) showchoujiangrezult
+{
+    UIImageView *bacakGroundImage = [[UIImageView alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    bacakGroundImage.image = [UIImage imageNamed:@"象棋主界面.png"];
+    bacakGroundImage.userInteractionEnabled = YES;
+    [self.view addSubview:bacakGroundImage];
+    UIImageView *imageview = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"抽奖结果背景"]];
+    CGFloat mainwidh = MAINSCREEN_WIDTH;
+    CGFloat image_width = mainwidh *5/7;
+    [imageview setFrame:CGRectMake(mainwidh/2 - image_width /2, 100, image_width, image_width*2 )];
+    [self.view addSubview:imageview];
+    
+    UILabel *ratiolabel = [[UILabel alloc]initWithFrame:CGRectMake(imageview.frame.origin.x + image_width/2 - 50, imageview.frame.origin.y +155, 100, 20)];
+    ratiolabel.text = [NSString stringWithFormat:@"%d * %d倍",(int)increaseScore,self.ratio];
+    ratiolabel.textColor = [UIColor greenColor];
+    ratiolabel.textAlignment = UITextAlignmentCenter;
+    [self.view addSubview:ratiolabel];
+    
+    UILabel *nowscorelabel = [[UILabel alloc]initWithFrame:CGRectMake(imageview.frame.origin.x + image_width/2 +15, imageview.frame.origin.y +185, 100, 30)];
+    int nowscore = [[RuntimeStatus instance].userInfo.score intValue] + (int)increaseScore *self.ratio;
+    [RuntimeStatus instance].userInfo.score  = [NSNumber numberWithInt:nowscore];
+    [[RuntimeStatus instance] saveUserInfo];
+    nowscorelabel.text = [NSString stringWithFormat:@"%d",nowscore];
+    nowscorelabel.textColor = [UIColor whiteColor];
+    nowscorelabel.textAlignment = UITextAlignmentLeft;
+    [self.view addSubview:nowscorelabel];
+    
+    UILabel *needscorelabel = [[UILabel alloc]initWithFrame:CGRectMake(imageview.frame.origin.x + image_width/2 +15, imageview.frame.origin.y +220, 100, 30)];
+    int needscore = 10000- nowscore%10000;
+    needscorelabel.text = [NSString stringWithFormat:@"%d",needscore];
+    needscorelabel.textColor = [UIColor whiteColor];
+    needscorelabel.textAlignment = UITextAlignmentLeft;
+    [self.view addSubview:needscorelabel];
+    
+    UIButton *offbutton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    offbutton.frame = CGRectMake(imageview.frame.origin.x + image_width/2 -50, imageview.frame.origin.y +260, 100, 40);
+    [offbutton setBackgroundImage:[UIImage imageNamed:@"离开按键"] forState:UIControlStateNormal];
+    //    [self.btn_start setTitle:@"抽奖" ];
+    [offbutton addTarget:self action:@selector(off) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:offbutton];
+
+}
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
-    //判断抽奖结果
-    float ratio;
-    if (orign >= 0.0 && orign < (0.5/3.0)) {
-        ratio = 3;
-        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 一等奖，获得了3倍积分，共%d积分",3*increaseScore] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-        [result setTag:56];
-        [result show];
+    self.ratio = 1;
+    orign = orign + 0.05;
+    if ((orign >= 0.0 && orign < (0.5/3.0)*2.0)||(orign >= 0.5 && orign < (0.5/3.0)*7.0)||(orign >= (0.5/3.0)*8.0 && orign < (0.5/3.0)*9.0)||(orign >= (0.5/3.0)*10.0 && orign < (0.5/3.0)*12.0))
+    {
+        self.ratio = 1;
     }
-    else if (orign >= (0.5/3.0) && orign < ((0.5/3.0)*2))
+    else if((orign >= (0.5/3.0)*2.0 && orign < (0.5/3.0)*3.0)||(orign >= (0.5/3.0)*7.0 && orign < (0.5/3.0)*8.0))
     {
-        ratio = 1;
-        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 七等奖，获得了1倍积分，共%d积分",increaseScore] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-        [result setTag:56];
-        [result show];
-    }else if (orign >= ((0.5/3.0)*2) && orign < ((0.5/3.0)*3))
-    {
-        ratio = 1.2;
-        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 六等奖，获得了1.2倍积分，共%d积分",(int)(increaseScore*1.2)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-        [result setTag:56];
-        [result show];
-    }else if (orign >= (0.0+0.5) && orign < ((0.5/3.0)+0.5))
-    {
-        ratio = 1;
-        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 七等奖，获得了1倍积分，共%d积分",increaseScore] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-        [result setTag:56];
-        [result show];
-    }else if (orign >= ((0.5/3.0)+0.5) && orign < (((0.5/3.0)*2)+0.5))
-    {
-        ratio = 1.5;
-        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 五等奖，获得了1.5倍积分，共%d积分",(int)(increaseScore*1.5)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-        [result setTag:56];
-        [result show];
-    }else if (orign >= (((0.5/3.0)*2)+0.5) && orign < (((0.5/3.0)*3)+0.5))
-    {
-        ratio = 1;
-        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 七等奖，获得了1倍积分，共%d积分",(int)(increaseScore*1)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-        [result setTag:56];
-        [result show];
-    }else if (orign >= (0.0+1.0) && orign < ((0.5/3.0)+1.0))
-    {
-        ratio = 1.8;
-        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 四等奖，获得了1.8倍积分，共%d积分",(int)(increaseScore*1.8)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-        [result setTag:56];
-        [result show];
-    }else if (orign >= ((0.5/3.0)+1.0) && orign < (((0.5/3.0)*2)+1.0))
-    {
-        ratio = 1;
-        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 七等奖，获得了1倍积分，共%d积分",(int)(increaseScore*1)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-        [result setTag:56];
-        [result show];
-    }else if (orign >= (((0.5/3.0)*2)+1.0) && orign < (((0.5/3.0)*3)+1.0))
-    {
-        ratio = 2;
-        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 三等奖，获得了2倍积分，共%d积分",(int)(increaseScore*2)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-        [result setTag:56];
-        [result show];
-    }else if (orign >= (0.0+1.5) && orign < ((0.5/3.0)+1.5))
-    {
-        ratio = 1;
-        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 七等奖，获得了1倍积分，共%d积分",(int)(increaseScore*1)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-        [result setTag:56];
-        [result show];
-    }else if (orign >= ((0.5/3.0)+1.5) && orign < (((0.5/3.0)*2)+1.5))
-    {
-        ratio = 2.5;
-        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 二等奖，获得了2.5倍积分，共%d积分",(int)(increaseScore*2.5)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-        [result setTag:56];
-        [result show];
-    }else if (orign >= (((0.5/3.0)*2)+1.5) && orign < (((0.5/3.0)*3)+1.5))
-    {
-        ratio = 1;
-        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 七等奖，获得了1倍积分，共%d积分",(int)(increaseScore*1)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-        [result setTag:56];
-        [result show];
+        self.ratio = 2;
     }
-    increaseScore = increaseScore *ratio;
-    [RuntimeStatus instance].userInfo.score = [NSNumber numberWithInt:increaseScore];
-    [[RuntimeStatus instance] saveUserInfo];
+    else
+    {
+        self.ratio = 3;
+    }
+    UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您获得了%d倍积分",self.ratio] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+    [result setTag:56];
+    [result show];
+
+
 }
+//{
+//    //判断抽奖结果
+//    float ratio;
+//    if (orign >= 0.0 && orign < (0.5/3.0)) {
+//        ratio = 3;
+//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 一等奖，获得了3倍积分，共%d积分",3*increaseScore] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+//        [result setTag:56];
+//        [result show];
+//    }
+//    else if (orign >= (0.5/3.0) && orign < ((0.5/3.0)*2))
+//    {
+//        ratio = 1;
+//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 七等奖，获得了1倍积分，共%d积分",increaseScore] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+//        [result setTag:56];
+//        [result show];
+//    }else if (orign >= ((0.5/3.0)*2) && orign < ((0.5/3.0)*3))
+//    {
+//        ratio = 1.2;
+//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 六等奖，获得了1.2倍积分，共%d积分",(int)(increaseScore*1.2)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+//        [result setTag:56];
+//        [result show];
+//    }else if (orign >= (0.0+0.5) && orign < ((0.5/3.0)+0.5))
+//    {
+//        ratio = 1;
+//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 七等奖，获得了1倍积分，共%d积分",increaseScore] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+//        [result setTag:56];
+//        [result show];
+//    }else if (orign >= ((0.5/3.0)+0.5) && orign < (((0.5/3.0)*2)+0.5))
+//    {
+//        ratio = 1.5;
+//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 五等奖，获得了1.5倍积分，共%d积分",(int)(increaseScore*1.5)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+//        [result setTag:56];
+//        [result show];
+//    }else if (orign >= (((0.5/3.0)*2)+0.5) && orign < (((0.5/3.0)*3)+0.5))
+//    {
+//        ratio = 1;
+//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 七等奖，获得了1倍积分，共%d积分",(int)(increaseScore*1)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+//        [result setTag:56];
+//        [result show];
+//    }else if (orign >= (0.0+1.0) && orign < ((0.5/3.0)+1.0))
+//    {
+//        ratio = 1.8;
+//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 四等奖，获得了1.8倍积分，共%d积分",(int)(increaseScore*1.8)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+//        [result setTag:56];
+//        [result show];
+//    }else if (orign >= ((0.5/3.0)+1.0) && orign < (((0.5/3.0)*2)+1.0))
+//    {
+//        ratio = 1;
+//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 七等奖，获得了1倍积分，共%d积分",(int)(increaseScore*1)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+//        [result setTag:56];
+//        [result show];
+//    }else if (orign >= (((0.5/3.0)*2)+1.0) && orign < (((0.5/3.0)*3)+1.0))
+//    {
+//        ratio = 2;
+//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 三等奖，获得了2倍积分，共%d积分",(int)(increaseScore*2)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+//        [result setTag:56];
+//        [result show];
+//    }else if (orign >= (0.0+1.5) && orign < ((0.5/3.0)+1.5))
+//    {
+//        ratio = 1;
+//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 七等奖，获得了1倍积分，共%d积分",(int)(increaseScore*1)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+//        [result setTag:56];
+//        [result show];
+//    }else if (orign >= ((0.5/3.0)+1.5) && orign < (((0.5/3.0)*2)+1.5))
+//    {
+//        ratio = 2.5;
+//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 二等奖，获得了2.5倍积分，共%d积分",(int)(increaseScore*2.5)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+//        [result setTag:56];
+//        [result show];
+//    }else if (orign >= (((0.5/3.0)*2)+1.5) && orign < (((0.5/3.0)*3)+1.5))
+//    {
+//        ratio = 1;
+//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 七等奖，获得了1倍积分，共%d积分",(int)(increaseScore*1)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
+//        [result setTag:56];
+//        [result show];
+//    }
+//    increaseScore = increaseScore *ratio;
+//    [RuntimeStatus instance].userInfo.score = [NSNumber numberWithInt:increaseScore];
+//    [[RuntimeStatus instance] saveUserInfo];
+//}
 //
 //#pragma mark -ViewControllerDelegate
 //
@@ -654,17 +721,17 @@ static int seconds = 180;
 #pragma mark - Private
 
 - (void)showImagesOnly {
-    NSInteger numberOfOptions = 5;
+    NSInteger numberOfOptions = 1;
     NSArray *images = @[
-                        [UIImage imageNamed:@"arrow"],
-                        [UIImage imageNamed:@"attachment"],
-                        [UIImage imageNamed:@"block"],
-                        [UIImage imageNamed:@"bluetooth"],
-                        [UIImage imageNamed:@"cube"],
-                        [UIImage imageNamed:@"download"],
-                        [UIImage imageNamed:@"enter"],
-                        [UIImage imageNamed:@"file"],
-                        [UIImage imageNamed:@"github"]
+                        [UIImage imageNamed:@"抽奖结果背景"],
+//                        [UIImage imageNamed:@"attachment"],
+//                        [UIImage imageNamed:@"block"],
+//                        [UIImage imageNamed:@"bluetooth"],
+//                        [UIImage imageNamed:@"cube"],
+//                        [UIImage imageNamed:@"download"],
+//                        [UIImage imageNamed:@"enter"],
+//                        [UIImage imageNamed:@"file"],
+//                        [UIImage imageNamed:@"github"]
                         ];
     RNGridMenu *av = [[RNGridMenu alloc] initWithImages:[images subarrayWithRange:NSMakeRange(0, numberOfOptions)]];
     av.delegate = self;
