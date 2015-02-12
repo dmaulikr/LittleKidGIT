@@ -13,10 +13,12 @@
 
 @interface invatedPlayViewController ()
 
+@property (strong,nonatomic) AVAudioPlayer *play;
 @end
 
 @implementation invatedPlayViewController
 - (IBAction)accept {
+    [self stopInvateMusic];
     [[CDSessionManager sharedInstance] invitePlayChessAck:@"同意" toPeerId:self.toid];
     RootViewController *vc = [[RootViewController alloc] init];
     vc.otherId = self.otherid.text;
@@ -25,12 +27,27 @@
     [self presentViewController:vc animated:YES completion:nil];
 }
 - (IBAction)reject{
+    [self stopInvateMusic];
     [[CDSessionManager sharedInstance] invitePlayChessAck:@"不同意" toPeerId:self.toid];
     [self.navigationController popViewControllerAnimated:YES];
+}
+-(void) playInvateMusic
+{
+    NSString *path = [[NSBundle mainBundle]pathForResource:@"invate" ofType:@"mp3"];
+    NSURL *url = [[NSURL alloc]initFileURLWithPath:path];
+    self.play = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:nil];
+    self.play.numberOfLoops = -1;
+    [self.play prepareToPlay];
+    [self.play play];
+}
+-(void) stopInvateMusic
+{
+    self.play = nil;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self playInvateMusic];
     self.otherid.text = self.toid;
     UIImageView *image_backgroup = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"invatedbackview"]];
     image_backgroup.frame = [[UIScreen mainScreen]bounds];

@@ -23,7 +23,6 @@
 @property (strong, nonatomic) NSMutableArray *recentUsrList;
 @property (nonatomic, strong) NSArray *messages;
 @property NSInteger toChatUsrIndex;
-
 @end
 
 @implementation ViewControllerRecent
@@ -53,12 +52,15 @@
 }
 - (void) invatedPlay:(NSNotification *)notification
 {
+    [self.tabBarController setSelectedIndex:0];
     NSDictionary *dict = notification.userInfo;
     UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     invatedPlayViewController *Controller1 = [mainStoryboard instantiateViewControllerWithIdentifier:@"invatedPlayViewController"];
     Controller1.toid = [dict objectForKey:@"fromid"];
     [self.navigationController pushViewController:Controller1 animated:NO];
 }
+
+
 - (void)freshTable{
     [self.recentTableView reloadData];
 }
