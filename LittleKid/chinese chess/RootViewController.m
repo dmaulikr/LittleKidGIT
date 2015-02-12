@@ -514,13 +514,13 @@ static int seconds = 180;
     [imageview setFrame:CGRectMake(mainwidh/2 - image_width /2, 100, image_width, image_width*2 )];
     [self.view addSubview:imageview];
     
-    UILabel *ratiolabel = [[UILabel alloc]initWithFrame:CGRectMake(imageview.frame.origin.x + image_width/2 - 50, imageview.frame.origin.y +150, 100, 20)];
+    UILabel *ratiolabel = [[UILabel alloc]initWithFrame:CGRectMake(imageview.frame.origin.x + image_width/2 - 50, imageview.frame.origin.y +155, 100, 20)];
     ratiolabel.text = [NSString stringWithFormat:@"%d * %d倍",(int)increaseScore,self.ratio];
     ratiolabel.textColor = [UIColor greenColor];
     ratiolabel.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:ratiolabel];
     
-    UILabel *nowscorelabel = [[UILabel alloc]initWithFrame:CGRectMake(imageview.frame.origin.x + image_width/2 , imageview.frame.origin.y +190, 100, 30)];
+    UILabel *nowscorelabel = [[UILabel alloc]initWithFrame:CGRectMake(imageview.frame.origin.x + image_width/2 +15, imageview.frame.origin.y +185, 100, 30)];
     int nowscore = [[RuntimeStatus instance].userInfo.score intValue] + (int)increaseScore *self.ratio;
     [RuntimeStatus instance].userInfo.score  = [NSNumber numberWithInt:nowscore];
     [[RuntimeStatus instance] saveUserInfo];
@@ -529,7 +529,7 @@ static int seconds = 180;
     nowscorelabel.textAlignment = UITextAlignmentLeft;
     [self.view addSubview:nowscorelabel];
     
-    UILabel *needscorelabel = [[UILabel alloc]initWithFrame:CGRectMake(imageview.frame.origin.x + image_width/2, imageview.frame.origin.y +220, 100, 30)];
+    UILabel *needscorelabel = [[UILabel alloc]initWithFrame:CGRectMake(imageview.frame.origin.x + image_width/2 +15, imageview.frame.origin.y +220, 100, 30)];
     int needscore = 10000- nowscore%10000;
     needscorelabel.text = [NSString stringWithFormat:@"%d",needscore];
     needscorelabel.textColor = [UIColor whiteColor];
@@ -548,7 +548,7 @@ static int seconds = 180;
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     self.ratio = 1;
-    orign = orign - 0.1;
+    orign = orign + 0.05;
     if ((orign >= 0.0 && orign < (0.5/3.0)*2.0)||(orign >= 0.5 && orign < (0.5/3.0)*7.0)||(orign >= (0.5/3.0)*8.0 && orign < (0.5/3.0)*9.0)||(orign >= (0.5/3.0)*10.0 && orign < (0.5/3.0)*12.0))
     {
         self.ratio = 1;
