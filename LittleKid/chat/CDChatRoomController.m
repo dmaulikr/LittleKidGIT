@@ -15,6 +15,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "CDContactDetailController.h"
 #import "InvitePlayViewController.h"
+#import "RuntimeStatus.h"
 
 @interface CDChatRoomController () <JSMessagesViewDelegate, JSMessagesViewDataSource, QBImagePickerControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate> {
     NSMutableArray *_timestampArray;
@@ -60,7 +61,7 @@
         }
         self.title = title;
     } else {
-        self.title = self.otherId;
+        self.title = [[RuntimeStatus instance] getFriendUserInfo:self.otherId].nickname;
     }
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showDetail:)];
     UIImageView *imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liaotian_background.png"]];

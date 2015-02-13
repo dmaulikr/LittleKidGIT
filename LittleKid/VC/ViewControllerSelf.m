@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *level;
 @property (weak, nonatomic) IBOutlet UILabel *gender;
 @property (weak, nonatomic) IBOutlet UILabel *howold;
+@property (weak, nonatomic) IBOutlet UILabel *nowScore;
 
 @end
 
@@ -47,6 +48,9 @@
     int age=0-trunc(dateDiff/(60*60*24))/365;
     NSString *str = [[NSString alloc]initWithFormat:@"%d岁",age ];
     self.howold.text = str;
+    int score = [[RuntimeStatus instance].userInfo.score intValue];
+    int needscore = 10000 - score%10000;
+    self.nowScore.text = [NSString stringWithFormat:@"%d还差%d升级",score  ,needscore];
     self.level.text = [self getGradeForNumber:[RuntimeStatus instance].userInfo.score];
     
 }
@@ -184,7 +188,8 @@
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
  // Get the new view controller using [segue destinationViewController].
-     
+//     ViewControllerImpInfo *destVC = segue.destinationViewController;
+//     destVC.hidesBottomBarWhenPushed = YES;
      
  // Pass the selected object to the new view controller.
  }

@@ -379,7 +379,7 @@
     
     return userInfo;
 }
-
+//查找服务器上是否有改用户
 - (BOOL) searchForUsername:(NSString *)oneFriend {
     AVQuery * query = [AVUser query];
     [query whereKey:@"username" equalTo:oneFriend];
@@ -392,7 +392,7 @@
     }
 }
 
-
+//用username从服务器上获取userinfo
 - (UserInfo *) getUserInfoForUsername:(NSString *)oneFriend
 {
     AVQuery * query = [AVUser query];
