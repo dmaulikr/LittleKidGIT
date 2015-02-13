@@ -89,13 +89,15 @@
 
 }
 
-
+//暂时注释掉通讯录找好友
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if ( indexPath.row == 2 ) {//点击扫一扫cell
-        [self addScan];
+        //[self addScan];
+        return;
     }
     if (indexPath.row == 1) {//通讯录，mainstoryboard已处理跳转，直接返回
-        return;
+        //return;
+        [self addScan];
     }
 }
 

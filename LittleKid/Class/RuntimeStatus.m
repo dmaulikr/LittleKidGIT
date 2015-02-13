@@ -43,6 +43,8 @@
         self.udpP2P = [[UDPP2P alloc] init];
         self.userInfo = [[UserInfo alloc] init];
         self.friends = [NSMutableArray array];
+        //TODO
+        self.friendsToBeConfirm = [NSMutableArray array];
     }
     return self;
 }
@@ -86,10 +88,9 @@
 //    
 //}
 - (void) initial {
+    self.friends = [NSMutableArray array];
     [self initialDb];
-    
     self.currentUser = [AVUser currentUser];
-    
     AVObject* userInfo = [self.currentUser objectForKey:@"userInfo"];
     [userInfo fetchIfNeededInBackgroundWithBlock:^(AVObject *object, NSError *error) {
         if (error) {
@@ -110,8 +111,7 @@
         [self updateLoaclFriendList:objects];
     }];
     
-    //TODO
-    self.friendsToBeConfirm = [NSMutableArray array];
+    
 }
 
 
@@ -137,7 +137,7 @@
                         userInfo.gender = [object objectForKey:@"gender"];
                         userInfo.level = [object objectForKey:@"level"];
                         userInfo.score = [object objectForKey:@"score"];
-                        
+                        [[NSNotificationCenter defaultCenter]postNotificationName:NOTIFI_GET_FRIEND_LIST object:nil userInfo:nil];
                         [self updateLocalFriend:userInfo byObjId:u.objectId];
                     }
                 }];
@@ -210,6 +210,7 @@
 - (void) addLocalFriend: (AVUser*) user {
     [self.db executeUpdateWithFormat:@"INSERT INTO friends (friendId, friendName) VALUES(%@, %@)", user.objectId, user.username];
 }
+
 
 
 - (void) initialDb {
@@ -380,6 +381,13 @@
 }
 
 - (void) addFriendsToBeConfirm:(NSString *)oneFriend {
+    //不允许重复
+    for (UserInfo *userinfo in self.friendsToBeConfirm)
+    {
+        if ([userinfo.userName isEqualToString:oneFriend]) {
+            return;
+        }
+    }
     AVQuery * query = [AVUser query];
     [query whereKey:@"username" equalTo:oneFriend];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
