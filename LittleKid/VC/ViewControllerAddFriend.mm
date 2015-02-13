@@ -15,11 +15,12 @@
 #import "CDSessionManager.h"
 #import "RuntimeStatus.h"
 
-@interface ViewControllerAddFriend () <ZXingDelegate, UITextFieldDelegate, UIAlertViewDelegate>
+@interface ViewControllerAddFriend () <ZXingDelegate, UITextFieldDelegate, UIAlertViewDelegate,UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *cellNumberTextField;
 @property(strong, nonatomic) NSDictionary *toAddFriendInfoDict;
 @property (weak, nonatomic) IBOutlet UIImageView *barcodeSelfImgView;
+@property (weak, nonatomic) IBOutlet UISearchBar *cellNumberSearchBar;
 
 //@property (strong, atomic) NSString * peerID;
 
@@ -29,6 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.cellNumberSearchBar.delegate = self;
     // Do any additional setup after loading the view.
     [self addSelfBarCode];
 }
@@ -153,7 +155,40 @@
     return YES;
 }
 
+#pragma search bar delegate
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText;
+{
+    if(searchText.length == 11)
+    {
+        for (UserInfo *usr in [RuntimeStatus instance].friends) {
+            if([usr.userName isEqualToString:searchText]){
+                [[[UIAlertView alloc] initWithTitle:@"已经加为好友" message:@"提示原因" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil , nil] show];
+                return;
+            }
+        }
+        if ([[RuntimeStatus instance] searchForUsername:searchText]) {
+            UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            TableViewControllerFriendConfirm *Controller = [mainStoryboard instantiateViewControllerWithIdentifier:@"friendConfirmVC"];
+            NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+            [dict setObject:searchText forKey:@"uid"];
+            Controller.toAddFriendInfoDict = [[NSDictionary alloc] initWithDictionary:dict];
+            [self.navigationController pushViewController:Controller animated:NO];
+        }
+        else
+        {
+            [[[UIAlertView alloc] initWithTitle:@"没有该号码" message:@"提示原因" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil , nil] show];
+            return;
+        }
+    }
+    
+    
+}
 
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 @end

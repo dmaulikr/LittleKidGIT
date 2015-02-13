@@ -2678,16 +2678,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入手机号码查找好友" textAlignment="center" minimumFontSize="21" translatesAutoresizingMaskIntoConstraints="NO" id="LiJ-qG-rBm">
-                                                    <rect key="frame" x="14" y="8" width="294" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
-                                                    <connections>
-                                                        <action selector="editEndToFindFriend:" destination="3qg-Jc-wFx" eventType="editingDidEnd" id="ozD-ui-aIY"/>
-                                                        <outlet property="delegate" destination="3qg-Jc-wFx" id="Fnu-oH-z3R"/>
-                                                    </connections>
-                                                </textField>
+                                                <searchBar contentMode="redraw" ambiguous="YES" misplaced="YES" searchBarStyle="minimal" placeholder="输入手机号码查找好友" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bbV-Qe-5Wn">
+                                                    <rect key="frame" x="38" y="2" width="524" height="44"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                                </searchBar>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="bbV-Qe-5Wn" secondAttribute="trailing" constant="5" id="upF-qG-akF"/>
+                                                <constraint firstItem="bbV-Qe-5Wn" firstAttribute="leading" secondItem="lpB-yl-8vJ" secondAttribute="leadingMargin" constant="5" id="xqT-YJ-Z1V"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="44" id="WHW-yj-yGJ">
@@ -2733,13 +2732,13 @@
                     </tableView>
                     <connections>
                         <outlet property="barcodeSelfImgView" destination="i82-ks-kFz" id="v7h-fx-nfX"/>
-                        <outlet property="cellNumberTextField" destination="LiJ-qG-rBm" id="BCX-FZ-Wcr"/>
+                        <outlet property="cellNumberSearchBar" destination="bbV-Qe-5Wn" id="EUF-d4-ucP"/>
                         <segue destination="aVg-KN-NZm" kind="show" identifier="segueToFriendConfirm" id="xCO-4c-luw"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oud-t8-AQd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="951" y="2991"/>
+            <point key="canvasLocation" x="951" y="2990"/>
         </scene>
         <!--Table View Controller Friend Confirm-->
         <scene sceneID="Ntu-RI-fMZ">

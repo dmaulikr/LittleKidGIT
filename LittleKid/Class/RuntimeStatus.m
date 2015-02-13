@@ -380,6 +380,56 @@
     return userInfo;
 }
 
+- (BOOL) searchForUsername:(NSString *)oneFriend {
+    AVQuery * query = [AVUser query];
+    [query whereKey:@"username" equalTo:oneFriend];
+    NSArray *objects =[query findObjects];//(NSArray *objects, NSError *error) {
+    if (objects) {
+        return YES;
+        
+    } else {
+        return NO;
+    }
+}
+
+
+- (UserInfo *) getUserInfoForUsername:(NSString *)oneFriend
+{
+    AVQuery * query = [AVUser query];
+    [query whereKey:@"username" equalTo:oneFriend];
+    NSArray *objects =[query findObjects];//(NSArray *objects, NSError *error) {
+    if (objects) {
+        AVUser  *peerUser = [objects firstObject];
+        
+        if (peerUser == nil) {
+            //TODO
+            return nil;
+        }
+        UserInfo *user = [[UserInfo alloc] init];
+        user.objID = peerUser.objectId;
+        user.userName = peerUser.username;
+        AVObject *userInfo = [peerUser objectForKey:@"userInfo"];
+        [userInfo fetch];
+        user.nickname = [userInfo objectForKey:@"nickname"];
+        user.birthday = [userInfo objectForKey:@"birthday"];
+        
+        user.nickname = [userInfo objectForKey:@"nickname"];
+        user.birthday = [userInfo objectForKey:@"birthday"];
+        user.gender = [userInfo objectForKey:@"gender"];
+        user.level = [userInfo objectForKey:@"level"];
+        user.score = [userInfo objectForKey:@"score"];
+        
+        NSData *headImage = [userInfo objectForKey:@"headImage"];
+        user.headImage = [UIImage imageWithData:headImage];
+        
+        user.updatedAt = userInfo.updatedAt;
+        return user;
+    
+    }
+    return  nil;
+    
+}
+
 - (void) addFriendsToBeConfirm:(NSString *)oneFriend {
     //不允许重复
     for (UserInfo *userinfo in self.friendsToBeConfirm)
