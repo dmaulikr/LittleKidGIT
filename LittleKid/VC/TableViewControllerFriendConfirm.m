@@ -39,9 +39,11 @@
     if ( self.toAddFriendInfoDict == nil ){
         return;
     }
-    self.headImageView.image = [UIImage imageNamed:@"head.jpg"];
-    self.nicknameLabel.text = [self.toAddFriendInfoDict objectForKey:@"nickname"];
     self.uidLabel.text = [self.toAddFriendInfoDict objectForKey:@"uid"];
+    UserInfo *otheruserinfo = [[RuntimeStatus instance] getUserInfoForUsername:self.uidLabel.text];
+    self.headImageView.image = [[RuntimeStatus instance] circleImage:otheruserinfo.headImage withParam:0];
+    self.nicknameLabel.text = otheruserinfo.nickname;
+    
 }
 
 - (void)didReceiveMemoryWarning {
