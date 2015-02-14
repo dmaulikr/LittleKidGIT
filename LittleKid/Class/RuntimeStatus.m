@@ -380,16 +380,15 @@
     return userInfo;
 }
 //查找服务器上是否有改用户
-- (BOOL) searchForUsername:(NSString *)oneFriend {
+- (AVUser *) searchForUsername:(NSString *)oneFriend {
     AVQuery * query = [AVUser query];
     [query whereKey:@"username" equalTo:oneFriend];
     NSArray *objects =[query findObjects];//(NSArray *objects, NSError *error) {
     if (objects) {
-        return YES;
-        
-    } else {
-        return NO;
+        AVUser *peerUser = [objects firstObject];
+        return peerUser;
     }
+   return nil;
 }
 
 //用username从服务器上获取userinfo

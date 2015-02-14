@@ -49,8 +49,8 @@
     NSString *str = [[NSString alloc]initWithFormat:@"%d岁",age ];
     self.howold.text = str;
     int score = [[RuntimeStatus instance].userInfo.score intValue];
-    int needscore = 10000 - score%10000;
-    self.nowScore.text = [NSString stringWithFormat:@"%d还差%d升级",score  ,needscore];
+//    int needscore = 10000 - score%10000;
+    self.nowScore.text = [NSString stringWithFormat:@"%d",score];
     self.level.text = [self getGradeForNumber:[RuntimeStatus instance].userInfo.score];
     
 }

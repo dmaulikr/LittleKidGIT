@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *uidLabel;
 @property (weak, nonatomic) IBOutlet UIButton *btnAdd;
 
+@property (weak, nonatomic) IBOutlet UILabel *level;
 
 @end
 
@@ -43,6 +44,7 @@
     UserInfo *otheruserinfo = [[RuntimeStatus instance] getUserInfoForUsername:self.uidLabel.text];
     self.headImageView.image = [[RuntimeStatus instance] circleImage:otheruserinfo.headImage withParam:0];
     self.nicknameLabel.text = otheruserinfo.nickname;
+    self.level.text = [[RuntimeStatus instance] getLevelString:otheruserinfo.score];
     
 }
 
@@ -56,6 +58,11 @@
     for (UserInfo *usr in [RuntimeStatus instance].friends) {
         if([usr.userName isEqualToString:self.uidLabel.text]){
             [[[UIAlertView alloc] initWithTitle:@"已经加为好友" message:@"提示原因" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil , nil] show];
+            
+            return;
+        }
+        if ([self.uidLabel.text isEqual:[AVUser currentUser].username]) {
+            [[[UIAlertView alloc] initWithTitle:@"不能加自己为好友" message:@"提示原因" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil , nil] show];
             
             return;
         }

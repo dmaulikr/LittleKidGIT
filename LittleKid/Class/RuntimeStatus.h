@@ -65,9 +65,9 @@
 - (UserInfo*)getFriendUserInfo:(NSString*)userName;
 
 -(UIImage*) circleImage:(UIImage*) image withParam:(CGFloat) inset;
-
+- (AVUser *) searchForUsername:(NSString *)oneFriend;
 
 - (UserInfo *) getUserInfoForUsername:(NSString *)oneFriend;
-- (BOOL) searchForUsername:(NSString *)oneFriend;
+
 
 @end

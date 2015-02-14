@@ -1,4 +1,4 @@
-//
+
 //  ViewControllerAddFriend.m
 //  LittleKid
 //
@@ -31,6 +31,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.cellNumberSearchBar.delegate = self;
+    for(id cc in [self.cellNumberSearchBar subviews])
+    {
+        if([cc isKindOfClass:[UIButton class]])
+        {
+            UIButton *btn = (UIButton *)cc;
+            [btn setTitle:@"取消"  forState:UIControlStateNormal];
+        }
+    }
     // Do any additional setup after loading the view.
     [self addSelfBarCode];
 }
@@ -166,7 +174,7 @@
                 return;
             }
         }
-        if ([[RuntimeStatus instance] searchForUsername:searchText]) {
+        if (!([[RuntimeStatus instance] searchForUsername:searchText] ==nil)) {
             UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             TableViewControllerFriendConfirm *Controller = [mainStoryboard instantiateViewControllerWithIdentifier:@"friendConfirmVC"];
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
