@@ -588,7 +588,7 @@ static BOOL initialized = NO;
         {
             NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
             [dict setObject:cmdDict forKey:@"cmd"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ADD_FRIEND_ACK_UPDATED object:session userInfo:dict];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ADD_FRIEND_ACK_UPDATED object:session userInfo:dict];
             return;
         }
         else if ([cmd_type isEqualToString:INVITE_PLAY_CHESS_CMD_ACK])

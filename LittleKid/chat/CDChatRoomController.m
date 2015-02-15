@@ -375,6 +375,60 @@
     }
   
 }
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    JSBubbleMessageType type = [self.delegate messageTypeForRowAtIndexPath:indexPath];
+    JSBubbleMessageStyle bubbleStyle = [self.delegate messageStyleForRowAtIndexPath:indexPath];
+    JSBubbleMediaType mediaType = [self.delegate messageMediaTypeForRowAtIndexPath:indexPath];
+    JSAvatarStyle avatarStyle = [self.delegate avatarStyle];
+    
+    BOOL hasTimestamp = [self shouldHaveTimestampForRowAtIndexPath:indexPath];
+    BOOL hasName = [self shouldHaveNameForRowAtIndexPath:indexPath];
+    BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
+    
+    NSString *CellID = [NSString stringWithFormat:@"MessageCell_%d_%d_%d_%d_%d", type, bubbleStyle, hasTimestamp, hasName, hasAvatar];
+    JSBubbleMessageCell *cell = (JSBubbleMessageCell *)[tableView dequeueReusableCellWithIdentifier:CellID];
+    
+    if(!cell)
+        cell = [[JSBubbleMessageCell alloc] initWithBubbleType:type
+                                                   bubbleStyle:bubbleStyle
+                                                   avatarStyle:(hasAvatar) ? avatarStyle : JSAvatarStyleNone
+                                                     mediaType:mediaType
+                                                  hasTimestamp:hasTimestamp
+                                                       hasName:hasName
+                                               reuseIdentifier:CellID];
+    
+    if(hasTimestamp)
+        [cell setTimestamp:[self.dataSource timestampForRowAtIndexPath:indexPath]];
+    if(hasName)
+        [cell setName:[self.dataSource nameForRowAtIndexPath:indexPath]];
+    
+    if(hasAvatar) {
+        switch (type) {
+            case JSBubbleMessageTypeIncoming:
+                [cell setAvatarImage:[self.dataSource avatarImageForIncomingMessage]];
+                [cell setAvatarImageTarget:self.dataSource action:[self.dataSource avatarImageForIncomingMessageAction]];
+                break;
+                
+            case JSBubbleMessageTypeOutgoing:
+                [cell setAvatarImage:[self.dataSource avatarImageForOutgoingMessage]];
+                [cell setAvatarImageTarget:self.dataSource action:[self.dataSource avatarImageForOutgoingMessageAction]];
+                break;
+        }
+    }
+    
+    if (kAllowsMedia)
+        [cell setMedia:[self.dataSource dataForRowAtIndexPath:indexPath]];
+    
+    [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath]];
+    [cell setBackgroundColor:tableView.backgroundColor];
+    
+    
+    cell.isSelected = [self.selectedMarks containsObject:CellID] ? YES : NO;
+    
+    return cell;
+}
+
 - (id)dataForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger i = indexPath.row;
     NSNumber *r = @(i);

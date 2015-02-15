@@ -55,44 +55,72 @@
     }
 }
 
-- (void)receiveAddFriendRequestAck:(NSNotification *)notification {
-    NSDictionary *dict = notification.userInfo;
-    NSString *peerid = [dict objectForKey:@"fromid"];
-    dict = [dict objectForKey:@"cmd"];
-    NSString *str = [dict objectForKey:@"cmd_type"];
-    if ([str isEqualToString:ADD_FRIEND_CMD_ACK] ) {
-        str = [dict objectForKey:@"ack_value"];
-        if ([str isEqualToString:@"OK"])
-        {
-            AVQuery * query = [AVUser query];
-            [query whereKey:@"username" equalTo:peerid];
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                if (error == nil) {
-                    AVUser  *peerUser = [objects firstObject];
-                    
-                    if (peerUser == nil) {
-                        //TODO
-                        return;
-                    }
-                    
-                    [[AVUser currentUser] follow:peerUser.objectId andCallback:^(BOOL succeeded, NSError *error) {
-                        if (succeeded) {
-                            NSLog(@"Add friend %@ successful", [RuntimeStatus instance].peerId);
-                            //TODO: just need to add one user to friend list, no need to call initial
-                            [[RuntimeStatus instance] initial];//加好友更新
-                            [self freshTable];
-                        } else {
-                            NSLog(@"Add friend %@ error %@", [RuntimeStatus instance].peerId, error);
-                        }
-                    }];
+- (void)receiveAddFriendRequestAck:(NSNotification *)notification
+{
+    AVQuery * query = [AVUser query];
+    [query whereKey:@"username" equalTo:notification.userInfo];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error == nil) {
+            AVUser  *peerUser = [objects firstObject];
+            
+            if (peerUser == nil) {
+                //TODO
+                return;
+            }
+            
+            [[AVUser currentUser] follow:peerUser.objectId andCallback:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    NSLog(@"Add friend %@ successful", [RuntimeStatus instance].peerId);
+                    //TODO: just need to add one user to friend list, no need to call initial
+                    [[RuntimeStatus instance] initial];//加好友更新
+                    [self freshTable];
                 } else {
-                    
+                    NSLog(@"Add friend %@ error %@", [RuntimeStatus instance].peerId, error);
                 }
             }];
+        } else {
+            
         }
-    }
-    
+    }];
 }
+//{
+//    NSDictionary *dict = notification.userInfo;
+//    NSString *peerid = [dict objectForKey:@"fromid"];
+//    dict = [dict objectForKey:@"cmd"];
+//    NSString *str = [dict objectForKey:@"cmd_type"];
+//    if ([str isEqualToString:ADD_FRIEND_CMD_ACK] ) {
+//        str = [dict objectForKey:@"ack_value"];
+//        if ([str isEqualToString:@"OK"])
+//        {
+//            AVQuery * query = [AVUser query];
+//            [query whereKey:@"username" equalTo:peerid];
+//            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//                if (error == nil) {
+//                    AVUser  *peerUser = [objects firstObject];
+//                    
+//                    if (peerUser == nil) {
+//                        //TODO
+//                        return;
+//                    }
+//                    
+//                    [[AVUser currentUser] follow:peerUser.objectId andCallback:^(BOOL succeeded, NSError *error) {
+//                        if (succeeded) {
+//                            NSLog(@"Add friend %@ successful", [RuntimeStatus instance].peerId);
+//                            //TODO: just need to add one user to friend list, no need to call initial
+//                            [[RuntimeStatus instance] initial];//加好友更新
+//                            [self freshTable];
+//                        } else {
+//                            NSLog(@"Add friend %@ error %@", [RuntimeStatus instance].peerId, error);
+//                        }
+//                    }];
+//                } else {
+//                    
+//                }
+//            }];
+//        }
+//    }
+//    
+//}
 
 
 - (void)freshTable{
@@ -139,7 +167,7 @@
         
     }];
     
-    [[CDSessionManager sharedInstance] sendAddFriendRequestAck:@"OK" toPeerId:[RuntimeStatus instance].peerId];
+//    [[CDSessionManager sharedInstance] sendAddFriendRequestAck:@"OK" toPeerId:[RuntimeStatus instance].peerId];
     
     
 }
