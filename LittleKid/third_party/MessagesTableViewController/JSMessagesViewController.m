@@ -279,8 +279,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    JSBubbleMessageType type = [self.delegate messageTypeForRowAtIndexPath:indexPath];
-    JSBubbleMessageStyle bubbleStyle = [self.delegate messageStyleForRowAtIndexPath:indexPath];
+    JSBubbleMessageType type = [self.delegate messageTypeForRowAtIndexPath:indexPath];//in out
+    JSBubbleMessageStyle bubbleStyle = [self.delegate messageStyleForRowAtIndexPath:indexPath];//
     JSBubbleMediaType mediaType = [self.delegate messageMediaTypeForRowAtIndexPath:indexPath];
     JSAvatarStyle avatarStyle = [self.delegate avatarStyle];
     
