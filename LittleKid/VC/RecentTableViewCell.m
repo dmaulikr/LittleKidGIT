@@ -18,7 +18,7 @@
     self.backgroundView.backgroundColor = [UIColor whiteColor];
     UIImageView *imageview = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liaotiankuang"]];
     self.backgroundView = imageview;
-    self.backgroundView.alpha = 0.2;
+    self.backgroundView.alpha = 0.9;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

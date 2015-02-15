@@ -260,7 +260,7 @@
         headImage = [UIImage imageNamed:@"liaotiankuang"];
         UIImageView *imageview = [[UIImageView alloc]initWithImage:headImage];
         cell.backgroundView = imageview;
-        cell.backgroundView.alpha = 0.8;
+        cell.backgroundView.alpha = 0.9;
         return  cell;
     }
 }
