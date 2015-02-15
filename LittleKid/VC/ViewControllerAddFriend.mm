@@ -167,13 +167,7 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText;
 {
     if(searchText.length == 11)
-    {
-        for (UserInfo *usr in [RuntimeStatus instance].friends) {
-            if([usr.userName isEqualToString:searchText]){
-                [[[UIAlertView alloc] initWithTitle:@"已经加为好友" message:@"提示原因" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil , nil] show];
-                return;
-            }
-        }
+    {        
         if (!([[RuntimeStatus instance] searchForUsername:searchText] ==nil)) {
             UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             TableViewControllerFriendConfirm *Controller = [mainStoryboard instantiateViewControllerWithIdentifier:@"friendConfirmVC"];

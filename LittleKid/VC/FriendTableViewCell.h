@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *starNumber;
 @property (weak, nonatomic) IBOutlet UILabel *state;
 @property (weak, nonatomic) IBOutlet UILabel *signature;
+@property (weak, nonatomic) IBOutlet UILabel *online;
 
 
 @end

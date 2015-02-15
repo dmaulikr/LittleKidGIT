@@ -176,7 +176,7 @@
 
 + (UIImage *)bubbleDefaultIncomingGreen
 {
-    return [[UIImage imageNamed:@"bubble-default-incoming-green"] makeStretchableDefaultIncoming];
+    return [[UIImage imageNamed:@"liaotian_bubble1"] makeStretchableDefaultIncoming];
 }
 
 + (UIImage *)bubbleSquareIncoming
@@ -214,7 +214,7 @@
 
 + (UIImage *)bubbleDefaultOutgoingGreen
 {
-    return [[UIImage imageNamed:@"bubble-default-outgoing-green"] makeStretchableDefaultOutgoing];
+    return [[UIImage imageNamed:@"liaotian_bubble2"] makeStretchableDefaultOutgoing];
 }
 
 + (UIImage *)bubbleSquareOutgoing

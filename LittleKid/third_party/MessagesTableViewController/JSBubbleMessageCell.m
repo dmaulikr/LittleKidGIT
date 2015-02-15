@@ -239,13 +239,15 @@
 	if ([data isKindOfClass:[UIImage class]])
 	{
 		// image
-		NSLog(@"show the image here");
+        NSData *d = data;
+		NSLog(@"show the image here%d",(int)d.length);
         self.bubbleView.data = data;
 	}
 	else if ([data isKindOfClass:[NSData class]])
 	{
 		// show a button / icon to view details
 		NSLog(@"icon view");
+        self.bubbleView.data = data;
 	}
 }
 

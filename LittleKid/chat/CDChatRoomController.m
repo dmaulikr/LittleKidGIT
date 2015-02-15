@@ -228,7 +228,10 @@
 }
 
 - (JSBubbleMessageStyle)messageStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return JSBubbleMessageStyleFlat;
+ //   return JSBubbleMessageStyleDefault;
+ //   return JSBubbleMessageStyleSquare;
+    return JSBubbleMessageStyleDefaultGreen;
+//    return JSBubbleMessageStyleFlat;
 }
 
 - (JSBubbleMediaType)messageMediaTypeForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -278,7 +281,7 @@
      JSMessagesViewAvatarPolicyBoth,
      JSMessagesViewAvatarPolicyNone
      */
-    return JSMessagesViewAvatarPolicyNone;
+    return JSMessagesViewAvatarPolicyBoth;
 }
 
 - (JSAvatarStyle)avatarStyle
@@ -288,7 +291,7 @@
      JSAvatarStyleSquare,
      JSAvatarStyleNone
      */
-    return JSAvatarStyleNone;
+    return JSAvatarStyleCircle;
 }
 
 - (JSInputBarStyle)inputBarStyle
@@ -334,9 +337,8 @@
 }
 
 - (UIImage *)avatarImageForIncomingMessage {
-    return [UIImage imageNamed:@"demo-avatar-jobs"];
+    return [[RuntimeStatus instance] getFriendUserInfo:self.otherId].headImage;
 }
-
 - (SEL)avatarImageForIncomingMessageAction {
     return @selector(onInComingAvatarImageClick);
 }
@@ -355,13 +357,15 @@
 
 - (UIImage *)avatarImageForOutgoingMessage
 {
-    return [UIImage imageNamed:@"demo-avatar-woz"];
+    return [RuntimeStatus instance].userInfo.headImage;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSNumber *i = @(indexPath.row);
     AVFile *file = [_loadedData objectForKey:i];
     if (file) {
         NSData *data = [file getData];
+        int i = (int)data.length;
+        NSLog(@"%d",i);
         NSError *playerError;
         self.player = nil;
         self.player = [[AVAudioPlayer alloc] initWithData:data error:&playerError];
@@ -375,14 +379,14 @@
     }
   
 }
+
 - (id)dataForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger i = indexPath.row;
     NSNumber *r = @(i);
     AVFile *file = [_loadedData objectForKey:r];
     if (file) {
         NSData *data = [file getData];
-        UIImage *image = [[UIImage alloc] initWithData:data];
-        return image;
+        return data;
     } else {
 //        NSString *objectId = [[self.messages objectAtIndex:i] objectForKey:@"object"];
 //        NSString *type = [[self.messages objectAtIndex:i] objectForKey:@"type"];
@@ -397,8 +401,10 @@
         AVFile *file = [[self.messages objectAtIndex:i] objectForKey:@"avfile"];
         [_loadedData setObject:file forKey:r];
         [self.tableView reloadData];
-        UIImage *image = [UIImage imageNamed:@"image_placeholder"];
-        return image;
+        NSData * data = [file getData];
+        int i = (int)data.length;
+        NSLog(@"datafor%d",i);
+        return data;
     }
 }
 

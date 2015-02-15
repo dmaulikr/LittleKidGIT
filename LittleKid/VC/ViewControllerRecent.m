@@ -127,25 +127,6 @@
     
     
 }
-- (void)startFetchUserList {
-    AVQuery * query = [AVUser query];
-    query.cachePolicy = kAVCachePolicyIgnoreCache;
-    NSError *error;
-    NSArray *objects =[query findObjects];//(NSArray *objects, NSError *error) {
-        if (objects) {
-            NSMutableArray *users = [NSMutableArray array];
-            for (AVUser *user in objects) {
-                if (![user isEqual:[AVUser currentUser]]) {
-                    [users addObject:user];
-                    [[CDSessionManager sharedInstance] addChatWithPeerId:user.username];
-                }
-            }
-            
-        } else {
-            NSLog(@"error:%@", error);
-        }
-    
-}
 
 
 /* display a waiting indictor */
@@ -179,7 +160,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
 //    return [[RuntimeStatus instance].recentUsrList count];
-    NSInteger i = [[[CDSessionManager sharedInstance] chatRooms] count];
+    NSInteger i = [self.recentUsrList count];
     return i;
 }
 

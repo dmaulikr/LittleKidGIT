@@ -38,9 +38,9 @@
 #import "NSString+JSMessagesView.h"
 #import "UIImage+JSMessagesView.h"
 
-CGFloat const kJSAvatarSize = 50.0f;
+CGFloat const kJSAvatarSize = 100.0f;
 
-#define kMarginTop 8.0f
+#define kMarginTop 40.0f
 #define kMarginBottom 4.0f
 #define kPaddingTop 12.0f
 #define kPaddingBottom 12.0f
@@ -140,10 +140,10 @@ CGFloat const kJSAvatarSize = 50.0f;
                           floorf(bubbleSize.height));
     }else if (self.mediaType == JSBubbleMediaTypeImage){
         CGSize bubbleSize = [JSBubbleView imageSizeForImage:(UIImage *)self.data];
-        return CGRectMake(floorf(self.type == JSBubbleMessageTypeOutgoing ? self.frame.size.width - bubbleSize.width : 10.0f),
+        return CGRectMake(floorf(self.type == JSBubbleMessageTypeOutgoing ? self.frame.size.width  -150 : 1.0f),
                           floorf(kMarginTop),
-                          floorf(bubbleSize.width),
-                          floorf(bubbleSize.height));
+                          floorf(150),
+                          floorf(60));
     }else{
         NSLog(@"act对象消息");
         return CGRectMake(0, 0, 0, 0);
@@ -182,9 +182,26 @@ CGFloat const kJSAvatarSize = 50.0f;
     
     CGRect bubbleFrame = [self bubbleFrame];
 	[image drawInRect:bubbleFrame];
+    NSData *sounddata = self.data;
+    int soundLength = (int)sounddata.length;
+    soundLength = soundLength/4096;
+    if (soundLength<1) {
+        soundLength = 1;
+    }
     
-	
-
+    CGRect soundlengthRect = bubbleFrame;
+    soundlengthRect.size.height  /= 2;
+    soundlengthRect.origin.x += 65;
+    soundlengthRect.origin.y +=15;
+    UILabel *label = [[UILabel alloc]initWithFrame:soundlengthRect];
+    label.text = [NSString stringWithFormat:@"%ds",soundLength];
+    NSMutableParagraphStyle* paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+				[paragraphStyle setAlignment:NSTextAlignmentLeft];
+				[paragraphStyle setLineBreakMode:NSLineBreakByWordWrapping];
+				
+				NSDictionary* attributes = @{NSFontAttributeName: [JSBubbleView font],
+                                             NSParagraphStyleAttributeName: paragraphStyle};
+    [label.text drawInRect:soundlengthRect withAttributes:attributes];
 	if (self.mediaType == JSBubbleMediaTypeText)
 	{
         CGSize textSize = [JSBubbleView textSizeForText:self.text];
@@ -271,32 +288,32 @@ CGFloat const kJSAvatarSize = 50.0f;
 	}
 	else if(self.mediaType == JSBubbleMediaTypeImage)	// media
 	{
-        UIImage *recivedImg = (UIImage *)self.data;
-        
-		if (recivedImg)
-		{
-            
-            
-            
-            CGSize imageSize = [JSBubbleView imageSizeForImage:recivedImg];
-            
-            CGFloat imgX = image.leftCapWidth - 3.0f + (self.type == JSBubbleMessageTypeOutgoing ? bubbleFrame.origin.x : 10.0f);
-            
-            CGRect imageFrame = CGRectMake(imgX - 3.f,
-                                          kPaddingTop,
-                                          imageSize.width - kPaddingTop - kMarginTop,
-                                          imageSize.height - kPaddingBottom + 2.f);
-            
-            
-            if (self.style == JSBubbleMessageStyleFlat && self.type == JSBubbleMessageTypeOutgoing)
-            {
-                UIColor* textColor = [UIColor whiteColor];
-                if (self.selectedToShowCopyMenu)
-                    textColor = [UIColor lightTextColor];
-            }
-            [recivedImg drawInRect:imageFrame];
-            
-		}
+//        UIImage *recivedImg = (UIImage *)self.data;
+//        
+//		if (recivedImg)
+//		{
+//            
+//            
+//            
+//            CGSize imageSize = [JSBubbleView imageSizeForImage:recivedImg];
+//            
+//            CGFloat imgX = image.leftCapWidth - 3.0f + (self.type == JSBubbleMessageTypeOutgoing ? bubbleFrame.origin.x : 10.0f);
+//            
+//            CGRect imageFrame = CGRectMake(imgX - 3.f,
+//                                          kPaddingTop,
+//                                          imageSize.width - kPaddingTop - kMarginTop,
+//                                          imageSize.height - kPaddingBottom + 2.f);
+//            
+//            
+//            if (self.style == JSBubbleMessageStyleFlat && self.type == JSBubbleMessageTypeOutgoing)
+//            {
+//                UIColor* textColor = [UIColor whiteColor];
+//                if (self.selectedToShowCopyMenu)
+//                    textColor = [UIColor lightTextColor];
+//            }
+//            [recivedImg drawInRect:imageFrame];
+//            
+//		}
 	}
 }
 
@@ -386,9 +403,8 @@ CGFloat const kJSAvatarSize = 50.0f;
 
 + (CGSize)imageSizeForImage:(UIImage *)image{
     CGFloat width = [UIScreen mainScreen].applicationFrame.size.width * 0.75f;
-    CGFloat height = 40.f;
-    
-    return CGSizeMake(width - kJSAvatarSize, height + kJSAvatarSize);
+    CGFloat height = 0;//40.f;
+    return CGSizeMake(width - kJSAvatarSize, kJSAvatarSize);
 
 }
 

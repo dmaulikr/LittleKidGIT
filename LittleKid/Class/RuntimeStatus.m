@@ -437,6 +437,12 @@
             return;
         }
     }
+    for(UserInfo *userinfo in self.friends)
+    {
+        if ([userinfo.userName isEqualToString:oneFriend]) {
+            return;
+        }
+    }
     AVQuery * query = [AVUser query];
     [query whereKey:@"username" equalTo:oneFriend];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {

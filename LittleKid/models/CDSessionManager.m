@@ -196,7 +196,15 @@ static BOOL initialized = NO;
 {
     return [_session isOpen];
 }
-
+-(BOOL) peerIdIsOnline:(NSString *)peerId
+{
+    for (NSString *peer in _session.onlinePeerIds) {
+        if ([peer isEqualToString:peerId]) {
+            return YES;
+        }
+    }
+    return NO;
+}
 - (void)sendAddFriendRequest:(NSString *)peerId
 {
     [self addChatWithPeerId:peerId];
@@ -588,7 +596,7 @@ static BOOL initialized = NO;
         {
             NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
             [dict setObject:cmdDict forKey:@"cmd"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ADD_FRIEND_ACK_UPDATED object:session userInfo:dict];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_ADD_FRIEND_ACK_UPDATED object:session userInfo:dict];
             return;
         }
         else if ([cmd_type isEqualToString:INVITE_PLAY_CHESS_CMD_ACK])
@@ -684,6 +692,11 @@ static BOOL initialized = NO;
 - (void)session:(AVSession *)session didReceiveStatus:(AVPeerStatus)status peerIds:(NSArray *)peerIds {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     NSLog(@"session:%@ peerIds:%@ status:%@", session.peerId, peerIds, status==AVPeerStatusOffline?@"offline":@"online");
+    NSString *str = status==AVPeerStatusOffline?@"offline":@"online";
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:peerIds forKey:@"fromid"];
+    [dict setObject:str forKey:@"status"];
+    [[NSNotificationCenter defaultCenter]postNotificationName:NOTIFICATION_ReceiveStatus object:nil userInfo:dict];
 }
 
 - (void)sessionFailed:(AVSession *)session error:(NSError *)error {

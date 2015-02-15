@@ -31,7 +31,13 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshTable) name:NOTIFI_GET_FRIEND_LIST object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveAddFriendRequest:) name:NOTIFICATION_ADD_FRIEND_UPDATED object:nil]; //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveAddFriendRequestAck:) name:NOTIFICATION_ADD_FRIEND_ACK_UPDATED object:nil]; //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receveStatus:) name:NOTIFICATION_ReceiveStatus object:nil]; //注册通知
     
+}
+
+- (void) receveStatus:(NSNotification *)notification
+{
+    [self freshTable];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,44 +61,72 @@
     }
 }
 
-- (void)receiveAddFriendRequestAck:(NSNotification *)notification {
-    NSDictionary *dict = notification.userInfo;
-    NSString *peerid = [dict objectForKey:@"fromid"];
-    dict = [dict objectForKey:@"cmd"];
-    NSString *str = [dict objectForKey:@"cmd_type"];
-    if ([str isEqualToString:ADD_FRIEND_CMD_ACK] ) {
-        str = [dict objectForKey:@"ack_value"];
-        if ([str isEqualToString:@"OK"])
-        {
-            AVQuery * query = [AVUser query];
-            [query whereKey:@"username" equalTo:peerid];
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                if (error == nil) {
-                    AVUser  *peerUser = [objects firstObject];
-                    
-                    if (peerUser == nil) {
-                        //TODO
-                        return;
-                    }
-                    
-                    [[AVUser currentUser] follow:peerUser.objectId andCallback:^(BOOL succeeded, NSError *error) {
-                        if (succeeded) {
-                            NSLog(@"Add friend %@ successful", [RuntimeStatus instance].peerId);
-                            //TODO: just need to add one user to friend list, no need to call initial
-                            [[RuntimeStatus instance] initial];//加好友更新
-                            [self freshTable];
-                        } else {
-                            NSLog(@"Add friend %@ error %@", [RuntimeStatus instance].peerId, error);
-                        }
-                    }];
+- (void)receiveAddFriendRequestAck:(NSNotification *)notification
+{
+    AVQuery * query = [AVUser query];
+    [query whereKey:@"username" equalTo:notification.userInfo];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error == nil) {
+            AVUser  *peerUser = [objects firstObject];
+            
+            if (peerUser == nil) {
+                //TODO
+                return;
+            }
+            
+            [[AVUser currentUser] follow:peerUser.objectId andCallback:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    NSLog(@"Add friend %@ successful", [RuntimeStatus instance].peerId);
+                    //TODO: just need to add one user to friend list, no need to call initial
+                    [[RuntimeStatus instance] initial];//加好友更新
+                    [self freshTable];
                 } else {
-                    
+                    NSLog(@"Add friend %@ error %@", [RuntimeStatus instance].peerId, error);
                 }
             }];
+        } else {
+            
         }
-    }
-    
+    }];
 }
+//{
+//    NSDictionary *dict = notification.userInfo;
+//    NSString *peerid = [dict objectForKey:@"fromid"];
+//    dict = [dict objectForKey:@"cmd"];
+//    NSString *str = [dict objectForKey:@"cmd_type"];
+//    if ([str isEqualToString:ADD_FRIEND_CMD_ACK] ) {
+//        str = [dict objectForKey:@"ack_value"];
+//        if ([str isEqualToString:@"OK"])
+//        {
+//            AVQuery * query = [AVUser query];
+//            [query whereKey:@"username" equalTo:peerid];
+//            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//                if (error == nil) {
+//                    AVUser  *peerUser = [objects firstObject];
+//                    
+//                    if (peerUser == nil) {
+//                        //TODO
+//                        return;
+//                    }
+//                    
+//                    [[AVUser currentUser] follow:peerUser.objectId andCallback:^(BOOL succeeded, NSError *error) {
+//                        if (succeeded) {
+//                            NSLog(@"Add friend %@ successful", [RuntimeStatus instance].peerId);
+//                            //TODO: just need to add one user to friend list, no need to call initial
+//                            [[RuntimeStatus instance] initial];//加好友更新
+//                            [self freshTable];
+//                        } else {
+//                            NSLog(@"Add friend %@ error %@", [RuntimeStatus instance].peerId, error);
+//                        }
+//                    }];
+//                } else {
+//                    
+//                }
+//            }];
+//        }
+//    }
+//    
+//}
 
 
 - (void)freshTable{
@@ -139,7 +173,7 @@
         
     }];
     
-    [[CDSessionManager sharedInstance] sendAddFriendRequestAck:@"OK" toPeerId:[RuntimeStatus instance].peerId];
+//    [[CDSessionManager sharedInstance] sendAddFriendRequestAck:@"OK" toPeerId:[RuntimeStatus instance].peerId];
     
     
 }
@@ -210,6 +244,14 @@
         cell.nickName.text = userInfo.nickname;
         cell.state.text = @"state";
         cell.starNumber.text = @"5";
+        if ([[CDSessionManager sharedInstance] peerIdIsOnline:userInfo.userName] == YES)
+        {
+            cell.online.text = @"在线";
+        }
+        else
+        {
+            cell.online.text = @"不在线";
+        }
         cell.signature.text = [[RuntimeStatus instance] getLevelString:userInfo.score];
         UIImage *headImage;
         headImage = userInfo.headImage;
@@ -218,7 +260,7 @@
         headImage = [UIImage imageNamed:@"liaotiankuang"];
         UIImageView *imageview = [[UIImageView alloc]initWithImage:headImage];
         cell.backgroundView = imageview;
-        cell.backgroundView.alpha = 0.8;
+        cell.backgroundView.alpha = 0.9;
         return  cell;
     }
 }
