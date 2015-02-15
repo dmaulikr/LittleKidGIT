@@ -31,7 +31,13 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshTable) name:NOTIFI_GET_FRIEND_LIST object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveAddFriendRequest:) name:NOTIFICATION_ADD_FRIEND_UPDATED object:nil]; //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveAddFriendRequestAck:) name:NOTIFICATION_ADD_FRIEND_ACK_UPDATED object:nil]; //注册通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receveStatus:) name:NOTIFICATION_ReceiveStatus object:nil]; //注册通知
     
+}
+
+- (void) receveStatus:(NSNotification *)notification
+{
+    [self freshTable];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -238,6 +244,14 @@
         cell.nickName.text = userInfo.nickname;
         cell.state.text = @"state";
         cell.starNumber.text = @"5";
+        if ([[CDSessionManager sharedInstance] peerIdIsOnline:userInfo.userName] == YES)
+        {
+            cell.online.text = @"在线";
+        }
+        else
+        {
+            cell.online.text = @"不在线";
+        }
         cell.signature.text = [[RuntimeStatus instance] getLevelString:userInfo.score];
         UIImage *headImage;
         headImage = userInfo.headImage;
