@@ -51,45 +51,6 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="head.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ABZ-hT-g1c">
-                                <rect key="frame" x="115" y="93" width="80" height="80"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="510-kj-jDS">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="80"/>
-                                    </constraint>
-                                    <constraint firstAttribute="width" constant="40" id="8aZ-aa-V4F">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="80"/>
-                                    </constraint>
-                                    <constraint firstAttribute="height" constant="80" id="Jj1-TF-5bX">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="200"/>
-                                    </constraint>
-                                    <constraint firstAttribute="width" constant="80" id="QGs-go-s0s">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="200"/>
-                                    </constraint>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="510-kj-jDS"/>
-                                        <exclude reference="8aZ-aa-V4F"/>
-                                        <exclude reference="Jj1-TF-5bX"/>
-                                        <exclude reference="QGs-go-s0s"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="153" y="93" width="94" height="94"/>
-                                    <mask key="constraints">
-                                        <include reference="510-kj-jDS"/>
-                                        <include reference="8aZ-aa-V4F"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                    <rect key="frame" x="182" y="126" width="200" height="200"/>
-                                    <mask key="constraints">
-                                        <include reference="Jj1-TF-5bX"/>
-                                        <include reference="QGs-go-s0s"/>
-                                    </mask>
-                                </variation>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yca-k7-SeU">
                                 <rect key="frame" x="168" y="438" width="152" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -287,10 +248,50 @@
                                     <segue destination="Gme-1v-GV1" kind="show" id="5GQ-Oj-kHY"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="head.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ABZ-hT-g1c">
+                                <rect key="frame" x="115" y="93" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="510-kj-jDS">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="80"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="40" id="8aZ-aa-V4F">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="80"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="80" id="Jj1-TF-5bX">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="200"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="80" id="QGs-go-s0s">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="200"/>
+                                    </constraint>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="510-kj-jDS"/>
+                                        <exclude reference="8aZ-aa-V4F"/>
+                                        <exclude reference="Jj1-TF-5bX"/>
+                                        <exclude reference="QGs-go-s0s"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="153" y="93" width="94" height="94"/>
+                                    <mask key="constraints">
+                                        <include reference="510-kj-jDS"/>
+                                        <include reference="8aZ-aa-V4F"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                    <rect key="frame" x="182" y="126" width="200" height="200"/>
+                                    <mask key="constraints">
+                                        <include reference="Jj1-TF-5bX"/>
+                                        <include reference="QGs-go-s0s"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.7776003649635036" green="0.13554972627737227" blue="0.039575729927007301" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
+                            <constraint firstItem="RiU-cy-cHv" firstAttribute="top" secondItem="5Z3-op-atZ" secondAttribute="bottom" constant="20" id="0Hw-0G-EKA"/>
                             <constraint firstAttribute="centerX" secondItem="5Z3-op-atZ" secondAttribute="centerX" id="3c7-ZB-Tbs"/>
                             <constraint firstItem="Yca-k7-SeU" firstAttribute="top" secondItem="G5E-Fg-wmS" secondAttribute="bottom" constant="12" id="5kP-Mq-Fdx">
                                 <variation key="heightClass=regular-widthClass=regular" constant="20"/>
@@ -301,7 +302,7 @@
                             <constraint firstItem="QXM-2V-fLI" firstAttribute="bottom" secondItem="ABZ-hT-g1c" secondAttribute="bottom" constant="-27" id="AhB-tB-FYZ">
                                 <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                             </constraint>
-                            <constraint firstItem="ABZ-hT-g1c" firstAttribute="top" secondItem="qNk-3j-XZs" secondAttribute="bottom" constant="62" id="Cbb-GT-yLj"/>
+                            <constraint firstItem="ABZ-hT-g1c" firstAttribute="top" secondItem="qNk-3j-XZs" secondAttribute="bottom" constant="22" id="Cbb-GT-yLj"/>
                             <constraint firstAttribute="centerX" secondItem="K6n-UZ-0ZN" secondAttribute="centerX" id="CsY-om-Oi5"/>
                             <constraint firstItem="n1u-ic-B87" firstAttribute="top" secondItem="Tu2-f5-JWC" secondAttribute="bottom" id="D7E-EE-Nm0"/>
                             <constraint firstAttribute="trailing" secondItem="QXM-2V-fLI" secondAttribute="trailing" id="ERD-XC-oMV"/>
@@ -323,7 +324,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Yca-k7-SeU" secondAttribute="trailing" constant="50" id="O68-di-q5z">
                                 <variation key="heightClass=regular-widthClass=compact" constant="50"/>
                             </constraint>
-                            <constraint firstItem="5Z3-op-atZ" firstAttribute="top" secondItem="K6n-UZ-0ZN" secondAttribute="bottom" constant="46" id="SPI-dE-OY4"/>
+                            <constraint firstItem="5Z3-op-atZ" firstAttribute="top" secondItem="K6n-UZ-0ZN" secondAttribute="bottom" constant="26" id="SPI-dE-OY4"/>
                             <constraint firstItem="G5E-Fg-wmS" firstAttribute="centerY" secondItem="RiU-cy-cHv" secondAttribute="centerY" id="TnP-wV-xOh"/>
                             <constraint firstAttribute="centerY" secondItem="K6n-UZ-0ZN" secondAttribute="centerY" id="Ugb-x4-MMz"/>
                             <constraint firstItem="RiU-cy-cHv" firstAttribute="firstBaseline" secondItem="G5E-Fg-wmS" secondAttribute="firstBaseline" id="VAX-QQ-p06"/>
@@ -608,6 +609,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="dqy-jc-LZB" secondAttribute="trailing" constant="20" id="87m-zw-ZLW"/>
                             <constraint firstItem="dwA-Lc-SFy" firstAttribute="leading" secondItem="eKV-EZ-3fe" secondAttribute="trailing" constant="-250" id="937-Pf-zIX"/>
                             <constraint firstItem="K4F-Lc-487" firstAttribute="top" secondItem="FeN-Tw-RRk" secondAttribute="bottom" id="9eB-d5-MaF"/>
+                            <constraint firstItem="UsK-wY-gDj" firstAttribute="bottom" secondItem="dwA-Lc-SFy" secondAttribute="bottom" constant="-5" id="A6m-Sf-U0c"/>
                             <constraint firstItem="dqy-jc-LZB" firstAttribute="top" secondItem="dwA-Lc-SFy" secondAttribute="top" constant="65" id="EtV-Lj-R20"/>
                             <constraint firstItem="eKV-EZ-3fe" firstAttribute="leading" secondItem="wgD-6o-zlO" secondAttribute="leadingMargin" constant="20" id="H1x-al-e8b"/>
                             <constraint firstItem="GKW-fW-2sP" firstAttribute="top" secondItem="dqy-jc-LZB" secondAttribute="bottom" constant="20" id="Nj6-Fa-Vol"/>
@@ -629,7 +631,6 @@
                             </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="eKV-EZ-3fe" secondAttribute="trailing" constant="20" id="tpR-cb-KD8"/>
                             <constraint firstItem="GKW-fW-2sP" firstAttribute="leading" secondItem="wgD-6o-zlO" secondAttribute="leadingMargin" constant="20" id="uSl-Za-gDm"/>
-                            <constraint firstItem="FeN-Tw-RRk" firstAttribute="top" secondItem="UsK-wY-gDj" secondAttribute="bottom" constant="27" id="xgD-GL-6g0"/>
                             <constraint firstItem="dwA-Lc-SFy" firstAttribute="top" secondItem="x2X-Yx-7Hh" secondAttribute="bottom" constant="61" id="zCh-ss-kZl"/>
                         </constraints>
                         <variation key="default">
@@ -1075,7 +1076,7 @@
         <!--Invite Play View Controller-->
         <scene sceneID="HLK-PP-KKv">
             <objects>
-                <viewController storyboardIdentifier="InvitePlayViewController" id="v0Z-gX-oEq" customClass="InvitePlayViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InvitePlayViewController" hidesBottomBarWhenPushed="YES" id="v0Z-gX-oEq" customClass="InvitePlayViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8pp-EV-1DF"/>
                         <viewControllerLayoutGuide type="bottom" id="hgW-4b-vGq"/>
@@ -2301,7 +2302,7 @@
                                 <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="281" y="576" width="39" height="25"/>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="447" y="418" width="39" height="25"/>
                                 </variation>
                             </label>
@@ -2378,7 +2379,7 @@
                                         <include reference="844-wy-Y32"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="372" y="398" width="45" height="45"/>
                                     <mask key="constraints">
                                         <include reference="nqt-sO-P56"/>
@@ -2848,7 +2849,7 @@
         <!--Invated Play View Controller-->
         <scene sceneID="nh1-cd-rkq">
             <objects>
-                <viewController storyboardIdentifier="invatedPlayViewController" id="5da-39-GNy" customClass="invatedPlayViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="invatedPlayViewController" hidesBottomBarWhenPushed="YES" id="5da-39-GNy" customClass="invatedPlayViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ios-5U-oJe"/>
                         <viewControllerLayoutGuide type="bottom" id="Yld-kR-w1i"/>

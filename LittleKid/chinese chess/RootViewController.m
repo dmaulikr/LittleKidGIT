@@ -433,11 +433,11 @@ static int seconds = 180;
     [self.view addSubview:image2];
     //添加转盘
     CGFloat x = image_backgroup.frame.size.width;
-    CGFloat disk_width = x*5/7;
-    CGFloat disk_starty = 175;
+    CGFloat disk_width = image_backgroup.frame.size.height*0.4;
+    CGFloat disk_starty = image_backgroup.frame.size.height * 0.30;
     
     UIImageView *image_disk = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"抽奖盘"]];
-    image_disk.frame = CGRectMake(x/7, disk_starty, disk_width , disk_width);
+    image_disk.frame = CGRectMake(x/2- disk_width/2, disk_starty, disk_width , disk_width);
     image1 = image_disk;
     [self.view addSubview:image1];
     
@@ -450,7 +450,7 @@ static int seconds = 180;
     
     //添加按钮
     self.btn_start = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    self.btn_start.frame = CGRectMake(x/2 - 75, disk_starty + disk_width +60, 150.0, 40.0);
+    self.btn_start.frame = CGRectMake(x/2 - 75, disk_starty + disk_width + image_backgroup.frame.size.height * 0.1, 150.0, 40.0);
     [self.btn_start setBackgroundImage:[UIImage imageNamed:@"抽奖按键"] forState:UIControlStateNormal];
 //    [self.btn_start setTitle:@"抽奖" ];
     [self.btn_start addTarget:self action:@selector(choujiang) forControlEvents:UIControlEventTouchUpInside];
