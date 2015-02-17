@@ -8,12 +8,10 @@
 
 #import "CDChatRoomController.h"
 #import "CDSessionManager.h"
-#import "CDChatDetailController.h"
 #import "QBImagePickerController.h"
 #import "UIImage+Resize.h"
 #import "User.h"
 #import <AVFoundation/AVFoundation.h>
-#import "CDContactDetailController.h"
 #import "InvitePlayViewController.h"
 #import "RuntimeStatus.h"
 
@@ -110,16 +108,7 @@
     _timestampArray = hasTimestampArray;
 }
 
-- (void)showDetail:(id)sender {
-    CDChatDetailController *controller = [[CDChatDetailController alloc] init];
-    controller.type = self.type;
-    if (self.type == CDChatRoomTypeSingle) {
-        controller.otherId = self.otherId;
-    } else if (self.type == CDChatRoomTypeGroup) {
-        controller.otherId = self.group.groupId;
-    }
-    [self.navigationController pushViewController:controller animated:YES];
-}
+
 
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

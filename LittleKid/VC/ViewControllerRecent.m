@@ -8,7 +8,6 @@
 
 #import "ViewControllerRecent.h"
 #import "RecentTableViewCell.h"
-#import "ViewControllerChat.h"
 #import "CDSessionManager.h"
 #import "CDChatRoomController.h"
 #import "InvitePlayViewController.h"
