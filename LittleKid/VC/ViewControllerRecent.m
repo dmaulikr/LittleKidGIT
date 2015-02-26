@@ -178,7 +178,7 @@
         cell.lastMsg.text = @"语音";
     }
     else
-    cell.lastMsg.text = @"现在可以聊天和下象棋了";
+    cell.lastMsg.text = @"现在可以下棋了";
     str = [chatroom objectForKey:@"unreadmsg"];
     [cell.unreadmsg setTitle:str forState:UIControlStateNormal];
     if ([str intValue] == 0) {

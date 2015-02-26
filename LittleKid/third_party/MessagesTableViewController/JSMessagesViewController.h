@@ -72,6 +72,7 @@ typedef enum {
 - (JSMessagesViewTimestampPolicy)timestampPolicy;
 - (JSMessagesViewAvatarPolicy)avatarPolicy;
 - (JSAvatarStyle)avatarStyle;
+- (JSBubbleisRead)isreadForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @optional
 - (BOOL)hasTimestampForRowAtIndexPath:(NSIndexPath *)indexPath;

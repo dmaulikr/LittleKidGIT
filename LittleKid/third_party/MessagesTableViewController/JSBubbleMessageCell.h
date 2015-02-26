@@ -62,6 +62,7 @@ typedef enum {
 #pragma mark - Message cell
 - (void)setName:(NSString *)name;
 - (void)setMessage:(NSString *)msg;
+- (void)setisRead:(JSBubbleisRead)isread;
 - (void)setMedia:(id)data;
 - (void)setTimestamp:(NSDate *)date;
 - (void)setAvatarImage:(UIImage *)image;

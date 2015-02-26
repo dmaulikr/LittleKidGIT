@@ -195,6 +195,7 @@ CGFloat const kJSAvatarSize = 100.0f;
     soundlengthRect.origin.y +=15;
     UILabel *label = [[UILabel alloc]initWithFrame:soundlengthRect];
     label.text = [NSString stringWithFormat:@"%ds",soundLength];
+    
     NSMutableParagraphStyle* paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 				[paragraphStyle setAlignment:NSTextAlignmentLeft];
 				[paragraphStyle setLineBreakMode:NSLineBreakByWordWrapping];
@@ -202,6 +203,12 @@ CGFloat const kJSAvatarSize = 100.0f;
 				NSDictionary* attributes = @{NSFontAttributeName: [JSBubbleView font],
                                              NSParagraphStyleAttributeName: paragraphStyle};
     [label.text drawInRect:soundlengthRect withAttributes:attributes];
+    soundlengthRect.origin.x +=60;
+    soundlengthRect.size.height = soundlengthRect.size.width = 20;
+    if (self.isread == JSBubbleUnRead) {
+        UIImage *anniu = [UIImage imageNamed:@"anniu"];
+        [anniu drawInRect:soundlengthRect];
+    }
 	if (self.mediaType == JSBubbleMediaTypeText)
 	{
         CGSize textSize = [JSBubbleView textSizeForText:self.text];

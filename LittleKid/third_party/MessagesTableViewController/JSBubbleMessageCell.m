@@ -233,7 +233,10 @@
     self.bubbleView.text = msg;
 }
 
-
+- (void)setisRead:(JSBubbleisRead)isread
+{
+    self.bubbleView.isread = isread;
+}
 - (void)setMedia:(id)data
 {
 	if ([data isKindOfClass:[UIImage class]])

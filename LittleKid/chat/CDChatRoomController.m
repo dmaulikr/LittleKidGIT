@@ -283,6 +283,14 @@
     return JSAvatarStyleCircle;
 }
 
+- (JSBubbleisRead)isreadForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([[[self.messages objectAtIndex:indexPath.row] objectForKey:@"isread"]isEqualToString:@"read" ]){
+        return JSBubbleRead;
+    }
+    else
+        return JSBubbleUnRead;
+}
 - (JSInputBarStyle)inputBarStyle
 {
     /*

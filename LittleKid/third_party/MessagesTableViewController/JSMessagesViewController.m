@@ -283,7 +283,7 @@
     JSBubbleMessageStyle bubbleStyle = [self.delegate messageStyleForRowAtIndexPath:indexPath];//
     JSBubbleMediaType mediaType = [self.delegate messageMediaTypeForRowAtIndexPath:indexPath];
     JSAvatarStyle avatarStyle = [self.delegate avatarStyle];
-    
+    JSBubbleisRead isread = [self.delegate isreadForRowAtIndexPath:indexPath];
     BOOL hasTimestamp = [self shouldHaveTimestampForRowAtIndexPath:indexPath];
     BOOL hasName = [self shouldHaveNameForRowAtIndexPath:indexPath];
     BOOL hasAvatar = [self shouldHaveAvatarForRowAtIndexPath:indexPath];
@@ -321,7 +321,7 @@
     
 	if (kAllowsMedia)
 		[cell setMedia:[self.dataSource dataForRowAtIndexPath:indexPath]];
-    
+    [cell setisRead:isread];
     [cell setMessage:[self.dataSource textForRowAtIndexPath:indexPath]];
     [cell setBackgroundColor:tableView.backgroundColor];
     

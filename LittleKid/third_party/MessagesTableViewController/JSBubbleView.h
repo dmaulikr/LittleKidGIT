@@ -48,6 +48,11 @@ typedef enum {
 }JSBubbleMediaType;
 
 typedef enum {
+    JSBubbleRead = 0,
+    JSBubbleUnRead,
+}JSBubbleisRead;
+
+typedef enum {
     JSBubbleMessageStyleDefault = 0,
     JSBubbleMessageStyleSquare,
     JSBubbleMessageStyleDefaultGreen,
@@ -58,6 +63,7 @@ typedef enum {
 @interface JSBubbleView : UIView
 
 @property (assign, nonatomic) JSBubbleMessageType type;
+@property (assign, nonatomic) JSBubbleisRead isread;
 @property (assign, nonatomic) JSBubbleMessageStyle style;
 @property (nonatomic,assign) JSBubbleMediaType mediaType;
 @property (copy, nonatomic) NSString *text;
