@@ -290,37 +290,63 @@
 -(NSString *)getLevelString:(NSNumber *)number//0-12
 {
     NSInteger i = number.integerValue;
-    i = i/10000;
-    switch (i) {
-        case 0:
-            return @"九级棋士";
-        case 1:
-            return @"八级棋士";
-        case 2:
-            return @"七级棋士";
-        case 3:
-            return @"六级棋士";
-        case 4:
-            return @"五级棋士";
-        case 5:
-            return @"四级棋士";
-        case 6:
-            return @"三级棋士";
-        case 7:
-            return @"二级棋士";
-        case 8:
-            return @"一级棋士";
-        case 9:
-            return @"三级大师";
-        case 10:
-            return @"二级大师";
-        case 11:
-            return @"一级大师";
-        case 12:
-            return @"特级大师";
-        default:
-            return nil;
+    NSString *levelstr = [[NSString alloc]initWithFormat:@"九级棋士"];
+    if (i<10000) {
+        levelstr = @"九级棋士";
     }
+    else if (i<12000)
+    {
+        levelstr = @"八级棋士";
+    }
+    else if (i<15000)
+    {
+        levelstr = @"七级棋士";
+    }
+    else if (i<19000)
+    {
+        levelstr = @"六级棋士";
+    }
+    else if (i<24000)
+    {
+        levelstr = @"五级棋士";
+    }
+    else if (i<30000)
+    {
+        levelstr = @"四级棋士";
+    }
+    else if (i<37000)
+    {
+        levelstr = @"三级棋士";
+    }
+    else if (i<45000)
+    {
+        levelstr = @"二级棋士";
+    }
+    else if (i<54000)
+    {
+        levelstr = @"一级棋士";
+    }
+    else if (i<64000)
+    {
+        levelstr = @"三级大师";
+    }
+    else if (i<75000)
+    {
+        levelstr = @"二级大师";
+    }
+    else if (i<87000)
+    {
+        levelstr = @"一级大师";
+    }
+    else if (i<100000)
+    {
+        levelstr = @"特级大师";
+    }
+    else if (i>=100000)
+    {
+        levelstr = @"国手";
+    }
+    return levelstr;
 }
 - (UIImage *)scaleToSize:(UIImage *)img size:(CGSize)size{
     // 创建一个bitmap的context

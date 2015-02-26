@@ -51,43 +51,8 @@
     int score = [[RuntimeStatus instance].userInfo.score intValue];
 //    int needscore = 10000 - score%10000;
     self.nowScore.text = [NSString stringWithFormat:@"%d",score];
-    self.level.text = [self getGradeForNumber:[RuntimeStatus instance].userInfo.score];
+    self.level.text = [[RuntimeStatus instance]getLevelString:[RuntimeStatus instance].userInfo.score];
     
-}
--(NSString *)getGradeForNumber:(NSNumber *)number//0-12
-{
-    NSInteger i = number.integerValue;
-    i = i/10000;
-    switch (i) {
-        case 0:
-            return @"九级棋士";
-        case 1:
-            return @"八级棋士";
-        case 2:
-            return @"七级棋士";
-        case 3:
-            return @"六级棋士";
-        case 4:
-            return @"五级棋士";
-        case 5:
-            return @"四级棋士";
-        case 6:
-            return @"三级棋士";
-        case 7:
-            return @"二级棋士";
-        case 8:
-            return @"一级棋士";
-        case 9:
-            return @"三级大师";
-        case 10:
-            return @"二级大师";
-        case 11:
-            return @"一级大师";
-        case 12:
-            return @"特级大师";
-        default:
-            return @"特级大师";
-    }
 }
 - (void)viewWillDisappear:(BOOL)animated{
     

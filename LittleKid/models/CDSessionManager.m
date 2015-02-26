@@ -37,7 +37,8 @@ static BOOL initialized = NO;
     static NSString *databasePath = nil;
     if (!databasePath) {
         NSString *cacheDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        databasePath = [cacheDirectory stringByAppendingPathComponent:@"chat.db"];
+        NSString *fileName = [NSString stringWithFormat:@"chat-%@.db", [AVUser currentUser].username];
+        databasePath = [cacheDirectory stringByAppendingPathComponent:fileName];
     }
     return databasePath;
 }
@@ -65,7 +66,7 @@ static BOOL initialized = NO;
 
 - (void)commonInit {
     if (![_database tableExists:@"messages"]) {
-        if ([_database executeUpdate:@"create table \"messages\" (\"fromid\" text, \"toid\" text, \"type\" text, \"message\" text, \"object\" text, \"time\" integer, \"avfile\" blob)"]) {
+        if ([_database executeUpdate:@"create table \"messages\" (\"fromid\" text, \"toid\" text, \"type\" text, \"message\" text, \"isread\" text, \"object\" text, \"time\" integer, \"avfile\" blob)"]) {
             NSLog(@"creat success");
         }
     }
@@ -391,8 +392,9 @@ static BOOL initialized = NO;
     [dict setObject:object.objectId forKey:@"object"];
     NSData *filedata = [file getData];
     [dict setObject:filedata forKey:@"filedata"];
+    [dict setObject:@"read" forKey:@"isread"];//是否已读
     [dict setObject:[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] forKey:@"time"];
-    if ([_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"object\", \"time\", \"avfile\") values (:fromid, :toid, :type, :object, :time, :filedata)" withParameterDictionary:dict]) {
+    if ([_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"isread\", \"object\", \"time\", \"avfile\") values (:fromid, :toid, :type, :isread, :object, :time, :filedata)" withParameterDictionary:dict]) {
         NSLog(@"database insert sucess");
     }
     
@@ -451,7 +453,7 @@ static BOOL initialized = NO;
 
 - (NSArray *)getMessagesForPeerId:(NSString *)peerId {
     NSString *selfId = _session.peerId;
-    FMResultSet *rs = [_database executeQuery:@"select \"fromid\", \"toid\", \"type\", \"message\", \"object\", \"time\", \"avfile\" from \"messages\" where (\"fromid\"=? and \"toid\"=?) or (\"fromid\"=? and \"toid\"=?)" withArgumentsInArray:@[selfId, peerId, peerId, selfId]];
+    FMResultSet *rs = [_database executeQuery:@"select \"fromid\", \"toid\", \"type\", \"message\" ,\"isread\", \"object\", \"time\", \"avfile\" from \"messages\" where (\"fromid\"=? and \"toid\"=?) or (\"fromid\"=? and \"toid\"=?)" withArgumentsInArray:@[selfId, peerId, peerId, selfId]];
     NSMutableArray *result = [NSMutableArray array];
     while ([rs next]) {
         NSString *fromid = [rs stringForColumn:@"fromid"];
@@ -459,15 +461,16 @@ static BOOL initialized = NO;
         double time = [rs doubleForColumn:@"time"];
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:time];
         NSString *type = [rs stringForColumn:@"type"];
+        NSString *isread = [rs stringForColumn:@"isread"];
         NSData *data = [rs dataForColumn:@"avfile"];
         AVFile *file = [AVFile fileWithData:data];
         if ([type isEqualToString:@"text"]) {
             NSString *message = [rs stringForColumn:@"message"];
-            NSDictionary *dict = @{@"fromid":fromid, @"toid":toid, @"type":type, @"message":message, @"time":date};
+            NSDictionary *dict = @{@"fromid":fromid, @"toid":toid, @"type":type, @"isread":isread, @"message":message, @"time":date};
             [result addObject:dict];
         } else {
             NSString *object = [rs stringForColumn:@"object"];
-            NSDictionary *dict = @{@"fromid":fromid, @"toid":toid, @"type":type, @"object":object, @"time":date,@"avfile":file};
+            NSDictionary *dict = @{@"fromid":fromid, @"toid":toid, @"type":type, @"isread":isread, @"object":object, @"time":date,@"avfile":file};
             [result addObject:dict];
         }
     }
@@ -618,7 +621,8 @@ static BOOL initialized = NO;
                 
                 NSData *filedata = [avfile getData];
                 [dict setObject:filedata forKey:@"avfile"];
-                [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"object\", \"time\", \"avfile\") values (:fromid, :toid, :type, :object, :time, :avfile)" withParameterDictionary:dict];
+                [dict setObject:@"unread" forKey:@"isread"];
+                [_database executeUpdate:@"insert into \"messages\" (\"fromid\", \"toid\", \"type\", \"isread\", \"object\", \"time\", \"avfile\") values (:fromid, :toid, :type, :isread, :object, :time, :avfile)" withParameterDictionary:dict];
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_MESSAGE_UPDATED object:session userInfo:dict];
                 return ;
             }];

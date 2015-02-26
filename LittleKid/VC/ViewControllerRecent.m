@@ -33,11 +33,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshRecentContacts:) name:NOTIFI_GET_RECENT_MSG object:nil];
     self.headImage = [UIImage imageNamed:@"head.jpg"];
     self.iconImage = [UIImage imageNamed:@"5.png"];
-//    [self startFetchUserList];
-//    [[CDSessionManager sharedInstance] clearData];
-//    [[CDSessionManager sharedInstance] addChatWithPeerId:@"15926305768"];
-//    [[CDSessionManager sharedInstance] addChatWithPeerId:@"13437251599"];
-//    [[CDSessionManager sharedInstance] addChatWithPeerId:@"13451825813"];
     [self waitStatus];
     UIImageView *imageview = [[UIImageView alloc] initWithFrame:self.view.bounds];
     [imageview setImage:[UIImage imageNamed:@"zuijin_background"]];
@@ -75,25 +70,27 @@
 - (void)loadList:(NSNotification *) notification
 {
     NSMutableArray *usrList = [[NSMutableArray alloc]init];
-    for(NSMutableDictionary *chatRoom in [[CDSessionManager sharedInstance] chatRooms])
+//    for(NSMutableDictionary *chatRoom in [[CDSessionManager sharedInstance] chatRooms])
+    for (UserInfo *userinfo in [RuntimeStatus instance].friends)
     {
-        if (chatRoom == nil) {
-            return ;
-        }
+
         NSMutableDictionary * dict = [[NSMutableDictionary alloc]init];
-        CDChatRoomType type = [[chatRoom objectForKey:@"type"] integerValue];
-        NSString *otherid = [chatRoom objectForKey:@"otherid"];
-        NSMutableString *nameString = [[NSMutableString alloc] init];
-        if (type == CDChatRoomTypeGroup) {
-            [nameString appendFormat:@"group:%@", otherid];
-        } else {
-            [nameString appendFormat:@"%@", otherid];
-        }
+        NSString *otherid = userinfo.userName;
         [dict setObject:otherid forKey:@"otherid"];
-        [dict setObject:@"0" forKey:@"unreadmsg"];
+//        [dict setObject:@"0" forKey:@"unreadmsg"];
         NSArray *messages = nil;
+        [[CDSessionManager sharedInstance]addChatWithPeerId:otherid];
         messages = [[CDSessionManager sharedInstance] getMessagesForPeerId:otherid];
         self.messages = messages;
+        int unreadcount = 0;
+        for (NSDictionary *message in self.messages) {
+            NSString *isreadstr = [message objectForKey:@"isread"];
+            if ([isreadstr isEqualToString:@"unread"]) {
+                unreadcount ++;
+            }
+        }
+        NSString *unreadcountstr = [[NSString alloc]initWithFormat:@"%d",unreadcount ];
+        [dict setObject:unreadcountstr forKey:@"unreadmsg"];
         NSString *lastmsgtype = [[self.messages lastObject] objectForKey:@"type"];
         NSString *lasttime = [[self.messages lastObject] objectForKey:@"time"];
         if (lastmsgtype) {
@@ -181,7 +178,7 @@
         cell.lastMsg.text = @"语音";
     }
     else
-    cell.lastMsg.text = str;
+    cell.lastMsg.text = @"现在可以聊天和下象棋了";
     str = [chatroom objectForKey:@"unreadmsg"];
     [cell.unreadmsg setTitle:str forState:UIControlStateNormal];
     if ([str intValue] == 0) {

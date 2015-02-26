@@ -114,10 +114,10 @@ static  BOOL isShouldChessPlayer = YES;
     UILabel *opponentgrade = [[UILabel alloc]initWithFrame:CGRectMake(mainrect.size.width/2+photowidth/2+mainrect.size.height/30, mainrect.size.height*0.05+mainrect.size.width/16, mainrect.size.width/4, mainrect.size.width/16)];
     myname.text = [RuntimeStatus instance].userInfo.nickname;
     NSNumber *levernumber = [RuntimeStatus instance].userInfo.score;
-    mygrade.text = [self getGradeForNumber:levernumber];
+    mygrade.text = [[RuntimeStatus instance] getLevelString:levernumber];
     opponentname.text = [[RuntimeStatus instance] getFriendUserInfo:self.otherId].nickname;
     levernumber = [[RuntimeStatus instance] getFriendUserInfo:self.otherId].score;
-    opponentgrade.text = [self getGradeForNumber:levernumber];
+    opponentgrade.text = [[RuntimeStatus instance]getLevelString:levernumber];;
     self.mytime = [[UILabel alloc]initWithFrame:CGRectMake(mainrect.size.width/2-photowidth/2-mainrect.size.height/15, mainrect.size.height*0.9+mainrect.size.width/16, mainrect.size.width/4, mainrect.size.width/16)];
     self.opponenttime = [[UILabel alloc]initWithFrame:CGRectMake(mainrect.size.width/2-photowidth/2-mainrect.size.height/15, mainrect.size.height*0.05+mainrect.size.width/16, mainrect.size.width/4, mainrect.size.width/16)];
     self.mytime.font = self.opponenttime.font =[UIFont boldSystemFontOfSize:mainrect.size.width/32];
@@ -154,42 +154,6 @@ static  BOOL isShouldChessPlayer = YES;
     {
         self.mytime.hidden = YES;
         self.opponenttime.hidden = NO;
-    }
-}
-
--(NSString *)getGradeForNumber:(NSNumber *)number//0-12
-{
-    NSInteger i = number.integerValue;
-    i = i/10000;
-    switch (i) {
-        case 0:
-            return @"九级棋士";
-        case 1:
-            return @"八级棋士";
-        case 2:
-            return @"七级棋士";
-        case 3:
-            return @"六级棋士";
-        case 4:
-            return @"五级棋士";
-        case 5:
-            return @"四级棋士";
-        case 6:
-            return @"三级棋士";
-        case 7:
-            return @"二级棋士";
-        case 8:
-            return @"一级棋士";
-        case 9:
-            return @"三级大师";
-        case 10:
-            return @"二级大师";
-        case 11:
-            return @"一级大师";
-        case 12:
-            return @"特级大师";
-        default:
-            return nil;
     }
 }
 
@@ -304,12 +268,7 @@ static  BOOL isShouldChessPlayer = YES;
 }
 -(void)updatesendfinish:(NSNotification *)notify
 {
-    if (self.sendCmd == CHESS_CMD_MOVE) {
-        seconds = 180;
-        [self shouldPlayChange];
-        [self.cheseInterface moveComplete];
-        
-    }
+
 }
 #pragma mark --定时器
 
@@ -515,7 +474,7 @@ static int seconds = 180;
     [self.view addSubview:imageview];
     
     UILabel *ratiolabel = [[UILabel alloc]initWithFrame:CGRectMake(imageview.frame.origin.x + image_width/2 - 50, imageview.frame.origin.y +155, 100, 20)];
-    ratiolabel.text = [NSString stringWithFormat:@"%d * %d倍",(int)increaseScore,self.ratio];
+    ratiolabel.text = [NSString stringWithFormat:@"%d",(int)increaseScore*self.ratio];
     ratiolabel.textColor = [UIColor greenColor];
     ratiolabel.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:ratiolabel];
@@ -530,7 +489,12 @@ static int seconds = 180;
     [self.view addSubview:nowscorelabel];
     
     UILabel *needscorelabel = [[UILabel alloc]initWithFrame:CGRectMake(imageview.frame.origin.x + image_width/2 +15, imageview.frame.origin.y +220, 100, 30)];
-    int needscore = 10000- nowscore%10000;
+    int i = nowscore/10000;
+    int needscore = 9000;
+    for (int j = i + 1; j>0; j--) {
+        needscore += j*1000;
+    }
+    needscore = needscore - nowscore;
     needscorelabel.text = [NSString stringWithFormat:@"%d",needscore];
     needscorelabel.textColor = [UIColor whiteColor];
     needscorelabel.textAlignment = UITextAlignmentLeft;
@@ -567,94 +531,7 @@ static int seconds = 180;
 
 
 }
-//{
-//    //判断抽奖结果
-//    float ratio;
-//    if (orign >= 0.0 && orign < (0.5/3.0)) {
-//        ratio = 3;
-//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 一等奖，获得了3倍积分，共%d积分",3*increaseScore] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-//        [result setTag:56];
-//        [result show];
-//    }
-//    else if (orign >= (0.5/3.0) && orign < ((0.5/3.0)*2))
-//    {
-//        ratio = 1;
-//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 七等奖，获得了1倍积分，共%d积分",increaseScore] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-//        [result setTag:56];
-//        [result show];
-//    }else if (orign >= ((0.5/3.0)*2) && orign < ((0.5/3.0)*3))
-//    {
-//        ratio = 1.2;
-//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 六等奖，获得了1.2倍积分，共%d积分",(int)(increaseScore*1.2)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-//        [result setTag:56];
-//        [result show];
-//    }else if (orign >= (0.0+0.5) && orign < ((0.5/3.0)+0.5))
-//    {
-//        ratio = 1;
-//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 七等奖，获得了1倍积分，共%d积分",increaseScore] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-//        [result setTag:56];
-//        [result show];
-//    }else if (orign >= ((0.5/3.0)+0.5) && orign < (((0.5/3.0)*2)+0.5))
-//    {
-//        ratio = 1.5;
-//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 五等奖，获得了1.5倍积分，共%d积分",(int)(increaseScore*1.5)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-//        [result setTag:56];
-//        [result show];
-//    }else if (orign >= (((0.5/3.0)*2)+0.5) && orign < (((0.5/3.0)*3)+0.5))
-//    {
-//        ratio = 1;
-//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 七等奖，获得了1倍积分，共%d积分",(int)(increaseScore*1)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-//        [result setTag:56];
-//        [result show];
-//    }else if (orign >= (0.0+1.0) && orign < ((0.5/3.0)+1.0))
-//    {
-//        ratio = 1.8;
-//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 四等奖，获得了1.8倍积分，共%d积分",(int)(increaseScore*1.8)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-//        [result setTag:56];
-//        [result show];
-//    }else if (orign >= ((0.5/3.0)+1.0) && orign < (((0.5/3.0)*2)+1.0))
-//    {
-//        ratio = 1;
-//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 七等奖，获得了1倍积分，共%d积分",(int)(increaseScore*1)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-//        [result setTag:56];
-//        [result show];
-//    }else if (orign >= (((0.5/3.0)*2)+1.0) && orign < (((0.5/3.0)*3)+1.0))
-//    {
-//        ratio = 2;
-//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 三等奖，获得了2倍积分，共%d积分",(int)(increaseScore*2)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-//        [result setTag:56];
-//        [result show];
-//    }else if (orign >= (0.0+1.5) && orign < ((0.5/3.0)+1.5))
-//    {
-//        ratio = 1;
-//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 七等奖，获得了1倍积分，共%d积分",(int)(increaseScore*1)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-//        [result setTag:56];
-//        [result show];
-//    }else if (orign >= ((0.5/3.0)+1.5) && orign < (((0.5/3.0)*2)+1.5))
-//    {
-//        ratio = 2.5;
-//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 二等奖，获得了2.5倍积分，共%d积分",(int)(increaseScore*2.5)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-//        [result setTag:56];
-//        [result show];
-//    }else if (orign >= (((0.5/3.0)*2)+1.5) && orign < (((0.5/3.0)*3)+1.5))
-//    {
-//        ratio = 1;
-//        UIAlertView *result = [[UIAlertView alloc] initWithTitle:@"恭喜中奖！" message:[[NSString alloc]initWithFormat:@"您中了 七等奖，获得了1倍积分，共%d积分",(int)(increaseScore*1)] delegate:self cancelButtonTitle:@"领奖去！" otherButtonTitles: nil];
-//        [result setTag:56];
-//        [result show];
-//    }
-//    increaseScore = increaseScore *ratio;
-//    [RuntimeStatus instance].userInfo.score = [NSNumber numberWithInt:increaseScore];
-//    [[RuntimeStatus instance] saveUserInfo];
-//}
-//
-//#pragma mark -ViewControllerDelegate
-//
-//- (void)ViewControllerCancel:(ViewController *)Controller
-//{
-//    [self dismissViewControllerAnimated:YES completion:NULL];
-//    [self.delegate rootViewControllerCancel:self];
-//}
+
 
 #pragma mark - RNGridMenuDelegate
 - (void)turnoffMusic
@@ -704,6 +581,12 @@ static int seconds = 180;
     self.senddict = dict;
     self.sendCmd = CHESS_CMD_MOVE;
     [[CDSessionManager sharedInstance] sendPlayChess:self.senddict toPeerId:self.otherId];
+    if (self.sendCmd == CHESS_CMD_MOVE) {
+        seconds = 180;
+        [self shouldPlayChange];
+        [self.cheseInterface moveComplete];
+        
+    }
 }
 
 -(void) cheseInterRezult
