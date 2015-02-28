@@ -11,6 +11,7 @@
 #import "RootViewController.h"
 #import "RuntimeStatus.h"
 #import "CDSessionManager.h"
+#import "CheseTools.h"
 
 @interface InvitePlayViewController ()
 @property (strong,nonatomic) AVAudioPlayer *play;
@@ -29,6 +30,9 @@
 - (IBAction)onCancel{
     [self stopInvateMusic];
     [[CDSessionManager sharedInstance]cancelInvite:self.otherId];
+    NSString *chesscmdtype = [[NSString alloc]initWithFormat:@"%d", CHESS_CMD_DEFEAL];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:chesscmdtype,@"CHESS_CMD", nil];
+    [[CDSessionManager sharedInstance] sendPlayChess:dict toPeerId:self.otherId];
      [self.navigationController popViewControllerAnimated:YES];
     
 }

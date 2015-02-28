@@ -14,6 +14,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "InvitePlayViewController.h"
 #import "RuntimeStatus.h"
+#import "CheseTools.h"
 
 @interface CDChatRoomController () <JSMessagesViewDelegate, JSMessagesViewDataSource, QBImagePickerControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate> {
     NSMutableArray *_timestampArray;
