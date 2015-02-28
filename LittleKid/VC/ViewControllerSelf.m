@@ -79,7 +79,7 @@
     if (buttonIndex == 0) {
         if ([AVUser currentUser]) {
             [AVUser logOut];
-            [[CDSessionManager sharedInstance] clearData];
+ //           [[CDSessionManager sharedInstance] clearData];
             
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             

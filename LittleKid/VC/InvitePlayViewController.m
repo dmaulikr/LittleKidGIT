@@ -10,6 +10,7 @@
 #import "CDCommonDefine.h"
 #import "RootViewController.h"
 #import "RuntimeStatus.h"
+#import "CDSessionManager.h"
 
 @interface InvitePlayViewController ()
 @property (strong,nonatomic) AVAudioPlayer *play;
@@ -27,7 +28,8 @@
 }
 - (IBAction)onCancel{
     [self stopInvateMusic];
-    [self.navigationController popViewControllerAnimated:YES];
+    [[CDSessionManager sharedInstance]cancelInvite:self.otherId];
+     [self.navigationController popViewControllerAnimated:YES];
     
 }
 - (void)rootViewControllerCancel:(UIViewController *)Controller
@@ -64,6 +66,15 @@
     //    [self.btn_start setTitle:@"抽奖" ];
     [btn_start addTarget:self action:@selector(onCancel) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn_start];
+    
+    if ([[CDSessionManager sharedInstance]peerIdIsOnline:self.otherId] == NO) {
+        UILabel *offlineLabel = [[UILabel alloc]initWithFrame:CGRectMake((image_backgroup.frame.size.width - 150)/2, 320.0, 150.0, 40.0)];
+        offlineLabel.text = @"对方可能不在线";
+        offlineLabel.textColor = [UIColor redColor];
+        offlineLabel.textAlignment = UITextAlignmentCenter;
+        [self.view addSubview:offlineLabel];
+    }
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageUpdated:) name:NOTIFICATION_INVITE_PLAY_CHESS_ACK_UPDATED object:nil];
     // Do any additional setup after loading the view.
 }

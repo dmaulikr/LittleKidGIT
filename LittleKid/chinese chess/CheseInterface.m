@@ -425,6 +425,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
         
         
         [chesePieces removeFromSuperview];
+        [self moveComplete];
         
     }];
 }
@@ -559,7 +560,7 @@ int redChesePngIndex[16] = {100,101,102,103,104,103,102,101,100,105,105,106,106,
             _optionButton.layer.transform = CATransform3DTranslate(_optionButton.layer.transform, _pointLocation.x - _optionButton.frame.origin.x, _pointLocation.y - _optionButton.frame.origin.y, 0);
 
         } completion:^(BOOL finished) {
-           // [self moveComplete];
+           [self moveComplete];
         }];
     }
 }

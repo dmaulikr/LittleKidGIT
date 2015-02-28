@@ -78,9 +78,15 @@
     [btn_reject setBackgroundImage:[UIImage imageNamed:@"invatedreject"] forState:UIControlStateNormal];
     //    [self.btn_start setTitle:@"抽奖" ];
     [btn_reject addTarget:self action:@selector(reject) forControlEvents:UIControlEventTouchUpInside];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(cancelInvate:) name:NOTIFICATION_CANCEL_INVATE object:nil];
     [self.view addSubview:btn_reject];
     
     // Do any additional setup after loading the view.
+}
+- (void) cancelInvate:(NSNotification *) notify
+{
+    [self stopInvateMusic];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

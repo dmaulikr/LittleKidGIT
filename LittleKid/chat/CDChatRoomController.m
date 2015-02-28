@@ -360,6 +360,15 @@
     NSNumber *i = @(indexPath.row);
     AVFile *file = [_loadedData objectForKey:i];
     if (file) {
+        if ([[[self.messages objectAtIndex:indexPath.row] objectForKey:@"isread"] isEqualToString:@"unread"]) {
+            NSString *peerId = [[self.messages objectAtIndex:indexPath.row] objectForKey:@"fromid"];
+            NSString *objectId = [[self.messages objectAtIndex:indexPath.row] objectForKey:@"object"];
+            [[CDSessionManager sharedInstance]setUnreadToRead:peerId objectId:objectId];
+            self.messages = nil;
+            self.messages = [[CDSessionManager sharedInstance]getMessagesForPeerId:self.otherId];
+            [self.tableView reloadData];
+    //        [[self.messages objectAtIndex:indexPath.row] setObject:@"read" forKey:@"isread"];
+        }
         NSData *data = [file getData];
         int i = (int)data.length;
         NSLog(@"%d",i);

@@ -258,17 +258,18 @@ static  BOOL isShouldChessPlayer = YES;
 //        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络不正常" message:nil delegate:self cancelButtonTitle:@"确定"  otherButtonTitles:nil, nil];
 //        [alert show];
 //    }
+    
   
 }
 - (void)updatesendfailed:(NSNotification *)notify
 {
-        
-        [[CDSessionManager sharedInstance] sendPlayChess:self.senddict toPeerId:self.otherId];
+    NSLog(@"send failed");
+    [[CDSessionManager sharedInstance] sendPlayChess:self.senddict toPeerId:self.otherId];
    
 }
 -(void)updatesendfinish:(NSNotification *)notify
 {
-
+    NSLog(@"send finish");
 }
 #pragma mark --定时器
 
@@ -461,6 +462,19 @@ static int seconds = 180;
     orign = fmodf(orign, 2.0);
     
 }
+- (int) calculateUpgradeScore:(int) nowscore
+{
+    int needscore=0;
+    needscore = 9000;
+    for (int i =0; i<12; i++) {
+        needscore += i*1000;
+        if (nowscore < needscore) {
+            needscore = needscore - nowscore;
+            return needscore;
+        }
+    }
+    return needscore;
+}
 -(void) showchoujiangrezult
 {
     UIImageView *bacakGroundImage = [[UIImageView alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -475,7 +489,7 @@ static int seconds = 180;
     
     UILabel *ratiolabel = [[UILabel alloc]initWithFrame:CGRectMake(imageview.frame.origin.x + image_width/2 - 50, imageview.frame.origin.y +155, 100, 20)];
     ratiolabel.text = [NSString stringWithFormat:@"%d",(int)increaseScore*self.ratio];
-    ratiolabel.textColor = [UIColor greenColor];
+    ratiolabel.textColor = [UIColor redColor];
     ratiolabel.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:ratiolabel];
     
@@ -489,12 +503,7 @@ static int seconds = 180;
     [self.view addSubview:nowscorelabel];
     
     UILabel *needscorelabel = [[UILabel alloc]initWithFrame:CGRectMake(imageview.frame.origin.x + image_width/2 +15, imageview.frame.origin.y +220, 100, 30)];
-    int i = nowscore/10000;
-    int needscore = 9000;
-    for (int j = i + 1; j>0; j--) {
-        needscore += j*1000;
-    }
-    needscore = needscore - nowscore;
+    int needscore = [self calculateUpgradeScore:nowscore];
     needscorelabel.text = [NSString stringWithFormat:@"%d",needscore];
     needscorelabel.textColor = [UIColor whiteColor];
     needscorelabel.textAlignment = UITextAlignmentLeft;
@@ -584,7 +593,7 @@ static int seconds = 180;
     if (self.sendCmd == CHESS_CMD_MOVE) {
         seconds = 180;
         [self shouldPlayChange];
-        [self.cheseInterface moveComplete];
+ //       [self.cheseInterface moveComplete];
         
     }
 }

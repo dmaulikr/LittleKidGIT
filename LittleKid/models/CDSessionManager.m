@@ -217,14 +217,21 @@ static BOOL initialized = NO;
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:INVITE_PLAY_CHESS_CMD  forKey:@"cmd_type"];
-    [self sendCmd:dict toPeerId:peerId transient:YES];
+    [self sendCmd:dict toPeerId:peerId transient:NO];
 }
+- (void)cancelInvite:(NSString *)peerId
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    [dict setObject:CANCEL_INVITE forKey:@"cmd_type"];
+    [self sendCmd:dict toPeerId:peerId transient:NO];
+}
+
 - (void) sendPlayChess:(NSDictionary *) chessCmd toPeerId:(NSString *) peerId
 {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:PLAY_CHESS_CMD  forKey:@"cmd_type"];
     [dict addEntriesFromDictionary:chessCmd];
-    [self sendCmd:dict toPeerId:peerId requsetReceipt:YES];
+    [self sendCmd:dict toPeerId:peerId requsetReceipt:NO];
     
 }
 - (void) sendAddFriendRequestAck:(NSString *)ack toPeerId:(NSString *)peerId
@@ -240,7 +247,7 @@ static BOOL initialized = NO;
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     [dict setObject:INVITE_PLAY_CHESS_CMD_ACK  forKey:@"cmd_type"];
     [dict setObject:ack forKey:@"ack_value"];
-    [self sendCmd:dict toPeerId:peerId transient:YES];
+    [self sendCmd:dict toPeerId:peerId transient:NO];
 }
 /*
  *  发送命令@“dn”  @"type" @"cmd"  cmd的object 为dictionary  cmd_dictionary @"cmd_type" @""ack_value"
@@ -451,6 +458,19 @@ static BOOL initialized = NO;
 
 }
 
+-(void)setUnreadToRead:(NSString *)peerId objectId:(NSString *)object
+{
+    NSString *updateSql = [NSString stringWithFormat:
+                           @"UPDATE \"messages\" SET \"isread\" = '%@' WHERE \"fromid\" = '%@' and \"object\" = '%@'",
+                            @"read",peerId ,object];
+    BOOL res = [_database executeUpdate:updateSql];
+    if (!res) {
+        NSLog(@"error when update db table");
+    } else {
+        NSLog(@"success to update db table");
+    }
+}
+
 - (NSArray *)getMessagesForPeerId:(NSString *)peerId {
     NSString *selfId = _session.peerId;
     FMResultSet *rs = [_database executeQuery:@"select \"fromid\", \"toid\", \"type\", \"message\" ,\"isread\", \"object\", \"time\", \"avfile\" from \"messages\" where (\"fromid\"=? and \"toid\"=?) or (\"fromid\"=? and \"toid\"=?)" withArgumentsInArray:@[selfId, peerId, peerId, selfId]];
@@ -586,6 +606,13 @@ static BOOL initialized = NO;
             NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
             [dict setObject:cmdDict forKey:@"cmd"];
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_INVITE_PLAY_CHESS_UPDATED object:session userInfo:dict];
+            return;
+        }
+        else if ([cmd_type isEqualToString:CANCEL_INVITE])
+        {
+            NSDictionary * cmdDict = [jsonDict objectForKey:@"cmd"];
+            [dict setObject:cmdDict forKey:@"cmd"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CANCEL_INVATE object:session userInfo:dict];
             return;
         }
         else if ([cmd_type isEqualToString:PLAY_CHESS_CMD])

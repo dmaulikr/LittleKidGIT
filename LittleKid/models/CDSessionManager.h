@@ -38,6 +38,8 @@ typedef enum : NSUInteger {
 - (void)clearData;
 - (BOOL)isOpen;
 -(BOOL) peerIdIsOnline:(NSString *)peerId;
+- (void)cancelInvite:(NSString *)peerId;
+-(void)setUnreadToRead:(NSString *)peerId objectId:(NSString *)object;
 /*
  *  发送加好友命令
  *  @param peerId 对方的peer id
