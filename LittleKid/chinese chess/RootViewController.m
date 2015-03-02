@@ -169,15 +169,16 @@ static  BOOL isShouldChessPlayer = YES;
         }
         NSString *cmd = [dict objectForKey:@"CHESS_CMD"];
         NSInteger cmdindex = [cmd integerValue];
-        NSString *chess_x = [dict objectForKey:@"CHESS_X"];
-        NSString *chess_tag = [dict objectForKey:@"CHESS_TAG"];
-        NSInteger tag = [chess_tag integerValue];
-        _cheseInterface.optionButton = (UIButton *)[self.cheseInterface viewWithTag:tag];
+        
         //        NSLog(@"receve a data:%@",err);
         switch (cmdindex)
         {
             case CHESS_CMD_MOVE://MOVE
             {
+                NSString *chess_x = [dict objectForKey:@"CHESS_X"];
+                NSString *chess_tag = [dict objectForKey:@"CHESS_TAG"];
+                NSInteger tag = [chess_tag integerValue];
+                _cheseInterface.optionButton = (UIButton *)[self.cheseInterface viewWithTag:tag];
                 NSString *chess_y = [dict objectForKey:@"CHESS_Y"];
                 NSInteger x = [chess_x integerValue];
                 NSInteger y = [chess_y integerValue];
@@ -194,6 +195,9 @@ static  BOOL isShouldChessPlayer = YES;
                 break;
             case CHESS_CMD_REMOVE://REMOVE
             {
+                NSString *chess_tag = [dict objectForKey:@"CHESS_TAG"];
+                NSInteger tag = [chess_tag integerValue];
+                _cheseInterface.optionButton = (UIButton *)[self.cheseInterface viewWithTag:tag];
                 NSString *chess_newtag = [dict objectForKey:@"NEW_CHESS_TAG"];
                 NSInteger newtag = [chess_newtag integerValue];
                 UIButton *newbutton =(UIButton *) [self.cheseInterface viewWithTag:newtag];
