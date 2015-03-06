@@ -81,9 +81,10 @@
 #pragma mark - - register and callback
 - (void) registerNotifications: (UIApplication *)application{
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        // for iOS 8
+        // for iOS 8，注册APNS要两步
+        [[UIApplication sharedApplication] registerForRemoteNotifications];//注册远程推送
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];//配置远程推送设置
     } else {
         // for iOS 7 or iOS 6
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
@@ -92,14 +93,15 @@
 
 - (void)application:(UIApplication *)application
 didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings{
-    //判断用户允许的权限，做进一步处理，目前注册的过程只调用了这个方法，没调用下面两个方法
-    NSLog(@"without device token");
+    NSLog(@"did register user notify settings");
 }
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-//    NSString *token = [NSString stringWithFormat:@"%@", deviceToken];
-//    TheRuntime.pushToken= [dn stringByReplacingOccurrencesOfString:@" " withString:@""];
-//    NSLog(@"token......%@",TheRuntime.pushToken);
+    NSString *token = [NSString stringWithFormat:@"%@", deviceToken];
+    NSLog(@"device token: %@",token);
+    AVInstallation *currentInstallation = [AVInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackground];
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -108,9 +110,15 @@ didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSe
 }
 
 - (void)procLaunchOptios:(NSDictionary *)launchOptions{
-    NSDictionary *pushDict = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    NSDictionary *pushDict;
+    pushDict = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if(pushDict)
     {
+        
+    }
+    pushDict = nil;
+    pushDict = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (pushDict) {
         
     }
     //检查其他推送
