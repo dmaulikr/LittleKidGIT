@@ -24,6 +24,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //隐藏tabbar
+    self.tabBarController.tabBar.hidden = YES;
     
     self.nickText.delegate = self;
     //显示圆角
