@@ -17,7 +17,6 @@
 
 @interface ViewControllerAddFriend () <ZXingDelegate, UITextFieldDelegate, UIAlertViewDelegate,UISearchBarDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *cellNumberTextField;
 @property(strong, nonatomic) NSDictionary *toAddFriendInfoDict;
 @property (weak, nonatomic) IBOutlet UIImageView *barcodeSelfImgView;
 @property (weak, nonatomic) IBOutlet UISearchBar *cellNumberSearchBar;
@@ -30,6 +29,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"addFriend_beijing.png"]];
+    
+    
     self.cellNumberSearchBar.delegate = self;
     for(id cc in [self.cellNumberSearchBar subviews])
     {
