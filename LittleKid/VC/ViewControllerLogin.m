@@ -175,5 +175,15 @@
     NSLog(@"height--:%f",kbSize.height);
     
 }
+- (IBAction)forgetPassword {
+    
+    UIViewController *v1 = [UIViewController alloc];
+//    UIView *p = [];
+    NSLog(@"%@",v1);
+    [self.navigationController pushViewController:v1 animated:YES];
+}
+
+#pragma mark--实现找回密码页面
+
 
 @end
