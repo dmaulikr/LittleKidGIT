@@ -1885,11 +1885,8 @@
 				57AC90D81A71FEC6008F0892 /* bubble-default-incoming-green@2x.png in Resources */,
 				E4AC60401AAD910B001D5916 /* addFriend_scanImg.png in Resources */,
 				57AC90F71A71FEC6008F0892 /* input-bar-flat.png in Resources */,
-<<<<<<< HEAD
 				570E6F371AAD9CAA002175BC /* checked.png in Resources */,
-=======
 				E4AC60421AAD910B001D5916 /* addFriend_wodeerweima.png in Resources */,
->>>>>>> 7964cd763525e6b5db0cc286ef7b54aeb84b7487
 				570876041A5CF82100892B53 /* wo_bg_woblue.png in Resources */,
 				57AC90DC1A71FEC6008F0892 /* bubble-default-incoming@2x.png in Resources */,
 				572E3F6B1A63BA1300323683 /* yanzhengma_01.png in Resources */,
