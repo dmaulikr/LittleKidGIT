@@ -19,25 +19,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-//    if ( [[UIDevice currentDevice] systemVersion].floatValue >= 8.0 ) {
-//        CLLocationManager *clloc = [[CLLocationManager alloc] init];
-//        [clloc requestAlwaysAuthorization];
-//    }
-    //For leancloud initilization
-//    setenv("LOG_CURL", "YES", 0);
     [AVOSCloud setApplicationId:AVOSAppID clientKey:AVOSAppKey];
-    
-    
-    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
     UITableViewController* nextController = [storyboard instantiateViewControllerWithIdentifier:@"mainTabViewController"];
-
-    
     //if already sign up, just login directly
-    
     if ([AVUser currentUser]) {
-
         [self.window setRootViewController:nextController];
         [self.window makeKeyAndVisible];
         
@@ -47,7 +33,6 @@
     [self registerNotifications: application];
     //后台时有服务器推送，进入程序即调用下方法(可能)，此时可判断推送调用方法。remote推送是会自动调用的。
     [self procLaunchOptios:launchOptions];
-
 
     return YES;
 }
@@ -132,6 +117,18 @@ didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSe
 didReceiveRemoteNotification:(NSDictionary *)userInfo
 fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler{
     NSLog(@"%@",[userInfo description]);
+    if (application.applicationState == UIApplicationStateActive) {
+        // 转换成一个本地通知，显示到通知栏，你也可以直接显示出一个 alertView，只是那样稍显 aggressive：）
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        localNotification.userInfo = userInfo;
+        localNotification.soundName = UILocalNotificationDefaultSoundName;
+        localNotification.alertBody = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+        localNotification.fireDate = [NSDate date];
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    } else {
+        [AVAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
+    }
+    
 }
 
 //custom actions callback
