@@ -9,6 +9,7 @@
 #import "ViewControllerImpInfo.h"
 #import "RuntimeStatus.h"
 #import "UIImage+FixOrientation.h"
+#import "RadioButton.h"
 
 @interface ViewControllerImpInfo ()
 @property (strong, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -16,7 +17,7 @@
 @property(retain,nonatomic) UITextField *birthText;
 @property (strong, nonatomic) IBOutlet UITextField *nickText;
 @property (strong, nonatomic) IBOutlet UIButton *birthBtn;
-@property (strong, nonatomic) IBOutlet UISegmentedControl *sexText;
+@property (strong, nonatomic) IBOutlet UIImageView *sexImgView;
 
 @end
 
@@ -24,6 +25,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //加载性别选择
+    [self setRadioBtn];
     //隐藏tabbar
     self.tabBarController.tabBar.hidden = YES;
     
@@ -47,18 +51,6 @@
     NSString *strDate = [dateFormatter stringFromDate:[RuntimeStatus instance].userInfo.birthday];
     
     [self.birthBtn setTitle:strDate forState:UIControlStateNormal];
-    //TODO
-    //set gender
-    if ([[RuntimeStatus instance].userInfo.gender isEqualToString:@"boy"]) {
-        self.sexText.selectedSegmentIndex = 0;
-    }
-    else
-    {
-        self.sexText.selectedSegmentIndex = 1;
-    }
-    
-    //监听性别选择点击
-    [self.sexText addTarget:self action:@selector(sexSegmentAction) forControlEvents:UIControlEventValueChanged];
     
     //add--点击背景退出输入法
     UITapGestureRecognizer *gestureTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeKeyBoard)];
@@ -79,6 +71,46 @@
     return YES;
 }
 
+
+#pragma mark--绘制RadioButton
+
+-(void)setRadioBtn
+{
+    UIImage *maleImage = [UIImage imageNamed:@"maleimage"];
+    UIImage *famaleImage = [UIImage imageNamed:@"famaleimage"];
+    
+    NSMutableArray *buttons = [NSMutableArray arrayWithCapacity:2];
+    CGRect btnRect = CGRectMake(self.sexImgView.frame.origin.x + 80, self.sexImgView.frame.origin.y + self.sexImgView.frame.size.height - 3, 100, 30);
+    int i = 0;
+    for (UIImage *images in @[maleImage,famaleImage]) {
+        RadioButton* btn = [[RadioButton alloc] initWithFrame:btnRect];
+        [btn addTarget:self action:@selector(sexSegmentAction:) forControlEvents:UIControlEventValueChanged];
+        btn.tag = i++;
+        btnRect.origin.x += 70;
+        [btn setImage:[UIImage imageNamed:@"unchecked.png"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"checked.png"] forState:UIControlStateSelected];
+        btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        btn.titleEdgeInsets = UIEdgeInsetsMake(0, 6, 0, 0);
+        [self.view addSubview:btn];
+        
+        UIImageView *bg = [[UIImageView alloc] initWithFrame:CGRectMake(btn.frame.origin.x+25, btn.frame.origin.y, 30, 30)];
+        bg.image = images;
+        [self.view addSubview:bg];
+        [buttons addObject:btn];
+    }
+    
+    [buttons[0] setGroupButtons:buttons]; // Setting buttons into the group
+    
+    //set gender
+    if ([[RuntimeStatus instance].userInfo.gender isEqualToString:@"boy"]) {
+        [buttons[0] setSelected:YES];
+    }
+    else
+    {
+        [buttons[1] setSelected:YES];
+    }
+    
+}
 
 
 - (void)didReceiveMemoryWarning {
@@ -351,17 +383,21 @@
 
 #pragma mark--设置用户性别
 
--(void)sexSegmentAction
+-(void)sexSegmentAction:(RadioButton*)sender
 {
-    if(self.sexText.selectedSegmentIndex)
+    if(sender.selected)
     {
-        [RuntimeStatus instance].userInfo.gender = @"girl";
-    }
-    else
-    {
-        [RuntimeStatus instance].userInfo.gender = @"boy";
+        if(sender.tag == 0)
+        {
+            [RuntimeStatus instance].userInfo.gender = @"boy";
+        }
+        else
+        {
+            [RuntimeStatus instance].userInfo.gender = @"girl";
+        }
     }
     
     [[RuntimeStatus instance] saveUserInfo];
+    
 }
 @end

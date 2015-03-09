@@ -25,6 +25,13 @@
 		570CCD8D1A88C2900016FA1D /* RSKImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 570CCD871A88C2900016FA1D /* RSKImageScrollView.m */; };
 		570CCD8E1A88C2900016FA1D /* RSKTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 570CCD891A88C2900016FA1D /* RSKTouchView.m */; };
 		570CCD8F1A88C2900016FA1D /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 570CCD8B1A88C2900016FA1D /* UIImage+FixOrientation.m */; };
+		570E6F0B1AAD845D002175BC /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 570E6F0A1AAD845D002175BC /* RadioButton.m */; };
+		570E6F371AAD9CAA002175BC /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 570E6F311AAD9CAA002175BC /* checked.png */; };
+		570E6F381AAD9CAA002175BC /* checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 570E6F321AAD9CAA002175BC /* checked@2x.png */; };
+		570E6F391AAD9CAA002175BC /* famaleimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 570E6F331AAD9CAA002175BC /* famaleimage.png */; };
+		570E6F3A1AAD9CAA002175BC /* maleimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 570E6F341AAD9CAA002175BC /* maleimage.png */; };
+		570E6F3B1AAD9CAA002175BC /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 570E6F351AAD9CAA002175BC /* unchecked.png */; };
+		570E6F3C1AAD9CAA002175BC /* unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 570E6F361AAD9CAA002175BC /* unchecked@2x.png */; };
 		571B09481A8702A400CDA057 /* denglu_bg_mima.png in Resources */ = {isa = PBXBuildFile; fileRef = 571B09461A8702A400CDA057 /* denglu_bg_mima.png */; };
 		571B09491A8702A400CDA057 /* denglu_bg_user.png in Resources */ = {isa = PBXBuildFile; fileRef = 571B09471A8702A400CDA057 /* denglu_bg_user.png */; };
 		571B094B1A87328300CDA057 /* wo_0005_rect2.png in Resources */ = {isa = PBXBuildFile; fileRef = 571B094A1A87328300CDA057 /* wo_0005_rect2.png */; };
@@ -336,6 +343,14 @@
 		570CCD891A88C2900016FA1D /* RSKTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSKTouchView.m; sourceTree = "<group>"; };
 		570CCD8A1A88C2900016FA1D /* UIImage+FixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FixOrientation.h"; sourceTree = "<group>"; };
 		570CCD8B1A88C2900016FA1D /* UIImage+FixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FixOrientation.m"; sourceTree = "<group>"; };
+		570E6F091AAD845D002175BC /* RadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioButton.h; sourceTree = "<group>"; };
+		570E6F0A1AAD845D002175BC /* RadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioButton.m; sourceTree = "<group>"; };
+		570E6F311AAD9CAA002175BC /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
+		570E6F321AAD9CAA002175BC /* checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checked@2x.png"; sourceTree = "<group>"; };
+		570E6F331AAD9CAA002175BC /* famaleimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = famaleimage.png; sourceTree = "<group>"; };
+		570E6F341AAD9CAA002175BC /* maleimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = maleimage.png; sourceTree = "<group>"; };
+		570E6F351AAD9CAA002175BC /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
+		570E6F361AAD9CAA002175BC /* unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "unchecked@2x.png"; sourceTree = "<group>"; };
 		571B09461A8702A400CDA057 /* denglu_bg_mima.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = denglu_bg_mima.png; sourceTree = "<group>"; };
 		571B09471A8702A400CDA057 /* denglu_bg_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = denglu_bg_user.png; sourceTree = "<group>"; };
 		571B094A1A87328300CDA057 /* wo_0005_rect2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wo_0005_rect2.png; sourceTree = "<group>"; };
@@ -797,6 +812,28 @@
 				570CCD8B1A88C2900016FA1D /* UIImage+FixOrientation.m */,
 			);
 			path = RSKImageCropper;
+			sourceTree = "<group>";
+		};
+		570E6F081AAD845D002175BC /* RadioButton */ = {
+			isa = PBXGroup;
+			children = (
+				570E6F091AAD845D002175BC /* RadioButton.h */,
+				570E6F0A1AAD845D002175BC /* RadioButton.m */,
+			);
+			path = RadioButton;
+			sourceTree = "<group>";
+		};
+		570E6F301AAD9CAA002175BC /* radiobuttonImage */ = {
+			isa = PBXGroup;
+			children = (
+				570E6F311AAD9CAA002175BC /* checked.png */,
+				570E6F321AAD9CAA002175BC /* checked@2x.png */,
+				570E6F331AAD9CAA002175BC /* famaleimage.png */,
+				570E6F341AAD9CAA002175BC /* maleimage.png */,
+				570E6F351AAD9CAA002175BC /* unchecked.png */,
+				570E6F361AAD9CAA002175BC /* unchecked@2x.png */,
+			);
+			path = radiobuttonImage;
 			sourceTree = "<group>";
 		};
 		571A70DE1A5E2EDE002C8322 /* ImpInfo */ = {
@@ -1426,6 +1463,7 @@
 		E422F88D1A43FDE800CF2F9C /* VC */ = {
 			isa = PBXGroup;
 			children = (
+				570E6F081AAD845D002175BC /* RadioButton */,
 				570CCD821A88C2900016FA1D /* RSKImageCropper */,
 				57BC40401A7FEF6300A5F6BE /* FriendApplyMsgTableViewCell.h */,
 				57BC40411A7FEF6300A5F6BE /* FriendApplyMsgTableViewCell.m */,
@@ -1474,6 +1512,7 @@
 		E422F8AC1A43FE0300CF2F9C /* image */ = {
 			isa = PBXGroup;
 			children = (
+				570E6F301AAD9CAA002175BC /* radiobuttonImage */,
 				57CAEAD31A8C2C4900CA1572 /* invitedPlayViewCon */,
 				57E0E0DE1A8B8C51006A268A /* 背景.png */,
 				57E0E0DF1A8B8C51006A268A /* 取消挑战按键.png */,
@@ -1659,8 +1698,10 @@
 				570876091A5D059100892B53 /* wo_bg_green.png in Resources */,
 				57AC90EA1A71FEC6008F0892 /* bubble-flat-outgoing-selected@2x.png in Resources */,
 				572E3F601A63BA1300323683 /* juxing.png in Resources */,
+				570E6F381AAD9CAA002175BC /* checked@2x.png in Resources */,
 				E48D20F71A650A620099537F /* anniu.png in Resources */,
 				573230B51A6F70CE004E187F /* 16.png in Resources */,
+				570E6F3C1AAD9CAA002175BC /* unchecked@2x.png in Resources */,
 				573230A71A6F70CE004E187F /* 105.png in Resources */,
 				57E0E0E11A8B8C51006A268A /* 取消挑战按键.png in Resources */,
 				E43ED32F1A5E9BA000A8D90D /* liaotian_bubble2.png in Resources */,
@@ -1695,6 +1736,7 @@
 				573230B11A6F70CE004E187F /* 12.png in Resources */,
 				5759E2521A5FCA65002A9315 /* 云登陆.png in Resources */,
 				57AC90E11A71FEC6008F0892 /* bubble-default-outgoing.png in Resources */,
+				570E6F3B1AAD9CAA002175BC /* unchecked.png in Resources */,
 				57AC90FC1A71FEC6008F0892 /* input-field@2x.png in Resources */,
 				572E3F671A63BA1300323683 /* xinpengyou_0011_图层-4.png in Resources */,
 				5767F0B31A541D33003CE13D /* unSelected.png in Resources */,
@@ -1768,6 +1810,7 @@
 				57AC91011A71FEC6008F0892 /* send.png in Resources */,
 				5779BA731A8B0482001FAC0B /* 菜单二级（求和）.png in Resources */,
 				570876021A5CF82100892B53 /* wo_bg_red.png in Resources */,
+				570E6F391AAD9CAA002175BC /* famaleimage.png in Resources */,
 				573230BE1A6F70CE004E187F /* 菜单二级（认输）.png in Resources */,
 				572E3F6D1A63BA1300323683 /* yanzhengma_04.png in Resources */,
 				572E3F5F1A63BA1300323683 /* jieshouduanxinwenzi.png in Resources */,
@@ -1815,11 +1858,13 @@
 				57AC91031A71FEC6008F0892 /* messageReceived.aiff in Resources */,
 				57AC90D81A71FEC6008F0892 /* bubble-default-incoming-green@2x.png in Resources */,
 				57AC90F71A71FEC6008F0892 /* input-bar-flat.png in Resources */,
+				570E6F371AAD9CAA002175BC /* checked.png in Resources */,
 				570876041A5CF82100892B53 /* wo_bg_woblue.png in Resources */,
 				57AC90DC1A71FEC6008F0892 /* bubble-default-incoming@2x.png in Resources */,
 				572E3F6B1A63BA1300323683 /* yanzhengma_01.png in Resources */,
 				57AC90F91A71FEC6008F0892 /* input-bar.png in Resources */,
 				57FE76071A75E8BB002D8292 /* liaotian_0011_圆角矩形-1.png in Resources */,
+				570E6F3A1AAD9CAA002175BC /* maleimage.png in Resources */,
 				579BA0201A80A3EE002176E2 /* zhuce_0030_图层-14_01.png in Resources */,
 				E422F8A01A43FDE800CF2F9C /* Main.storyboard in Resources */,
 				573230A51A6F70CE004E187F /* 103.png in Resources */,
@@ -1887,6 +1932,7 @@
 				E4E729AE1A4BB6FD000FA552 /* ChatMessage.m in Sources */,
 				570CCD8D1A88C2900016FA1D /* RSKImageScrollView.m in Sources */,
 				57AC91121A71FEC6008F0892 /* QBImagePickerGroupCell.m in Sources */,
+				570E6F0B1AAD845D002175BC /* RadioButton.m in Sources */,
 				57AC90D61A71FEC6008F0892 /* NSString+JSMessagesView.m in Sources */,
 				57AC90D11A71FEC6008F0892 /* JSDismissiveTextView.m in Sources */,
 				57AC90051A71FC0D008F0892 /* CDBaseTabBarController.m in Sources */,
