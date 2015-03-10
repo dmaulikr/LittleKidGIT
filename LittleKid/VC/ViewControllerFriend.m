@@ -47,6 +47,9 @@
 
 - (void)setUI{
     self.friendTableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"zhuce_0030_图层-14_01.png"]];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"addFriend_barImg.png"]];
+    self.navigationController.navigationItem.titleView.backgroundColor = [UIColor whiteColor];
+    
 }
 - (void)receiveAddFriendRequest:(NSNotification *)notification {
     NSDictionary *dict = notification.userInfo;
