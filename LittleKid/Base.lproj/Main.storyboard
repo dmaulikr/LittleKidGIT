@@ -1298,10 +1298,25 @@
                                                         <action selector="acceptDidDown:" destination="gfz-ec-YmM" eventType="touchDown" id="tKd-Yz-fhC"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="加您为好友" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MjT-6S-mHh">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="请求加您为好友" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MjT-6S-mHh">
                                                     <rect key="frame" x="142" y="23" width="100" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qwo-Lb-opA">
+                                                    <rect key="frame" x="211" y="19" width="46" height="30"/>
+                                                    <state key="normal" title="忽略">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onBtnIngoreDown:" destination="gfz-ec-YmM" eventType="touchUpInside" id="544-ng-B3N"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="手机号码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTh-2B-NtN">
+                                                    <rect key="frame" x="75" y="44" width="111" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1320,6 +1335,8 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="accept" destination="GZ7-vB-Q5N" id="ovH-6f-hDJ"/>
+                                            <outlet property="btnIgnore" destination="qwo-Lb-opA" id="b0F-y7-E18"/>
+                                            <outlet property="cellNumberLabel" destination="YTh-2B-NtN" id="Ztm-EE-vYa"/>
                                             <outlet property="headPictureView" destination="J0t-7I-mgQ" id="Qt7-IA-3uW"/>
                                             <outlet property="nicknameLabel" destination="taC-eN-1sm" id="5um-BW-ScR"/>
                                         </connections>

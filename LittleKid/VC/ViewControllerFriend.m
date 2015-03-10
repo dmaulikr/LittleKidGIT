@@ -138,9 +138,13 @@
     }];
     
 //    [[CDSessionManager sharedInstance] sendAddFriendRequestAck:@"OK" toPeerId:[RuntimeStatus instance].peerId];
-    
-    
 }
+
+-(void)ignoreAddFriend{
+    [[RuntimeStatus instance] removeFriendsToBeConfirm:[RuntimeStatus instance].peerId];
+    [self freshTable];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
