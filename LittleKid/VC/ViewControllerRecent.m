@@ -31,6 +31,10 @@
     self.recentUsrList = [[NSMutableArray alloc]init];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(freshRecentContacts:) name:NOTIFI_GET_RECENT_MSG object:nil];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"addFriend_barImg.png"]];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
     self.headImage = [UIImage imageNamed:@"head.jpg"];
     self.iconImage = [UIImage imageNamed:@"5.png"];
     [self waitStatus];

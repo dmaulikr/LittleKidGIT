@@ -37,6 +37,10 @@
 - (void)setUI{
 //    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2;
 //    self.profileImageView.clipsToBounds = YES;
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"addFriend_barImg.png"]];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
     if ([RuntimeStatus instance].userInfo.headImage != nil) {
         self.profileImageView.image = [[RuntimeStatus instance] circleImage:[RuntimeStatus instance].userInfo.headImage withParam:0];
     }
