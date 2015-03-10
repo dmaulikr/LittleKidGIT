@@ -19,6 +19,14 @@
 
 @property (strong, nonatomic) UIViewController *v1;
 
+@property (strong, nonatomic) UIButton *verifyCode;
+
+@property (strong, nonatomic) NSTimer *theTimer;
+
+@property (strong, nonatomic) UITextField *userna;
+
+@property (strong, nonatomic) UITextField *userpa;
+
 @end
 
 @implementation ViewControllerLogin
@@ -186,38 +194,38 @@
     
     self.v1 = [[UIViewController alloc] init];
     self.v1.view.backgroundColor = [UIColor lightGrayColor];
-    UITextField *userna = [[UITextField alloc] initWithFrame:CGRectMake(0, 90, self.v1.view.frame.size.width, 30)];
-    UITextField *userpa = [[UITextField alloc] initWithFrame:CGRectMake(0, userna.frame.origin.y+32, self.v1.view.frame.size.width, 30)];
-    userna.backgroundColor = [UIColor whiteColor];
-    userpa.backgroundColor = [UIColor whiteColor];
-    userna.borderStyle = UITextBorderStyleNone;
-    userpa.borderStyle = UITextBorderStyleNone;
+    self.userna = [[UITextField alloc] initWithFrame:CGRectMake(0, 90, self.v1.view.frame.size.width, 30)];
+    self.userpa = [[UITextField alloc] initWithFrame:CGRectMake(0, self.userna.frame.origin.y+32, self.v1.view.frame.size.width, 30)];
+    self.userna.backgroundColor = [UIColor whiteColor];
+    self.userpa.backgroundColor = [UIColor whiteColor];
+    self.userna.borderStyle = UITextBorderStyleNone;
+    self.userpa.borderStyle = UITextBorderStyleNone;
     
-    userna.keyboardType = UIKeyboardTypePhonePad;
-    userna.returnKeyType = UIReturnKeyNext;
-    userpa.returnKeyType = UIReturnKeyGo;
+    self.userna.keyboardType = UIKeyboardTypePhonePad;
+    self.userna.returnKeyType = UIReturnKeyNext;
+    self.userpa.returnKeyType = UIReturnKeyGo;
     
-    UILabel *utips = [[UILabel alloc] initWithFrame:CGRectMake(20, 90, 60, 20)];
+    UILabel *utips = [[UILabel alloc] initWithFrame:CGRectMake(30, 90, 60, 20)];
     utips.textColor = [UIColor darkTextColor];
     utips.text = @"手机号:";
-    userna.leftView = utips;
-    userna.leftViewMode = UITextFieldViewModeAlways;
+    self.userna.leftView = utips;
+    self.userna.leftViewMode = UITextFieldViewModeAlways;
     
-    UILabel *ptips = [[UILabel alloc] initWithFrame:CGRectMake(20, 122, 60, 20)];
+    UILabel *ptips = [[UILabel alloc] initWithFrame:CGRectMake(30, 122, 60, 20)];
     ptips.textColor = [UIColor darkTextColor];
     ptips.text = @"验证码:";
-    userpa.leftView = ptips;
-    userpa.leftViewMode = UITextFieldViewModeAlways;
+    self.userpa.leftView = ptips;
+    self.userpa.leftViewMode = UITextFieldViewModeAlways;
     
-    UIButton *verifyCode =  [UIButton buttonWithType:UIButtonTypeSystem];
-    verifyCode.frame = CGRectMake(userna.frame.origin.x + 200, 95, 90, 20);
-    verifyCode.backgroundColor = [UIColor blueColor];
-    [verifyCode setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [verifyCode setTitle:@"获取验证码" forState:UIControlStateNormal];
-    [verifyCode addTarget:self action:@selector(getVerifycode) forControlEvents:UIControlEventTouchUpInside];
+    self.verifyCode =  [UIButton buttonWithType:UIButtonTypeSystem];
+    self.verifyCode.frame = CGRectMake(self.userna.frame.origin.x + 200, 95, 90, 20);
+    self.verifyCode.backgroundColor = [UIColor blueColor];
+    [self.verifyCode setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.verifyCode setTitle:@"获取验证码" forState:UIControlStateNormal];
+    [self.verifyCode addTarget:self action:@selector(getVerifycode) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *next =  [UIButton buttonWithType:UIButtonTypeSystem];
-    next.frame = CGRectMake(20, userpa.frame.origin.y+45, 280, 30);
+    next.frame = CGRectMake(20, self.userpa.frame.origin.y+45, 280, 30);
     next.backgroundColor = [UIColor purpleColor];
     [next.layer setMasksToBounds:YES];
     [next.layer setCornerRadius:10.0]; //设置矩形四个圆角半径
@@ -228,40 +236,62 @@
     [next addTarget:self action:@selector(verifycodeCheck) forControlEvents:UIControlEventTouchUpInside];
    
     
-    [self.v1.view addSubview:userna];
-    [self.v1.view addSubview:userpa];
-    [self.v1.view addSubview:verifyCode];
+    [self.v1.view addSubview:self.userna];
+    [self.v1.view addSubview:self.userpa];
+    [self.v1.view addSubview:self.verifyCode];
     [self.v1.view addSubview:next];
     
 }
 
 - (IBAction)forgetPassword {
-    [self.navigationController pushViewController:self.v1 animated:YES];
+//    [self.navigationController pushViewController:self.v1 animated:YES];
 }
 
 -(void)getVerifycode{
-//    [];
+    
+    if (self.userna.text.length != 11) {
+         UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"提示" message:@"无效的电话号码" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil];
+        [alter show];
+    }
+    else
+    {
+        [AVOSCloud requestSmsCodeWithPhoneNumber:self.userna.text appName:@"一起兴趣班" operation:@"找回密码服务" timeToLive:10  callback:^(BOOL succeeded, NSError *error) {
+            NSLog(@"bool:%c,error:xxxxxx--%@--xxxxxx",succeeded,error);
+        }];
+        
+        self.theTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:YES];
+    }
+    
 }
 
 -(void)verifycodeCheck{
     
+    [AVOSCloud verifySmsCode:self.userpa.text mobilePhoneNumber:self.userna.text callback:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            //TODO:跳转下一页
+            
+            ;
+        } else {
+            ;
+        }
+    }];
 }
 
-static int seconds = 60;
+static int seconds = 120;
 
--(void)timerFireMethod:(NSTimer *)theTimer :(UIButton *)btn{
+-(void)timerFireMethod:(NSTimer *)theTimer{
     if (seconds == 1) {
         [theTimer invalidate];
         seconds = 60;
-        [btn setTitle:@"获取验证码" forState: UIControlStateNormal];
-        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btn setEnabled:YES];
+        [self.verifyCode setTitle:@"获取验证码" forState: UIControlStateNormal];
+        [self.verifyCode setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.verifyCode setEnabled:YES];
     }else{
         seconds--;
         NSString *title = [NSString stringWithFormat:@"重新获取验证码 %d",seconds];
-        [btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        [btn setEnabled:NO];
-        [btn setTitle:title forState:UIControlStateNormal];
+        [self.verifyCode setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [self.verifyCode setEnabled:NO];
+        [self.verifyCode setTitle:title forState:UIControlStateNormal];
     }
 }
 

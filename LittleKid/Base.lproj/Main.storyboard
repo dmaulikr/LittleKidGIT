@@ -91,6 +91,7 @@
                                 </variation>
                                 <connections>
                                     <action selector="forgetPassword" destination="BYZ-38-t0r" eventType="touchUpInside" id="b5h-Qp-XRu"/>
+                                    <segue destination="t45-Td-FSf" kind="show" id="fYE-uc-9zm"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="手机" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K6n-UZ-0ZN">
@@ -982,6 +983,163 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GG5-ws-qVE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="951" y="811"/>
+        </scene>
+        <!--View Controller Forget Passwd-->
+        <scene sceneID="tq8-du-PzV">
+            <objects>
+                <viewController id="t45-Td-FSf" customClass="viewControllerForgetPasswd" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="C1x-hd-1x4"/>
+                        <viewControllerLayoutGuide type="bottom" id="2uA-vY-vDM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tfH-9h-UaC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="guC-Mc-ksM">
+                                <rect key="frame" x="150" y="122" width="300" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="50" y="86" width="300" height="30"/>
+                                </variation>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v61-Lh-Nc4">
+                                <rect key="frame" x="259" y="232" width="83" height="24"/>
+                                <state key="normal" title="下一步">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="159" y="216" width="83" height="24"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="wH8-Rl-QBx" kind="show" id="dDq-P9-M7c"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hg6-og-vGL">
+                                <rect key="frame" x="323" y="121" width="79" height="30"/>
+                                <state key="normal" title="获取验证码">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="220" y="85" width="88" height="30"/>
+                                </variation>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="itk-wP-o8b">
+                                <rect key="frame" x="150" y="183" width="300" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="NmY-qJ-MdA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="NmY-qJ-MdA"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="50" y="147" width="300" height="30"/>
+                                    <mask key="constraints">
+                                        <include reference="NmY-qJ-MdA"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="guC-Mc-ksM" firstAttribute="leading" secondItem="itk-wP-o8b" secondAttribute="leading" id="9Ds-C7-wCP"/>
+                            <constraint firstItem="guC-Mc-ksM" firstAttribute="top" secondItem="hg6-og-vGL" secondAttribute="top" id="B3a-dd-Y04"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hg6-og-vGL" secondAttribute="trailing" constant="76" id="FZC-rI-Xir">
+                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                            </constraint>
+                            <constraint firstItem="guC-Mc-ksM" firstAttribute="bottom" secondItem="hg6-og-vGL" secondAttribute="bottom" id="IAH-9F-VjA"/>
+                            <constraint firstAttribute="centerX" secondItem="v61-Lh-Nc4" secondAttribute="centerX" constant="-0.5" id="Llb-AL-Zgv">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
+                            <constraint firstAttribute="centerX" secondItem="guC-Mc-ksM" secondAttribute="centerX" id="R1h-L0-ipe"/>
+                            <constraint firstItem="v61-Lh-Nc4" firstAttribute="top" secondItem="itk-wP-o8b" secondAttribute="bottom" constant="39" id="WTd-Lr-yWZ"/>
+                            <constraint firstItem="itk-wP-o8b" firstAttribute="top" secondItem="guC-Mc-ksM" secondAttribute="bottom" constant="31" id="pjG-UM-cgK"/>
+                            <constraint firstItem="guC-Mc-ksM" firstAttribute="top" secondItem="C1x-hd-1x4" secondAttribute="bottom" constant="22" id="ty8-uA-k33">
+                                <variation key="heightClass=regular-widthClass=compact" constant="30"/>
+                            </constraint>
+                            <constraint firstItem="guC-Mc-ksM" firstAttribute="trailing" secondItem="itk-wP-o8b" secondAttribute="trailing" id="z0Z-25-e7f"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ty8-uA-k33"/>
+                                <exclude reference="pjG-UM-cgK"/>
+                                <exclude reference="FZC-rI-Xir"/>
+                                <exclude reference="WTd-Lr-yWZ"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="ty8-uA-k33"/>
+                                <include reference="pjG-UM-cgK"/>
+                                <include reference="FZC-rI-Xir"/>
+                                <include reference="WTd-Lr-yWZ"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QgE-rc-CuN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1621.5" y="807"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="zbe-RF-hIf">
+            <objects>
+                <viewController id="wH8-Rl-QBx" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ln2-gy-VI3"/>
+                        <viewControllerLayoutGuide type="bottom" id="s35-WD-5q1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="75Y-B5-ncA">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mQU-9k-Q53">
+                                <rect key="frame" x="86" y="189" width="423" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="86" y="189" width="97" height="30"/>
+                                </variation>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qyO-UH-04i">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="177" y="271" width="46" height="30"/>
+                                </variation>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O8C-dS-jB7">
+                                <rect key="frame" x="86" y="125" width="423" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="86" y="125" width="97" height="30"/>
+                                </variation>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="qyO-UH-04i"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="qyO-UH-04i"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pff-eS-FJM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2322" y="801"/>
         </scene>
         <!--最近-->
         <scene sceneID="ggl-vM-wUP">

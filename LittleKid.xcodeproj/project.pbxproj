@@ -25,6 +25,7 @@
 		570CCD8D1A88C2900016FA1D /* RSKImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 570CCD871A88C2900016FA1D /* RSKImageScrollView.m */; };
 		570CCD8E1A88C2900016FA1D /* RSKTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 570CCD891A88C2900016FA1D /* RSKTouchView.m */; };
 		570CCD8F1A88C2900016FA1D /* UIImage+FixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 570CCD8B1A88C2900016FA1D /* UIImage+FixOrientation.m */; };
+		570DA46E1AAF21F900C3BF16 /* viewControllerForgetPasswd.m in Sources */ = {isa = PBXBuildFile; fileRef = 570DA46D1AAF21F900C3BF16 /* viewControllerForgetPasswd.m */; };
 		570E6F0B1AAD845D002175BC /* RadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 570E6F0A1AAD845D002175BC /* RadioButton.m */; };
 		570E6F371AAD9CAA002175BC /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 570E6F311AAD9CAA002175BC /* checked.png */; };
 		570E6F381AAD9CAA002175BC /* checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 570E6F321AAD9CAA002175BC /* checked@2x.png */; };
@@ -350,6 +351,8 @@
 		570CCD891A88C2900016FA1D /* RSKTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSKTouchView.m; sourceTree = "<group>"; };
 		570CCD8A1A88C2900016FA1D /* UIImage+FixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FixOrientation.h"; sourceTree = "<group>"; };
 		570CCD8B1A88C2900016FA1D /* UIImage+FixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FixOrientation.m"; sourceTree = "<group>"; };
+		570DA46C1AAF21F900C3BF16 /* viewControllerForgetPasswd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewControllerForgetPasswd.h; sourceTree = "<group>"; };
+		570DA46D1AAF21F900C3BF16 /* viewControllerForgetPasswd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = viewControllerForgetPasswd.m; sourceTree = "<group>"; };
 		570E6F091AAD845D002175BC /* RadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioButton.h; sourceTree = "<group>"; };
 		570E6F0A1AAD845D002175BC /* RadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioButton.m; sourceTree = "<group>"; };
 		570E6F311AAD9CAA002175BC /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
@@ -1520,6 +1523,8 @@
 				E4A85E2E1A5A781400C0A222 /* SelfMsgTableViewCell.m */,
 				E4A5385C1A5FFCFB002456A4 /* FriendTableViewCell.h */,
 				E4A5385D1A5FFCFB002456A4 /* FriendTableViewCell.m */,
+				570DA46C1AAF21F900C3BF16 /* viewControllerForgetPasswd.h */,
+				570DA46D1AAF21F900C3BF16 /* viewControllerForgetPasswd.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1900,7 +1905,7 @@
 				57AC90F91A71FEC6008F0892 /* input-bar.png in Resources */,
 				57FE76071A75E8BB002D8292 /* liaotian_0011_圆角矩形-1.png in Resources */,
 				570E6F3A1AAD9CAA002175BC /* maleimage.png in Resources */,
-				579BA0201A80A3EE002176E2 /* zhuce_0030_图层-14_01.png in Resources */,
+				579BA0201A80A3EE002176E2 /* friend_bg.png in Resources */,
 				579BA0201A80A3EE002176E2 /* friend_bg.png in Resources */,
 				E422F8A01A43FDE800CF2F9C /* Main.storyboard in Resources */,
 				573230A51A6F70CE004E187F /* 103.png in Resources */,
@@ -1939,6 +1944,7 @@
 				57AC910C1A71FEC6008F0892 /* QBAssetsCollectionOverlayView.m in Sources */,
 				57AC90CB1A71FEC6008F0892 /* FMDatabaseAdditions.m in Sources */,
 				57AC90CD1A71FEC6008F0892 /* FMDatabaseQueue.m in Sources */,
+				570DA46E1AAF21F900C3BF16 /* viewControllerForgetPasswd.m in Sources */,
 				57AC91171A71FEC6008F0892 /* UIImage+Resize.m in Sources */,
 				E422F8E51A4459C200CF2F9C /* RuntimeStatus.m in Sources */,
 				E422F8A71A43FDE800CF2F9C /* ViewControllerLogin.m in Sources */,
