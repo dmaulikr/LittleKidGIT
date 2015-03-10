@@ -34,7 +34,6 @@
     
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"addFriend_barImg.png"]];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.tabBarController.tabBar.tintColor = [UIColor clearColor];
     
     self.headImage = [UIImage imageNamed:@"head.jpg"];
     self.iconImage = [UIImage imageNamed:@"5.png"];

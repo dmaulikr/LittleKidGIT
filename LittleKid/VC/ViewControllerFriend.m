@@ -46,10 +46,10 @@
 }
 
 - (void)setUI{
-    self.friendTableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"zhuce_0030_图层-14_01.png"]];
+    self.friendTableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"friend_bg.png"]];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"addFriend_barImg.png"]];
+    //    self.navigationController.navigationBar.barTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"friend_topbarImg"]];//图不对应
     self.navigationController.navigationItem.titleView.backgroundColor = [UIColor whiteColor];
-    
 }
 - (void)receiveAddFriendRequest:(NSNotification *)notification {
     NSDictionary *dict = notification.userInfo;
@@ -92,45 +92,6 @@
         }
     }];
 }
-//{
-//    NSDictionary *dict = notification.userInfo;
-//    NSString *peerid = [dict objectForKey:@"fromid"];
-//    dict = [dict objectForKey:@"cmd"];
-//    NSString *str = [dict objectForKey:@"cmd_type"];
-//    if ([str isEqualToString:ADD_FRIEND_CMD_ACK] ) {
-//        str = [dict objectForKey:@"ack_value"];
-//        if ([str isEqualToString:@"OK"])
-//        {
-//            AVQuery * query = [AVUser query];
-//            [query whereKey:@"username" equalTo:peerid];
-//            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//                if (error == nil) {
-//                    AVUser  *peerUser = [objects firstObject];
-//                    
-//                    if (peerUser == nil) {
-//                        //TODO
-//                        return;
-//                    }
-//                    
-//                    [[AVUser currentUser] follow:peerUser.objectId andCallback:^(BOOL succeeded, NSError *error) {
-//                        if (succeeded) {
-//                            NSLog(@"Add friend %@ successful", [RuntimeStatus instance].peerId);
-//                            //TODO: just need to add one user to friend list, no need to call initial
-//                            [[RuntimeStatus instance] initial];//加好友更新
-//                            [self freshTable];
-//                        } else {
-//                            NSLog(@"Add friend %@ error %@", [RuntimeStatus instance].peerId, error);
-//                        }
-//                    }];
-//                } else {
-//                    
-//                }
-//            }];
-//        }
-//    }
-//    
-//}
-
 
 - (void)freshTable{
     [self.friendTableView reloadData];
@@ -213,7 +174,7 @@
     NSInteger indexsection = indexPath.section;
     if ( indexsection == SECTION_ADD_FRIEND ) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellToAddFriend" forIndexPath:indexPath];
-        UIImageView *imageview = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"好友_02"]];
+        UIImageView *imageview = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"friend_addFriendCellImg"]];
         cell.backgroundView = imageview;
         cell.backgroundView.alpha = 1;
         return cell;
