@@ -31,7 +31,8 @@
     [super viewDidLoad];
     
     self.tableView.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"addFriend_beijing.png"]];
-    
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"addFriend_barImg.png"]];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     self.cellNumberSearchBar.delegate = self;
     for(id cc in [self.cellNumberSearchBar subviews])

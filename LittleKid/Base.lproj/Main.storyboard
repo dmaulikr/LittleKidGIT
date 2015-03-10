@@ -1074,7 +1074,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ped-Hh-4Bz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1113" y="2216"/>
+            <point key="canvasLocation" x="969" y="2256"/>
         </scene>
         <!--Invite Play View Controller-->
         <scene sceneID="HLK-PP-KKv">
@@ -1130,7 +1130,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pro-pv-uC0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1427" y="3047"/>
+            <point key="canvasLocation" x="-483" y="2959"/>
         </scene>
         <!--View Controller Chat-->
         <scene sceneID="MCy-FR-c20">
@@ -1247,7 +1247,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mth-kI-Dz9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-511" y="3047"/>
+            <point key="canvasLocation" x="241" y="3007"/>
         </scene>
         <!--我的小伙伴-->
         <scene sceneID="TVr-Ox-mZk">
@@ -1261,7 +1261,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="t5c-Fg-vg1">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="t5c-Fg-vg1">
                                 <rect key="frame" x="140" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1304,10 +1304,25 @@
                                                         <action selector="acceptDidDown:" destination="gfz-ec-YmM" eventType="touchDown" id="tKd-Yz-fhC"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="加您为好友" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MjT-6S-mHh">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="请求加您为好友" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MjT-6S-mHh">
                                                     <rect key="frame" x="142" y="23" width="100" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qwo-Lb-opA">
+                                                    <rect key="frame" x="211" y="19" width="46" height="30"/>
+                                                    <state key="normal" title="忽略">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="onBtnIngoreDown:" destination="gfz-ec-YmM" eventType="touchUpInside" id="544-ng-B3N"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="手机号码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTh-2B-NtN">
+                                                    <rect key="frame" x="75" y="44" width="111" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1326,6 +1341,8 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="accept" destination="GZ7-vB-Q5N" id="ovH-6f-hDJ"/>
+                                            <outlet property="btnIgnore" destination="qwo-Lb-opA" id="b0F-y7-E18"/>
+                                            <outlet property="cellNumberLabel" destination="YTh-2B-NtN" id="Ztm-EE-vYa"/>
                                             <outlet property="headPictureView" destination="J0t-7I-mgQ" id="Qt7-IA-3uW"/>
                                             <outlet property="nicknameLabel" destination="taC-eN-1sm" id="5um-BW-ScR"/>
                                         </connections>
@@ -1415,7 +1432,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZyK-tH-gWA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2580" y="2248"/>
+            <point key="canvasLocation" x="2080" y="2313"/>
         </scene>
         <!--View Controller Imp Info-->
         <scene sceneID="V7q-II-5hK">
@@ -1808,7 +1825,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nac-CV-82n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2334" y="3066"/>
+            <point key="canvasLocation" x="3318" y="3163"/>
         </scene>
         <!--View Controller Real Talk-->
         <scene sceneID="DA7-1A-aaw">
@@ -1891,7 +1908,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JyB-m3-Ox6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1145" y="3768"/>
+            <point key="canvasLocation" x="-1521" y="3007"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="ecl-u2-Vci">
@@ -1909,7 +1926,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rkf-h8-8lg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-511" y="3776"/>
+            <point key="canvasLocation" x="249" y="3760"/>
         </scene>
         <!--通讯录-->
         <scene sceneID="d6g-Dm-R71">
@@ -2571,7 +2588,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VLH-u7-xOk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3200" y="2253"/>
+            <point key="canvasLocation" x="3344" y="2334"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wcG-1W-bMV">
@@ -2608,7 +2625,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kaj-Wg-54U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="301" y="1537"/>
+            <point key="canvasLocation" x="957" y="1553"/>
         </scene>
         <!--我的小伙伴-->
         <scene sceneID="7mA-F9-MFd">
@@ -2630,7 +2647,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TE4-50-pPk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3392" y="1577"/>
+            <point key="canvasLocation" x="2080" y="1546"/>
         </scene>
         <!--我-->
         <scene sceneID="ZC3-lr-yV3">
@@ -2649,7 +2666,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RkE-lb-AH7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4770" y="1589"/>
+            <point key="canvasLocation" x="3458" y="1558"/>
         </scene>
         <!--View Controller Add Friend-->
         <scene sceneID="lGU-Pg-vGL">
@@ -2729,7 +2746,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oud-t8-AQd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="951" y="2990"/>
+            <point key="canvasLocation" x="2087" y="3007"/>
         </scene>
         <!--Table View Controller Friend Confirm-->
         <scene sceneID="Ntu-RI-fMZ">
@@ -2835,7 +2852,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I5T-kA-YRY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="492" y="3735"/>
+            <point key="canvasLocation" x="2087" y="3768"/>
         </scene>
         <!--Invated Play View Controller-->
         <scene sceneID="nh1-cd-rkq">

@@ -17,6 +17,11 @@
     [self.delegate accpectAddFriend];
 }
 
+- (IBAction)onBtnIngoreDown:(id)sender {
+    [self.delegate ignoreAddFriend];
+}
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

@@ -9,17 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @protocol FriendApplyMsgTableViewCellDelegate <NSObject>
-
+@optional
 - (void) accpectAddFriend;
+- (void) ignoreAddFriend;
 
 @end
 @interface FriendApplyMsgTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *accept;
 @property (nonatomic, weak) id<FriendApplyMsgTableViewCellDelegate> delegate;
--(void)accpectAddFriend;
+//-(void)accpectAddFriend;
 @property (weak, nonatomic) IBOutlet UIImageView *headPictureView;
 @property (weak, nonatomic) IBOutlet UILabel *nicknameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cellNumberLabel;
+@property (weak, nonatomic) IBOutlet UIButton *btnIgnore;
 
 
 
