@@ -67,9 +67,9 @@
 - (void) registerNotifications: (UIApplication *)application{
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         // for iOS 8，注册APNS要两步
-        [[UIApplication sharedApplication] registerForRemoteNotifications];//注册远程推送
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];//配置远程推送设置
+        [[UIApplication sharedApplication] registerForRemoteNotifications];//注册远程推送
     } else {
         // for iOS 7 or iOS 6
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
@@ -111,11 +111,11 @@ didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSe
 }
 
 #pragma mark - - remote notifications
-//default notifications callback
-//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{}
+
 - (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo
 fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler{
+    
     NSLog(@"%@",[userInfo description]);
     if (application.applicationState == UIApplicationStateActive) {
         // 转换成一个本地通知，显示到通知栏，你也可以直接显示出一个 alertView，只是那样稍显 aggressive：）
@@ -131,8 +131,6 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler{
     
 }
 
-//custom actions callback
-//- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo
 - (void)application:(UIApplication *)application
 handleActionWithIdentifier:(NSString *)identifier
 forRemoteNotification:(NSDictionary *)userInfo
@@ -141,8 +139,6 @@ forRemoteNotification:(NSDictionary *)userInfo
     if ([identifier isEqualToString: @"ACCEPT_IDENTIFIER"]) {
         //[self handleAcceptActionWithNotification:userInfo];
     }
-    
-    
     
     // Must be called when finished
     completionHandler();
