@@ -118,15 +118,11 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler{
     
     NSLog(@"%@",[userInfo description]);
     if (application.applicationState == UIApplicationStateActive) {
-        // 转换成一个本地通知，显示到通知栏，你也可以直接显示出一个 alertView，只是那样稍显 aggressive：）
-        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-        localNotification.userInfo = userInfo;
-        localNotification.soundName = UILocalNotificationDefaultSoundName;
-        localNotification.alertBody = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
-        localNotification.fireDate = [NSDate date];
-        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-    } else {
-        [AVAnalytics trackAppOpenedWithRemoteNotificationPayload:userInfo];
+        NSLog(@"get romote notify when active");
+        //jump to one specific view.
+        
+    } else {//该处代码是后台或未启动状态下接到远程推送，点进app后才触发的。远程推送系统本身已有显示，下面直接进行相应操作即可
+        NSLog(@"get romote notify when inactive/background");
     }
     
 }
