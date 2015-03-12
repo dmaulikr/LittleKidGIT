@@ -33,6 +33,15 @@
     [self registerNotifications: application];
     //后台时有服务器推送，进入程序即调用下方法(可能)，此时可判断推送调用方法。remote推送是会自动调用的。
     [self procLaunchOptios:launchOptions];
+    AVPush *testpush = [[AVPush alloc] init];
+    [testpush setChannel:@"13164696487"];
+    [testpush setMessage:@"只推送给李允恺"];
+    [testpush expireAfterTimeInterval:60*10];
+    [testpush sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded == YES) {
+            NSLog(@"推送成功");
+        }
+    }];
 
     return YES;
 }
@@ -74,6 +83,8 @@
         // for iOS 7 or iOS 6
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     }
+    //配置推送证书模式
+    [AVPush setProductionMode:NO];
 }
 
 - (void)application:(UIApplication *)application
@@ -86,6 +97,7 @@ didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSe
     NSLog(@"device token: %@",token);
     AVInstallation *currentInstallation = [AVInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
+
     [currentInstallation saveInBackground];
 }
 
