@@ -32,16 +32,7 @@
     
     [self registerNotifications: application];
     //后台时有服务器推送，进入程序即调用下方法(可能)，此时可判断推送调用方法。remote推送是会自动调用的。
-    [self procLaunchOptios:launchOptions];
-    AVPush *testpush = [[AVPush alloc] init];
-    [testpush setChannel:@"13164696487"];
-    [testpush setMessage:@"只推送给李允恺"];
-    [testpush expireAfterTimeInterval:60*10];
-    [testpush sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded == YES) {
-            NSLog(@"推送成功");
-        }
-    }];
+    //[self procLaunchOptios:launchOptions];
 
     return YES;
 }
@@ -116,7 +107,7 @@ didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSe
     pushDict = nil;
     pushDict = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (pushDict) {
-        
+        NSLog(@"remote push come");
     }
     //检查其他推送
     
@@ -130,13 +121,18 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))handler{
     
     NSLog(@"%@",[userInfo description]);
     if (application.applicationState == UIApplicationStateActive) {
-        NSLog(@"get romote notify when active");
-        //jump to one specific view.
+        //jump to one specific view.在线状态象棋已直接跳转
         
-    } else {//该处代码是后台或未启动状态下接到远程推送，点进app后才触发的。远程推送系统本身已有显示，下面直接进行相应操作即可
+    } else {//该处代码是后台或未启动状态下接到远程推送，点进app后才触发的。远程推送系统本身已有显示，下面直接进行相应操作即可//判断跳转到聊天界面的推送或象棋邀请界面的推送
         NSLog(@"get romote notify when inactive/background");
+        NSString *pushType = [userInfo objectForKey:@"msgType"];
+        if ([pushType compare:@"record"] == NSOrderedSame ) {
+            NSString *toChatUID = [userInfo objectForKey:@"uid"];
+        }
+        if ([pushType compare:@"chess"] == NSOrderedSame ) {
+            //消息处理中已实现跳转
+        }
     }
-    
 }
 
 - (void)application:(UIApplication *)application

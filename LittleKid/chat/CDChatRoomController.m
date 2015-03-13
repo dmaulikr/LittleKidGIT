@@ -50,8 +50,6 @@
     _session = [AVAudioSession sharedInstance];
     self.toChatUsr = [[UserOther alloc]init];
     self.toChatUsr.UID = self.otherId;
-    //   self.toChatUsr = [[RuntimeStatus instance].recentUsrList objectAtIndex:self.toChatUsrIndex];
-    //    [self testCode];
     [self prepareRecord];
     if (self.type == CDChatRoomTypeGroup) {
         NSString *title = @"group";
@@ -62,7 +60,6 @@
     } else {
         self.title = [[RuntimeStatus instance] getFriendUserInfo:self.otherId].nickname;
     }
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showDetail:)];
     UIImageView *imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"liaotian_background.png"]];
     [self.tableView setBackgroundView:imgView];
     [self setBackgroundColor:[UIColor clearColor]];
@@ -123,16 +120,25 @@
 - (void)sendPressed:(UIButton *)sender withText:(NSString *)text {
 
     [[CDSessionManager sharedInstance] invitePlayChess:self.otherId];
-//    InvitePlayViewController *controller = mainStoryboard instantiateViewControllerWithIdentifier:@"leftViewController"];//[[InvitePlayViewController alloc] initWithUser:self.otherId];
-//    [self.navigationController pushViewController:controller animated:NO];
-
     UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     InvitePlayViewController *Controller = [mainStoryboard instantiateViewControllerWithIdentifier:@"InvitePlayViewController"];
     Controller.otherId = self.otherId;
     [self.navigationController pushViewController:Controller animated:NO];
-
-//    [self refreshTimestampArray];
-//    [self finishSend];
+    if ( YES == [self check2Push] ){
+        AVPush *chessPush = [[AVPush alloc] init];
+        [chessPush setChannel:self.toChatUsr.UID];
+        NSDictionary *pushDic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                 [NSString stringWithFormat:@"%@邀请你下象棋",[RuntimeStatus instance].userInfo.nickname],
+                                 @"alert",
+                                 @"chess",
+                                 @"msgType",
+                                 nil];
+        if([NSJSONSerialization isValidJSONObject:pushDic]){
+            [chessPush setData:pushDic];
+            [chessPush expireAfterTimeInterval:60];//设置过期时间，单位:s
+            [chessPush sendPushInBackground];
+        }
+    };
 }
 
 - (void)sendAttachment:(AVObject *)object avfile:(AVFile *) file{
@@ -209,6 +215,32 @@
     }];
     [self refreshTimestampArray];
     [self finishSend];
+    if ( YES == [self check2Push] ){
+        AVPush *msgPush = [[AVPush alloc] init];
+        [msgPush setChannel:self.toChatUsr.UID];
+        NSDictionary *pushDic = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                 [NSString stringWithFormat:@"%@给你发了一条消息",[RuntimeStatus instance].userInfo.nickname],
+                                    @"alert",
+                                    @"record",
+                                    @"msgType",
+                                    [AVUser currentUser].username,
+                                    @"uid",
+                                    nil];
+        if([NSJSONSerialization isValidJSONObject:pushDic]){
+            [msgPush setData:pushDic];
+            [msgPush expireAfterTimeInterval:60*10];//设置过期时间，单位:s
+            [msgPush sendPushInBackground];
+        }
+    };
+}
+
+- (BOOL)check2Push{
+    if ([[CDSessionManager sharedInstance] peerIdIsOnline:self.toChatUsr.UID] == YES){
+        return NO;
+    }
+    else{
+        return YES;
+    }
 }
 
 - (JSBubbleMessageType)messageTypeForRowAtIndexPath:(NSIndexPath *)indexPath {
