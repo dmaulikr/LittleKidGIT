@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#include <AVOSCloud/AVOSCloud.h>
+#import "UIViewControllerBase.h"
 
-@interface viewControllerForgetPasswd : UIViewController
+@interface viewControllerForgetPasswd : UIViewControllerBase
 
 @end

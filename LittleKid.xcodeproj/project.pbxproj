@@ -40,6 +40,7 @@
 		571B09501A87367700CDA057 /* xuanzekuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 571B094E1A87367700CDA057 /* xuanzekuang.png */; };
 		571B09511A87367700CDA057 /* xuanzekuang2.png in Resources */ = {isa = PBXBuildFile; fileRef = 571B094F1A87367700CDA057 /* xuanzekuang2.png */; };
 		571D793A1A80D2B400723AA0 /* corner.png in Resources */ = {isa = PBXBuildFile; fileRef = 571D79391A80D2B400723AA0 /* corner.png */; };
+		5721D07A1AB1CA9E0041F8E9 /* viewControllerCheckcode.m in Sources */ = {isa = PBXBuildFile; fileRef = 5721D0791AB1CA9E0041F8E9 /* viewControllerCheckcode.m */; };
 		5727D3B91A7B7ACA00491C7F /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5727D3B81A7B7ACA00491C7F /* CustomAlertView.m */; };
 		572A2A871A89EA7A0087C0B5 /* tabbar_huoban.png in Resources */ = {isa = PBXBuildFile; fileRef = 572A2A841A89EA7A0087C0B5 /* tabbar_huoban.png */; };
 		572A2A881A89EA7A0087C0B5 /* tabbar_wo.png in Resources */ = {isa = PBXBuildFile; fileRef = 572A2A851A89EA7A0087C0B5 /* tabbar_wo.png */; };
@@ -369,6 +370,8 @@
 		571B094F1A87367700CDA057 /* xuanzekuang2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xuanzekuang2.png; sourceTree = "<group>"; };
 		571D79391A80D2B400723AA0 /* corner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = corner.png; path = image/corner.png; sourceTree = "<group>"; };
 		571D793F1A80D2C200723AA0 /* PassImageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PassImageDelegate.h; path = ../PassImageDelegate.h; sourceTree = "<group>"; };
+		5721D0781AB1CA9E0041F8E9 /* viewControllerCheckcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewControllerCheckcode.h; sourceTree = "<group>"; };
+		5721D0791AB1CA9E0041F8E9 /* viewControllerCheckcode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = viewControllerCheckcode.m; sourceTree = "<group>"; };
 		5727D3B71A7B7ACA00491C7F /* CustomAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlertView.h; sourceTree = "<group>"; };
 		5727D3B81A7B7ACA00491C7F /* CustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlertView.m; sourceTree = "<group>"; };
 		572A2A841A89EA7A0087C0B5 /* tabbar_huoban.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_huoban.png; sourceTree = "<group>"; };
@@ -1525,6 +1528,8 @@
 				E4A5385D1A5FFCFB002456A4 /* FriendTableViewCell.m */,
 				570DA46C1AAF21F900C3BF16 /* viewControllerForgetPasswd.h */,
 				570DA46D1AAF21F900C3BF16 /* viewControllerForgetPasswd.m */,
+				5721D0781AB1CA9E0041F8E9 /* viewControllerCheckcode.h */,
+				5721D0791AB1CA9E0041F8E9 /* viewControllerCheckcode.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -2001,6 +2006,7 @@
 				E422F8A41A43FDE800CF2F9C /* ViewControllerContact.m in Sources */,
 				570CCD8C1A88C2900016FA1D /* RSKImageCropViewController.m in Sources */,
 				57AC90CA1A71FEC6008F0892 /* FMDatabase.m in Sources */,
+				5721D07A1AB1CA9E0041F8E9 /* viewControllerCheckcode.m in Sources */,
 				E4A85E2F1A5A781400C0A222 /* SelfMsgTableViewCell.m in Sources */,
 				57BC40481A7FEF6300A5F6BE /* InvitePlayViewController.m in Sources */,
 				57AC91071A71FEC6008F0892 /* UIImage+JSMessagesView.m in Sources */,
